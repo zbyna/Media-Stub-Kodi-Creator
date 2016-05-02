@@ -1,0 +1,954 @@
+﻿msgid "change ?change ?change ?change ?"
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: tform1.menuitem1.caption
+msgid "File"
+msgstr ""
+
+#: tform1.menuitem10.caption
+msgctxt "tform1.menuitem10.caption"
+msgid "Exit"
+msgstr ""
+
+#: tform1.menuitem11.caption
+msgctxt "TFORM1.MENUITEM11.CAPTION"
+msgid "Series"
+msgstr ""
+
+#: tform1.menuitem12.caption
+msgctxt "TFORM1.MENUITEM12.CAPTION"
+msgid "Bulk change \"Series name\""
+msgstr ""
+
+#: tform1.menuitem13.caption
+msgctxt "tform1.menuitem13.caption"
+msgid "Bulk change  \"Location\""
+msgstr ""
+
+#: tform1.menuitem14.caption
+msgctxt "TFORM1.MENUITEM14.CAPTION"
+msgid "Create series"
+msgstr ""
+
+#: tform1.menuitem15.caption
+msgctxt "TFORM1.MENUITEM15.CAPTION"
+msgid "Bulk change \"Year\""
+msgstr ""
+
+#: tform1.menuitem16.caption
+msgctxt "TFORM1.MENUITEM16.CAPTION"
+msgid "Create stub files"
+msgstr ""
+
+#: tform1.menuitem17.caption
+msgctxt "TFORM1.MENUITEM17.CAPTION"
+msgid "Bulk change - complex"
+msgstr ""
+
+#: tform1.menuitem18.caption
+msgctxt "TFORM1.MENUITEM18.CAPTION"
+msgid "Films"
+msgstr ""
+
+#: tform1.menuitem19.caption
+msgid "Create film (s)"
+msgstr ""
+
+#: tform1.menuitem2.caption
+msgctxt "tform1.menuitem2.caption"
+msgid "New"
+msgstr ""
+
+#: tform1.menuitem20.caption
+msgctxt "TFORM1.MENUITEM20.CAPTION"
+msgid "Bulk change  \"Location\""
+msgstr ""
+
+#: tform1.menuitem21.caption
+msgctxt "TFORM1.MENUITEM21.CAPTION"
+msgid "Create stub files"
+msgstr ""
+
+#: tform1.menuitem22.caption
+msgctxt "TFORM1.MENUITEM22.CAPTION"
+msgid "Change film (s)"
+msgstr ""
+
+#: tform1.menuitem23.caption
+msgid "Mass creation \"Stubfile\" + \"Directory\""
+msgstr ""
+
+#: tform1.menuitem24.caption
+msgctxt "TFORM1.MENUITEM24.CAPTION"
+msgid "Select series"
+msgstr ""
+
+#: tform1.menuitem25.caption
+msgctxt "TFORM1.MENUITEM25.CAPTION"
+msgid "Tools"
+msgstr ""
+
+#: tform1.menuitem26.caption
+msgctxt "TFORM1.MENUITEM26.CAPTION"
+msgid "Import CSV"
+msgstr ""
+
+#: tform1.menuitem27.caption
+msgctxt "TFORM1.MENUITEM27.CAPTION"
+msgid "Export CSV"
+msgstr ""
+
+#: tform1.menuitem28.caption
+msgid "Delete selection"
+msgstr ""
+
+#: tform1.menuitem29.caption
+msgctxt "tform1.menuitem29.caption"
+msgid "Scrap selection"
+msgstr ""
+
+#: tform1.menuitem3.caption
+msgctxt "tform1.menuitem3.caption"
+msgid "-"
+msgstr ""
+
+#: tform1.menuitem30.caption
+msgctxt "TFORM1.MENUITEM30.CAPTION"
+msgid "Create stub files"
+msgstr ""
+
+#: tform1.menuitem4.caption
+msgctxt "tform1.menuitem4.caption"
+msgid "Open"
+msgstr ""
+
+#: tform1.menuitem5.caption
+msgctxt "TFORM1.MENUITEM5.CAPTION"
+msgid "Open recent"
+msgstr ""
+
+#: tform1.menuitem5.hint
+msgctxt "TFORM1.MENUITEM5.HINT"
+msgid "Previously opened files"
+msgstr ""
+
+#: tform1.menuitem6.caption
+msgctxt "tform1.menuitem6.caption"
+msgid "Save"
+msgstr ""
+
+#: tform1.menuitem7.caption
+msgctxt "tform1.menuitem7.caption"
+msgid "Save as"
+msgstr ""
+
+#: tform1.menuitem8.caption
+msgctxt "tform1.menuitem8.caption"
+msgid "Close"
+msgstr ""
+
+#: tform1.menuitem9.caption
+msgctxt "TFORM1.MENUITEM9.CAPTION"
+msgid "-"
+msgstr ""
+
+#: tform1.menuitemfilmy.caption
+msgctxt "tform1.menuitemfilmy.caption"
+msgid "Films"
+msgstr ""
+
+#: tform1.menuitemfilmyhtstubfiledirectory.caption
+msgid "Mass   \"Stubfile\" + \"Directory\" creating"
+msgstr ""
+
+#: tform1.menuitemfilmyhzumisteni.caption
+msgid "Bulk change \"Location\""
+msgstr ""
+
+#: tform1.menuitemfilmyvytvorfilmy.caption
+msgid "Create film(s)"
+msgstr ""
+
+#: tform1.menuitemfilmyvytvorstubsoubory.caption
+msgctxt "TFORM1.MENUITEMFILMYVYTVORSTUBSOUBORY.CAPTION"
+msgid "Create stub files"
+msgstr ""
+
+#: tform1.menuitemfilmyzmenfilmy.caption
+msgctxt "tform1.menuitemfilmyzmenfilmy.caption"
+msgid "Change film (s)"
+msgstr ""
+
+#: tform1.menuitemhistory.caption
+msgid "History"
+msgstr ""
+
+#: tform1.menuitemhistoryredo.caption
+msgid "Redo"
+msgstr ""
+
+#: tform1.menuitemhistoryshow.caption
+msgid "Show history buffers"
+msgstr ""
+
+#: tform1.menuitemhistoryundo.caption
+msgid "Undo"
+msgstr ""
+
+#: tform1.menuitemhledej.caption
+msgctxt "TFORM1.MENUITEMHLEDEJ.CAPTION"
+msgid "Find"
+msgstr ""
+
+#: tform1.menuitemnastroje.caption
+msgctxt "tform1.menuitemnastroje.caption"
+msgid "Tools"
+msgstr ""
+
+#: tform1.menuitemnastrojeexportcsv.caption
+msgctxt "tform1.menuitemnastrojeexportcsv.caption"
+msgid "Export CSV"
+msgstr ""
+
+#: tform1.menuitemnastrojehledej.caption
+msgctxt "tform1.menuitemnastrojehledej.caption"
+msgid "Find"
+msgstr ""
+
+#: tform1.menuitemnastrojeimportcsv.caption
+msgctxt "tform1.menuitemnastrojeimportcsv.caption"
+msgid "Import CSV"
+msgstr ""
+
+#: tform1.menuitemnastrojescrapujvyber.caption
+msgctxt "tform1.menuitemnastrojescrapujvyber.caption"
+msgid "Scrap selection"
+msgstr ""
+
+#: tform1.menuitemnastrojeupravaformatuciselvlocation.caption
+msgctxt "TFORM1.MENUITEMNASTROJEUPRAVAFORMATUCISELVLOCATION.CAPTION"
+msgid "Location"
+msgstr ""
+
+#: tform1.menuitemnastrojeupravaformatuciselvname.caption
+msgctxt "TFORM1.MENUITEMNASTROJEUPRAVAFORMATUCISELVNAME.CAPTION"
+msgid "Name"
+msgstr ""
+
+#: tform1.menuitemnastrojeupravaformatuciselvseriename.caption
+msgctxt "TFORM1.MENUITEMNASTROJEUPRAVAFORMATUCISELVSERIENAME.CAPTION"
+msgid "Serie name"
+msgstr ""
+
+#: tform1.menuitemnastrojeupravaformatuciselvumisteni.caption
+msgctxt "tform1.menuitemnastrojeupravaformatuciselvumisteni.caption"
+msgid "Number format adjustment in column"
+msgstr ""
+
+#: tform1.menuitemnastrojevytvorstubsoubory.caption
+msgctxt "TFORM1.MENUITEMNASTROJEVYTVORSTUBSOUBORY.CAPTION"
+msgid "Create stub files"
+msgstr ""
+
+#: tform1.menuitemserialy.caption
+msgctxt "tform1.menuitemserialy.caption"
+msgid "Series"
+msgstr ""
+
+#: tform1.menuitemserialyhzkomplexni.caption
+msgctxt "tform1.menuitemserialyhzkomplexni.caption"
+msgid "Bulk change - complex"
+msgstr ""
+
+#: tform1.menuitemserialyhznazevserialu.caption
+msgctxt "tform1.menuitemserialyhznazevserialu.caption"
+msgid "Bulk change \"Series name\""
+msgstr ""
+
+#: tform1.menuitemserialyhzrok.caption
+msgctxt "tform1.menuitemserialyhzrok.caption"
+msgid "Bulk change \"Year\""
+msgstr ""
+
+#: tform1.menuitemserialyhzumisteni.caption
+msgctxt "tform1.menuitemserialyhzumisteni.caption"
+msgid "Bulk change  \"Location\""
+msgstr ""
+
+#: tform1.menuitemserialyoznacserial.caption
+msgctxt "tform1.menuitemserialyoznacserial.caption"
+msgid "Select series"
+msgstr ""
+
+#: tform1.menuitemserialyvytvorserial.caption
+msgctxt "tform1.menuitemserialyvytvorserial.caption"
+msgid "Create series"
+msgstr ""
+
+#: tform1.menuitemserialyvytvorstubsoubory.caption
+msgctxt "tform1.menuitemserialyvytvorstubsoubory.caption"
+msgid "Create stub files"
+msgstr ""
+
+#: tform1.menuitemupravumisteni.caption
+msgctxt "TFORM1.MENUITEMUPRAVUMISTENI.CAPTION"
+msgid "Number format adjustment in column"
+msgstr ""
+
+#: tform1.menuitemupravumisteninazev.caption
+msgctxt "TFORM1.MENUITEMUPRAVUMISTENINAZEV.CAPTION"
+msgid "Name"
+msgstr ""
+
+#: tform1.menuitemupravumisteninazevserialu.caption
+msgctxt "TFORM1.MENUITEMUPRAVUMISTENINAZEVSERIALU.CAPTION"
+msgid "Series name"
+msgstr ""
+
+#: tform1.menuitemupravumisteniumisteni.caption
+msgctxt "TFORM1.MENUITEMUPRAVUMISTENIUMISTENI.CAPTION"
+msgid "Location"
+msgstr ""
+
+#: tform1.menunastaveni.caption
+msgid "Settings"
+msgstr ""
+
+#: tform1.menuoaplikaci.caption
+msgid "About"
+msgstr ""
+
+#: tform1.menuobsah.caption
+msgid "Content"
+msgstr ""
+
+#: tform1.menupomoc.caption
+msgid "Help"
+msgstr ""
+
+#: tform1.opendialog1.title
+msgid "Open file"
+msgstr ""
+
+#: tform1.savedialog1.title
+msgid "Save file as"
+msgstr ""
+
+#: tform1.statusbar1.hint
+msgid "For sorting click the column´s header"
+msgstr ""
+
+#: tform1.toolbtnclose.hint
+msgid "Closes actual file"
+msgstr ""
+
+#: tform1.toolbtnexit.hint
+msgid "Exits program"
+msgstr ""
+
+#: tform1.toolbtnexport.hint
+msgid "Exports selection  from table"
+msgstr ""
+
+#: tform1.toolbtnhledej.hint
+msgid "Search the table"
+msgstr ""
+
+#: tform1.toolbtnimport.hint
+msgid "Imports to the table"
+msgstr ""
+
+#: tform1.toolbtnnastaveni.hint
+msgid "Shows application settings"
+msgstr ""
+
+#: tform1.toolbtnnew.hint
+msgid "New file will be created"
+msgstr ""
+
+#: tform1.toolbtnopen.hint
+msgid "Opens file"
+msgstr ""
+
+#: tform1.toolbtnsave.hint
+msgid "Saves file"
+msgstr ""
+
+#: tform1.toolbtnsaveas.hint
+msgid "Saves file with new filename"
+msgstr ""
+
+#: tform1.toolbtnscrapuj.hint
+msgid "Scrapes information for selected items"
+msgstr ""
+
+#: tform1.toolbtnstubfile.hint
+msgid "Creates sub files for selection"
+msgstr ""
+
+#: tform1.toolbuttonopenrecent.caption
+msgctxt "TFORM1.TOOLBUTTONOPENRECENT.CAPTION"
+msgid "Open recent"
+msgstr ""
+
+#: tform1.toolbuttonopenrecent.hint
+msgctxt "tform1.toolbuttonopenrecent.hint"
+msgid "Previously opened files"
+msgstr ""
+
+#: tform2.button1.caption
+msgctxt "tform2.button1.caption"
+msgid "OK"
+msgstr ""
+
+#: tform2.button2.caption
+msgctxt "tform2.button2.caption"
+msgid "Cancel"
+msgstr ""
+
+#: tform2.caption
+msgid "Bulk change of Location column"
+msgstr ""
+
+#: tform2.checkbox1.caption
+msgctxt "tform2.checkbox1.caption"
+msgid "Location index"
+msgstr ""
+
+#: tform3.button1.caption
+msgid "Add root node"
+msgstr ""
+
+#: tform3.button2.caption
+msgid "Add child node"
+msgstr ""
+
+#: tform3.button3.caption
+msgid "Delete node"
+msgstr ""
+
+#: tform3.button4.caption
+msgctxt "TFORM3.BUTTON4.CAPTION"
+msgid "OK"
+msgstr ""
+
+#: tform3.button5.caption
+msgctxt "tform3.button5.caption"
+msgid "Cancel"
+msgstr ""
+
+#: tform3.button6.caption
+msgid "Create tree"
+msgstr ""
+
+#: tform3.button7.caption
+msgid "Scrape the serie year"
+msgstr ""
+
+#: tform3.checkbox1.caption
+msgctxt "TFORM3.CHECKBOX1.CAPTION"
+msgid "Location index"
+msgstr ""
+
+#: tform3.combobox1.text
+msgctxt "tform3.combobox1.text"
+msgid "DVD"
+msgstr ""
+
+#: tform3.jlabeledintegeredit2.editlabel.caption
+msgid " "
+msgstr ""
+
+#: tform3.label1.caption
+msgid "Actual node"
+msgstr ""
+
+#: tform3.label2.caption
+msgid "Whole tree"
+msgstr ""
+
+#: tform3.label3.caption
+msgctxt "tform3.label3.caption"
+msgid "Medium"
+msgstr ""
+
+#: tform3.labelededit1.editlabel.caption
+msgctxt "tform3.labelededit1.editlabel.caption"
+msgid "Serie name"
+msgstr ""
+
+#: tform4.bitbtn1.caption
+msgctxt "TFORM4.BITBTN1.CAPTION"
+msgid "OK"
+msgstr ""
+
+#: tform4.bitbtn2.caption
+msgctxt "TFORM4.BITBTN2.CAPTION"
+msgid "Cancel"
+msgstr ""
+
+#: tform4.caption
+msgid "Season structure creating"
+msgstr ""
+
+#: tform5.button1.caption
+msgctxt "TFORM5.BUTTON1.CAPTION"
+msgid "OK"
+msgstr ""
+
+#: tform5.button2.caption
+msgctxt "TFORM5.BUTTON2.CAPTION"
+msgid "Cancel"
+msgstr ""
+
+#: tform5.caption
+msgid "Stub files creating"
+msgstr ""
+
+#: tform5.label1.caption
+msgid "Directory for stub files creating:"
+msgstr ""
+
+#: tform6.button1.caption
+msgctxt "TFORM6.BUTTON1.CAPTION"
+msgid "Ok"
+msgstr ""
+
+#: tform6.button2.caption
+msgctxt "TFORM6.BUTTON2.CAPTION"
+msgid "Cancel"
+msgstr ""
+
+#: tform6.button3.caption
+msgid "Scrape year"
+msgstr ""
+
+#: tform6.button4.caption
+msgid "Next film"
+msgstr ""
+
+#: tform6.caption
+msgid "Film"
+msgstr ""
+
+#: tform6.combobox1.text
+msgctxt "TFORM6.COMBOBOX1.TEXT"
+msgid "DVD"
+msgstr ""
+
+#: tform6.label1.caption
+msgid "Media"
+msgstr ""
+
+#: tform6.statictext1.caption
+msgid "Stubfile :"
+msgstr ""
+
+#: tformnastaveni.cancelbutton.caption
+msgctxt "TFORMNASTAVENI.CANCELBUTTON.CAPTION"
+msgid "Cancel"
+msgstr ""
+
+#: tformnastaveni.caption
+msgid "Options"
+msgstr ""
+
+#: tformnastaveni.filmscrapers.caption
+msgid "Film Scrapers"
+msgstr ""
+
+#: tformnastaveni.jazykaplikace.caption
+msgid "Languages"
+msgstr ""
+
+#: tformnastaveni.languagescrapers.caption
+msgid "For themoviedb.org a thetvdb.com"
+msgstr ""
+
+#: tformnastaveni.myskoleckooznaceni.caption
+msgid "Pointer behaving  during mouse wheel scrolling"
+msgstr ""
+
+#: tformnastaveni.narodninastaveni.caption
+msgid "National setting"
+msgstr ""
+
+#: tformnastaveni.okbutton.caption
+msgctxt "TFORMNASTAVENI.OKBUTTON.CAPTION"
+msgid "Ok"
+msgstr ""
+
+#: tformnastaveni.ostatni.caption
+msgid "Misc."
+msgstr ""
+
+#: tformnastaveni.scrapers.caption
+msgid "Scrapers"
+msgstr ""
+
+#: tformnastaveni.serialscrapers.caption
+msgid "Serial Scrapers"
+msgstr ""
+
+#: tformscraper.cancelbutton.caption
+msgctxt "TFORMSCRAPER.CANCELBUTTON.CAPTION"
+msgid "Cancel"
+msgstr ""
+
+#: tformscraper.caption
+msgid "Year scraping"
+msgstr ""
+
+#: tformscraper.label1.caption
+msgid "Choose item:"
+msgstr ""
+
+#: tformscraper.okbutton.caption
+msgctxt "TFORMSCRAPER.OKBUTTON.CAPTION"
+msgid "Ok"
+msgstr ""
+
+#: tformscrapujvyber.cancelbutton.caption
+msgctxt "TFORMSCRAPUJVYBER.CANCELBUTTON.CAPTION"
+msgid "Cancel"
+msgstr ""
+
+#: tformscrapujvyber.caption
+msgctxt "tformscrapujvyber.caption"
+msgid "Scrape selection"
+msgstr ""
+
+#: tformscrapujvyber.jinyscraperbutton.caption
+msgid "Another scraper"
+msgstr ""
+
+#: tformscrapujvyber.okbutton.caption
+msgid "Ok - save results"
+msgstr ""
+
+#: tformscrapujvyber.scrapujvyberbutton.caption
+msgctxt "TFORMSCRAPUJVYBER.SCRAPUJVYBERBUTTON.CAPTION"
+msgid "Scrape selection"
+msgstr ""
+
+#: tformupravumisteni.cancelbutton.caption
+msgctxt "TFORMUPRAVUMISTENI.CANCELBUTTON.CAPTION"
+msgid "Cancel"
+msgstr ""
+
+#: tformupravumisteni.caption
+msgctxt "TFORMUPRAVUMISTENI.CAPTION"
+msgid "Number format adjustment in column: "
+msgstr ""
+
+#: tformupravumisteni.okbutton.caption
+msgctxt "tformupravumisteni.okbutton.caption"
+msgid "Ok"
+msgstr ""
+
+#: tfrmhledej.caption
+msgid "Search"
+msgstr ""
+
+#: tfrmhledej.labelededit1.editlabel.caption
+msgid "Text to be searched:"
+msgstr ""
+
+#: tfrmhledej.speedbuttondalsi.hint
+msgid " Search towards  the bottom  of the table CTRL+N"
+msgstr ""
+
+#: tfrmhledej.speedbuttonpredchozi.hint
+msgid "Search towards  the head o thef table CTRL + P"
+msgstr ""
+
+#: tfrmukazhistorii.caption
+msgid "Undo and Redo buffer"
+msgstr ""
+
+#: tfrmukazhistorii.menuitemclear.caption
+msgid "Clear History  Items"
+msgstr ""
+
+#: tfrmukazhistorii.menuitemundo.caption
+msgid "Undo History Item"
+msgstr ""
+
+#: unit1.rsaktulnscrape
+msgid "Actual scraper finds nothing.%sWhat next ?"
+msgstr ""
+
+#: unit1.rsalternativet
+msgctxt "unit1.rsalternativet"
+msgid "Alternative title"
+msgstr ""
+
+#: unit1.rsbzeindexu
+msgid "Index base"
+msgstr ""
+
+#: unit1.rschangeformat
+msgid "Change format of all numbers in field"
+msgstr ""
+
+#: unit1.rschybkasevlou
+msgctxt "unit1.rschybkasevlou"
+msgid "Something went wrong"
+msgstr ""
+
+#: unit1.rsdirectory
+msgid "Directory"
+msgstr ""
+
+#: unit1.rsdirectory2
+msgctxt "unit1.rsdirectory2"
+msgid "Directory :"
+msgstr ""
+
+#: unit1.rsdisk
+msgid "Disk n."
+msgstr ""
+
+#: unit1.rsdisk1
+msgid "Disk n.1"
+msgstr ""
+
+#: unit1.rsdisk2
+msgid "Disk n.%s"
+msgstr ""
+
+#: unit1.rsdiskycelkem
+msgid "Total disks: %s"
+msgstr ""
+
+#: unit1.rsdl
+msgid "Episode n."
+msgstr ""
+
+#: unit1.rsdl2
+msgid "Episode n.%s"
+msgstr ""
+
+#: unit1.rsdlycelkem
+msgid "Total episodes: %s"
+msgstr ""
+
+#: unit1.rsdonothighlig
+msgid "Do not highlight initial position"
+msgstr ""
+
+#: unit1.rsepisodesondi
+msgid "Episodes on disk"
+msgstr ""
+
+#: unit1.rsfixedpartofl
+msgctxt "unit1.rsfixedpartofl"
+msgid "Fixed part of Location (text)"
+msgstr ""
+
+#: unit1.rshelphtmlenin
+msgid "\\Help\\en\\Help.chm"
+msgstr ""
+
+#: unit1.rshighlightini
+msgid "Highlight initial position"
+msgstr ""
+
+#: unit1.rshromadnzmnan
+msgid "Bulk change of series name"
+msgstr ""
+
+#: unit1.rshromadnzmnar
+msgid "Bulk change of year"
+msgstr ""
+
+#: unit1.rsifhistoryexc
+msgid "If  history exceeds number of 100 items%sit may slow down program reaction time during%slarge database operations.%sHIDE HISTORY FORM"
+msgstr ""
+
+#: unit1.rsindexod
+msgid "Beginning index from ?"
+msgstr ""
+
+#: unit1.rsinintialinde
+msgctxt "unit1.rsinintialinde"
+msgid "Initial index value"
+msgstr ""
+
+#: unit1.rsjmnosouborun
+msgid "The file name can not be new.fdb%s"
+msgstr ""
+
+#: unit1.rslocation
+msgctxt "unit1.rslocation"
+msgid "Location"
+msgstr ""
+
+#: unit1.rsmedium
+msgctxt "unit1.rsmedium"
+msgid "Medium"
+msgstr ""
+
+#: unit1.rsmessagetobed
+msgctxt "unit1.rsmessagetobed"
+msgid "Message to be displayed"
+msgstr ""
+
+#: unit1.rsname
+msgctxt "unit1.rsname"
+msgid "Name"
+msgstr ""
+
+#: unit1.rsneuloenzmny
+msgid "Unsave changes"
+msgstr ""
+
+#: unit1.rsnovnzev
+msgid "New name ?"
+msgstr ""
+
+#: unit1.rsnovrok
+msgid "New year?"
+msgstr ""
+
+#: unit1.rsnumberofdisk
+msgid "Number of disks for season:"
+msgstr ""
+
+#: unit1.rsnumberofepis
+msgid "Number of episodes for disk:"
+msgstr ""
+
+#: unit1.rspoetdiskvevb
+msgid "Number disks in selection is: %s"
+msgstr ""
+
+#: unit1.rspoetvybranch
+msgid "Number of disks chosen to change is %s"
+msgstr ""
+
+#: unit1.rspoetzznam
+msgid "Total records: %s"
+msgstr ""
+
+#: unit1.rspoetzznam0
+msgid "Total records: 0 "
+msgstr ""
+
+#: unit1.rspokraovatbez
+msgctxt "unit1.rspokraovatbez"
+msgid "Scrape next item"
+msgstr ""
+
+#: unit1.rspoutindexums
+msgid "Use location index ?"
+msgstr ""
+
+#: unit1.rsprohlednroku
+msgid "For year scraping %sis neede to check also field \"Series name\""
+msgstr ""
+
+#: unit1.rsredobufferit
+msgid "Redo Buffer Items"
+msgstr ""
+
+#: unit1.rsseason
+msgid "Season"
+msgstr ""
+
+#: unit1.rsseasondiskep
+msgid "Season : Disk : Episode"
+msgstr ""
+
+#: unit1.rsseazenodle
+msgid "Sorted by:  "
+msgstr ""
+
+#: unit1.rsseriename
+msgctxt "unit1.rsseriename"
+msgid "Series name"
+msgstr ""
+
+#: unit1.rsseriesfilms
+msgid "Series: %s Films: %s       "
+msgstr ""
+
+#: unit1.rsserilhromadn
+msgid "Series - Bulk change complex"
+msgstr ""
+
+#: unit1.rssezna
+msgid "Season n."
+msgstr ""
+
+#: unit1.rssezona
+msgid "Season n.%s"
+msgstr ""
+
+#: unit1.rssezona1
+msgid "Season n.1"
+msgstr ""
+
+#: unit1.rssezonycelkem
+msgid "Total seasons: %s"
+msgstr ""
+
+#: unit1.rssort
+msgid "Sort"
+msgstr ""
+
+#: unit1.rsstubfile
+msgid "Stubfile"
+msgstr ""
+
+#: unit1.rstotalepisode
+msgid "Total episodes"
+msgstr ""
+
+#: unit1.rstotalseasons
+msgid "Total seasons:"
+msgstr ""
+
+#: unit1.rsundobufferit
+msgid "Undo Buffer Items"
+msgstr ""
+
+#: unit1.rsundohistoryi
+msgid "Undo History Item name: "
+msgstr ""
+
+#: unit1.rsvsouborujsou
+msgid "There are unsaved changes in file,%sdo you want to save them ?"
+msgstr ""
+
+#: unit1.rsvytvoennovpo
+msgid "New item creation"
+msgstr ""
+
+#: unit1.rsvytvofilm
+msgid "Create film"
+msgstr ""
+
+#: unit1.rsvytvoitnovse
+msgid "Create new series of film ?"
+msgstr ""
+
+#: unit1.rsvytvoseril
+msgctxt "unit1.rsvytvoseril"
+msgid "Create series"
+msgstr ""
+
+#: unit1.rsyear
+msgctxt "unit1.rsyear"
+msgid "Year"
+msgstr ""
+
+#: unit1.rszmfilmy
+msgid "Change film(s)"
+msgstr ""
+
+#: unit1.rszmnitscraper
+msgctxt "unit1.rszmnitscraper"
+msgid "Change scraper"
+msgstr ""
+

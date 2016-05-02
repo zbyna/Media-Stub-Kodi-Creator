@@ -1,0 +1,962 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7\n"
+"Project-Id-Version: Media Stub Kodi Creator\n"
+"Language: cs\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+
+#: tform1.menuitem1.caption
+msgid "File"
+msgstr "Soubor"
+
+#: tform1.menuitem10.caption
+msgctxt "tform1.menuitem10.caption"
+msgid "Exit"
+msgstr "Ukončit program"
+
+#: tform1.menuitem11.caption
+msgctxt "TFORM1.MENUITEM11.CAPTION"
+msgid "Series"
+msgstr "Seriál"
+
+#: tform1.menuitem12.caption
+msgctxt "TFORM1.MENUITEM12.CAPTION"
+msgid "Bulk change \"Series name\""
+msgstr "Hromadná změna \"Název seriálu\""
+
+#: tform1.menuitem13.caption
+msgctxt "tform1.menuitem13.caption"
+msgid "Bulk change  \"Location\""
+msgstr "Hromadná změna \"Umístění\""
+
+#: tform1.menuitem14.caption
+msgctxt "TFORM1.MENUITEM14.CAPTION"
+msgid "Create series"
+msgstr "Vytvoř seriál"
+
+#: tform1.menuitem15.caption
+msgctxt "TFORM1.MENUITEM15.CAPTION"
+msgid "Bulk change \"Year\""
+msgstr "Hromadná změna \"Rok\""
+
+#: tform1.menuitem16.caption
+msgctxt "TFORM1.MENUITEM16.CAPTION"
+msgid "Create stub files"
+msgstr "Vytvoř stub soubory"
+
+#: tform1.menuitem17.caption
+msgctxt "TFORM1.MENUITEM17.CAPTION"
+msgid "Bulk change - complex"
+msgstr "Hromadná změna - komplexní"
+
+#: tform1.menuitem18.caption
+msgctxt "TFORM1.MENUITEM18.CAPTION"
+msgid "Films"
+msgstr "Filmy"
+
+#: tform1.menuitem19.caption
+msgid "Create film (s)"
+msgstr "Vytvoř film(y)"
+
+#: tform1.menuitem2.caption
+msgctxt "tform1.menuitem2.caption"
+msgid "New"
+msgstr "Nový"
+
+#: tform1.menuitem20.caption
+msgctxt "TFORM1.MENUITEM20.CAPTION"
+msgid "Bulk change  \"Location\""
+msgstr "Hromadná změna \"Umístění\""
+
+#: tform1.menuitem21.caption
+msgctxt "TFORM1.MENUITEM21.CAPTION"
+msgid "Create stub files"
+msgstr "Vytvoř stub soubory"
+
+#: tform1.menuitem22.caption
+msgctxt "TFORM1.MENUITEM22.CAPTION"
+msgid "Change film (s)"
+msgstr "Změň film(y)"
+
+#: tform1.menuitem23.caption
+msgid "Mass creation \"Stubfile\" + \"Directory\""
+msgstr "Hromadné vytvoření  ''Stubfile\" + \"Directory\""
+
+#: tform1.menuitem24.caption
+msgctxt "TFORM1.MENUITEM24.CAPTION"
+msgid "Select series"
+msgstr "Vyber seriál"
+
+#: tform1.menuitem25.caption
+msgctxt "TFORM1.MENUITEM25.CAPTION"
+msgid "Tools"
+msgstr "Nástroje"
+
+#: tform1.menuitem26.caption
+msgctxt "TFORM1.MENUITEM26.CAPTION"
+msgid "Import CSV"
+msgstr "Import CSV"
+
+#: tform1.menuitem27.caption
+msgctxt "TFORM1.MENUITEM27.CAPTION"
+msgid "Export CSV"
+msgstr "Export CSV"
+
+#: tform1.menuitem28.caption
+msgid "Delete selection"
+msgstr "Smaž výběr"
+
+#: tform1.menuitem29.caption
+msgctxt "tform1.menuitem29.caption"
+msgid "Scrap selection"
+msgstr "Scrapuj výběr"
+
+#: tform1.menuitem3.caption
+msgctxt "tform1.menuitem3.caption"
+msgid "-"
+msgstr "-"
+
+#: tform1.menuitem30.caption
+msgctxt "TFORM1.MENUITEM30.CAPTION"
+msgid "Create stub files"
+msgstr "Vytvoř stub soubory"
+
+#: tform1.menuitem4.caption
+msgctxt "tform1.menuitem4.caption"
+msgid "Open"
+msgstr "Otevřít"
+
+#: tform1.menuitem5.caption
+msgctxt "TFORM1.MENUITEM5.CAPTION"
+msgid "Open recent"
+msgstr "Otevřít minulé"
+
+#: tform1.menuitem5.hint
+msgctxt "TFORM1.MENUITEM5.HINT"
+msgid "Previously opened files"
+msgstr "Dříve otevřené soubory"
+
+#: tform1.menuitem6.caption
+msgctxt "tform1.menuitem6.caption"
+msgid "Save"
+msgstr "Uložit"
+
+#: tform1.menuitem7.caption
+msgctxt "tform1.menuitem7.caption"
+msgid "Save as"
+msgstr "Uložit jako"
+
+#: tform1.menuitem8.caption
+msgctxt "tform1.menuitem8.caption"
+msgid "Close"
+msgstr "Zavřít"
+
+#: tform1.menuitem9.caption
+msgctxt "TFORM1.MENUITEM9.CAPTION"
+msgid "-"
+msgstr "-"
+
+#: tform1.menuitemfilmy.caption
+msgctxt "tform1.menuitemfilmy.caption"
+msgid "Films"
+msgstr "Filmy"
+
+#: tform1.menuitemfilmyhtstubfiledirectory.caption
+msgid "Mass   \"Stubfile\" + \"Directory\" creating"
+msgstr "Hromadné vytvoření \"Stubfile\" + \"Directory\""
+
+#: tform1.menuitemfilmyhzumisteni.caption
+msgid "Bulk change \"Location\""
+msgstr "Hromadná změna \"Umístění\""
+
+#: tform1.menuitemfilmyvytvorfilmy.caption
+msgid "Create film(s)"
+msgstr "Vytvoř film(y)"
+
+#: tform1.menuitemfilmyvytvorstubsoubory.caption
+msgctxt "TFORM1.MENUITEMFILMYVYTVORSTUBSOUBORY.CAPTION"
+msgid "Create stub files"
+msgstr "Vytvoř stub soubory"
+
+#: tform1.menuitemfilmyzmenfilmy.caption
+msgctxt "tform1.menuitemfilmyzmenfilmy.caption"
+msgid "Change film (s)"
+msgstr "Změň film(y)"
+
+#: tform1.menuitemhistory.caption
+msgid "History"
+msgstr "Historie"
+
+#: tform1.menuitemhistoryredo.caption
+msgid "Redo"
+msgstr "Znovu (Redo)"
+
+#: tform1.menuitemhistoryshow.caption
+msgid "Show history buffers"
+msgstr "Zobraz položky historie"
+
+#: tform1.menuitemhistoryundo.caption
+msgid "Undo"
+msgstr "Zpět (Undo)"
+
+#: tform1.menuitemhledej.caption
+msgctxt "TFORM1.MENUITEMHLEDEJ.CAPTION"
+msgid "Find"
+msgstr "Najdi"
+
+#: tform1.menuitemnastroje.caption
+msgctxt "tform1.menuitemnastroje.caption"
+msgid "Tools"
+msgstr "Nástroje"
+
+#: tform1.menuitemnastrojeexportcsv.caption
+msgctxt "tform1.menuitemnastrojeexportcsv.caption"
+msgid "Export CSV"
+msgstr "Export CSV"
+
+#: tform1.menuitemnastrojehledej.caption
+msgctxt "tform1.menuitemnastrojehledej.caption"
+msgid "Find"
+msgstr "Najdi"
+
+#: tform1.menuitemnastrojeimportcsv.caption
+msgctxt "tform1.menuitemnastrojeimportcsv.caption"
+msgid "Import CSV"
+msgstr "Import CSV"
+
+#: tform1.menuitemnastrojescrapujvyber.caption
+msgctxt "tform1.menuitemnastrojescrapujvyber.caption"
+msgid "Scrap selection"
+msgstr "Scrapuj výběr"
+
+#: tform1.menuitemnastrojeupravaformatuciselvlocation.caption
+msgctxt "tform1.menuitemnastrojeupravaformatuciselvlocation.caption"
+msgid "Location"
+msgstr "Umístění"
+
+#: tform1.menuitemnastrojeupravaformatuciselvname.caption
+msgctxt "tform1.menuitemnastrojeupravaformatuciselvname.caption"
+msgid "Name"
+msgstr "Název"
+
+#: tform1.menuitemnastrojeupravaformatuciselvseriename.caption
+msgctxt "tform1.menuitemnastrojeupravaformatuciselvseriename.caption"
+msgid "Serie name"
+msgstr "Název seriálu"
+
+#: tform1.menuitemnastrojeupravaformatuciselvumisteni.caption
+msgctxt "tform1.menuitemnastrojeupravaformatuciselvumisteni.caption"
+msgid "Number format adjustment in column"
+msgstr "Úprava formátu čísla ve sloupci"
+
+#: tform1.menuitemnastrojevytvorstubsoubory.caption
+msgctxt "TFORM1.MENUITEMNASTROJEVYTVORSTUBSOUBORY.CAPTION"
+msgid "Create stub files"
+msgstr "Vytvoř stub soubory"
+
+#: tform1.menuitemserialy.caption
+msgctxt "tform1.menuitemserialy.caption"
+msgid "Series"
+msgstr "Seriály"
+
+#: tform1.menuitemserialyhzkomplexni.caption
+msgctxt "tform1.menuitemserialyhzkomplexni.caption"
+msgid "Bulk change - complex"
+msgstr "Hromadná změna - komplexní"
+
+#: tform1.menuitemserialyhznazevserialu.caption
+msgctxt "tform1.menuitemserialyhznazevserialu.caption"
+msgid "Bulk change \"Series name\""
+msgstr "Hromadná změna \"Název seriálu\""
+
+#: tform1.menuitemserialyhzrok.caption
+msgctxt "tform1.menuitemserialyhzrok.caption"
+msgid "Bulk change \"Year\""
+msgstr "Hromadná změna \"Rok\""
+
+#: tform1.menuitemserialyhzumisteni.caption
+msgctxt "tform1.menuitemserialyhzumisteni.caption"
+msgid "Bulk change  \"Location\""
+msgstr "Hromadná změna \"Umístění\""
+
+#: tform1.menuitemserialyoznacserial.caption
+msgctxt "tform1.menuitemserialyoznacserial.caption"
+msgid "Select series"
+msgstr "Vyber seriál"
+
+#: tform1.menuitemserialyvytvorserial.caption
+msgctxt "tform1.menuitemserialyvytvorserial.caption"
+msgid "Create series"
+msgstr "Vytvoř seriál"
+
+#: tform1.menuitemserialyvytvorstubsoubory.caption
+msgctxt "tform1.menuitemserialyvytvorstubsoubory.caption"
+msgid "Create stub files"
+msgstr "Vytvoř stub soubory"
+
+#: tform1.menuitemupravumisteni.caption
+msgctxt "TFORM1.MENUITEMUPRAVUMISTENI.CAPTION"
+msgid "Number format adjustment in column"
+msgstr "Úprava formátu čísla ve sloupci"
+
+#: tform1.menuitemupravumisteninazev.caption
+msgctxt "tform1.menuitemupravumisteninazev.caption"
+msgid "Name"
+msgstr "Název"
+
+#: tform1.menuitemupravumisteninazevserialu.caption
+msgctxt "tform1.menuitemupravumisteninazevserialu.caption"
+msgid "Series name"
+msgstr "Název seriálu"
+
+#: tform1.menuitemupravumisteniumisteni.caption
+msgctxt "tform1.menuitemupravumisteniumisteni.caption"
+msgid "Location"
+msgstr "Umístění"
+
+#: tform1.menunastaveni.caption
+msgid "Settings"
+msgstr "Nastavení"
+
+#: tform1.menuoaplikaci.caption
+msgid "About"
+msgstr "O programu"
+
+#: tform1.menuobsah.caption
+msgid "Content"
+msgstr "Obsah"
+
+#: tform1.menupomoc.caption
+msgid "Help"
+msgstr "Pomoc"
+
+#: tform1.opendialog1.title
+msgid "Open file"
+msgstr "Otevřít soubor"
+
+#: tform1.savedialog1.title
+msgid "Save file as"
+msgstr "Uložit soubor jako"
+
+#: tform1.statusbar1.hint
+msgid "For sorting click the column´s header"
+msgstr "Pro setřídění klikni na záhlaví sloupce"
+
+#: tform1.toolbtnclose.hint
+msgid "Closes actual file"
+msgstr "Zavřít aktuální soubor"
+
+#: tform1.toolbtnexit.hint
+msgid "Exits program"
+msgstr "Ukončit program"
+
+#: tform1.toolbtnexport.hint
+msgid "Exports selection  from table"
+msgstr "Exportuj výběr z tabulky"
+
+#: tform1.toolbtnhledej.hint
+msgid "Search the table"
+msgstr "Hledej v tabulce"
+
+#: tform1.toolbtnimport.hint
+msgid "Imports to the table"
+msgstr "Importuj do tabulky"
+
+#: tform1.toolbtnnastaveni.hint
+msgid "Shows application settings"
+msgstr "Ukaž nastavení aplikace"
+
+#: tform1.toolbtnnew.hint
+msgid "New file will be created"
+msgstr "Bude vytvořen nový soubor"
+
+#: tform1.toolbtnopen.hint
+msgid "Opens file"
+msgstr "Otevře soubor"
+
+#: tform1.toolbtnsave.hint
+msgid "Saves file"
+msgstr "Uloží soubor"
+
+#: tform1.toolbtnsaveas.hint
+msgid "Saves file with new filename"
+msgstr "Uloží soubor pod novým jménem"
+
+#: tform1.toolbtnscrapuj.hint
+msgid "Scrapes information for selected items"
+msgstr "Scrapuje informace pro vybrané položky"
+
+#: tform1.toolbtnstubfile.hint
+msgid "Creates sub files for selection"
+msgstr "Vytvoří stub soubory pro vybrané položky"
+
+#: tform1.toolbuttonopenrecent.caption
+msgctxt "TFORM1.TOOLBUTTONOPENRECENT.CAPTION"
+msgid "Open recent"
+msgstr "Otevřít minulé"
+
+#: tform1.toolbuttonopenrecent.hint
+msgctxt "tform1.toolbuttonopenrecent.hint"
+msgid "Previously opened files"
+msgstr "Minule otevřené soubory"
+
+#: tform2.button1.caption
+msgctxt "tform2.button1.caption"
+msgid "OK"
+msgstr "OK"
+
+#: tform2.button2.caption
+msgctxt "tform2.button2.caption"
+msgid "Cancel"
+msgstr "Zrušit"
+
+#: tform2.caption
+msgid "Bulk change of Location column"
+msgstr "Hromacná změna sloupce \"Umístění\""
+
+#: tform2.checkbox1.caption
+msgctxt "tform2.checkbox1.caption"
+msgid "Location index"
+msgstr "Index umístění"
+
+#: tform3.button1.caption
+msgid "Add root node"
+msgstr "Přider root node"
+
+#: tform3.button2.caption
+msgid "Add child node"
+msgstr "Přidej child node"
+
+#: tform3.button3.caption
+msgid "Delete node"
+msgstr "Smaž node"
+
+#: tform3.button4.caption
+msgctxt "TFORM3.BUTTON4.CAPTION"
+msgid "OK"
+msgstr "OK"
+
+#: tform3.button5.caption
+msgctxt "tform3.button5.caption"
+msgid "Cancel"
+msgstr "Zrušit"
+
+#: tform3.button6.caption
+msgid "Create tree"
+msgstr "Vytvoř strom"
+
+#: tform3.button7.caption
+msgid "Scrape the serie year"
+msgstr "Srapuj rok pro seriál"
+
+#: tform3.checkbox1.caption
+msgctxt "TFORM3.CHECKBOX1.CAPTION"
+msgid "Location index"
+msgstr "Index umístění"
+
+#: tform3.combobox1.text
+msgctxt "tform3.combobox1.text"
+msgid "DVD"
+msgstr "DVD"
+
+#: tform3.jlabeledintegeredit2.editlabel.caption
+msgid " "
+msgstr " "
+
+#: tform3.label1.caption
+msgid "Actual node"
+msgstr "Aktuální node"
+
+#: tform3.label2.caption
+msgid "Whole tree"
+msgstr "Celý strom"
+
+#: tform3.label3.caption
+msgctxt "tform3.label3.caption"
+msgid "Medium"
+msgstr "Medium"
+
+#: tform3.labelededit1.editlabel.caption
+msgctxt "tform3.labelededit1.editlabel.caption"
+msgid "Serie name"
+msgstr "Název seriálu"
+
+#: tform4.bitbtn1.caption
+msgctxt "TFORM4.BITBTN1.CAPTION"
+msgid "OK"
+msgstr "OK"
+
+#: tform4.bitbtn2.caption
+msgctxt "TFORM4.BITBTN2.CAPTION"
+msgid "Cancel"
+msgstr "Zrušit"
+
+#: tform4.caption
+msgid "Season structure creating"
+msgstr "Vytvoření struktury seriálu"
+
+#: tform5.button1.caption
+msgctxt "TFORM5.BUTTON1.CAPTION"
+msgid "OK"
+msgstr "OK"
+
+#: tform5.button2.caption
+msgctxt "TFORM5.BUTTON2.CAPTION"
+msgid "Cancel"
+msgstr "Zrušit"
+
+#: tform5.caption
+msgid "Stub files creating"
+msgstr "Vytvoření stub souborů"
+
+#: tform5.label1.caption
+msgid "Directory for stub files creating:"
+msgstr "Adresář pro vytváření stub soubory"
+
+#: tform6.button1.caption
+msgctxt "TFORM6.BUTTON1.CAPTION"
+msgid "Ok"
+msgstr "OK"
+
+#: tform6.button2.caption
+msgctxt "TFORM6.BUTTON2.CAPTION"
+msgid "Cancel"
+msgstr "Zrušit"
+
+#: tform6.button3.caption
+msgid "Scrape year"
+msgstr "Scrapuj rok"
+
+#: tform6.button4.caption
+msgid "Next film"
+msgstr "Další film"
+
+#: tform6.caption
+msgid "Film"
+msgstr "Film"
+
+#: tform6.combobox1.text
+msgctxt "TFORM6.COMBOBOX1.TEXT"
+msgid "DVD"
+msgstr "DVD"
+
+#: tform6.label1.caption
+msgid "Media"
+msgstr "Media"
+
+#: tform6.statictext1.caption
+msgid "Stubfile :"
+msgstr "Stubfile"
+
+#: tformnastaveni.cancelbutton.caption
+msgctxt "TFORMNASTAVENI.CANCELBUTTON.CAPTION"
+msgid "Cancel"
+msgstr "Zrušit"
+
+#: tformnastaveni.caption
+msgid "Options"
+msgstr "Nastavení"
+
+#: tformnastaveni.filmscrapers.caption
+msgid "Film Scrapers"
+msgstr "Scrapery filmů"
+
+#: tformnastaveni.jazykaplikace.caption
+msgid "Languages"
+msgstr "Jazyky"
+
+#: tformnastaveni.languagescrapers.caption
+msgid "For themoviedb.org a thetvdb.com"
+msgstr "Pro themoviedb.org a thetvdb.com "
+
+#: tformnastaveni.myskoleckooznaceni.caption
+msgid "Pointer behaving  during mouse wheel scrolling"
+msgstr "Chování ukazatele během scrolování kolečkem"
+
+#: tformnastaveni.narodninastaveni.caption
+msgid "National setting"
+msgstr "Národní nastavení"
+
+#: tformnastaveni.okbutton.caption
+msgctxt "TFORMNASTAVENI.OKBUTTON.CAPTION"
+msgid "Ok"
+msgstr "OK"
+
+#: tformnastaveni.ostatni.caption
+msgid "Misc."
+msgstr "Ostatní"
+
+#: tformnastaveni.scrapers.caption
+msgid "Scrapers"
+msgstr "Scrapery"
+
+#: tformnastaveni.serialscrapers.caption
+msgid "Serial Scrapers"
+msgstr "Scrapery seriálů"
+
+#: tformscraper.cancelbutton.caption
+msgctxt "TFORMSCRAPER.CANCELBUTTON.CAPTION"
+msgid "Cancel"
+msgstr "Zrušit"
+
+#: tformscraper.caption
+msgid "Year scraping"
+msgstr "Scrapování roku"
+
+#: tformscraper.label1.caption
+msgid "Choose item:"
+msgstr "Vyber položku:"
+
+#: tformscraper.okbutton.caption
+msgctxt "TFORMSCRAPER.OKBUTTON.CAPTION"
+msgid "Ok"
+msgstr "OK"
+
+#: tformscrapujvyber.cancelbutton.caption
+msgctxt "TFORMSCRAPUJVYBER.CANCELBUTTON.CAPTION"
+msgid "Cancel"
+msgstr "Zrušit"
+
+#: tformscrapujvyber.caption
+msgctxt "tformscrapujvyber.caption"
+msgid "Scrape selection"
+msgstr "Scrapuj výběr"
+
+#: tformscrapujvyber.jinyscraperbutton.caption
+msgid "Another scraper"
+msgstr "Jiný scraper"
+
+#: tformscrapujvyber.okbutton.caption
+msgid "Ok - save results"
+msgstr "Ok - ulož výsledky"
+
+#: tformscrapujvyber.scrapujvyberbutton.caption
+msgctxt "TFORMSCRAPUJVYBER.SCRAPUJVYBERBUTTON.CAPTION"
+msgid "Scrape selection"
+msgstr "Scrapuj výběr"
+
+#: tformupravumisteni.cancelbutton.caption
+msgctxt "TFORMUPRAVUMISTENI.CANCELBUTTON.CAPTION"
+msgid "Cancel"
+msgstr "Zrušit"
+
+#: tformupravumisteni.caption
+msgctxt "TFORMUPRAVUMISTENI.CAPTION"
+msgid "Number format adjustment in column: "
+msgstr "Úprava formátu čísla ve sloupci: "
+
+#: tformupravumisteni.okbutton.caption
+msgctxt "tformupravumisteni.okbutton.caption"
+msgid "Ok"
+msgstr "OK"
+
+#: tfrmhledej.caption
+msgid "Search"
+msgstr "Hledat"
+
+#: tfrmhledej.labelededit1.editlabel.caption
+msgid "Text to be searched:"
+msgstr "Hledaný text"
+
+#: tfrmhledej.speedbuttondalsi.hint
+msgid " Search towards  the bottom  of the table CTRL+N"
+msgstr "Hledat směrem ke konci tabulky CTRL+N "
+
+#: tfrmhledej.speedbuttonpredchozi.hint
+msgid "Search towards  the head o thef table CTRL + P"
+msgstr "Hledat směrem k začátku tabulky CTRL + P "
+
+#: tfrmukazhistorii.caption
+msgid "Undo and Redo buffer"
+msgstr "Undo a redo položky"
+
+#: tfrmukazhistorii.menuitemclear.caption
+msgid "Clear History  Items"
+msgstr "Vyčisti položky historie"
+
+#: tfrmukazhistorii.menuitemundo.caption
+msgid "Undo History Item"
+msgstr "Undo položka historie"
+
+#: unit1.rsaktulnscrape
+msgid "Actual scraper finds nothing.%sWhat next ?"
+msgstr "Aktuální scraper nic nenalezl.%sCo dál ? "
+
+#: unit1.rsalternativet
+msgctxt "unit1.rsalternativet"
+msgid "Alternative title"
+msgstr "Alternativní název"
+
+#: unit1.rsbzeindexu
+msgid "Index base"
+msgstr "Báze indexu"
+
+#: unit1.rschangeformat
+msgid "Change format of all numbers in field"
+msgstr "Změň formát všech čísel v řetězci"
+
+#: unit1.rschybkasevlou
+msgid "Something went wrong"
+msgstr "Chybka se vloudí"
+
+#: unit1.rsdirectory
+msgid "Directory"
+msgstr "Adresář"
+
+#: unit1.rsdirectory2
+msgctxt "unit1.rsdirectory2"
+msgid "Directory :"
+msgstr "Adresář"
+
+#: unit1.rsdisk
+msgid "Disk n."
+msgstr "Disk č."
+
+#: unit1.rsdisk1
+msgid "Disk n.1"
+msgstr "Disk č.1"
+
+#: unit1.rsdisk2
+msgid "Disk n.%s"
+msgstr "Disk č.%s "
+
+#: unit1.rsdiskycelkem
+msgid "Total disks: %s"
+msgstr "Celkový počet disků: %s "
+
+#: unit1.rsdl
+msgid "Episode n."
+msgstr "Díl č."
+
+#: unit1.rsdl2
+msgid "Episode n.%s"
+msgstr "Díl č.%s "
+
+#: unit1.rsdlycelkem
+msgid "Total episodes: %s"
+msgstr "Celkový počet dílů: %s "
+
+#: unit1.rsdonothighlig
+msgid "Do not highlight initial position"
+msgstr "Neoznačuj počáteční pozici"
+
+#: unit1.rsepisodesondi
+msgid "Episodes on disk"
+msgstr "Díly na disku"
+
+#: unit1.rsfixedpartofl
+msgctxt "unit1.rsfixedpartofl"
+msgid "Fixed part of Location (text)"
+msgstr "Pevná část \"Umístění\" (text)"
+
+#: unit1.rshelphtmlenin
+#| msgid "\\Help\\HTML-en\\Help.chm"
+msgid "\\Help\\en\\Help.chm"
+msgstr "\\Help\\cz\\Help.chm"
+
+#: unit1.rshighlightini
+msgid "Highlight initial position"
+msgstr "Označ počáteční pozici"
+
+#: unit1.rshromadnzmnan
+msgid "Bulk change of series name"
+msgstr "Hromadná změna \"Název seriálu\""
+
+#: unit1.rshromadnzmnar
+msgid "Bulk change of year"
+msgstr "Hromadná změn \"Rok\""
+
+#: unit1.rsifhistoryexc
+msgid "If  history exceeds number of 100 items%sit may slow down program reaction time during%slarge database operations.%sHIDE HISTORY FORM"
+msgstr "Jestliže historie překročí počet 100 položek%sreakční doba programu během%světších databázových operací může klesnout.%sSCHOVAT FORMULAŘ HISTORIE?"
+
+#: unit1.rsindexod
+msgid "Beginning index from ?"
+msgstr "Začít index od ?"
+
+#: unit1.rsinintialinde
+msgctxt "unit1.rsinintialinde"
+msgid "Initial index value"
+msgstr "Počáteční hodnota indexu"
+
+#: unit1.rsjmnosouborun
+msgid "The file name can not be new.fdb%s"
+msgstr "Soubor se nemůže jmenovat new.fdb%s "
+
+#: unit1.rslocation
+msgctxt "unit1.rslocation"
+msgid "Location"
+msgstr "Umístění"
+
+#: unit1.rsmedium
+msgctxt "unit1.rsmedium"
+msgid "Medium"
+msgstr "Medium"
+
+#: unit1.rsmessagetobed
+msgctxt "unit1.rsmessagetobed"
+msgid "Message to be displayed"
+msgstr "Hlášení k zobrazení"
+
+#: unit1.rsname
+msgctxt "unit1.rsname"
+msgid "Name"
+msgstr "Název"
+
+#: unit1.rsneuloenzmny
+msgid "Unsave changes"
+msgstr "Neuložené změny"
+
+#: unit1.rsnovnzev
+msgid "New name ?"
+msgstr "Nové jméno ?"
+
+#: unit1.rsnovrok
+msgid "New year?"
+msgstr "Nový rok ?"
+
+#: unit1.rsnumberofdisk
+msgid "Number of disks for season:"
+msgstr "Počet disků na sezónu"
+
+#: unit1.rsnumberofepis
+msgid "Number of episodes for disk:"
+msgstr "Počet dílů na disk"
+
+#: unit1.rspoetdiskvevb
+msgid "Number disks in selection is: %s"
+msgstr "Počet disků ve výběru: %s "
+
+#: unit1.rspoetvybranch
+msgid "Number of disks chosen to change is %s"
+msgstr "Počet disků vybraných ke změně je %s "
+
+#: unit1.rspoetzznam
+msgid "Total records: %s"
+msgstr "Celkový počet záznamů: %s "
+
+#: unit1.rspoetzznam0
+msgid "Total records: 0 "
+msgstr "Celkový počet záznamů: 0␣"
+
+#: unit1.rspokraovatbez
+msgid "Scrape next item"
+msgstr "Scrapuj další položku"
+
+#: unit1.rspoutindexums
+msgid "Use location index ?"
+msgstr "Použít index umístění ?"
+
+#: unit1.rsprohlednroku
+#| msgid "For year scraping %sis neede to check also field \"Serie name\""
+msgid "For year scraping %sis neede to check also field \"Series name\""
+msgstr "Pro scrapování roku %sje potřeba také zaškrtnout pole \"Název seriálu\""
+
+#: unit1.rsredobufferit
+msgid "Redo Buffer Items"
+msgstr "Redo položky"
+
+#: unit1.rsseason
+msgid "Season"
+msgstr "Sezóna"
+
+#: unit1.rsseasondiskep
+msgid "Season : Disk : Episode"
+msgstr "Sezóna : Disk : Díl"
+
+#: unit1.rsseazenodle
+msgid "Sorted by:  "
+msgstr "Pro scrapování roku %sje potřeba zaškrtnout také pole \"Název seriálu\" "
+
+#: unit1.rsseriename
+msgctxt "unit1.rsseriename"
+msgid "Series name"
+msgstr "Název seriálu"
+
+#: unit1.rsseriesfilms
+msgid "Series: %s Films: %s       "
+msgstr "Seriály: %s Filmy: %s       "
+
+#: unit1.rsserilhromadn
+msgid "Series - Bulk change complex"
+msgstr "Seriál - Hromadná změna komplexní"
+
+#: unit1.rssezna
+msgid "Season n."
+msgstr "Sezóna č."
+
+#: unit1.rssezona
+msgid "Season n.%s"
+msgstr "Sezóna č.%s"
+
+#: unit1.rssezona1
+msgid "Season n.1"
+msgstr "Sezóna č.1"
+
+#: unit1.rssezonycelkem
+msgid "Total seasons: %s"
+msgstr "Celkový počet sezón: %s "
+
+#: unit1.rssort
+msgid "Sort"
+msgstr "Druh"
+
+#: unit1.rsstubfile
+msgid "Stubfile"
+msgstr "Stubfile"
+
+#: unit1.rstotalepisode
+msgid "Total episodes"
+msgstr "Dílů celkem"
+
+#: unit1.rstotalseasons
+msgid "Total seasons:"
+msgstr "Celkový počet sezón"
+
+#: unit1.rsundobufferit
+msgid "Undo Buffer Items"
+msgstr "Undo položky"
+
+#: unit1.rsundohistoryi
+msgid "Undo History Item name: "
+msgstr "Undo položku:"
+
+#: unit1.rsvsouborujsou
+msgid "There are unsaved changes in file,%sdo you want to save them ?"
+msgstr "V souboru jsou neuložené změny,%schcete je uložit ? "
+
+#: unit1.rsvytvoennovpo
+msgid "New item creation"
+msgstr "Vytvoření nové položky"
+
+#: unit1.rsvytvofilm
+msgid "Create film"
+msgstr "Vytvoř film"
+
+#: unit1.rsvytvoitnovse
+msgid "Create new series of film ?"
+msgstr "Vytvořit nový seriál nebo film ?"
+
+#: unit1.rsvytvoseril
+msgctxt "unit1.rsvytvoseril"
+msgid "Create series"
+msgstr "Vytvoř seriál"
+
+#: unit1.rsyear
+msgctxt "unit1.rsyear"
+msgid "Year"
+msgstr "Rok"
+
+#: unit1.rszmfilmy
+msgid "Change film(s)"
+msgstr "Změň film(y)"
+
+#: unit1.rszmnitscraper
+msgid "Change scraper"
+msgstr "Změň scraper"

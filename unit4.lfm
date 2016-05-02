@@ -1,0 +1,117 @@
+inherited Form4: TForm4
+  Left = 762
+  Height = 223
+  Top = 329
+  Width = 381
+  Caption = 'Season structure creating'
+  ClientHeight = 223
+  ClientWidth = 381
+  Position = poDesktopCenter
+  object JLabeledIntegerEdit1: TJLabeledIntegerEdit[0]
+    Left = 16
+    Height = 29
+    Top = 32
+    Width = 198
+    DisplayFormat = '0'
+    Value = 3
+    EditLabel.AnchorSideLeft.Control = JLabeledIntegerEdit1
+    EditLabel.AnchorSideRight.Control = JLabeledIntegerEdit1
+    EditLabel.AnchorSideRight.Side = asrBottom
+    EditLabel.AnchorSideBottom.Control = JLabeledIntegerEdit1
+    EditLabel.Left = 16
+    EditLabel.Height = 1
+    EditLabel.Top = 28
+    EditLabel.Width = 198
+    EditLabel.ParentColor = False
+    TabOrder = 0
+  end
+  object JLabeledIntegerEdit2: TJLabeledIntegerEdit[1]
+    Left = 16
+    Height = 29
+    Top = 104
+    Width = 205
+    DisplayFormat = '0'
+    Value = 4
+    EditLabel.AnchorSideLeft.Control = JLabeledIntegerEdit2
+    EditLabel.AnchorSideRight.Control = JLabeledIntegerEdit2
+    EditLabel.AnchorSideRight.Side = asrBottom
+    EditLabel.AnchorSideBottom.Control = JLabeledIntegerEdit2
+    EditLabel.Left = 16
+    EditLabel.Height = 1
+    EditLabel.Top = 100
+    EditLabel.Width = 205
+    EditLabel.ParentColor = False
+    TabOrder = 2
+  end
+  object JLabeledIntegerEdit3: TJLabeledIntegerEdit[2]
+    Left = 16
+    Height = 29
+    Top = 176
+    Width = 196
+    DisplayFormat = '0'
+    Value = 5
+    EditLabel.AnchorSideLeft.Control = JLabeledIntegerEdit3
+    EditLabel.AnchorSideRight.Control = JLabeledIntegerEdit3
+    EditLabel.AnchorSideRight.Side = asrBottom
+    EditLabel.AnchorSideBottom.Control = JLabeledIntegerEdit3
+    EditLabel.Left = 16
+    EditLabel.Height = 1
+    EditLabel.Top = 172
+    EditLabel.Width = 196
+    EditLabel.ParentColor = False
+    TabOrder = 4
+  end
+  object BitBtn1: TBitBtn[3]
+    Left = 304
+    Height = 40
+    Top = 24
+    Width = 61
+    Caption = 'OK'
+    ModalResult = 1
+    OnClick = BitBtn1Click
+    TabOrder = 6
+  end
+  object BitBtn2: TBitBtn[4]
+    Left = 304
+    Height = 40
+    Top = 96
+    Width = 61
+    Caption = 'Cancel'
+    ModalResult = 2
+    OnClick = BitBtn2Click
+    TabOrder = 7
+  end
+  object UpDown1: TUpDown[5]
+    Left = 214
+    Height = 40
+    Top = 24
+    Width = 50
+    Min = 0
+    OnChanging = UpDown1Changing
+    Position = 0
+    TabOrder = 1
+    Wrap = False
+  end
+  object UpDown2: TUpDown[6]
+    Left = 214
+    Height = 40
+    Top = 96
+    Width = 50
+    Min = 0
+    OnChanging = UpDown2Changing
+    Position = 0
+    TabOrder = 3
+    Wrap = False
+  end
+  object UpDown3: TUpDown[7]
+    Left = 214
+    Height = 40
+    Top = 168
+    Width = 50
+    Min = 0
+    OnChanging = UpDown3Changing
+    Position = 0
+    TabOrder = 5
+    Wrap = False
+  end
+end

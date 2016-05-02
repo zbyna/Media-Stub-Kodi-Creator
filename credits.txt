@@ -1,0 +1,22 @@
+
+
+This application uses:
+
+Superb The Oxygen Icon Theme
+
+    Copyright (C) 2007 David Vignoni 
+    <david@icon-king.com>
+    Copyright (C) 2007 Johann Ollivier Lapeyre
+     <johann@oxygen-icons.org>
+    Copyright (C) 2007 Kenneth Wimer
+     <kwwii@bootsplash.org>
+    Copyright (C) 2007 Nuno Pinheiro
+     <nuno@oxygen-icons.org>
+    Copyright (C) 2007 Riccardo Iaconelli
+     <riccardo@oxygen-icons.org>
+    Copyright (C) 2007 David Miller
+     <miller@oxygen-icons.org>
+and others
+
+Thanks
+
