@@ -134,8 +134,34 @@ var
 
 begin
 
- scraperVstup:='http://csfdapi.cz/movie?search='+PomNazev;
- parsujNazev:='$json() ! [.("names")("cs") ,string(.("year"))]';
+ //scraperVstup:='http://csfdapi.cz/movie?search='+PomNazev;
+ //parsujNazev:='$json() ! [.("names")("cs") ,string(.("year"))]';
+ scraperVstup:='http://www.csfd.cz/hledat/?q='+PomNazev;
+ nahradDiakritiku(scraperVstup);
+ parsujNazev:=  '<div id="search-films" class="ct-general th-1">' + slineBreak +
+                '  <div class="content">' + slineBreak +
+                '      <ul class="ui-image-list js-odd-even">' + slineBreak +
+                '        <template:loop>' + slineBreak +
+                '          <li>' + slineBreak +
+                '            <div>' + slineBreak +
+                '              <h3><a>{nazev:= text()}</a></h3>' + slineBreak +
+                '              <p> <template:read var="rok" source="text()" regex="(\d\d\d\d)$"/> </p>' + slineBreak +
+                '            </div>' + slineBreak +
+                '          </li>' + slineBreak +
+                '        </template:loop>' + slineBreak +
+                '      </ul>' + slineBreak +
+                '      <ul class="films others">' + slineBreak +
+                '        <template:loop>' + slineBreak +
+                '          <li>' + slineBreak +
+                '            <a>{nazev:=text()}</a>' + slineBreak +
+                '            <span class="film-year">' + slineBreak +
+                '              <template:read var="rok" source="text()" regex="(\d{4})"/>' + slineBreak +
+                '            </span>' + slineBreak +
+                '          </li>' + slineBreak +
+                '        </template:loop>' + slineBreak +
+                '      </ul>' + slineBreak +
+                '    </div>' + slineBreak +
+                '</div>';
  htmlTag:=False;
  FormScraper.Scrapuj(scraperVstup,parsujNazev,htmlTag);{naplní FormScraper výsledkem}
  if  FormScraper.ShowModal = mrOK then
@@ -228,8 +254,34 @@ var
 
 begin
 
-  scraperVstup:='http://csfdapi.cz/movie?search='+PomNazev;
- parsujNazev:='$json() ! [.("names")("cs") ,string(.("year"))]';
+ //scraperVstup:='http://csfdapi.cz/movie?search='+PomNazev;
+ //parsujNazev:='$json() ! [.("names")("cs") ,string(.("year"))]';
+ scraperVstup:='http://www.csfd.cz/hledat/?q='+PomNazev;
+ nahradDiakritiku(scraperVstup);
+ parsujNazev:=  '<div id="search-films" class="ct-general th-1">' + slineBreak +
+                '  <div class="content">' + slineBreak +
+                '      <ul class="ui-image-list js-odd-even">' + slineBreak +
+                '        <template:loop>' + slineBreak +
+                '          <li>' + slineBreak +
+                '            <div>' + slineBreak +
+                '              <h3><a>{nazev:= text()}</a></h3>' + slineBreak +
+                '              <p> <template:read var="rok" source="text()" regex="(\d\d\d\d)$"/> </p>' + slineBreak +
+                '            </div>' + slineBreak +
+                '          </li>' + slineBreak +
+                '        </template:loop>' + slineBreak +
+                '      </ul>' + slineBreak +
+                '      <ul class="films others">' + slineBreak +
+                '        <template:loop>' + slineBreak +
+                '          <li>' + slineBreak +
+                '            <a>{nazev:=text()}</a>' + slineBreak +
+                '            <span class="film-year">' + slineBreak +
+                '              <template:read var="rok" source="text()" regex="(\d{4})"/>' + slineBreak +
+                '            </span>' + slineBreak +
+                '          </li>' + slineBreak +
+                '        </template:loop>' + slineBreak +
+                '      </ul>' + slineBreak +
+                '    </div>' + slineBreak +
+                '</div>';
  htmlTag:=False;
  FormScraper.Scrapuj(scraperVstup,parsujNazev,htmlTag);{naplní FormScraper výsledkem}
  if  FormScraper.ShowModal = mrOK then
@@ -247,9 +299,10 @@ end;
 
 procedure TFormScraper.Scrapuj(var scraperVstup,parsujNazev:string;htmlTag:Boolean);
 
-var     v: IXQValue;
+var
+        v: IXQValue;
         //Nazev,Rok:IXQValue;
-        //i: Integer;
+        i: Integer;
         ztazeno: String;
         pamatuj1: Char;
         pamatuj2: String;
@@ -284,25 +337,40 @@ begin
                                                 end;
     //ShowMessage('Počet nalezených filmů: ' + inttostr(nazev.Count));
     //ShowMessage('Počet nalezených roků: ' + inttostr(Rok.Count));
-    for v in process (ztazeno,parsujNazev) do  { naplň seznam získanými hodnotami }
-      begin
-        pomNazev:= (v as TXQValueJSONArray).seq.get(0).toString;
-        pomRok:= (v as TXQValueJSONArray).seq.get(1).toString;
-        //pomNazev:=nazev.toString;
-        //pomRok:=rok.toString;
-        //ShowMessage(v.debugAsStringWithTypeAnnotation());
-        if length(pomRok)=4 then   {csfd api vrací rovnou čtyři znaky roku}
+    if (aktualniScraperFilm = ScraperyFilm[csfd]) or
+        (aktualniScraperSerial = ScraperySerial[Scsfd]) then
+         begin   { naplň seznam získanými hodnotami for csfd  scraper začátek }
+           v:= process(ztazeno,parsujNazev);
+            for i:=1 to (v as TXQValueObject).getProperty('nazev').Count do
+              begin
+                pomNazev:=(v as TXQValueObject).getProperty('nazev').get(i).toString;
+                pomRok:= (v as TXQValueObject).getProperty('rok').get(i).toString;
+                vyberFilmu.Items.AddText(pomNazev+'~'+pomRok);
+              end;
+         end    { naplň seznam získanými hodnotami for csfd  scraper konec }
+                                                   else
+        begin   { naplň seznam získanými hodnotami for other scrapers začátek }
+          for v in process (ztazeno,parsujNazev) do
             begin
-              vyberFilmu.Items.AddText(pomNazev+'~'+pomRok);
-              continue;
+              pomNazev:= (v as TXQValueJSONArray).seq.get(0).toString;
+              pomRok:= (v as TXQValueJSONArray).seq.get(1).toString;
+              //pomNazev:=nazev.toString;
+              //pomRok:=rok.toString;
+              //ShowMessage(v.debugAsStringWithTypeAnnotation());
+              if length(pomRok)=4 then   {když api vrací rovnou čtyři znaky roku}
+                  begin
+                    vyberFilmu.Items.AddText(pomNazev+'~'+pomRok);
+                    continue;
+                  end;
+              if pomRok='' then pomRokTDate:=0000-00-00
+                    else
+                      {themoviedb api vrací RRR-MM-DD}
+                      pomRokTDate:=(v as TXQValueJSONArray).seq.get(1).toDateTime;
+              vyberFilmu.Items.AddText(pomNazev+'~'+floattostr(yearof(pomRokTDate)));
+              {vyberFilmu.Items.Strings[i] záhadně nefunguje}
             end;
-        if pomRok='' then pomRokTDate:=0000-00-00
-              else
-                {themoviedb api vrací RRR-MM-DD}
-                pomRokTDate:=(v as TXQValueJSONArray).seq.get(1).toDateTime;
-        vyberFilmu.Items.AddText(pomNazev+'~'+floattostr(yearof(pomRokTDate)));
-        {vyberFilmu.Items.Strings[i] záhadně nefunguje}
-      end;
+
+        end;  { naplň seznam získanými hodnotami for other scrapers konec }
     EventLog1.Info('-----------------------------------------------------');
     if vyberFilmu.Items.Count<>0 then vyberFilmu.Selected[0]:=True
                                  else
