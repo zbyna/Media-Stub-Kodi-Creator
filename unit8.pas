@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, FileUtil, TplTimerUnit, Forms, Controls,
   Graphics, Dialogs, StdCtrls, ComCtrls, ExtCtrls, simpleinternet,
   simplehtmltreeparser, extendedhtmlparser, xquery, xquery_json, dateutils,
-  strutils,LazUTF8,character,eventlog, LocalizedForms;
+  strutils,LazUTF8,character,eventlog, LocalizedForms,bbutils;
 
 type
   { pro scraping roku k filmu - languages }
@@ -40,7 +40,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure OkButtonClick(Sender: TObject);
-    procedure Scrapuj(var scraperVstup,parsujNazev:string;htmlTag:Boolean);
+    procedure Scrapuj(var scraperVstup,parsujNazev:string;csfdTag:Boolean);
     procedure Timer1Timer(Sender: TObject);
     procedure vyberFilmuClick(Sender: TObject);
     procedure vyberFilmuEnter(Sender: TObject);
@@ -88,7 +88,7 @@ implementation
 function FilmThemoviedb(PomNazev: string): string;
 var
     scraperVstup,parsujNazev:string;
-    htmlTag:Boolean;
+    csfdTag:Boolean;
 
 begin
 
@@ -96,8 +96,8 @@ begin
             +pomNazev+'&language='+aktualniJazyk;
  parsujNazev:='$json("results")() ! [.("title"), .("release_date")]';
 
- htmlTag:=False;
- FormScraper.Scrapuj(scraperVstup,parsujNazev,htmlTag);{naplní FormScraper výsledkem}
+ csfdTag:=False;
+ FormScraper.Scrapuj(scraperVstup,parsujNazev,csfdTag);{naplní FormScraper výsledkem}
  if  FormScraper.ShowModal = mrOK then
      FilmThemoviedb:=FormScraper.vybranyRok
                                    else
@@ -110,14 +110,14 @@ end;
 function FilmImdb(PomNazev: string):string;
 var
     scraperVstup,parsujNazev:string;
-    htmlTag:Boolean;
+    csfdTag:Boolean;
 
 begin
 
  scraperVstup:='http://www.omdbapi.com/?s='+PomNazev;
  parsujNazev:='$json("Search")() ! [.("Title"),string(.("Year"))]' ;
- htmlTag:=False;
- FormScraper.Scrapuj(scraperVstup,parsujNazev,htmlTag);{naplní FormScraper výsledkem}
+ csfdTag:=False;
+ FormScraper.Scrapuj(scraperVstup,parsujNazev,csfdTag);{naplní FormScraper výsledkem}
  if  FormScraper.ShowModal = mrOK then
      FilmImdb:=FormScraper.vybranyRok
                                    else
@@ -130,7 +130,7 @@ end;
 function FilmCsfd(PomNazev: string): string;
 var
     scraperVstup,parsujNazev:string;
-    htmlTag:Boolean;
+    csfdTag:Boolean;
 
 begin
 
@@ -162,8 +162,8 @@ begin
                 '      </ul>' + slineBreak +
                 '    </div>' + slineBreak +
                 '</div>';
- htmlTag:=False;
- FormScraper.Scrapuj(scraperVstup,parsujNazev,htmlTag);{naplní FormScraper výsledkem}
+ csfdTag:=True;
+ FormScraper.Scrapuj(scraperVstup,parsujNazev,csfdTag);{naplní FormScraper výsledkem}
  if  FormScraper.ShowModal = mrOK then
      FilmCsfd:=FormScraper.vybranyRok
                                    else
@@ -177,7 +177,7 @@ end;
 function SerialThemoviedb(PomNazev: string): string;
   var
     scraperVstup,parsujNazev:string;
-    htmlTag:Boolean;
+    csfdTag:Boolean;
 
 begin
 
@@ -185,10 +185,10 @@ begin
             +pomNazev+'&language='+aktualniJazyk));
 
  parsujNazev:='$json("results")() ! [.("name"), .("first_air_date")]';
- htmlTag:=False;
+ csfdTag:=False;
  //ShowMessage('aktuální jazyk: ' + aktualniJazyk + sLineBreak+
  //             scraperVstup );
- FormScraper.Scrapuj(scraperVstup,parsujNazev,htmlTag);{naplní FormScraper výsledkem}
+ FormScraper.Scrapuj(scraperVstup,parsujNazev,csfdTag);{naplní FormScraper výsledkem}
  if  FormScraper.ShowModal = mrOK then
      SerialThemoviedb:=FormScraper.vybranyRok
                                    else
@@ -201,7 +201,7 @@ end;
 function SerialTvmaze(PomNazev: string): string;
 var
     scraperVstup,parsujNazev:string;
-    htmlTag:Boolean;
+    csfdTag:Boolean;
 
 begin
 
@@ -209,9 +209,9 @@ begin
  //for $prom in  $json()("show")
  //return [$prom("name"),$prom("premiered")]
  parsujNazev:='$json()("show") ! [.("name") ,string(.("premiered"))]';
- htmlTag:=False;
+ csfdTag:=False;
  nahradDiakritiku(scraperVstup);
- FormScraper.Scrapuj(scraperVstup,parsujNazev,htmlTag);{naplní FormScraper výsledkem}
+ FormScraper.Scrapuj(scraperVstup,parsujNazev,csfdTag);{naplní FormScraper výsledkem}
  if  FormScraper.ShowModal = mrOK then
      SerialTvmaze:=FormScraper.vybranyRok
                                    else
@@ -224,7 +224,7 @@ end;
 function SerialThetvdb(PomNazev: string): string;
 var
     scraperVstup,parsujNazev:string;
-    htmlTag:Boolean;
+    csfdTag:Boolean;
 begin
 
    //http://www.thetvdb.com/api/GetSeries.php?seriesname=neviditeln%C3%AD&language=cs
@@ -233,11 +233,11 @@ begin
  //parsujNazev:= 'for $prom in Data/series' + sLineBreak +
  //          'return [string($prom/seriesname/text()) ,string($prom/firstaired/text())]';
  parsujNazev:= 'Data/series ! [string(./seriesname/text()) ,string(./firstaired/text())]';
- htmlTag:=False;
+ csfdTag:=False;
  nahradDiakritiku(scraperVstup);
   //ShowMessage('aktuální jazyk: ' + aktualniJazyk + sLineBreak+
  //             scraperVstup );
- FormScraper.Scrapuj(scraperVstup,parsujNazev,htmlTag);{naplní FormScraper výsledkem}
+ FormScraper.Scrapuj(scraperVstup,parsujNazev,csfdTag);{naplní FormScraper výsledkem}
  if  FormScraper.ShowModal = mrOK then
      SerialThetvdb:=FormScraper.vybranyRok
                                    else
@@ -250,7 +250,7 @@ end;
 function SerialCsfd(PomNazev: string): string;
 var
     scraperVstup,parsujNazev:string;
-    htmlTag:Boolean;
+    csfdTag:Boolean;
 
 begin
 
@@ -282,8 +282,8 @@ begin
                 '      </ul>' + slineBreak +
                 '    </div>' + slineBreak +
                 '</div>';
- htmlTag:=False;
- FormScraper.Scrapuj(scraperVstup,parsujNazev,htmlTag);{naplní FormScraper výsledkem}
+ csfdTag:=True;
+ FormScraper.Scrapuj(scraperVstup,parsujNazev,csfdTag);{naplní FormScraper výsledkem}
  if  FormScraper.ShowModal = mrOK then
      SerialCsfd:=FormScraper.vybranyRok
                                    else
@@ -297,7 +297,7 @@ end;
 
 { TFormScraper }
 
-procedure TFormScraper.Scrapuj(var scraperVstup,parsujNazev:string;htmlTag:Boolean);
+procedure TFormScraper.Scrapuj(var scraperVstup,parsujNazev:string;csfdTag:Boolean);
 
 var
         v: IXQValue;
@@ -318,11 +318,19 @@ begin
     DefaultFormatSettings.DateSeparator:='-';  // defaultní se inicalizuje ze systému z kultury :-)
     DefaultFormatSettings.ShortDateFormat:= 'yyyy-mm-dd'; {themoviedb api vrací RRR-MM-DD}
     {uprav vstup a scrapuj }
-    if htmlTag then ztazeno:='<html>'+retrieve(scraperVstup)+'</html>'
-               else ztazeno:=retrieve(scraperVstup);
+    if not csfdTag then  ztazeno:= retrieve(scraperVstup)
+                   else
+                     begin
+                      // dá se tak obejít logování na straně csfd
+                      // střídat s strLoadFromFileUTF8() a strSaveToFileUTF8();
+                      strSaveToFile('csfdpom', retrieve(scraperVstup));
+                      ztazeno:=strLoadFromFile('csfdpom');
+                      // někdy funguje i jenom retrieve(scraperVstup) tzn. bez ukládání do souboru,
+                      // ale zřídka kdy
+                     end;
      EventLog1.Info('--------------Začátek scrapování--------------------');
      EventLog1.Debug(scraperVstup);
-     EventLog1.Debug('html tag: '+booltostr(htmlTag,true));
+     EventLog1.Debug('csfd tag: '+booltostr(csfdTag,true));
      EventLog1.Debug('query: ' + parsujNazev);
      EventLog1.Debug(ztazeno);
 
@@ -337,16 +345,28 @@ begin
                                                 end;
     //ShowMessage('Počet nalezených filmů: ' + inttostr(nazev.Count));
     //ShowMessage('Počet nalezených roků: ' + inttostr(Rok.Count));
-    if (aktualniScraperFilm = ScraperyFilm[csfd]) or
-        (aktualniScraperSerial = ScraperySerial[Scsfd]) then
+    if csfdTag then
          begin   { naplň seznam získanými hodnotami for csfd  scraper začátek }
-           v:= process(ztazeno,parsujNazev);
-            for i:=1 to (v as TXQValueObject).getProperty('nazev').Count do
-              begin
-                pomNazev:=(v as TXQValueObject).getProperty('nazev').get(i).toString;
-                pomRok:= (v as TXQValueObject).getProperty('rok').get(i).toString;
-                vyberFilmu.Items.AddText(pomNazev+'~'+pomRok);
-              end;
+           v:= process(ztazeno,'<title> <template:read var="rok"source="text()"'+
+                       ' regex="(\d{4})"/> </title>');
+           // je v titulu stránky rok ?
+           if (v as TXQValueObject).getProperty('rok').get(1).toString = '' then
+                // není našlo se více položke
+                    v:= process(ztazeno,parsujNazev)
+                                                      else
+                // je a tedy našla se pouze jedna položka (např. Postřižiny)
+                // csfd si loguje požadavky a když usoudí tak vrací chybná data
+                // zřejmě naschvál :-) a stězuje to ladění dost ... :-)
+                    v:= process(ztazeno,'<title><template:read var="rok"'+
+                        ' source="text()" regex="(\d{4})"/></title>'+
+                        '<h1 itemprop="name">{nazev:= text()}</h1>');
+           for i:=1 to (v as TXQValueObject).getProperty('nazev').Count do
+             begin
+               pomNazev:=(v as TXQValueObject).getProperty('nazev').get(i).toString;
+               pomRok:= (v as TXQValueObject).getProperty('rok').get(i).toString;
+               vyberFilmu.Items.AddText(pomNazev+'~'+pomRok);
+             end;
+
          end    { naplň seznam získanými hodnotami for csfd  scraper konec }
                                                    else
         begin   { naplň seznam získanými hodnotami for other scrapers začátek }

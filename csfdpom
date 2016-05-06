@@ -1,0 +1,529 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cs" xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://developers.facebook.com/schema/">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="description" content="ČSFD.cz">
+
+
+	<title>Vyhledávání | ČSFD.cz</title>
+
+	<link rel="shortcut icon" href="http://img.csfd.cz/assets/b1806/images/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="http://img.csfd.cz/assets/b1806/images/apple_touch_icon.png">
+
+
+		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/base/jquery-ui.css" type="text/css">
+	<link rel="stylesheet" href="http://img.csfd.cz/assets/b1806/modules/web/styles/styles.css" />
+	<link rel="stylesheet" type="text/css" href="http://img.csfd.cz/assets/b1806/styles/print.css" media="print">
+
+		<script src="//assets.adobedtm.com/4beaca54604aa1db7a7d9296a08d83bee398e7fd/satelliteLib-b54c24dc1fb24a614f18cbe602726d4b06972d15.js"></script>
+
+	<script type="text/javascript" charset="utf-8" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> 
+	<script type="text/javascript" charset="utf-8" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script> 
+	<script type="text/javascript"> if (window.jQuery === undefined) { document.write(decodeURI(
+			"%3Clink rel=\"stylesheet\" href=\"http://img.csfd.cz/assets/b1806/libs/jqueryui/themes/base/jquery-ui.css\" type=\"text/css\" /%3E"+
+            "%3Cscript src=\"http://img.csfd.cz/assets/b1806/libs/jquery/jquery.min.js\" type=\"text/javascript\">%3C/script%3E"+
+            "%3Cscript src=\"http://img.csfd.cz/assets/b1806/libs/jqueryui/jquery-ui.min.js\" type=\"text/javascript\">%3C/script%3E"
+		)); }
+	</script> 
+	<script type="text/javascript" charset="utf-8" src="http://img.csfd.cz/assets/b1806/modules/web/scripts/scripts.js"></script>
+
+	
+		<script type="text/javascript">
+		CSFD.app.action.id = ":Web:Search:default";
+		
+		
+		CSFD.app.visitor = {"country":[1]};
+		
+	</script>
+
+	
+	<meta property="og:site_name" content="ČSFD.cz">
+	<meta property="og:image" content="http://img.csfd.cz/assets/b1806/modules/web/images/facebook_csfd.png?1">
+	<meta property="og:description" content="ČSFD.cz">
+	<meta property="og:title" content="Vyhledávání">
+	<meta property="fb:app_id" content="260163667481043">
+
+	<link rel="canonical" href="http://www.csfd.cz/hledat/?q=Zivot+savcu">
+	<link rel="search" type="application/opensearchdescription+xml" title="ČSFD.cz" href="http://img.csfd.cz/assets/b1806/modules/web/misc/opensearch.xml">
+
+	<meta name="application-name" content="ČSFD.cz">
+	<meta name="msapplication-tooltip" content="ČSFD.cz">
+	<meta name="msapplication-starturl" content="http://www.csfd.cz/">
+	<meta name="msapplication-navbutton-color" content="#BB0011">
+
+	<meta name="msapplication-task" content="name=Přihlášení;action-uri=/prihlaseni/;icon-uri=http://img.csfd.cz/assets/b1806/images/favicon.ico">
+	<meta name="msapplication-task" content="name=Novinky;action-uri=/novinky/;icon-uri=http://img.csfd.cz/assets/b1806/images/favicon.ico">
+	<meta name="msapplication-task" content="name=Žebříčky;action-uri=/zebricky/;icon-uri=http://img.csfd.cz/assets/b1806/images/favicon.ico">
+	<meta name="msapplication-task" content="name=Televize;action-uri=/televize/;icon-uri=http://img.csfd.cz/assets/b1806/images/favicon.ico">
+
+
+</head>
+
+<body class="no-js ap-web" id="ap-web-search">
+	<script type="text/javascript">
+		$('body').removeClass('no-js').addClass('js');
+	</script>
+
+		<div id="ad-wrapper">
+
+<div id="bmone2n-19877.2.1.5" class="ui-advert ad-ibillboard ad-ibillboard-videobanner" data-code="19877.2.1.5">
+	<noscript>
+		<div style="display: inline"><a href="http://go.cz.bbelements.com/please/redirect/19877/2/1/5/"><img src="http://go.cz.bbelements.com/please/showit/19877/2/1/5/?typkodu=img&keywords=" style="border-width: 0" alt=""></a></div>
+	</noscript>
+</div>
+		<div id="ad-leaderboard"><div class="ad-pmg ad-pmg-leaderboard" data-element-type="leaderboard">
+	
+<div id="bmone2n-19877.2.1.1" class="ui-advert ad-ibillboard ad-ibillboard-leaderboard" data-code="19877.2.1.1">
+	<noscript>
+		<div style="display: inline"><a href="http://go.cz.bbelements.com/please/redirect/19877/2/1/1/"><img src="http://go.cz.bbelements.com/please/showit/19877/2/1/1/?typkodu=img&keywords=" style="border-width: 0" alt=""></a></div>
+	</noscript>
+</div>
+
+</div>
+</div>
+		<div class="ad-pmg-skyscraper-left-wrapper">
+			<div id="ad-skyscraper-left"><div class="ad-pmg ad-pmg-skyscraper-left" data-element-type="skyscraper-left">
+	
+<div id="bmone2n-19877.2.1.2" class="ui-advert ad-ibillboard ad-ibillboard-skyscraper-left" data-code="19877.2.1.2">
+	<noscript>
+		<div style="display: inline"><a href="http://go.cz.bbelements.com/please/redirect/19877/2/1/2/"><img src="http://go.cz.bbelements.com/please/showit/19877/2/1/2/?typkodu=img&keywords=" style="border-width: 0" alt=""></a></div>
+	</noscript>
+</div>
+
+</div>
+</div>
+		</div>
+		<div id="ad-skyscraper-right"><div class="ad-pmg ad-pmg-skyscraper-right" data-element-type="skyscraper-right">
+	
+<div id="bmone2n-19877.2.1.7" class="ui-advert ad-ibillboard ad-ibillboard-skyscraper-right" data-code="19877.2.1.7">
+	<noscript>
+		<div style="display: inline"><a href="http://go.cz.bbelements.com/please/redirect/19877/2/1/7/"><img src="http://go.cz.bbelements.com/please/showit/19877/2/1/7/?typkodu=img&keywords=" style="border-width: 0" alt=""></a></div>
+	</noscript>
+</div>
+
+</div>
+</div>
+	</div>
+
+
+	<div id="page-wrapper">
+		<div id="page-header">
+			<div id="logo">
+				<a href="/" title="ČSFD.cz">
+					<img src="http://img.csfd.cz/assets/b1806/images/logo.png" alt="ČSFD.cz" width="330" height="75">
+				</a>
+				<h2 class="hidden">Česko-Slovenská filmová databáze</h2>
+			</div>
+
+			
+	<div id="user-menu" class="unlogged">
+		<h3>Uživatelská zóna</h3>
+		<ul>
+			<li><a href="/prihlaseni/">Přihlásit</a></li>
+			<li><a href="/registrace/">Registrovat</a></li>
+			<li><a href="/registrace/ztracene-heslo/">Ztracené heslo</a></li>
+		</ul>
+	</div>
+
+
+	<div id="main-search">
+		<form action="/hledat/" method="get">
+			<div>
+				<input type="text" class="text" name="q" value="Zivot savcu" id="mainSearch" size="20" placeholder="Hledat">
+				<input type="submit" class="submit" title="Hledat" value="">
+			</div>
+		</form>
+		<a class="advanced-search" href="/podrobne-vyhledavani/">podrobné vyhledávání &rarr;</a>
+	</div>
+
+
+			<ul id="main-menu" class="bottom-menu">
+				
+	<li><a href="/novinky/">Novinky</a></li>
+	<li><a href="/videa/">Videa</a></li>
+	<li><a href="/televize/">Televize</a></li>
+	<li><a href="/kino/">Kino</a></li>
+	<li><a href="/filmy-online/">Filmy online</a></li>
+	<li><a href="/dvd-a-bluray/">DVD &amp; Blu-ray</a></li>
+	<li><a href="/tvurci/">Tvůrci</a></li>
+	<li><a href="/zebricky/">Žebříčky</a></li>
+	<li><a href="/filmoteky/">Filmotéky</a></li>
+	<li><a href="/uzivatele/">Uživatelé</a></li>
+	<li><a href="/diskuze/">Diskuze</a></li>
+
+			</ul>
+
+				<div id="activity-message">
+	</div>
+
+		</div>
+
+
+		<div class="page-content" id="pg-web-search">
+<h1>Vyhledávání</h1>
+<p class="search-query">Hledaný výraz: <strong>Zivot savcu</strong></p>
+
+<div class="left-column">
+	<div id="search-ad">
+<div class="ad-pmg ad-pmg-square" data-element-type="square">
+	
+<div id="bmone2n-19877.2.1.4" class="ui-advert ad-ibillboard ad-ibillboard-square" data-code="19877.2.1.4">
+	<noscript>
+		<div style="display: inline"><a href="http://go.cz.bbelements.com/please/redirect/19877/2/1/4/"><img src="http://go.cz.bbelements.com/please/showit/19877/2/1/4/?typkodu=img&keywords=" style="border-width: 0" alt=""></a></div>
+	</noscript>
+</div>
+
+</div>
+
+<div id="bmone2n-19877.2.1.8" class="ui-advert ad-ibillboard ad-ibillboard-square" data-code="19877.2.1.8">
+	<noscript>
+		<div style="display: inline"><a href="http://go.cz.bbelements.com/please/redirect/19877/2/1/8/"><img src="http://go.cz.bbelements.com/please/showit/19877/2/1/8/?typkodu=img&keywords=" style="border-width: 0" alt=""></a></div>
+	</noscript>
+</div>
+	</div>
+
+	<div id="search-users" class="ct-general th-0">
+		<h2 class="header">Uživatelé</h2>
+		<div class="content">
+
+			<ul class="ui-image-list js-odd-even">
+				<li>
+					<a href="/uzivatel/418637-jeden-zivot/"><img src="//img.csfd.cz/files/images/user/avatars/136/843/136843230_2d5565.jpg?w60h80crop" alt="Jeden.Zivot" class="avatar" width="60" height="80" /></a>
+					<h3 class="subject"><a href="/uzivatel/418637-jeden-zivot/">Jeden.Zivot</a></h3>
+					Jeden Zivot
+					<p><strong>0 bodů</strong><br>
+						0 hodnocení<br>
+						0 komentářů<br>
+					</p>
+					<div class="clear"></div>
+				</li>
+			</ul>
+
+		</div>
+		<div class="footer"></div>
+	</div>
+</div>
+
+<div id="search-films" class="ct-general th-1">
+	<h2 class="header">Filmy</h2>
+	<div class="content">
+
+		<ul class="ui-image-list js-odd-even">
+			<li>
+				<a href="/film/174074-zivot-savcu/"><img src="//img.csfd.cz/files/images/film/posters/000/041/41228_ae0d58.jpg?h180" alt="poster" class="film-poster-small image" /></a>
+				<div>
+					<h3 class="subject"><a href="/film/174074-zivot-savcu/" class="film c1">Život savců</a> <span class="film-type">(TV seriál)</span></h3>
+					
+					
+					
+					<p>Dokumentární, Velká Británie, 2002</p>
+					<p>
+						
+						Hrají: <a href="/tvurce/5125-david-attenborough/">David Attenborough</a><br>
+					</p>
+					<div class="clear"></div>
+				</div>
+			</li>
+			<li>
+				<a href="/film/390622-soukromy-zivot-evropskych-savcu/"><img src="http://img.csfd.cz/assets/b1806/images/poster-free.png" alt="poster" class="film-poster-small image" /></a>
+				<div>
+					<h3 class="subject"><a href="/film/390622-soukromy-zivot-evropskych-savcu/" class="film c1">Soukromý život evropských savců</a> <span class="film-type">(TV seriál)</span></h3>
+					
+					
+					
+					<p>Dokumentární, Kanada / Francie, 1999</p>
+					<p>
+						
+						
+					</p>
+					<div class="clear"></div>
+				</div>
+			</li>
+			<li>
+				<a href="/film/269003-zivot/"><img src="//img.csfd.cz/files/images/film/posters/157/867/157867013_4f1167.jpg?h180" alt="poster" class="film-poster-small image" /></a>
+				<div>
+					<h3 class="subject"><a href="/film/269003-zivot/" class="film c1">Život</a> <span class="film-type">(TV seriál)</span></h3>
+					
+					
+					
+					<p>Dokumentární / Dobrodružný, Velká Británie / Řecko, 2009</p>
+					<p>
+						Režie: <a href="/tvurce/62509-simon-blakeney/">Simon Blakeney</a>, <a href="/tvurce/62510-stephen-lyle/">Stephen Lyle</a><br>
+						Hrají: <a href="/tvurce/5125-david-attenborough/">David Attenborough</a>, <a href="/tvurce/21166-oprah-winfrey/">Oprah Winfrey</a><br>
+					</p>
+					<div class="clear"></div>
+				</div>
+			</li>
+			<li>
+				<a href="/film/315535-zivot-adele/"><img src="//img.csfd.cz/files/images/film/posters/158/037/158037692_71e5d8.jpg?h180" alt="poster" class="film-poster-small image" /></a>
+				<div>
+					<h3 class="subject"><a href="/film/315535-zivot-adele/" class="film c1">Život Adele</a></h3>
+					
+					
+					
+					<p>Drama / Romantický, Francie / Tunisko, 2013</p>
+					<p>
+						Režie: <a href="/tvurce/15594-abdellatif-kechiche/">Abdellatif Kechiche</a><br>
+						Hrají: <a href="/tvurce/93901-adele-exarchopoulos/">Adèle Exarchopoulos</a>, <a href="/tvurce/43398-lea-seydoux/">Léa Seydoux</a><br>
+					</p>
+					<div class="clear"></div>
+				</div>
+			</li>
+		</ul>
+
+		<h5 class="ui-list-label">Další nalezené záznamy</h5>
+
+		<ul class="films others">
+			<li>
+				<a href="/film/23587-zivot-briana/" class="film c1">Život Briana</a> <span class="film-year">(1979)</span>
+			</li>
+			<li>
+				<a href="/film/16080-zivot-brouka/" class="film c1">Život brouka</a> <span class="film-year">(1998)</span>
+			</li>
+			<li>
+				<a href="/film/7119-zivot-davida-galea/" class="film c1">Život Davida Galea</a> <span class="film-year">(2003)</span>
+			</li>
+			<li>
+				<a href="/film/245462-zivot-je-boj/" class="film c2">Život je boj</a> <span class="film-year">(2009)</span>
+			</li>
+			<li>
+				<a href="/film/11989-dospivani-po-americku/" class="film c1">Dospívání po americku</a> <span class="film-year">(1993)</span>
+				<span class="search-name">(Život jednoho chlapce)</span>
+			</li>
+			<li>
+				<a href="/film/642-zivot-je-krasny/" class="film c1">Život je krásný</a> <span class="film-year">(1997)</span>
+			</li>
+			<li>
+				<a href="/film/1279-zivot-je-krasny/" class="film c1">Život je krásný</a> <span class="film-year">(1946)</span>
+			</li>
+			<li>
+				<a href="/film/269232-pod-jednou-strechou/" class="film c2">Pod jednou střechou</a> <span class="film-year">(2010)</span>
+				<span class="search-name">(Život je taký)</span>
+			</li>
+			<li>
+				<a href="/film/72883-zivot-na-zamku/" class="film c2">Život na zámku</a> <span class="film-type">(TV seriál)</span> <span class="film-year">(1995)</span>
+			</li>
+			<li>
+				<a href="/film/226342-zivot-podle-dana/" class="film c1">Život podle Dana</a> <span class="film-year">(2007)</span>
+			</li>
+			<li>
+				<a href="/film/134224-zivot-pod-vodou/" class="film c1">Život pod vodou</a> <span class="film-year">(2004)</span>
+			</li>
+			<li>
+				<a href="/film/228777-po-zivote/" class="film c2">Po životě</a> <span class="film-year">(2009)</span>
+				<span class="search-name">(Život po živote)</span>
+			</li>
+			<li>
+				<a href="/film/266500-zivot-po-zivote/" class="film c2">Život po životě</a> <span class="film-year">(2010)</span>
+			</li>
+			<li>
+				<a href="/film/6261-zbesilost-v-srdci/" class="film c1">Zběsilost v srdci</a> <span class="film-year">(1990)</span>
+				<span class="search-name">(Život v bushi)</span>
+			</li>
+			<li>
+				<a href="/film/210573-zivot/" class="film c2">Život</a> <span class="film-year">(1993)</span>
+			</li>
+			<li>
+				<a href="/film/279963-zivot/" class="film c2">Život</a> <span class="film-type">(amatérský film)</span> <span class="film-year">(2007)</span>
+			</li>
+			<li>
+				<a href="/film/240186-zivot/" class="film c0">Život</a> <span class="film-type">(studentský film)</span> <span class="film-year">(1956)</span>
+			</li>
+			<li>
+				<a href="/film/192930-zivot-radnika/" class="film c0">Zivot radnika</a> <span class="film-year">(1987)</span>
+			</li>
+			<li>
+				<a href="/film/85402-zivot-berliozuv/" class="film c2">Život Berliozův</a> <span class="film-type">(TV seriál)</span> <span class="film-year">(1983)</span>
+			</li>
+			<li>
+				<a href="/film/193150-zivot-bohemy/" class="film c0">Život bohémy</a> <span class="film-year">(1945)</span>
+			</li>
+			<li>
+				<a href="/film/332042-zivot-cloveka/" class="film c0">Život človeka</a> <span class="film-type">(studentský film)</span> <span class="film-year">(2011)</span>
+			</li>
+			<li>
+				<a href="/film/293516-zivot-dantuv/" class="film c0">Život Dantův</a> <span class="film-type">(TV seriál)</span> <span class="film-year">(1965)</span>
+			</li>
+			<li>
+				<a href="/film/384244-zivot-hada/" class="film c0">Život hada</a> <span class="film-type">(TV film)</span> <span class="film-year">(2014)</span>
+			</li>
+			<li>
+				<a href="/film/127845-zivot-herce/" class="film c0">Život herce</a> <span class="film-year">(1941)</span>
+			</li>
+			<li>
+				<a href="/film/14626-zivot-hvezdy/" class="film c2">Život hvězdy</a> <span class="film-year">(2000)</span>
+			</li>
+			<li>
+				<a href="/film/32895-zivot-jezise/" class="film c1">Život Ježíše</a> <span class="film-year">(1997)</span>
+			</li>
+			<li>
+				<a href="/film/296764-zivot-kocky/" class="film c1">Život kočky</a> <span class="film-year">(2010)</span>
+			</li>
+			<li>
+				<a href="/film/337331-zivot-kolibriku/" class="film c0">Život kolibříků</a> <span class="film-type">(TV film)</span> <span class="film-year">(2010)</span>
+			</li>
+			<li>
+				<a href="/film/124585-zivot-matousuv/" class="film c1">Život Matoušův</a> <span class="film-year">(1967)</span>
+			</li>
+			<li>
+				<a href="/film/317543-zivot-muhammada/" class="film c2">Život Muhammada</a> <span class="film-type">(TV seriál)</span> <span class="film-year">(2011)</span>
+			</li>
+			<li>
+				<a href="/film/262732-zivot-naplno/" class="film c2">Život naplno</a> <span class="film-type">(TV film)</span> <span class="film-year">(2009)</span>
+			</li>
+			<li>
+				<a href="/film/10519-zivot-naruby/" class="film c2">Život naruby</a> <span class="film-year">(1994)</span>
+			</li>
+			<li>
+				<a href="/film/234825-rozpolceni/" class="film c2">Rozpolcení</a> <span class="film-type">(TV film)</span> <span class="film-year">(2007)</span>
+				<span class="search-name">(Život naruby)</span>
+			</li>
+			<li>
+				<a href="/film/261880-zivot-naruby/" class="film c2">Život naruby</a> <span class="film-year">(2014)</span>
+			</li>
+			<li>
+				<a href="/film/23029-family-upside-down-a/" class="film c0">Family Upside Down, A</a> <span class="film-type">(TV film)</span> <span class="film-year">(1978)</span>
+				<span class="search-name">(Život naruby)</span>
+			</li>
+			<li>
+				<a href="/film/183177-zivot-nevratis/" class="film c2">Život nevrátíš</a> <span class="film-year">(2001)</span>
+			</li>
+			<li>
+				<a href="/film/14338-zivot-panny/" class="film c2">Život panny</a> <span class="film-year">(2000)</span>
+			</li>
+			<li>
+				<a href="/film/345129-zivot-papiera/" class="film c0">Život papiera</a> <span class="film-type">(studentský film)</span> <span class="film-year">(2010)</span>
+			</li>
+			<li>
+				<a href="/film/234634-zivot-penez/" class="film c0">Život peněz</a> <span class="film-year">(1957)</span>
+			</li>
+			<li>
+				<a href="/film/134984-zivot-potom/" class="film c0">Život potom</a> <span class="film-year">(2003)</span>
+			</li>
+			<li>
+				<a href="/film/107578-ingmarssonerna/" class="film c0">Ingmarssönerna</a> <span class="film-year">(1919)</span>
+				<span class="search-name">(Život predkov)</span>
+			</li>
+			<li>
+				<a href="/film/290126-zivot-predevsim/" class="film c1">Život především</a> <span class="film-year">(2010)</span>
+			</li>
+			<li>
+				<a href="/film/249993-zivot-psa/" class="film c0">Život psa</a> <span class="film-year">(2005)</span>
+			</li>
+			<li>
+				<a href="/film/270337-zivot-ryana/" class="film c2">Život Ryana</a> <span class="film-type">(TV pořad)</span> <span class="film-year">(2007)</span>
+			</li>
+			<li>
+				<a href="/film/292029-zivot-ryb/" class="film c2">Život ryb</a> <span class="film-year">(2010)</span>
+			</li>
+			<li>
+				<a href="/film/327246-rybi-zivot/" class="film c2">Rybí život</a> <span class="film-type">(TV seriál)</span> <span class="film-year">(2011)</span>
+			</li>
+		</ul>
+
+	</div>
+	<div class="footer"><a class="complete" href="/hledat/complete-films/?q=Zivot+savcu">další záznamy</a></div>
+</div>
+
+<div id="search-creators" class="ct-general th-1">
+	<h2 class="header">Tvůrci</h2>
+	<div class="content">
+		<p class="not-found">nenalezeny žádné záznamy v této kategorii</p>
+
+
+	</div>
+	<div class="footer"></div>
+</div>
+
+			<div class="clear"></div>
+
+<div class="ad-pmg ad-pmg-rectangle" data-element-type="rectangle">
+	
+<div id="bmone2n-19877.2.1.14" class="ui-advert ad-ibillboard ad-ibillboard-rectangle" data-code="19877.2.1.14">
+	<noscript>
+		<div style="display: inline"><a href="http://go.cz.bbelements.com/please/redirect/19877/2/1/14/"><img src="http://go.cz.bbelements.com/please/showit/19877/2/1/14/?typkodu=img&keywords=" style="border-width: 0" alt=""></a></div>
+	</noscript>
+</div>
+
+</div>
+		</div>
+
+		<div id="page-footer">
+			<p>Česko-Slovenská filmová databáze © 2001-2016 <strong>POMO Media Group s.r.o.</strong> Všechna práva vyhrazena.</p>
+				<p>
+		<a href="/provozovatel-a-redakce/">Provozovatel a redakce</a> | <a href="/reklama-a-marketing/">Reklama a marketing</a> |
+		 <a href="/kontakt/">Napište nám</a> |
+		Server hosting zajišťuje <a href="http://www.vshosting.cz">VSHosting s.r.o.</a>
+	</p>
+	<p>
+		Doporučujeme: <a href="http://www.supito.cz">překlady</a>
+	</p>
+
+		</div>
+
+	</div>
+
+	<!-- load ads data -->
+<script type="text/javascript" src="//img.csfd.cz/ads/pmg/data.js"></script>
+<script type="text/javascript">
+	CSFD.ads.provider.pmg.load();
+</script>
+<script type="text/javascript" src="http://go.cz.bbelements.com/bb/bb_one2n.js" onerror="CSFD.ads.blocked = true"></script>
+<script type="text/javascript">
+	try {
+		var bbkeywords = '';
+			if (CSFD.ads.provider.ibillboard.isCode("19877.2.1.5")) bmone2n.addPosition("19877.2.1.5", '');
+			if (CSFD.ads.provider.ibillboard.isCode("19877.2.1.1")) bmone2n.addPosition("19877.2.1.1", '');
+			if (CSFD.ads.provider.ibillboard.isCode("19877.2.1.2")) bmone2n.addPosition("19877.2.1.2", '');
+			if (CSFD.ads.provider.ibillboard.isCode("19877.2.1.7")) bmone2n.addPosition("19877.2.1.7", '');
+			if (CSFD.ads.provider.ibillboard.isCode("19877.2.1.4")) bmone2n.addPosition("19877.2.1.4", '');
+			if (CSFD.ads.provider.ibillboard.isCode("19877.2.1.8")) bmone2n.addPosition("19877.2.1.8", '');
+			if (CSFD.ads.provider.ibillboard.isCode("19877.2.1.14")) bmone2n.addPosition("19877.2.1.14", '');
+		bmone2n.getAd('go.cz.bbelements.com', bbkeywords, '' + (typeof(bburlparam) == 'string' ? '&' + bburlparam : ''), 'utf-8');
+	}
+	catch (e) {}
+</script>
+<div id="bmone2t-19877.2.1.5" style="display:none"><script type="text/javascript"> try { if (CSFD.ads.provider.ibillboard.isCode("19877.2.1.5")) bmone2n.makeAd("19877.2.1.5"); } catch (e) {} </script></div>
+<div id="bmone2t-19877.2.1.1" style="display:none"><script type="text/javascript"> try { if (CSFD.ads.provider.ibillboard.isCode("19877.2.1.1")) bmone2n.makeAd("19877.2.1.1"); } catch (e) {} </script></div>
+<div id="bmone2t-19877.2.1.2" style="display:none"><script type="text/javascript"> try { if (CSFD.ads.provider.ibillboard.isCode("19877.2.1.2")) bmone2n.makeAd("19877.2.1.2"); } catch (e) {} </script></div>
+<div id="bmone2t-19877.2.1.7" style="display:none"><script type="text/javascript"> try { if (CSFD.ads.provider.ibillboard.isCode("19877.2.1.7")) bmone2n.makeAd("19877.2.1.7"); } catch (e) {} </script></div>
+<div id="bmone2t-19877.2.1.4" style="display:none"><script type="text/javascript"> try { if (CSFD.ads.provider.ibillboard.isCode("19877.2.1.4")) bmone2n.makeAd("19877.2.1.4"); } catch (e) {} </script></div>
+<div id="bmone2t-19877.2.1.8" style="display:none"><script type="text/javascript"> try { if (CSFD.ads.provider.ibillboard.isCode("19877.2.1.8")) bmone2n.makeAd("19877.2.1.8"); } catch (e) {} </script></div>
+<div id="bmone2t-19877.2.1.14" style="display:none"><script type="text/javascript"> try { if (CSFD.ads.provider.ibillboard.isCode("19877.2.1.14")) bmone2n.makeAd("19877.2.1.14"); } catch (e) {} </script></div>
+<script type="text/javascript"> try { bmone2n.moveAd(); } catch (e) {} </script>
+
+		<script type="text/javascript">
+		<!--//--><![CDATA[//><!--
+		var pp_gemius_identifier = '.Xo70CM6eCnBhv6vp5QQNcR77xEWf47KiIqfXU6rmdf.e7';
+		// lines below shouldn't be edited
+		function gemius_pending(i) { window[i] = window[i] || function() { var x = window[i+'_pdata'] = window[i+'_pdata'] || []; x[x.length]=arguments;};};
+		gemius_pending('gemius_hit'); gemius_pending('gemius_event'); gemius_pending('pp_gemius_hit'); gemius_pending('pp_gemius_event');
+		(function(d,t) { try { var gt=d.createElement(t),s=d.getElementsByTagName(t)[0],l='http'+((location.protocol=='https:')?'s':''); gt.setAttribute('async','async');
+		gt.setAttribute('defer','defer'); gt.src=l+'://spir.hit.gemius.pl/xgemius.js'; s.parentNode.insertBefore(gt,s);} catch (e) { }})(document,'script');
+		//--><!]]>
+	</script>
+
+		<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-11601932-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+	<div id="cookies-agreement">
+		Tento web používá k poskytování služeb, personalizaci reklam a analýze návštěvnosti soubory cookie. Používáním tohoto webu s tím souhlasíte.
+		<button>V pořádku</button>
+		<a href="https://www.google.com/policies/technologies/cookies/" target="_blank">Další informace</a>
+	</div>
+
+	<script type="text/javascript">_satellite.pageBottom();</script>
+</body>
+</html>
