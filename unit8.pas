@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, FileUtil, TplTimerUnit, Forms, Controls,
   Graphics, Dialogs, StdCtrls, ComCtrls, ExtCtrls, simpleinternet,
   simplehtmltreeparser, extendedhtmlparser, xquery, xquery_json, dateutils,
-  strutils,LazUTF8,character,eventlog, LocalizedForms,bbutils;
+  strutils,LazUTF8,character,eventlog, LocalizedForms,bbutils,unConstants;
 
 type
   { pro scraping roku k filmu - languages }
@@ -92,8 +92,9 @@ var
 
 begin
 
- scraperVstup:='https://api.themoviedb.org/3/search/movie?api_key=38aa2361f14d66ac47ff4d0c46c9ebd4&query='
-            +pomNazev+'&language='+aktualniJazyk;
+ scraperVstup:='https://api.themoviedb.org/3/search/movie?api_key='+
+               unConstants.theMovidedbAPI +'&query='+
+               pomNazev+'&language='+aktualniJazyk;
  parsujNazev:='$json("results")() ! [.("title"), .("release_date")]';
 
  csfdTag:=False;
@@ -181,8 +182,9 @@ function SerialThemoviedb(PomNazev: string): string;
 
 begin
 
-  scraperVstup:=UTF8ToSys(('https://api.themoviedb.org/3/search/tv?api_key=38aa2361f14d66ac47ff4d0c46c9ebd4&query='
-            +pomNazev+'&language='+aktualniJazyk));
+  scraperVstup:=UTF8ToSys(('https://api.themoviedb.org/3/search/tv?api_key='+
+                            unConstants.theMovidedbAPI+'&query='+
+                            pomNazev+'&language='+aktualniJazyk));
 
  parsujNazev:='$json("results")() ! [.("name"), .("first_air_date")]';
  csfdTag:=False;
