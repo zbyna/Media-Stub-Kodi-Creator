@@ -151,7 +151,7 @@ begin
                 '          </li>' + slineBreak +
                 '        </template:loop>' + slineBreak +
                 '      </ul>' + slineBreak +
-                '      <ul class="films others">' + slineBreak +
+                '      <ul template:optional="true" class="films others">' + slineBreak +
                 '        <template:loop>' + slineBreak +
                 '          <li>' + slineBreak +
                 '            <a>{nazev:=text()}</a>' + slineBreak +
@@ -272,7 +272,7 @@ begin
                 '          </li>' + slineBreak +
                 '        </template:loop>' + slineBreak +
                 '      </ul>' + slineBreak +
-                '      <ul class="films others">' + slineBreak +
+                '      <ul template:optional="true" class="films others">' + slineBreak +
                 '        <template:loop>' + slineBreak +
                 '          <li>' + slineBreak +
                 '            <a>{nazev:=text()}</a>' + slineBreak +
