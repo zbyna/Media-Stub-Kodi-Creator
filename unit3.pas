@@ -327,7 +327,7 @@ If  Form1.ZjistiPromNovySerial()
                       Form1.ZQuery1.FieldByName('DILY_NA_DISKU').AsString:= PomPocetDilu;
                       Form1.ZQuery1.FieldByName('SEZONA').AsString:= PomPocetSezon;
                       Form1.ZQuery1.FieldByName('STUBFILE').AsString:=  PomPocetSezon + PomPocetDilu +'.disc';
-                      Form1.ZQuery1.FieldByName('DIRECTORY').AsString:= '\'+LabeledEdit1.Text+'\'+PomPocetSezon+'\';
+                      Form1.ZQuery1.FieldByName('DIRECTORY').AsString:= '\'+ Form1.validateFileName(LabeledEdit1.Text)+'\'+PomPocetSezon+'\';
                Form1.ZQuery1.Post;
                PomPocetDilu:='';
               end;
@@ -419,7 +419,7 @@ If  Form1.ZjistiPromNovySerial()
                       Form1.ZQuery1.FieldByName('SEZONA').AsString:= PomPocetSezon;
                       Form1.ZQuery1.FieldByName('STUBFILE').AsString:=  PomPocetSezon + PomPocetDilu +
                       '.disc';
-                      Form1.ZQuery1.FieldByName('DIRECTORY').AsString:= '\'+LabeledEdit1.Text+'\'
+                      Form1.ZQuery1.FieldByName('DIRECTORY').AsString:= '\'+ form1.validateFileName(LabeledEdit1.Text)+'\'
                       +PomPocetSezon+'\';
                   end;
                Form1.ZQuery1.Post;

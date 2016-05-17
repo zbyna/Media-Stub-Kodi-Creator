@@ -61,9 +61,12 @@ implementation
 { TForm6 }
 
 procedure TForm6.updateStubfileADirectory;
+var
+  pomString:String;
 begin
-  StaticText1.Caption:=  LabeledEdit1.Text +'.disc';
-  StaticText2.Caption:= '\'+ LabeledEdit1.Text+'('+LabeledEdit2.Text+')\';
+  pomString:=form1.validateFileName(LabeledEdit1.Text);
+  StaticText1.Caption:=  pomString +'.disc';
+  StaticText2.Caption:= '\'+ pomString+'('+LabeledEdit2.Text+')\';
 end;
 
 procedure TForm6.UpdateTranslation(ALang: String);

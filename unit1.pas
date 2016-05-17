@@ -208,6 +208,7 @@ type
     { public declarations }
     pomColumnForNumFormatAdujstment:TColumn;
     procedure UpdateTranslation(ALang: String); override;
+    function validateFileName(inputString:String):String;
   end;
 
 
@@ -942,6 +943,22 @@ begin
   StatusBar1.Panels[0].Text:=rsPoEtZZnam0;
 end;
 
+function TForm1.validateFileName(inputString: String): String;
+{Validuje jméno souboru}
+type
+  TNepovoleneZnaky =  set of char ;
+var
+  nepovoleneZnaky:TNepovoleneZnaky = ['\', '/', ':', '*', '?', '"', '<', '>', '|'];
+  pomString:String;
+  zn: Char;
+begin
+  pomString:=inputString;
+  for zn in pomString do
+    if zn in nepovoleneZnaky then
+           pomString:= UTF8StringReplace(pomString,zn,'',[rfReplaceAll]);
+  Result:=pomString;
+end;
+
 procedure TForm1.FormCreate(Sender: TObject);  {Při vytvoření Form1 inicializuj}
 var
  PomMenu : TMenuItem;
@@ -1201,13 +1218,15 @@ procedure TForm1.MenuItem23Click(Sender: TObject);
                                    {popup Filmy Hromadná tvorba "Stubfile"+"Directory"}
 var
   i: Integer;
+  pomString:String;
 begin
   for i:=0 to dbgrid1.SelectedRows.Count-1 do
    begin
      ZQuery1.GotoBookmark(dbgrid1.SelectedRows.Items[i]);
      ZQuery1.Edit;
-     ZQuery1.FieldByName('STUBFILE').AsString:=ZQuery1.FieldByName('NAZEV').AsString +'.disc';;
-     ZQuery1.FieldByName('DIRECTORY').AsString:='\'+ZQuery1.FieldByName('NAZEV').AsString
+     pomString:=validateFileName(ZQuery1.FieldByName('NAZEV').AsString);
+     ZQuery1.FieldByName('STUBFILE').AsString:= pomString +'.disc';
+     ZQuery1.FieldByName('DIRECTORY').AsString:='\'+pomString
                                                  +'('+ZQuery1.FieldByName('ROK').AsString+')\';
      ZQuery1.Post;
    end;
