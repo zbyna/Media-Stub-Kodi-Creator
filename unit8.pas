@@ -227,18 +227,28 @@ function SerialThetvdb(PomNazev: string): string;
 var
     scraperVstup,parsujNazev:string;
     csfdTag:Boolean;
+    token:String;
 begin
-
-   //http://www.thetvdb.com/api/GetSeries.php?seriesname=neviditeln%C3%AD&language=cs
-   scraperVstup:= 'http://www.thetvdb.com/api/GetSeries.php?seriesname='+pomNazev+
-                  '&language='+aktualniJazyk;
+   // to receive the token for API 2.1.0
+   defaultInternet.additionalHeaders.Add('Content-Type: application/json');
+   defaultInternet.additionalHeaders.Add('Accept: application/json');
+   // to add token to request header
+   token:= process(defaultInternet.post('https://api.thetvdb.com/login',
+                       '{"apikey": "'+unConstants.theTvdbAPI+'"}'),
+                       '$json("token")').toString;
+   defaultInternet.additionalHeaders.Add('Authorization: Bearer '+token);
+   // to add language to the request header
+   defaultInternet.additionalHeaders.Add('Accept-Language: '+aktualniJazyk);
+   scraperVstup:= 'https://api.thetvdb.com/search/series?name='+pomNazev;
+  // {API 1.0} scraperVstup:= 'http://www.thetvdb.com/api/GetSeries.php?seriesname='+pomNazev+
+  // {API 1.0}                '&language='+aktualniJazyk;
+  parsujNazev:='$json("data")()! [.("seriesName") ,string(.("firstAired"))]';
  //parsujNazev:= 'for $prom in Data/series' + sLineBreak +
  //          'return [string($prom/seriesname/text()) ,string($prom/firstaired/text())]';
- parsujNazev:= 'Data/series ! [string(./seriesname/text()) ,string(./firstaired/text())]';
+ // {API 1.0} parsujNazev:= 'Data/series ! [string(./seriesname/text()) ,string(./firstaired/text())]';
  csfdTag:=False;
  nahradDiakritiku(scraperVstup);
-  //ShowMessage('aktuální jazyk: ' + aktualniJazyk + sLineBreak+
- //             scraperVstup );
+  //ShowMessage(format('%s', [defaultInternet.additionalHeaders.Text]) );
  FormScraper.Scrapuj(scraperVstup,parsujNazev,csfdTag);{naplní FormScraper výsledkem}
  if  FormScraper.ShowModal = mrOK then
      SerialThetvdb:=FormScraper.vybranyRok
@@ -320,24 +330,31 @@ begin
     DefaultFormatSettings.DateSeparator:='-';  // defaultní se inicalizuje ze systému z kultury :-)
     DefaultFormatSettings.ShortDateFormat:= 'yyyy-mm-dd'; {themoviedb api vrací RRR-MM-DD}
     {uprav vstup a scrapuj }
-    if not csfdTag then  ztazeno:= retrieve(scraperVstup)
+     EventLog1.Info('--------------Začátek scrapování--------------------');
+     EventLog1.Debug('HTTP header - begin (defaultInternet.additionalHeaders): ');
+     EventLog1.Debug(format('%s', [defaultInternet.additionalHeaders.Text]));
+     EventLog1.Debug('scraperVstup: '+scraperVstup);
+     EventLog1.Debug('csfd tag: '+booltostr(csfdTag,true));
+     EventLog1.Debug('query: ' + parsujNazev);
+    if not csfdTag then
+                    try
+                      ztazeno:= retrieve(scraperVstup);
+                    except
+                      on e:Exception do  EventLog1.Debug(e.ToString);
+                    end
                    else
                      begin
                       // dá se tak obejít logování na straně csfd
                       // střídat s strLoadFromFileUTF8() a strSaveToFileUTF8();
                       strSaveToFile('csfdpom', retrieve(scraperVstup));
                       ztazeno:=strLoadFromFile('csfdpom');
-                      // někdy funguje i jenom retrieve(scraperVstup) tzn. bez ukládání do souboru,
+                      // někdy funguje i jenom retrieve(scraperVstup)
+                      // tzn. bez ukládání do souboru,
                       // ale zřídka kdy
                      end;
-     EventLog1.Info('--------------Začátek scrapování--------------------');
-     EventLog1.Debug(scraperVstup);
-     EventLog1.Debug('csfd tag: '+booltostr(csfdTag,true));
-     EventLog1.Debug('query: ' + parsujNazev);
-     EventLog1.Debug(ztazeno);
-
+    EventLog1.Debug('ztazeno: '+ztazeno);
     if (IsWordPresent('"total_results":0}',ztazeno,[','])) or
-       (Pos('Movie not found!',ztazeno) > 0)                      or
+       (Pos('not found!',ztazeno) > 0)                      or
        ((ztazeno = '[]')and (aktualniScraperFilm = ScraperyFilm[csfd]))
        {specialita csfd api :-) někdy}
                                            then
@@ -393,17 +410,22 @@ begin
             end;
 
         end;  { naplň seznam získanými hodnotami for other scrapers konec }
-    EventLog1.Info('-----------------------------------------------------');
+    defaultInternet.additionalHeaders.Clear;//vynulování dodatečné hlavičky HTTP
+                                            // s hlavičkou pracuje thetvdb api 2.0.1
+
     if vyberFilmu.Items.Count<>0 then vyberFilmu.Selected[0]:=True
                                  else
                                    begin
                                      nenalezeno:=true;
-                                     exit;
+                                     eventlog1.Debug('nenalezeno: '+
+                                                      booltostr(nenalezeno,true));
+                                    // exit;
                                    end;
 
     { vrať zpět defaultní formát data }
     DefaultFormatSettings.DateSeparator:=pamatuj1;
     DefaultFormatSettings.ShortDateFormat:= pamatuj2;
+    EventLog1.Info('-----------------------------------------------------');
 end;
 
 procedure TFormScraper.Timer1Timer(Sender: TObject);
