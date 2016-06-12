@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, FileUtil, TplTimerUnit, Forms, Controls,
   Graphics, Dialogs, StdCtrls, ComCtrls, ExtCtrls, simpleinternet,
   simplehtmltreeparser, extendedhtmlparser, xquery, xquery_json, dateutils,
-  strutils,LazUTF8,character,eventlog, LocalizedForms,bbutils,unConstants;
+  strutils,LazUTF8,character,eventlog, LocalizedForms,bbutils,unConstants,zuncomprfp;
 
 type
   { pro scraping roku k filmu - languages }
@@ -337,22 +337,27 @@ begin
      EventLog1.Debug('csfd tag: '+booltostr(csfdTag,true));
      EventLog1.Debug('query: ' + parsujNazev);
     if not csfdTag then
-                    try
-                      ztazeno:= retrieve(scraperVstup);
-                    except
-                      on e:Exception do  EventLog1.Debug(e.ToString);
-                    end
+        try
+          ztazeno:= retrieve(scraperVstup);
+        except
+          on e:Exception do EventLog1.Debug(e.ToString);
+        end
                    else
-                     begin
-                      // dá se tak obejít logování na straně csfd
-                      // střídat s strLoadFromFileUTF8() a strSaveToFileUTF8();
-                      strSaveToFile('csfdpom', retrieve(scraperVstup));
-                      ztazeno:=strLoadFromFile('csfdpom');
-                      // někdy funguje i jenom retrieve(scraperVstup)
-                      // tzn. bez ukládání do souboru,
-                      // ale zřídka kdy
-                     end;
-    EventLog1.Debug('ztazeno: '+ztazeno);
+       begin
+        // jde o cachování tj. data s úplnými informacemi o filmu
+        // se v případě opakovaného volání posílají z cache serveru
+        // zazipovaná (gzip)
+        ztazeno:= defaultInternet.post(scraperVstup,'');
+        EventLog1.Debug('HTTP header - begin (defaultInternet.lastHTTPHeaders): ');
+        EventLog1.Debug(format('%s', [defaultInternet.lastHTTPHeaders.Text]));
+        if defaultInternet.lastHTTPHeaders.IndexOf(
+              'Content-Encoding: gzip') <> -1 then
+                        begin
+                         ztazeno:=decompress(ztazeno);
+                         EventLog1.Debug('***** gzip unpacked :-) *****');
+                        end;
+       end;
+    EventLog1.Debug('ztazeno: '+ ztazeno {LeftStr(ztazeno,100)});
     if (IsWordPresent('"total_results":0}',ztazeno,[','])) or
        (Pos('not found!',ztazeno) > 0)                      or
        ((ztazeno = '[]')and (aktualniScraperFilm = ScraperyFilm[csfd]))
@@ -374,8 +379,8 @@ begin
                     v:= process(ztazeno,parsujNazev)
                                                       else
                 // je a tedy našla se pouze jedna položka (např. Postřižiny)
-                // csfd si loguje požadavky a když usoudí tak vrací chybná data
-                // zřejmě naschvál :-) a stězuje to ladění dost ... :-)
+                // csfd si cachuje častější požadavky a vrací je komprimované gzip
+                // počítej s tím zbyňo :-)
                     v:= process(ztazeno,'<title><template:read var="rok"'+
                         ' source="text()" regex="(\d{4})"/></title>'+
                         '<h1 itemprop="name">{nazev:= text()}</h1>');
