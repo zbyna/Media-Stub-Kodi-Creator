@@ -29,11 +29,15 @@ type
 
   TFormScraper = class(TLocalizedForm)
     EventLog1: TEventLog;
+    imgObrazek: TImage;
+    memDej: TMemo;
     OkButton: TButton;
     CancelButton: TButton;
     Label1: TLabel;
     Timer1: TTimer;
     vyberFilmu: TListBox;                    { seznam nascrapovaných řetězců název+rok }
+    vyberObrazku:TStringList;                { seznam nascrapovaných řetězců adres obrázků }
+    vyberDeju:TStringList;                   { seznam nascrapovaných řetězců dějů }
     ProgressBar1: TProgressBar;
     procedure CancelButtonClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -210,7 +214,8 @@ begin
   scraperVstup:='http://api.tvmaze.com/search/shows?q='+PomNazev;
  //for $prom in  $json()("show")
  //return [$prom("name"),$prom("premiered")]
- parsujNazev:='$json()("show") ! [.("name") ,string(.("premiered"))]';
+ parsujNazev:='$json()("show") ! [.("name") ,string(.("premiered")), '+
+                                 'string(.("image")("medium")),.("summary")]';
  csfdTag:=False;
  nahradDiakritiku(scraperVstup);
  FormScraper.Scrapuj(scraperVstup,parsujNazev,csfdTag);{naplní FormScraper výsledkem}
@@ -322,6 +327,10 @@ var
         pomRokTDate:TDateTime;
 begin
     vyberFilmu.Clear;
+    vyberObrazku.Clear;
+    imgObrazek.Picture.Clear;
+    memDej.Clear;
+    vyberDeju.Clear;
     nenalezeno:=false;
     { zapamatuj si defaultní formát data }
     pamatuj1:=DefaultFormatSettings.DateSeparator;
@@ -398,6 +407,8 @@ begin
             begin
               pomNazev:= (v as TXQValueJSONArray).seq.get(0).toString;
               pomRok:= (v as TXQValueJSONArray).seq.get(1).toString;
+              vyberObrazku.Add((v as TXQValueJSONArray).seq.get(2).toString);
+              vyberDeju.Add((v as TXQValueJSONArray).seq.get(3).toString);
               //pomNazev:=nazev.toString;
               //pomRok:=rok.toString;
               //ShowMessage(v.debugAsStringWithTypeAnnotation());
@@ -413,19 +424,24 @@ begin
               vyberFilmu.Items.AddText(pomNazev+'~'+floattostr(yearof(pomRokTDate)));
               {vyberFilmu.Items.Strings[i] záhadně nefunguje}
             end;
-
+         EventLog1.Debug(format('%s %s', ['Kapacita obrázků: ',inttostr(vyberObrazku.Count)]));
+         EventLog1.Debug(format('%s %s', ['Kapacita dějů: ',inttostr(vyberDeju.Count)]));
         end;  { naplň seznam získanými hodnotami for other scrapers konec }
     defaultInternet.additionalHeaders.Clear;//vynulování dodatečné hlavičky HTTP
                                             // s hlavičkou pracuje thetvdb api 2.0.1
 
-    if vyberFilmu.Items.Count<>0 then vyberFilmu.Selected[0]:=True
+    if vyberFilmu.Items.Count<>0 then
+            begin
+             vyberFilmu.Selected[0]:=True;
+             vyberFilmu.Click;
+            end
                                  else
-                                   begin
-                                     nenalezeno:=true;
-                                     eventlog1.Debug('nenalezeno: '+
-                                                      booltostr(nenalezeno,true));
-                                    // exit;
-                                   end;
+           begin
+             nenalezeno:=true;
+             eventlog1.Debug('nenalezeno: '+
+                              booltostr(nenalezeno,true));
+            // exit;
+           end;
 
     { vrať zpět defaultní formát data }
     DefaultFormatSettings.DateSeparator:=pamatuj1;
@@ -455,8 +471,33 @@ begin
 end;
 
 procedure TFormScraper.vyberFilmuClick(Sender: TObject);
+var
+    pomStream: TMemoryStream;
+    pomAdresa: String;
 begin
   ProgressBar1.Position:=0;
+  pomAdresa:=vyberObrazku.Strings[vyberFilmu.ItemIndex];
+  if pomAdresa <> '' then
+     begin
+        pomStream:=TMemoryStream.Create;
+        try
+          try
+           defaultInternet.get(pomAdresa,pomStream);
+           pomStream.Seek(0,soFromBeginning);
+           imgObrazek.Picture.LoadFromStream(pomStream);
+          Except
+            on E: Exception do  EventLog1.Debug(e.ToString);
+          end;
+        finally
+          pomStream.Free;
+        end;
+     end
+                     else
+     imgObrazek.Picture.Clear;
+  memDej.clear;
+  memDej.Lines.BeginUpdate;
+  memDej.Append(vyberDeju.Strings[vyberFilmu.ItemIndex]);
+  memDej.Lines.EndUpdate;
 end;
 
 procedure TFormScraper.vyberFilmuEnter(Sender: TObject);
@@ -510,6 +551,9 @@ begin
   aktualniScraperFilm:=ScraperyFilm[TScraperFilm(FormNastaveni.FilmScrapers.ItemIndex)];
   aktualniScraperSerial:=ScraperySerial[TScraperSerial(FormNastaveni.SerialScrapers.ItemIndex)];
   FormNastaveni.nastavStatusBar;
+  // vytvoření TStringList pro scrapování obrázků a dějů
+  vyberObrazku:=TStringList.Create;
+  vyberDeju:=TStringList.Create;
 end;
 
 procedure TFormScraper.FormClose(Sender:TObject; var CloseAction:TCloseAction);

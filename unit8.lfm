@@ -2,10 +2,10 @@ inherited FormScraper: TFormScraper
   Left = 719
   Height = 448
   Top = 247
-  Width = 468
+  Width = 830
   Caption = 'Year scraping'
   ClientHeight = 448
-  ClientWidth = 468
+  ClientWidth = 830
   Icon.Data = {
     BE1000000000010001002020000001002000A810000016000000280000002000
     0000400000000100200000000000001000006400000064000000000000000000
@@ -151,7 +151,7 @@ inherited FormScraper: TFormScraper
     Left = 16
     Height = 327
     Top = 48
-    Width = 299
+    Width = 235
     ItemHeight = 0
     OnClick = vyberFilmuClick
     OnEnter = vyberFilmuEnter
@@ -166,40 +166,68 @@ inherited FormScraper: TFormScraper
     ParentColor = False
   end
   object ProgressBar1: TProgressBar[2]
-    Left = 8
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 16
     Height = 40
     Top = 392
-    Width = 440
+    Width = 794
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Right = 20
     Step = 20
     TabOrder = 3
   end
   object OkButton: TButton[3]
-    Left = 342
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 715
     Height = 50
     Top = 120
-    Width = 79
+    Width = 95
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 20
     Caption = 'Ok'
     ModalResult = 1
     OnClick = OkButtonClick
     TabOrder = 1
   end
   object CancelButton: TButton[4]
-    Left = 342
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 714
     Height = 51
     Top = 192
-    Width = 80
+    Width = 96
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 20
     Cancel = True
     Caption = 'Cancel'
     ModalResult = 2
     OnClick = CancelButtonClick
     TabOrder = 2
   end
-  object Timer1: TTimer[5]
-    OnTimer = Timer1Timer
-    left = 346
-    top = 40
+  object imgObrazek: TImage[5]
+    Left = 280
+    Height = 226
+    Top = 88
+    Width = 144
+    AntialiasingMode = amOn
+    Stretch = True
   end
-  object EventLog1: TEventLog[6]
+  object memDej: TMemo[6]
+    Left = 444
+    Height = 226
+    Top = 88
+    Width = 240
+    ScrollBars = ssAutoVertical
+    TabOrder = 4
+  end
+  object Timer1: TTimer[7]
+    OnTimer = Timer1Timer
+    left = 104
+    top = 96
+  end
+  object EventLog1: TEventLog[8]
     AppendContent = False
     Identification = 'typhon'
     LogType = ltSystem
@@ -210,7 +238,7 @@ inherited FormScraper: TFormScraper
     CustomLogType = 0
     EventIDOffset = 0
     Paused = False
-    left = 346
-    top = 269
+    left = 104
+    top = 192
   end
 end
