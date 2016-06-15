@@ -119,8 +119,11 @@ var
 
 begin
 
- scraperVstup:='http://www.omdbapi.com/?s='+PomNazev;
- parsujNazev:='$json("Search")() ! [.("Title"),string(.("Year"))]' ;
+ scraperVstup:='http://www.omdbapi.com/?t='+
+               defaultInternet.urlEncodeData(PomNazev)+
+               '&plot=short&type=movie';
+ parsujNazev:='$json ! [.("Title"),string(.("Year")),'+
+                       'string(.("Poster")),.("Plot")]';
  csfdTag:=False;
  FormScraper.Scrapuj(scraperVstup,parsujNazev,csfdTag);{naplní FormScraper výsledkem}
  if  FormScraper.ShowModal = mrOK then
@@ -477,12 +480,15 @@ var
 begin
   ProgressBar1.Position:=0;
   pomAdresa:=vyberObrazku.Strings[vyberFilmu.ItemIndex];
-  if pomAdresa <> '' then
+  if (pomAdresa <> '') and (pomAdresa <> 'N/A') then
      begin
         pomStream:=TMemoryStream.Create;
         try
           try
+           // nastav referrer pro umožnění stáhnutí ;-)
+           defaultInternet.additionalHeaders.Text:='Referer: http://www.imdb.com/title/tt0401233/';
            defaultInternet.get(pomAdresa,pomStream);
+           defaultInternet.additionalHeaders.Text:='';
            pomStream.Seek(0,soFromBeginning);
            imgObrazek.Picture.LoadFromStream(pomStream);
           Except
