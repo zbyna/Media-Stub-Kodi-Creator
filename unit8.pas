@@ -182,9 +182,73 @@ var
     csfdTag:Boolean;
 
    procedure scraperAction(v:IXQValue);
+   var
+      pomNazev,pomRok, pomOdkazNaFilm, pomZtazeno, pomObrazek:String;
+      pomRokTDate:TDateTime;
+      w: IXQValue;
+      i,pomI:byte;
    begin
-       ShowMessage(scraperVstup);
+    pomI:=(v as TXQValueObject).getProperty('odkaz').Count;
+    if pomI > 5 then pomI:=5; // only 10 search results
+    for i:=1 to  pomI do
+      begin;
+      pomOdkazNaFilm:= (v as TXQValueObject).getProperty('odkaz').get(i).toString;
+      formScraper.EventLog1.Debug('pomOdkazNaFilm: '+pomOdkazNaFilm);
+      FormScraper.vyberReferer.Add('Referer: http://www.csfd.cz'+
+                                   pomOdkazNaFilm);
+      try
+        pomZtazeno:= retrieve('http://www.csfd.cz'+pomOdkazNaFilm);
+      except
+        on e:Exception do formScraper.EventLog1.Debug(e.ToString);
+      end;
+      if defaultInternet.lastHTTPHeaders.IndexOf(
+              'Content-Encoding: gzip') <> -1 then
+          begin
+           pomZtazeno:=decompress(pomZtazeno);
+           formScraper.EventLog1.Debug(
+                       '***** gzip unpacked in scraperAction proc :-) *****');
+          end;
+      w:= process(pomZtazeno,
+                  '<div id="poster" class="image" template:optional="true">' + slineBreak +
+                  '    <img> {obrazek:=@src} </img> ' + slineBreak +
+                  '</div>' + slineBreak +
+                  '<div class="info" template:optional="true">' + slineBreak +
+                  '     <div class="header">' + slineBreak +
+                  '		<h1>{nazev:=text()}</h1>' + slineBreak +
+                  '     </div>' + slineBreak +
+                  '     <p></p>' + slineBreak +
+                  '     <p> <template:read var="rok" source="text()" regex="(\d\d\d\d)"/> </p>' + slineBreak +
+                  '</div>' + slineBreak +
+                  '<div data-truncate="570" template:optional="true">' + slineBreak +
+                  '	<span class="dot icon icon-bullet"></span>' + slineBreak +
+                  '        {dej:=text()}' + slineBreak +
+                  '    <span class="source"></span>' + slineBreak +
+                  '</div>');
+      pomObrazek:= (w as TXQValueObject).getProperty('obrazek').get(1).toString;
+      if (Pos('http:',pomObrazek) = 0) then
+              pomObrazek:='http:'+pomObrazek;
+      formScraper.vyberObrazku.Add( pomObrazek);
+      pomNazev:= (w as TXQValueObject).getProperty('nazev').get(1).toString;
+      pomRok:= (w as TXQValueObject).getProperty('rok').get(1).toString;
+      formScraper.vyberDeju.Add((w as TXQValueObject).getProperty('dej').get(1).toString);
+      FormScraper.EventLog1.Debug('Děj: '+ LeftStr(
+                  (w as TXQValueObject).getProperty('dej').toString ,100));
+      //pomNazev:=nazev.toString;
+      //pomRok:=rok.toString;
+      //ShowMessage(v.debugAsStringWithTypeAnnotation());
+      if length(pomRok)=4 then   {když api vrací rovnou čtyři znaky roku}
+          begin
+            formScraper.vyberFilmu.Items.AddText(pomNazev+'~'+pomRok);
+            continue;
+          end;
+      if pomRok='' then pomRokTDate:=0000-00-00
+            else
+              {themoviedb api vrací RRR-MM-DD}
+              pomRokTDate:=(w as TXQValueObject).getProperty('rok').get(1).toDateTime;
+      formScraper.vyberFilmu.Items.AddText(pomNazev+'~'+floattostr(yearof(pomRokTDate)));
+      {vyberFilmu.Items.Strings[i] záhadně nefunguje}
    end;
+ end;
 
 begin
 
@@ -192,30 +256,36 @@ begin
  //parsujNazev:='$json() ! [.("names")("cs") ,string(.("year"))]';
  scraperVstup:='http://www.csfd.cz/hledat/?q='+PomNazev;
  nahradDiakritiku(scraperVstup);
- parsujNazev:=  '<div id="search-films" class="ct-general th-1">' + slineBreak +
-                '  <div class="content">' + slineBreak +
-                '      <ul class="ui-image-list js-odd-even">' + slineBreak +
-                '        <template:loop>' + slineBreak +
-                '          <li>' + slineBreak +
-                '            <div>' + slineBreak +
-                '              <h3><a>{nazev:= text()}</a></h3>' + slineBreak +
-                '              <p> <template:read var="rok" source="text()" regex="(\d\d\d\d)$"/> </p>' + slineBreak +
-                '            </div>' + slineBreak +
-                '          </li>' + slineBreak +
-                '        </template:loop>' + slineBreak +
-                '      </ul>' + slineBreak +
-                '      <ul template:optional="true" class="films others">' + slineBreak +
-                '        <template:loop>' + slineBreak +
-                '          <li>' + slineBreak +
-                '            <a>{nazev:=text()}</a>' + slineBreak +
-                '            <span class="film-year">' + slineBreak +
-                '              <template:read var="rok" source="text()" regex="(\d{4})"/>' + slineBreak +
-                '            </span>' + slineBreak +
-                '          </li>' + slineBreak +
-                '        </template:loop>' + slineBreak +
-                '      </ul>' + slineBreak +
-                '    </div>' + slineBreak +
-                '</div>';
+ parsujNazev:=  '<title> ' + slineBreak +
+          '<template:read var="testik" source="text()" /> ' + slineBreak +
+          '</title>' + slineBreak +
+          '<template:if test = "$testik = ''Vyhledávání | ČSFD.cz''">' + slineBreak +
+          '<div id="search-films" class="ct-general th-1">   ' + slineBreak +
+          '    <div class="content">   ' + slineBreak +
+          '       <ul class="ui-image-list js-odd-even">   ' + slineBreak +
+          '        <template:loop>   ' + slineBreak +
+          '            <li>   ' + slineBreak +
+          '              <div>   ' + slineBreak +
+          '                <h3><a>{odkaz:= @href}</a></h3>' + slineBreak +
+          '              </div>   ' + slineBreak +
+          '           </li>   ' + slineBreak +
+          '        </template:loop>   ' + slineBreak +
+          '      </ul>                   ' + slineBreak +
+          '       <ul template:optional="true" class="films others">' + slineBreak +
+          '         <template:loop>   ' + slineBreak +
+          '           <li>   ' + slineBreak +
+          '              <a>{odkaz:= @href}</a>' + slineBreak +
+          '           </li>   ' + slineBreak +
+          '         </template:loop>   ' + slineBreak +
+          '      </ul> ' + slineBreak +
+          '   </div>   ' + slineBreak +
+          '</div>      ' + slineBreak +
+          '</template:if>' + slineBreak +
+          '<template:else>' + slineBreak +
+          '   <li class="overview selected">' + slineBreak +
+          '		<a> {odkaz:=@href}</a>' + slineBreak +
+          '  </li>' + slineBreak +
+          '</template:else>' ;
  csfdTag:=True;
  FormScraper.Scrapuj(scraperVstup,parsujNazev,csfdTag,@scraperAction);{naplní FormScraper výsledkem}
  if  FormScraper.ShowModal = mrOK then
@@ -435,19 +505,17 @@ begin
      EventLog1.Debug(format('%s', [defaultInternet.additionalHeaders.Text]));
      EventLog1.Debug('scraperVstup: '+scraperVstup);
      EventLog1.Debug('csfd tag: '+booltostr(csfdTag,true));
-     EventLog1.Debug('query: ' + parsujNazev);
-    if not csfdTag then
+     EventLog1.Debug('query: ' + LeftStr(parsujNazev,100));
+
         try
           ztazeno:= retrieve(scraperVstup);
         except
           on e:Exception do EventLog1.Debug(e.ToString);
-        end
-                   else
-       begin
+        end;
         // jde o cachování tj. data s úplnými informacemi o filmu
         // se v případě opakovaného volání posílají z cache serveru
         // zazipovaná (gzip)
-        ztazeno:= defaultInternet.post(scraperVstup,'');
+        //ztazeno:= defaultInternet.post(scraperVstup,'');
         EventLog1.Debug('HTTP header - begin (defaultInternet.lastHTTPHeaders): ');
         EventLog1.Debug(format('%s', [defaultInternet.lastHTTPHeaders.Text]));
         if defaultInternet.lastHTTPHeaders.IndexOf(
@@ -456,51 +524,26 @@ begin
                          ztazeno:=decompress(ztazeno);
                          EventLog1.Debug('***** gzip unpacked :-) *****');
                         end;
-       end;
-    EventLog1.Debug('ztazeno: '+ ztazeno {LeftStr(ztazeno,100)});
+
+    EventLog1.Debug('ztazeno: '+ LeftStr(ztazeno,100));
     if (IsWordPresent('"total_results":0}',ztazeno,[','])) or
        (Pos('not found!',ztazeno) > 0)                      or
        ((ztazeno = '[]')and (aktualniScraperFilm = ScraperyFilm[csfd]))
        {specialita csfd api :-) někdy}
-                                           then
-                                                begin
-                                                  nenalezeno:=true;
-                                                  exit;
-                                                end;
-    //ShowMessage('Počet nalezených filmů: ' + inttostr(nazev.Count));
-    //ShowMessage('Počet nalezených roků: ' + inttostr(Rok.Count));
-    if csfdTag then
-         begin   { naplň seznam získanými hodnotami for csfd  scraper začátek }
-           v:= process(ztazeno,'<title> <template:read var="rok"source="text()"'+
-                       ' regex="(\d{4})"/> </title>');
-           // je v titulu stránky rok ?
-           if (v as TXQValueObject).getProperty('rok').get(1).toString = '' then
-                // není našlo se více položke
-                    v:= process(ztazeno,parsujNazev)
-                                                      else
-                // je a tedy našla se pouze jedna položka (např. Postřižiny)
-                // csfd si cachuje častější požadavky a vrací je komprimované gzip
-                // počítej s tím zbyňo :-)
-                    v:= process(ztazeno,'<title><template:read var="rok"'+
-                        ' source="text()" regex="(\d{4})"/></title>'+
-                        '<h1 itemprop="name">{nazev:= text()}</h1>');
-           for i:=1 to (v as TXQValueObject).getProperty('nazev').Count do
-             begin
-               pomNazev:=(v as TXQValueObject).getProperty('nazev').get(i).toString;
-               pomRok:= (v as TXQValueObject).getProperty('rok').get(i).toString;
-               vyberFilmu.Items.AddText(pomNazev+'~'+pomRok);
-             end;
-
-         end    { naplň seznam získanými hodnotami for csfd  scraper konec }
-                                                   else
-        begin   { naplň seznam získanými hodnotami for other scrapers začátek }
-          for v in process (ztazeno,parsujNazev) do
-            begin
-              scraperAction(v);
-            end;
-         EventLog1.Debug(format('%s %s', ['Kapacita obrázků: ',inttostr(vyberObrazku.Count)]));
-         EventLog1.Debug(format('%s %s', ['Kapacita dějů: ',inttostr(vyberDeju.Count)]));
-        end;  { naplň seznam získanými hodnotami for other scrapers konec }
+                       then
+                            begin
+                              nenalezeno:=true;
+                              exit;
+                            end;
+      i:=0;
+      for v in process (ztazeno,parsujNazev) do
+        begin
+          i:=i+1;
+          EventLog1.debug('For cyklus: '+inttostr(i));
+          scraperAction(v);
+        end;
+     EventLog1.Debug(format('%s %s', ['Kapacita obrázků: ',inttostr(vyberObrazku.Count)]));
+     EventLog1.Debug(format('%s %s', ['Kapacita dějů: ',inttostr(vyberDeju.Count)]));
     defaultInternet.additionalHeaders.Clear;//vynulování dodatečné hlavičky HTTP
                                             // s hlavičkou pracuje thetvdb api 2.0.1
 
