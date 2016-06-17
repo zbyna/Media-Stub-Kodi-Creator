@@ -42,6 +42,7 @@ type
     vyberFilmu: TListBox;                    { seznam nascrapovaných řetězců název+rok }
     vyberObrazku:TStringList;                { seznam nascrapovaných řetězců adres obrázků }
     vyberDeju:TStringList;                   { seznam nascrapovaných řetězců dějů }
+    vyberReferer:TStringList;
     ProgressBar1: TProgressBar;
     procedure CancelButtonClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -129,14 +130,20 @@ var
 
   procedure scraperAction(v: IXQValue);
   var
-      pomNazev,pomRok:String;
+      pomNazev,pomRok, pomImdbId:String;
       pomRokTDate:TDateTime;
+      w: IXQValue;
    begin
-      ShowMessage(scraperVstup);
-      pomNazev:= (v as TXQValueJSONArray).seq.get(0).toString;
-      pomRok:= (v as TXQValueJSONArray).seq.get(1).toString;
-      formScraper.vyberObrazku.Add((v as TXQValueJSONArray).seq.get(2).toString);
-      formScraper.vyberDeju.Add((v as TXQValueJSONArray).seq.get(3).toString);
+      pomImdbId:= (v as TXQValueJSONArray).seq.get(0).toString;
+      FormScraper.vyberReferer.Add('Referer: http://www.imdb.com/title/'+
+                                   pomImdbId+'/');
+      w:= process('http://www.omdbapi.com/?i='+pomImdbId,
+                   '$json ! [.("Title"),string(.("Year")),'+
+                             'string(.("Poster")),.("Plot")]');
+      pomNazev:= (w as TXQValueJSONArray).seq.get(0).toString;
+      pomRok:= (w as TXQValueJSONArray).seq.get(1).toString;
+      formScraper.vyberObrazku.Add((w as TXQValueJSONArray).seq.get(2).toString);
+      formScraper.vyberDeju.Add((w as TXQValueJSONArray).seq.get(3).toString);
       //pomNazev:=nazev.toString;
       //pomRok:=rok.toString;
       //ShowMessage(v.debugAsStringWithTypeAnnotation());
@@ -154,12 +161,10 @@ var
    end;
 
 begin
-
- scraperVstup:='http://www.omdbapi.com/?t='+
-               defaultInternet.urlEncodeData(PomNazev)+
-               '&plot=short&type=movie';
- parsujNazev:='$json ! [.("Title"),string(.("Year")),'+
-                       'string(.("Poster")),.("Plot")]';
+ scraperVstup:='http://www.omdbapi.com/?s='+
+                defaultInternet.urlEncodeData(PomNazev)+
+                '&type=movie';
+ parsujNazev:='$json("Search")()![.("imdbID")]';
  csfdTag:=False;
  FormScraper.Scrapuj(scraperVstup,parsujNazev,csfdTag,@scraperAction);{naplní FormScraper výsledkem}
  if  FormScraper.ShowModal = mrOK then
@@ -263,7 +268,7 @@ var
       pomNazev,pomRok:String;
       pomRokTDate:TDateTime;
    begin
-      ShowMessage(scraperVstup);
+      FormScraper.vyberReferer.Add('');
       pomNazev:= (v as TXQValueJSONArray).seq.get(0).toString;
       pomRok:= (v as TXQValueJSONArray).seq.get(1).toString;
       formScraper.vyberObrazku.Add((v as TXQValueJSONArray).seq.get(2).toString);
@@ -416,6 +421,7 @@ begin
     imgObrazek.Picture.Clear;
     memDej.Clear;
     vyberDeju.Clear;
+    vyberReferer.Clear;
     nenalezeno:=false;
     { zapamatuj si defaultní formát data }
     pamatuj1:=DefaultFormatSettings.DateSeparator;
@@ -542,16 +548,18 @@ procedure TFormScraper.vyberFilmuClick(Sender: TObject);
 var
     pomStream: TMemoryStream;
     pomAdresa: String;
+    pomIndex:Byte;
 begin
   ProgressBar1.Position:=0;
-  pomAdresa:=vyberObrazku.Strings[vyberFilmu.ItemIndex];
+  pomIndex:=vyberFilmu.ItemIndex;
+  pomAdresa:=vyberObrazku.Strings[pomIndex];
   if (pomAdresa <> '') and (pomAdresa <> 'N/A') then
      begin
         pomStream:=TMemoryStream.Create;
         try
           try
            // nastav referrer pro umožnění stáhnutí ;-)
-           defaultInternet.additionalHeaders.Text:='Referer: http://www.imdb.com/title/tt0401233/';
+           defaultInternet.additionalHeaders.Text:=vyberReferer.Strings[pomIndex];
            defaultInternet.get(pomAdresa,pomStream);
            defaultInternet.additionalHeaders.Text:='';
            pomStream.Seek(0,soFromBeginning);
@@ -622,9 +630,10 @@ begin
   aktualniScraperFilm:=ScraperyFilm[TScraperFilm(FormNastaveni.FilmScrapers.ItemIndex)];
   aktualniScraperSerial:=ScraperySerial[TScraperSerial(FormNastaveni.SerialScrapers.ItemIndex)];
   FormNastaveni.nastavStatusBar;
-  // vytvoření TStringList pro scrapování obrázků a dějů
+  // vytvoření TStringList pro scrapování obrázků a dějů a pomocných referrers
   vyberObrazku:=TStringList.Create;
   vyberDeju:=TStringList.Create;
+  vyberReferer:=TStringList.Create;
 end;
 
 procedure TFormScraper.FormClose(Sender:TObject; var CloseAction:TCloseAction);
