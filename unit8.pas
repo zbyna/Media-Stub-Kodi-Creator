@@ -9,7 +9,8 @@ uses
   Classes, SysUtils, FileUtil, TplTimerUnit, Forms, Controls,
   Graphics, Dialogs, StdCtrls, ComCtrls, ExtCtrls, simpleinternet,
   simplehtmltreeparser, extendedhtmlparser, xquery, xquery_json, dateutils,
-  strutils,LazUTF8,character,eventlog, LocalizedForms,bbutils,unConstants,zuncomprfp;
+  strutils,LazUTF8,character,eventlog, LocalizedForms,bbutils,unConstants,
+  zuncomprfp,pasMP,LCLProc;
 
 type
   { pro scraping roku k filmu - languages }
@@ -93,6 +94,12 @@ implementation
 
  var  nenalezeno:boolean;
       dobaTrmChangeScraper:Integer;
+      // input data for parrallel downloading job
+       pomArrayNazev: array of String;
+       pomArrayRok:array of String;
+       pomArrayObrazek:array of String;
+       pomArrayDej:array of String;
+       pomArrayReferer: array of String;
 
 { pro scraping roku k filmu }
 function FilmThemoviedb(PomNazev: string): string;
@@ -176,78 +183,97 @@ begin
      end;
 end;
 
+procedure parallelDownloadJob(const Job:PPasMPJob;const ThreadIndex:longint;
+                                 const pointerNaV:pointer;const FromIndex,ToIndex:longint);
+var
+  pomOdkazNaFilm, pomZtazeno: String;
+  v,w: IXQValue;
+begin
+   //DebuglnThreadLog('Thread Index: ' + inttostr(ThreadIndex));
+   //DebuglnThreadLog('From Index: ' + inttostr(fromIndex));
+   //DebuglnThreadLog('To Index: ' + inttostr(toIndex));
+   v:= IXQValue(pointerNav^);
+   pomOdkazNaFilm:= ( v as TXQValueObject).getProperty('odkaz').get(fromIndex+1).toString;
+   //DebuglnThreadLog('pomOdkazNaFilm:'+ pomOdkazNaFilm);
+   try
+     pomZtazeno:= retrieve('http://www.csfd.cz'+pomOdkazNaFilm);
+     pomArrayReferer[fromIndex]:='Referer: http://www.csfd.cz'+pomOdkazNaFilm;
+   except
+     on e:Exception do DebuglnThreadLog(e.ToString);
+   end;
+   if defaultInternet.lastHTTPHeaders.IndexOf(
+           'Content-Encoding: gzip') <> -1 then
+       begin
+        pomZtazeno:=decompress(pomZtazeno);
+        //DebuglnThreadLog(
+        //            '***** gzip unpacked in multithread attempt :-) *****');
+       end;
+   w:= process(pomZtazeno,
+               '<div id="poster" class="image" template:optional="true">' + slineBreak +
+               '    <img> {obrazek:=@src} </img> ' + slineBreak +
+               '</div>' + slineBreak +
+               '<div class="info" template:optional="true">' + slineBreak +
+               '     <div class="header">' + slineBreak +
+               '		<h1>{nazev:=text()}</h1>' + slineBreak +
+               '     </div>' + slineBreak +
+               '     <p></p>' + slineBreak +
+               '     <p> <template:read var="rok" source="text()" regex="(\d\d\d\d)"/> </p>' + slineBreak +
+               '</div>' + slineBreak +
+               '<div data-truncate="570" template:optional="true">' + slineBreak +
+               '	<span class="dot icon icon-bullet"></span>' + slineBreak +
+               '        {dej:=text()}' + slineBreak +
+               '    <span class="source"></span>' + slineBreak +
+               '</div>');
+   pomArrayObrazek[fromIndex]:= (w as TXQValueObject).getProperty('obrazek').get(1).toString;
+   //DebuglnThreadLog(pomArrayObrazek[fromIndex]);
+   if (Pos('http:',pomArrayObrazek[fromIndex]) = 0) then
+           pomArrayObrazek[fromIndex]:='http:'+pomArrayObrazek[fromIndex];
+   pomArrayNazev[fromIndex]:=(w as TXQValueObject).getProperty('nazev').get(1).toString;
+   pomArrayRok[fromIndex]:=(w as TXQValueObject).getProperty('rok').get(1).toString;
+   pomArrayDej[fromIndex]:=(w as TXQValueObject).getProperty('dej').get(1).toString;
+
+end;
+
 function FilmCsfd(PomNazev: string): string;
 var
     scraperVstup,parsujNazev:string;
     csfdTag:Boolean;
 
+
+
    procedure scraperAction(v:IXQValue);
    var
-      pomNazev,pomRok, pomOdkazNaFilm, pomZtazeno, pomObrazek:String;
-      pomRokTDate:TDateTime;
-      w: IXQValue;
       i,pomI:byte;
+      pointerNaV : ^IXQValue;
    begin
     pomI:=(v as TXQValueObject).getProperty('odkaz').Count;
-    if pomI > 5 then pomI:=5; // only 10 search results
-    for i:=1 to  pomI do
-      begin;
-      pomOdkazNaFilm:= (v as TXQValueObject).getProperty('odkaz').get(i).toString;
-      formScraper.EventLog1.Debug('pomOdkazNaFilm: '+pomOdkazNaFilm);
-      FormScraper.vyberReferer.Add('Referer: http://www.csfd.cz'+
-                                   pomOdkazNaFilm);
-      try
-        pomZtazeno:= retrieve('http://www.csfd.cz'+pomOdkazNaFilm);
-      except
-        on e:Exception do formScraper.EventLog1.Debug(e.ToString);
+    formScraper.EventLog1.Debug('Počet odkazů: ' +inttostr(pomI))  ;
+    if pomI > 5 then pomI:=5; // only 5 search results
+    pointerNaV:= @v;
+    SetLength(pomArrayNazev,pomI);
+    SetLength(pomArrayRok,pomI);
+    SetLength(pomArrayObrazek,pomI);
+    SetLength(pomArrayDej,pomI);
+    SetLength(pomArrayReferer,pomI);
+    TPasMP.CreateGlobalInstance;
+    if pomI = 1 then
+          parallelDownloadJob(nil,0,pointerNaV,0,0)
+                 else
+          GlobalPasMP.Invoke(
+          GlobalPasMP.ParallelFor(pointerNaV,0,pomI-1,@parallelDownloadJob,0,0));
+    for i:=0 to pomI-1 do
+      begin
+        formScraper.vyberFilmu.Items.AddText(pomArrayNazev[i]+'~'+pomArrayRok[i]);
+        formScraper.vyberObrazku.Add(pomArrayObrazek[i]);
+        formScraper.vyberDeju.Add(pomArrayDej[i]);
+        FormScraper.vyberReferer.Add(pomArrayReferer[i]);
       end;
-      if defaultInternet.lastHTTPHeaders.IndexOf(
-              'Content-Encoding: gzip') <> -1 then
-          begin
-           pomZtazeno:=decompress(pomZtazeno);
-           formScraper.EventLog1.Debug(
-                       '***** gzip unpacked in scraperAction proc :-) *****');
-          end;
-      w:= process(pomZtazeno,
-                  '<div id="poster" class="image" template:optional="true">' + slineBreak +
-                  '    <img> {obrazek:=@src} </img> ' + slineBreak +
-                  '</div>' + slineBreak +
-                  '<div class="info" template:optional="true">' + slineBreak +
-                  '     <div class="header">' + slineBreak +
-                  '		<h1>{nazev:=text()}</h1>' + slineBreak +
-                  '     </div>' + slineBreak +
-                  '     <p></p>' + slineBreak +
-                  '     <p> <template:read var="rok" source="text()" regex="(\d\d\d\d)"/> </p>' + slineBreak +
-                  '</div>' + slineBreak +
-                  '<div data-truncate="570" template:optional="true">' + slineBreak +
-                  '	<span class="dot icon icon-bullet"></span>' + slineBreak +
-                  '        {dej:=text()}' + slineBreak +
-                  '    <span class="source"></span>' + slineBreak +
-                  '</div>');
-      pomObrazek:= (w as TXQValueObject).getProperty('obrazek').get(1).toString;
-      if (Pos('http:',pomObrazek) = 0) then
-              pomObrazek:='http:'+pomObrazek;
-      formScraper.vyberObrazku.Add( pomObrazek);
-      pomNazev:= (w as TXQValueObject).getProperty('nazev').get(1).toString;
-      pomRok:= (w as TXQValueObject).getProperty('rok').get(1).toString;
-      formScraper.vyberDeju.Add((w as TXQValueObject).getProperty('dej').get(1).toString);
-      FormScraper.EventLog1.Debug('Děj: '+ LeftStr(
-                  (w as TXQValueObject).getProperty('dej').toString ,100));
-      //pomNazev:=nazev.toString;
-      //pomRok:=rok.toString;
-      //ShowMessage(v.debugAsStringWithTypeAnnotation());
-      if length(pomRok)=4 then   {když api vrací rovnou čtyři znaky roku}
-          begin
-            formScraper.vyberFilmu.Items.AddText(pomNazev+'~'+pomRok);
-            continue;
-          end;
-      if pomRok='' then pomRokTDate:=0000-00-00
-            else
-              {themoviedb api vrací RRR-MM-DD}
-              pomRokTDate:=(w as TXQValueObject).getProperty('rok').get(1).toDateTime;
-      formScraper.vyberFilmu.Items.AddText(pomNazev+'~'+floattostr(yearof(pomRokTDate)));
-      {vyberFilmu.Items.Strings[i] záhadně nefunguje}
-   end;
+    SetLength(pomArrayNazev,0);
+    SetLength(pomArrayRok,0);
+    SetLength(pomArrayObrazek,0);
+    SetLength(pomArrayDej,0);
+    SetLength(pomArrayReferer,0);
+    FormScraper.EventLog1.Debug('Vynulování pomArrays hotovo');
  end;
 
 begin
@@ -483,8 +509,6 @@ var
         ztazeno: String;
         pamatuj1: Char;
         pamatuj2: String;
-        pomNazev,pomRok:String;
-        pomRokTDate:TDateTime;
 begin
     vyberFilmu.Clear;
     vyberObrazku.Clear;
