@@ -221,7 +221,7 @@ begin
                '</div>' + slineBreak +
                '<div data-truncate="570" template:optional="true">' + slineBreak +
                '	<span class="dot icon icon-bullet"></span>' + slineBreak +
-               '        {dej:=text()}' + slineBreak +
+               '           {dej:=text()}' + slineBreak +
                '    <span class="source"></span>' + slineBreak +
                '</div>');
    pomArrayObrazek[fromIndex]:= (w as TXQValueObject).getProperty('obrazek').get(1).toString;
@@ -444,55 +444,10 @@ begin
      end;
 end;
 
-function SerialCsfd(PomNazev: string): string;
-var
-    scraperVstup,parsujNazev:string;
-    csfdTag:Boolean;
-
-   procedure scraperAction(v:IXQValue);
-   begin
-       ShowMessage(scraperVstup);
-   end;
+function SerialCsfd(PomNazev: string): string; // nahrazeno filmCsfd
 
 begin
-
- //scraperVstup:='http://csfdapi.cz/movie?search='+PomNazev;
- //parsujNazev:='$json() ! [.("names")("cs") ,string(.("year"))]';
- scraperVstup:='http://www.csfd.cz/hledat/?q='+PomNazev;
- nahradDiakritiku(scraperVstup);
- parsujNazev:=  '<div id="search-films" class="ct-general th-1">' + slineBreak +
-                '  <div class="content">' + slineBreak +
-                '      <ul class="ui-image-list js-odd-even">' + slineBreak +
-                '        <template:loop>' + slineBreak +
-                '          <li>' + slineBreak +
-                '            <div>' + slineBreak +
-                '              <h3><a>{nazev:= text()}</a></h3>' + slineBreak +
-                '              <p> <template:read var="rok" source="text()" regex="(\d\d\d\d)$"/> </p>' + slineBreak +
-                '            </div>' + slineBreak +
-                '          </li>' + slineBreak +
-                '        </template:loop>' + slineBreak +
-                '      </ul>' + slineBreak +
-                '      <ul template:optional="true" class="films others">' + slineBreak +
-                '        <template:loop>' + slineBreak +
-                '          <li>' + slineBreak +
-                '            <a>{nazev:=text()}</a>' + slineBreak +
-                '            <span class="film-year">' + slineBreak +
-                '              <template:read var="rok" source="text()" regex="(\d{4})"/>' + slineBreak +
-                '            </span>' + slineBreak +
-                '          </li>' + slineBreak +
-                '        </template:loop>' + slineBreak +
-                '      </ul>' + slineBreak +
-                '    </div>' + slineBreak +
-                '</div>';
- csfdTag:=True;
- FormScraper.Scrapuj(scraperVstup,parsujNazev,csfdTag,@scraperAction);{naplní FormScraper výsledkem}
- if  FormScraper.ShowModal = mrOK then
-     SerialCsfd:=FormScraper.vybranyRok
-                                   else
-     begin
-      FormScraper.vybranyNazev:=PomNazev;
-      SerialCsfd:='0';
-     end;
+ Result:='';
 end;
 
 {$R *.lfm}
@@ -691,7 +646,7 @@ begin
    ScraperySerial[Sthemoviedb]:=@(SerialThemoviedb);
    ScraperySerial[tvmaze]:=@(SerialTvmaze);
    ScraperySerial[thetvdb]:=@(SerialThetvdb);
-   ScraperySerial[Scsfd]:=@(SerialCsfd);
+   ScraperySerial[Scsfd]:=@(FilmCsfd); //@(SerialCsfd);
   { vytvoření aktuálních scraperu z ini, možno až po vytvoření FormNastaveni (unit7)
     jinak segmentation error za runtimu}
   aktualniScraperFilm:=ScraperyFilm[TScraperFilm(FormNastaveni.FilmScrapers.ItemIndex)];
