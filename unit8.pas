@@ -107,8 +107,31 @@ var
     scraperVstup,parsujNazev:string;
     csfdTag:Boolean;
   procedure scraperAction(v: IXQValue);
+  var
+      pomNazev,pomRok:String;
+      pomRokTDate:TDateTime;
+
    begin
-     ShowMessage(scraperVstup);
+     FormScraper.vyberReferer.Add('');
+      pomNazev:= (v as TXQValueJSONArray).seq.get(0).toString;
+      pomRok:= (v as TXQValueJSONArray).seq.get(1).toString;
+      formScraper.vyberObrazku.Add('http://image.tmdb.org/t/p/w154'+
+                    (v as TXQValueJSONArray).seq.get(2).toString);
+      formScraper.vyberDeju.Add((v as TXQValueJSONArray).seq.get(3).toString);
+      //pomNazev:=nazev.toString;
+      //pomRok:=rok.toString;
+      //ShowMessage(v.debugAsStringWithTypeAnnotation());
+      if length(pomRok)=4 then   {když api vrací rovnou čtyři znaky roku}
+          begin
+            formScraper.vyberFilmu.Items.AddText(pomNazev+'~'+pomRok);
+            exit;   // ve formScraper.Scrapuj() bylo continue
+          end;
+      if pomRok='' then pomRokTDate:=0000-00-00
+            else
+              {themoviedb api vrací RRR-MM-DD}
+              pomRokTDate:=(v as TXQValueJSONArray).seq.get(1).toDateTime;
+      formScraper.vyberFilmu.Items.AddText(pomNazev+'~'+floattostr(yearof(pomRokTDate)));
+      {vyberFilmu.Items.Strings[i] záhadně nefunguje}
    end;
 
 begin
@@ -116,7 +139,8 @@ begin
  scraperVstup:='https://api.themoviedb.org/3/search/movie?api_key='+
                unConstants.theMovidedbAPI +'&query='+
                pomNazev+'&language='+aktualniJazyk;
- parsujNazev:='$json("results")() ! [.("title"), .("release_date")]';
+ parsujNazev:='$json("results")() ! [.("title"), .("release_date"),'+
+               '.("poster_path"),.("overview")]';
 
  csfdTag:=False;
  FormScraper.Scrapuj(scraperVstup,parsujNazev,csfdTag,
@@ -330,8 +354,31 @@ function SerialThemoviedb(PomNazev: string): string;
     csfdTag:Boolean;
 
   procedure scraperAction(v:IXQValue);
+   var
+      pomNazev,pomRok:String;
+      pomRokTDate:TDateTime;
+
    begin
-       ShowMessage(scraperVstup);
+     FormScraper.vyberReferer.Add('');
+      pomNazev:= (v as TXQValueJSONArray).seq.get(0).toString;
+      pomRok:= (v as TXQValueJSONArray).seq.get(1).toString;
+      formScraper.vyberObrazku.Add('http://image.tmdb.org/t/p/w154'+
+                    (v as TXQValueJSONArray).seq.get(2).toString);
+      formScraper.vyberDeju.Add((v as TXQValueJSONArray).seq.get(3).toString);
+      //pomNazev:=nazev.toString;
+      //pomRok:=rok.toString;
+      //ShowMessage(v.debugAsStringWithTypeAnnotation());
+      if length(pomRok)=4 then   {když api vrací rovnou čtyři znaky roku}
+          begin
+            formScraper.vyberFilmu.Items.AddText(pomNazev+'~'+pomRok);
+            exit;   // ve formScraper.Scrapuj() bylo continue
+          end;
+      if pomRok='' then pomRokTDate:=0000-00-00
+            else
+              {themoviedb api vrací RRR-MM-DD}
+              pomRokTDate:=(v as TXQValueJSONArray).seq.get(1).toDateTime;
+      formScraper.vyberFilmu.Items.AddText(pomNazev+'~'+floattostr(yearof(pomRokTDate)));
+      {vyberFilmu.Items.Strings[i] záhadně nefunguje}
    end;
 
 begin
@@ -340,7 +387,8 @@ begin
                             unConstants.theMovidedbAPI+'&query='+
                             pomNazev+'&language='+aktualniJazyk));
 
- parsujNazev:='$json("results")() ! [.("name"), .("first_air_date")]';
+ parsujNazev:='$json("results")() ! [.("name"), .("first_air_date"),'+
+               '.("poster_path"),.("overview")]';
  csfdTag:=False;
  //ShowMessage('aktuální jazyk: ' + aktualniJazyk + sLineBreak+
  //             scraperVstup );
@@ -484,8 +532,7 @@ begin
      EventLog1.Debug(format('%s', [defaultInternet.additionalHeaders.Text]));
      EventLog1.Debug('scraperVstup: '+scraperVstup);
      EventLog1.Debug('csfd tag: '+booltostr(csfdTag,true));
-     EventLog1.Debug('query: ' + LeftStr(parsujNazev,100));
-
+     EventLog1.Debug('query: ' + LeftStr(parsujNazev,100) + ' ...');
         try
           ztazeno:= retrieve(scraperVstup);
         except
@@ -504,7 +551,7 @@ begin
                          EventLog1.Debug('***** gzip unpacked :-) *****');
                         end;
 
-    EventLog1.Debug('ztazeno: '+ LeftStr(ztazeno,100));
+    EventLog1.Debug('ztazeno: '+ LeftStr(ztazeno,100)+' ...');
     if (IsWordPresent('"total_results":0}',ztazeno,[','])) or
        (Pos('not found!',ztazeno) > 0)                      or
        ((ztazeno = '[]')and (aktualniScraperFilm = ScraperyFilm[csfd]))
@@ -514,13 +561,9 @@ begin
                               nenalezeno:=true;
                               exit;
                             end;
-      i:=0;
-      for v in process (ztazeno,parsujNazev) do
-        begin
-          i:=i+1;
-          EventLog1.debug('For cyklus: '+inttostr(i));
-          scraperAction(v);
-        end;
+
+      for v in process (ztazeno,parsujNazev) do scraperAction(v);
+
      EventLog1.Debug(format('%s %s', ['Kapacita obrázků: ',inttostr(vyberObrazku.Count)]));
      EventLog1.Debug(format('%s %s', ['Kapacita dějů: ',inttostr(vyberDeju.Count)]));
     defaultInternet.additionalHeaders.Clear;//vynulování dodatečné hlavičky HTTP
@@ -575,7 +618,7 @@ begin
   ProgressBar1.Position:=0;
   pomIndex:=vyberFilmu.ItemIndex;
   pomAdresa:=vyberObrazku.Strings[pomIndex];
-  if (pomAdresa <> '') and (pomAdresa <> 'N/A') then
+  if (pomAdresa <> '') and (pomAdresa <> 'N/A')  then
      begin
         pomStream:=TMemoryStream.Create;
         try
@@ -587,14 +630,18 @@ begin
            pomStream.Seek(0,soFromBeginning);
            imgObrazek.Picture.LoadFromStream(pomStream);
           Except
-            on E: Exception do  EventLog1.Debug(e.ToString);
+            on E: Exception do
+            begin
+              EventLog1.Debug(e.ToString);
+              imgObrazek.Picture.LoadFromFile('no_poster-v2.png');
+            end;
           end;
         finally
           pomStream.Free;
         end;
      end
                      else
-     imgObrazek.Picture.Clear;
+     imgObrazek.Picture.LoadFromFile('no_poster-v2.png');
   memDej.clear;
   memDej.Lines.BeginUpdate;
   memDej.Append(vyberDeju.Strings[vyberFilmu.ItemIndex]);
