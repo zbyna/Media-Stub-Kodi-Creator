@@ -122,9 +122,6 @@ var
                formScraper.vyberObrazku.Add(
                      'http://image.tmdb.org/t/p/w154'+pomObr);
       formScraper.vyberDeju.Add((v as TXQValueJSONArray).seq.get(3).toString);
-      //pomNazev:=nazev.toString;
-      //pomRok:=rok.toString;
-      //ShowMessage(v.debugAsStringWithTypeAnnotation());
       if length(pomRok)=4 then   {když api vrací rovnou čtyři znaky roku}
           begin
             formScraper.vyberFilmu.Items.AddText(pomNazev+'~'+pomRok);
@@ -179,9 +176,6 @@ var
       pomRok:= (w as TXQValueJSONArray).seq.get(1).toString;
       formScraper.vyberObrazku.Add((w as TXQValueJSONArray).seq.get(2).toString);
       formScraper.vyberDeju.Add((w as TXQValueJSONArray).seq.get(3).toString);
-      //pomNazev:=nazev.toString;
-      //pomRok:=rok.toString;
-      //ShowMessage(v.debugAsStringWithTypeAnnotation());
       if length(pomRok)=4 then   {když api vrací rovnou čtyři znaky roku}
           begin
             formScraper.vyberFilmu.Items.AddText(pomNazev+'~'+pomRok);
@@ -373,9 +367,6 @@ function SerialThemoviedb(PomNazev: string): string;
                formScraper.vyberObrazku.Add(
                      'http://image.tmdb.org/t/p/w154'+pomObr);
       formScraper.vyberDeju.Add((v as TXQValueJSONArray).seq.get(3).toString);
-      //pomNazev:=nazev.toString;
-      //pomRok:=rok.toString;
-      //ShowMessage(v.debugAsStringWithTypeAnnotation());
       if length(pomRok)=4 then   {když api vrací rovnou čtyři znaky roku}
           begin
             formScraper.vyberFilmu.Items.AddText(pomNazev+'~'+pomRok);
@@ -424,9 +415,6 @@ var
       pomRok:= (v as TXQValueJSONArray).seq.get(1).toString;
       formScraper.vyberObrazku.Add((v as TXQValueJSONArray).seq.get(2).toString);
       formScraper.vyberDeju.Add((v as TXQValueJSONArray).seq.get(3).toString);
-      //pomNazev:=nazev.toString;
-      //pomRok:=rok.toString;
-      //ShowMessage(v.debugAsStringWithTypeAnnotation());
       if length(pomRok)=4 then   {když api vrací rovnou čtyři znaky roku}
           begin
             formScraper.vyberFilmu.Items.AddText(pomNazev+'~'+pomRok);
@@ -481,14 +469,6 @@ var
                            'http://www.thetvdb.com/banners/_cache/'+
                             pomObr);
       formScraper.vyberDeju.Add((v as TXQValueJSONArray).seq.get(3).toString);
-      //pomNazev:=nazev.toString;
-      //pomRok:=rok.toString;
-      //ShowMessage(v.debugAsStringWithTypeAnnotation());
-      //if length(pomRok)=4 then   {když api vrací rovnou čtyři znaky roku}
-      //    begin
-      //      formScraper.vyberFilmu.Items.AddText(pomNazev+'~'+pomRok);
-      //      exit;   // ve formScraper.Scrapuj() bylo continue
-      //    end;
       if pomRok='' then pomRokTDate:=0000-00-00
             else
               {themoviedb api vrací RRR-MM-DD}
@@ -743,6 +723,8 @@ end;
 procedure TFormScraper.FormCreate(Sender: TObject);
 begin
   EventLog1.Active:=True;
+  EventLog1.Identification:='Scrapping';
+  // EventLog1.Pause;
   Timer1.Enabled:=false;
   prvniFokus:=true;
   {inicializace jazyka pro scrapování}
