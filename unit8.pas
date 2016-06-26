@@ -245,7 +245,7 @@ begin
                '</div>' + slineBreak +
                '<div data-truncate="570" template:optional="true">' + slineBreak +
                '	<span class="dot icon icon-bullet"></span>' + slineBreak +
-               '           {dej:=text()}' + slineBreak +
+               '           {dej:=deep-text()}' + slineBreak +
                '    <span class="source"></span>' + slineBreak +
                '</div>');
    pomArrayObrazek[fromIndex]:= (w as TXQValueObject).getProperty('obrazek').get(1).toString;
