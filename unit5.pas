@@ -67,7 +67,7 @@ end;
 
 procedure TForm5.Button1Click(Sender: TObject);    { OK a pak vytvoř stub soubor}
 var
-  i: byte;
+  i: integer;
   discstub: TXMLNode;
   xmlDoc : IXMLDocument;
   //pomSerieNazev : String;
