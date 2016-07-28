@@ -2,10 +2,10 @@ inherited Form5: TForm5
   Left = 848
   Height = 357
   Top = 175
-  Width = 333
+  Width = 294
   Caption = 'Stub files creating'
   ClientHeight = 357
-  ClientWidth = 333
+  ClientWidth = 294
   Icon.Data = {
     BE1000000000010001002020000001002000A810000016000000280000002000
     0000400000000100200000000000001000006400000064000000000000000000
@@ -147,77 +147,111 @@ inherited Form5: TForm5
   OnShow = FormShow
   Position = poDesktopCenter
   object LabeledEdit1: TLabeledEdit[0]
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
     Left = 16
-    Height = 29
+    Height = 27
     Top = 32
-    Width = 280
+    Width = 261
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Right = 17
     EditLabel.AnchorSideLeft.Control = LabeledEdit1
     EditLabel.AnchorSideRight.Control = LabeledEdit1
     EditLabel.AnchorSideRight.Side = asrBottom
     EditLabel.AnchorSideBottom.Control = LabeledEdit1
     EditLabel.Left = 16
-    EditLabel.Height = 1
-    EditLabel.Top = 28
-    EditLabel.Width = 280
+    EditLabel.Height = 19
+    EditLabel.Top = 10
+    EditLabel.Width = 261
     EditLabel.ParentColor = False
     Enabled = False
     TabOrder = 0
   end
   object LabeledEdit2: TLabeledEdit[1]
-    Left = 19
-    Height = 29
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 16
+    Height = 27
     Top = 104
-    Width = 275
+    Width = 261
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Right = 17
     EditLabel.AnchorSideLeft.Control = LabeledEdit2
     EditLabel.AnchorSideRight.Control = LabeledEdit2
     EditLabel.AnchorSideRight.Side = asrBottom
     EditLabel.AnchorSideBottom.Control = LabeledEdit2
-    EditLabel.Left = 19
-    EditLabel.Height = 1
-    EditLabel.Top = 100
-    EditLabel.Width = 275
+    EditLabel.Left = 16
+    EditLabel.Height = 19
+    EditLabel.Top = 82
+    EditLabel.Width = 261
     EditLabel.ParentColor = False
     Enabled = False
     TabOrder = 1
   end
   object DirectoryEdit1: TDirectoryEdit[2]
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
     Left = 16
-    Height = 29
+    Height = 27
     Top = 176
-    Width = 280
+    Width = 261
     RootDir = '/'
     DialogTitle = 'Vyber adresář'
     ShowHidden = False
     ButtonWidth = 23
     NumGlyphs = 1
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Right = 17
     MaxLength = 0
     TabOrder = 2
   end
   object Label1: TLabel[3]
-    Left = 15
-    Height = 21
+    Left = 16
+    Height = 19
     Top = 152
-    Width = 217
+    Width = 191
     Caption = 'Directory for stub files creating:'
     ParentColor = False
   end
   object Button1: TButton[4]
-    Left = 146
+    AnchorSideLeft.Control = CheckBox1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 142
     Height = 42
     Top = 224
-    Width = 148
+    Width = 135
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 17
+    BorderSpacing.Right = 17
     Caption = 'OK'
     ModalResult = 1
     OnClick = Button1Click
     TabOrder = 3
   end
   object Button2: TButton[5]
-    Left = 146
+    AnchorSideLeft.Control = CheckBox1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 142
     Height = 40
     Top = 288
-    Width = 148
+    Width = 135
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 17
+    BorderSpacing.Right = 17
     Caption = 'Cancel'
     ModalResult = 2
     TabOrder = 4
+  end
+  object CheckBox1: TCheckBox[6]
+    Left = 16
+    Height = 23
+    Top = 240
+    Width = 109
+    Caption = 'Create nfo file'
+    TabOrder = 5
   end
 end

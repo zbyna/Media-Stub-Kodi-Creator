@@ -3,7 +3,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 1.8.8\n"
 "Project-Id-Version: Media Stub Kodi Creator\n"
 "Language: en\n"
 "POT-Creation-Date: \n"
@@ -521,6 +521,10 @@ msgstr "Cancel"
 #: tform5.caption
 msgid "Stub files creating"
 msgstr "Stub files creating"
+
+#: tform5.checkbox1.caption
+msgid "Create nfo file"
+msgstr "Create nfo file"
 
 #: tform5.label1.caption
 msgid "Directory for stub files creating:"

@@ -505,6 +505,10 @@ msgstr ""
 msgid "Stub files creating"
 msgstr ""
 
+#: tform5.checkbox1.caption
+msgid "Create nfo file"
+msgstr ""
+
 #: tform5.label1.caption
 msgid "Directory for stub files creating:"
 msgstr ""

@@ -15,6 +15,7 @@ type
   TForm5 = class(TLocalizedForm)
     Button1: TButton;                  { OK}
     Button2: TButton;                   { Cancel }
+    CheckBox1: TCheckBox;
     DirectoryEdit1: TDirectoryEdit;     { umožňuje vybrat adresář }
     Label1: TLabel;
     LabeledEdit1: TLabeledEdit;          {Alternative title - název seriálu}
