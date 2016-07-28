@@ -9,7 +9,7 @@ uses
 
 const
   theMovidedbAPI = ''; // need to assign your own api
-
+  theTvdbAPI = '';
 implementation
 
 end.
