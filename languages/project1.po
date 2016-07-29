@@ -612,6 +612,11 @@ msgctxt "TFORMSCRAPER.OKBUTTON.CAPTION"
 msgid "Ok"
 msgstr ""
 
+#: tformscraper.pausebutton.caption
+msgctxt "TFORMSCRAPER.PAUSEBUTTON.CAPTION"
+msgid "Pause"
+msgstr ""
+
 #: tformscrapujvyber.cancelbutton.caption
 msgctxt "TFORMSCRAPUJVYBER.CANCELBUTTON.CAPTION"
 msgid "Cancel"

@@ -33,6 +33,7 @@ type
   { TFormScraper }
 
   TFormScraper = class(TLocalizedForm)
+    pauseButton: TButton;
     EventLog1: TEventLog;
     imgObrazek: TImage;
     memDej: TMemo;
@@ -45,6 +46,7 @@ type
     vyberDeju:TStringList;                   { seznam nascrapovaných řetězců dějů }
     vyberReferer:TStringList;
     ProgressBar1: TProgressBar;
+    procedure pauseButtonClick(Sender: TObject);
     procedure CancelButtonClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -718,6 +720,11 @@ begin
   ProgressBar1.Position:=0;
   //vybranyNazev:='';
   //vybranyRok:='';
+end;
+
+procedure TFormScraper.pauseButtonClick(Sender: TObject);
+begin
+  Timer1.Enabled:=not(Timer1.Enabled);
 end;
 
 procedure TFormScraper.FormCreate(Sender: TObject);
