@@ -17,6 +17,7 @@ type
                      // rescrape nebo pokračovat na další položku
     dobaTimer1:Integer;
     procedure scrapujVyber;
+    procedure createNfo(directory:String);
     procedure onTimer(sender:TObject);
     function notScrapedAction:Boolean;
     constructor create(zq:TZquery;dbg:TDBGrid);
@@ -26,11 +27,12 @@ var
    globalScraper:TGlobalScraper;
 
 implementation
- uses unit1, // resource strings
-      unit7, // formNastaveni
-      unit8, // formScraper
-      unNotSraped, // form for rescrape
-      unit9; // formScrapujVyber
+ uses unit1,              // resource strings
+      unit7,              // formNastaveni
+      unit8,              // formScraper
+      unNotSraped,        // form for rescrape
+      unit9,              // formScrapujVyber
+      OXmlCDOM,OXmlUtils; // creating xml
 { TGlobalScraper }
 
 procedure TGlobalScraper.scrapujVyber;
@@ -127,6 +129,90 @@ begin
            ZQuery.Post;
          end;
   if pom=mrCancel then  FormScrapujVyber.tabulkaVysledku.Clean([gzNormal,gzFixedRows])
+end;
+
+procedure TGlobalScraper.createNfo(directory:String);
+var
+  i: Integer;
+  pomStr,PomStr1,pomPath, pomString: String;
+  Pom: Integer;
+  scrapovatZnovuToSame : Boolean;
+
+  procedure createNfoFile(itemType,path:String); // itemType = tvshow or movie
+  var
+    xmlNode: TXMLNode;
+    xmlDoc : IXMLDocument;
+  begin
+    xmlDoc:=CreateXMLDoc(itemType,true);
+    xmlNode:=xmlDoc.DocumentElement;
+    // documentNode contains documentElement(so called root element) :-)
+    // below inserts comment before documentElement(root element)
+    xmlDoc.GetDocumentNode.InsertComment('created on '+ DateTimeToStr(now) +
+                                         ' - MediaStub Kodi Creator',xmlNOde);
+    xmlNode.AddChild('title').AddText(FormScraper.vybranyNazev);
+    xmlNode.AddChild('year').AddText(FormScraper.vybranyRok);
+    xmlNode.AddChild('plot').AddText(FormScraper.memDej.Lines.Text);
+    pomPath:=directory+path;
+    If ForceDirectories(pomPath) then    //utf8tosys
+      begin
+       xmlDoc.WriterSettings.IndentType:=itIndent;
+       xmlDoc.SaveToFile(pomPath+itemType+'.nfo');
+      end;
+  end;
+
+begin
+  PomStr:='';
+  PomStr1:='';
+  {projdi výběr a vytvoř nfo soubor v cestě path}
+      //nultý řádek v tabulkaVysledku jsou názvy sloupců proto +1
+  for i:=0 to dbgrid.SelectedRows.Count-1 do
+   begin
+     ZQuery.GotoBookmark(dbgrid.SelectedRows.Items[i]);
+     if  ZQuery.FieldByName('DRUH').AsString='series' then
+       begin       // --- řádek je seriál
+         if (i<>0) and (ZQuery.FieldByName('NAZEV_SERIALU').AsString=pomStr) then
+           begin
+             pomStr:= ZQuery.FieldByName('NAZEV_SERIALU').AsString;
+             continue;
+           end
+                                                                               else
+           begin
+            pomStr:= ZQuery.FieldByName('NAZEV_SERIALU').AsString;
+            {s prázdným názvem házi scrapování error 404}
+            If ZQuery.FieldByName('NAZEV_SERIALU').AsString ='' then continue;
+            repeat
+              PomStr1:= aktualniScraperSerial(ZQuery.FieldByName('NAZEV_SERIALU').AsString);
+              if PomStr1 <> 'nenalezeno' then
+                begin
+                  pomPath:=ZQuery.FieldByName('DIRECTORY').AsString;
+                  pomString:= ZQuery.FieldByName('SEZONA').AsString+'\';
+                  pomPath:=StringReplace(pomPath,pomString,'',[rfIgnoreCase]);
+                  createNfoFile('tvshow',pomPath);
+                end
+                                       else
+                scrapovatZnovuToSame:= self.notScrapedAction;
+               // tady někde bych se měl po změně scraperu vrátit a znovu scrapovat tu samou položku
+            until not(scrapovatZnovuToSame) or (pomStr<>'nenalezeno');
+           continue;
+           end;
+       end       // --- řádek je seriál
+                                                        else
+       begin     // --- řádek je film
+          {s prázdným názvem házi scrapování error 404}
+          if ZQuery.FieldByName('NAZEV').AsString ='' then continue;
+         repeat
+            pomStr:=aktualniScraperFilm(ZQuery.FieldByName('NAZEV').AsString);
+           if pomStr <>'nenalezeno' then
+             begin
+                pomPath:=ZQuery.FieldByName('DIRECTORY').AsString;
+                createNfoFile('movie',pomPath);
+             end
+                                      else
+             scrapovatZnovuToSame:= self.notScrapedAction;
+         until not(scrapovatZnovuToSame) or (pomStr<>'nenalezeno');
+         continue;
+       end;    // --- řádek je film
+   end;
 end;
 
 constructor TGlobalScraper.create(zq: TZquery;dbg:TDBGrid);

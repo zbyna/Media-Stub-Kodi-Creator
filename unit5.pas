@@ -37,7 +37,8 @@ var
 
 
 implementation
- uses unit1;  { chci pracovat s objekty Form1 }
+ uses unit1,  { chci pracovat s objekty Form1 }
+      unGlobalScraper; // a s objektem GlobalScraper
 {$R *.lfm}
 
 { TForm5 }
@@ -135,6 +136,7 @@ begin
         xmlDoc.SaveToFile(PomS);
       end;
    end;
+if CheckBox1.Checked then globalScraper.createNfo(DirectoryEdit1.Directory);
 end;
 
 end.
