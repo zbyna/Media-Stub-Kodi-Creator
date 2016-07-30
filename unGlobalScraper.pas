@@ -157,6 +157,7 @@ var
       begin
        xmlDoc.WriterSettings.IndentType:=itIndent;
        xmlDoc.SaveToFile(pomPath+itemType+'.nfo');
+       FormScraper.imgObrazek.Picture.SaveToFile(pomPath+'poster.jpg');
       end;
   end;
 
