@@ -112,9 +112,9 @@
         <FormatVersion Value="1"/>
       </local>
     </RunParams>
-    <RequiredPackages Count="27">
+    <RequiredPackages Count="26">
       <Item1>
-        <PackageName Value="internettools_utf8"/>
+        <PackageName Value="utf8tools"/>
       </Item1>
       <Item2>
         <PackageName Value="internettools"/>
@@ -144,56 +144,53 @@
         <PackageName Value="OXml_Lazarus"/>
       </Item10>
       <Item11>
-        <PackageName Value="utf8tools"/>
+        <PackageName Value="bs_IDEIntf"/>
       </Item11>
       <Item12>
-        <PackageName Value="bs_IDEIntf"/>
+        <PackageName Value="pl_jujiboutils"/>
       </Item12>
       <Item13>
-        <PackageName Value="pl_jujiboutils"/>
+        <PackageName Value="pl_zeosdbo"/>
       </Item13>
       <Item14>
-        <PackageName Value="pl_zeosdbo"/>
+        <PackageName Value="pl_synapsevs"/>
       </Item14>
       <Item15>
-        <PackageName Value="pl_synapsevs"/>
+        <PackageName Value="pl_jvcl"/>
       </Item15>
       <Item16>
-        <PackageName Value="pl_jvcl"/>
+        <PackageName Value="pl_exsystem"/>
       </Item16>
       <Item17>
-        <PackageName Value="pl_exsystem"/>
+        <PackageName Value="lz_sqldb"/>
       </Item17>
       <Item18>
-        <PackageName Value="lz_sqldb"/>
+        <PackageName Value="pl_exdesign"/>
       </Item18>
       <Item19>
-        <PackageName Value="pl_exdesign"/>
+        <PackageName Value="pl_excontrols"/>
       </Item19>
       <Item20>
-        <PackageName Value="pl_excontrols"/>
+        <PackageName Value="pl_solutions"/>
       </Item20>
       <Item21>
-        <PackageName Value="pl_solutions"/>
+        <PackageName Value="pl_virtualtreesextra"/>
       </Item21>
       <Item22>
-        <PackageName Value="pl_virtualtreesextra"/>
+        <PackageName Value="bs_Controls"/>
       </Item22>
       <Item23>
-        <PackageName Value="bs_Controls"/>
+        <PackageName Value="FCL"/>
       </Item23>
       <Item24>
-        <PackageName Value="FCL"/>
+        <PackageName Value="lz_sdf"/>
       </Item24>
       <Item25>
-        <PackageName Value="lz_sdf"/>
+        <PackageName Value="lz_tpipro"/>
       </Item25>
       <Item26>
-        <PackageName Value="lz_tpipro"/>
-      </Item26>
-      <Item27>
         <PackageName Value="LCL"/>
-      </Item27>
+      </Item26>
     </RequiredPackages>
     <Units Count="20">
       <Unit0>

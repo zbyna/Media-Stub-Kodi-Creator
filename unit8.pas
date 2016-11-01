@@ -10,9 +10,17 @@ uses
   Graphics, Dialogs, StdCtrls, ComCtrls, ExtCtrls, simpleinternet,
   simplehtmltreeparser, extendedhtmlparser, xquery, xquery_json, dateutils,
   strutils,LazUTF8,character,eventlog, LocalizedForms,bbutils,unConstants,
-  zuncomprfp,pasMP,LCLProc;
+  zuncomprfp,pasMP,LCLProc,ghashmap;
 
 type
+  { for moviedb genres - languages }
+  ProHash = class
+      public
+          class function hash(a:LongInt;b:LongInt):LongInt;
+  end;
+
+  TGenresMovieDB = specialize THashmap<LongInt,String,proHash>;
+
   { pro scraping roku k filmu - languages }
   Tjazyky = (English, Svenska, Norsk, Dansk, Suomeksi, Nederlands, Deutsch, Italiano,
              Espanol, Francais, Polski, Magyar, Greek, Turkish, Russian, Hebrew,
@@ -30,9 +38,15 @@ type
 
   { general action for all scrapers - něco jako closures ve Swiftu :-) }
   TprocedureSraperAction = procedure(v: IXQValue) is nested;
+
+  {genders for moviedb - films}
+
+
   { TFormScraper }
 
   TFormScraper = class(TLocalizedForm)
+    edtHodnoceni: TEdit;
+    edtZanry: TEdit;
     pauseButton: TButton;
     EventLog1: TEventLog;
     imgObrazek: TImage;
@@ -45,6 +59,8 @@ type
     vyberObrazku:TStringList;                { seznam nascrapovaných řetězců adres obrázků }
     vyberDeju:TStringList;                   { seznam nascrapovaných řetězců dějů }
     vyberReferer:TStringList;
+    vyberZanru:TStringList;                  { seznam nascrapovaných řetězců žánrů }
+    vyberHodnoceni:TStringList;              { seznam nascrapovaných řetězců hodnocení }
     ProgressBar1: TProgressBar;
     procedure pauseButtonClick(Sender: TObject);
     procedure CancelButtonClick(Sender: TObject);
@@ -86,6 +102,7 @@ var
   aktualniScraperFilm:TfunctionScraperFilm;
   ScraperySerial :array[TScraperSerial] of TFunctionScraperSerial;
   aktualniScraperSerial:TfunctionScraperSerial;
+  genresMovieDB : TgenresMovieDB;
 
 
 
@@ -103,6 +120,13 @@ implementation
        pomArrayDej:array of String;
        pomArrayReferer: array of String;
 
+
+{ for moviedb genres - languages }
+class function proHash.hash(a: LongInt; b: LongInt): LongInt;
+begin
+ hash:=a mod b;
+end;
+
 { pro scraping roku k filmu }
 function FilmThemoviedb(PomNazev: string): string;
 var
@@ -110,8 +134,11 @@ var
     theTvDbTag:Boolean;
   procedure scraperAction(v: IXQValue);
   var
-      pomNazev,pomRok,pomObr:String;
+      pomNazev,pomRok,pomObr, pomText:String;
       pomRokTDate:TDateTime;
+      pomList: TXQVList;
+      pomArray: TXQValueJSONArray;
+      pom:IXQValue;
 
    begin
      FormScraper.vyberReferer.Add('');
@@ -124,6 +151,15 @@ var
                formScraper.vyberObrazku.Add(
                      'http://image.tmdb.org/t/p/w154'+pomObr);
       formScraper.vyberDeju.Add((v as TXQValueJSONArray).seq.get(3).toString);
+      pomArray:=((v as TXQValueJSONArray).seq.get(4)) as TXQValueJSONArray;
+      // pomText:=pomArray.jsonSerialize(tnsText);
+      pomText:='';
+      for pom in pomArray.GetEnumeratorMembers do
+            pomText:= pomText + genresMovieDB.GetData(pom.toInt64)+ ', ';
+      RemoveTrailingChars(pomText,[' ',',']);
+      formScraper.vyberZanru.Add(pomText);
+      formScraper.vyberHodnoceni.Add((v as TXQValueJSONArray).seq.get(5).toString);
+
       if length(pomRok)=4 then   {když api vrací rovnou čtyři znaky roku}
           begin
             formScraper.vyberFilmu.Items.AddText(pomNazev+'~'+pomRok);
@@ -143,7 +179,8 @@ begin
                unConstants.theMovidedbAPI +'&query='+
                pomNazev+'&language='+aktualniJazyk;
  parsujNazev:='$json("results")() ! [.("title"), .("release_date"),'+
-               '.("poster_path"),.("overview")]';
+               '.("poster_path"),.("overview"),'+
+                '.("genre_ids"),.("vote_average")]';
 
  theTvDbTag:=False;
  FormScraper.Scrapuj(scraperVstup,parsujNazev,theTvDbTag,
@@ -173,11 +210,14 @@ var
                                    pomImdbId+'/');
       w:= process('http://www.omdbapi.com/?i='+pomImdbId,
                    '$json ! [.("Title"),string(.("Year")),'+
-                             'string(.("Poster")),.("Plot")]');
+                             'string(.("Poster")),.("Plot"),'+
+                             '.("Genre"),string(.("imdbRating"))]');
       pomNazev:= (w as TXQValueJSONArray).seq.get(0).toString;
       pomRok:= (w as TXQValueJSONArray).seq.get(1).toString;
       formScraper.vyberObrazku.Add((w as TXQValueJSONArray).seq.get(2).toString);
       formScraper.vyberDeju.Add((w as TXQValueJSONArray).seq.get(3).toString);
+      FormScraper.vyberZanru.Add((w as TXQValueJSONArray).seq.get(4).toString);
+      FormScraper.vyberHodnoceni.Add((w as TXQValueJSONArray).seq.get(5).toString);
       if length(pomRok)=4 then   {když api vrací rovnou čtyři znaky roku}
           begin
             formScraper.vyberFilmu.Items.AddText(pomNazev+'~'+pomRok);
@@ -539,6 +579,7 @@ begin
     memDej.Clear;
     vyberDeju.Clear;
     vyberReferer.Clear;
+    vyberZanru.Clear;
     nenalezeno:=false;
     if theTvDbTag then      // b/c of theTvDb horizontals banners
        begin
@@ -689,6 +730,8 @@ begin
   memDej.Lines.BeginUpdate;
   memDej.Append(vyberDeju.Strings[vyberFilmu.ItemIndex]);
   memDej.Lines.EndUpdate;
+  edtZanry.Caption:=vyberZanru[pomIndex];
+  edtHodnoceni.Caption:=vyberHodnoceni[pomIndex];
 end;
 
 procedure TFormScraper.vyberFilmuEnter(Sender: TObject);
@@ -728,6 +771,28 @@ begin
 end;
 
 procedure TFormScraper.FormCreate(Sender: TObject);
+
+  procedure initGenres(var tabulka:TGenresMovieDB;
+                           pathToFile:String;
+                           parseString:String);
+    var
+        w,v:IXQValue;
+        i: Integer;
+        cislo: Int64;
+        nazevGenre: String;
+    begin
+      w:=process(pathToFile,parseString);
+      i:=1;
+      for v in w do
+         begin
+           cislo:=(v as TXQValueJSONArray).seq.get(0).toInt64;
+           nazevGenre:=(v as TXQValueJSONArray).seq.get(1).toString;
+           // naplň THashMap
+           tabulka.insert(cislo,nazevGenre);
+           i:=i+1;
+         end;
+    end;
+
 begin
   EventLog1.Active:=True;
   EventLog1.Identification:='Scrapping';
@@ -753,6 +818,12 @@ begin
   vyberObrazku:=TStringList.Create;
   vyberDeju:=TStringList.Create;
   vyberReferer:=TStringList.Create;
+  vyberZanru:=TStringList.Create;
+  vyberHodnoceni:=TStringList.Create;
+  // inicializace genresMovieDB
+  genresMovieDB:=TGenresMovieDB.create;
+  initGenres(genresMovieDB,'file://movidedb-genres-film.json',
+                           '$json("genres")() ! [.("id"), .("name")]');
 end;
 
 procedure TFormScraper.FormClose(Sender:TObject; var CloseAction:TCloseAction);

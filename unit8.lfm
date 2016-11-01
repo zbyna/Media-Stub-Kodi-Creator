@@ -231,12 +231,26 @@ inherited FormScraper: TFormScraper
     OnClick = pauseButtonClick
     TabOrder = 5
   end
-  object Timer1: TTimer[8]
+  object edtZanry: TEdit[8]
+    Left = 280
+    Height = 27
+    Top = 344
+    Width = 344
+    TabOrder = 6
+  end
+  object edtHodnoceni: TEdit[9]
+    Left = 648
+    Height = 27
+    Top = 344
+    Width = 36
+    TabOrder = 7
+  end
+  object Timer1: TTimer[10]
     OnTimer = Timer1Timer
     left = 104
     top = 96
   end
-  object EventLog1: TEventLog[9]
+  object EventLog1: TEventLog[11]
     AppendContent = False
     Identification = 'typhon'
     LogType = ltSystem

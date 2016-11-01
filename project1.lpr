@@ -9,8 +9,8 @@ uses
   Forms, Interfaces, Unit1, Unit2, Unit3, Unit4, {pl_zmsql,}
   {pl_kcontrols, pl_win_midi,}  pl_exsystem, pl_synapsevs, pl_zeosdbo,
   pl_bgracontrols, pl_bgrauecontrols, pl_kcontrols, Unit5, Unit6, Unit7, Unit8,
-  Unit9, Unit10, unHledej, utf8tools, unHistory, unUkazHistorii, unGridMod,
-  unNotSraped, unGlobalScraper, unConstants;
+  Unit9, Unit10, unHledej, unHistory, unUkazHistorii, unGridMod,
+  unNotSraped, unGlobalScraper, unConstants, utf8tools;
 
 {$R *.res}
 
