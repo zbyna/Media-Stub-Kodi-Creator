@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ComCtrls,
-  ExtCtrls, StdCtrls, IniPropStorage,LCLTranslator,LocalizedForms;
+  ExtCtrls, StdCtrls, IniPropStorage,LCLTranslator,unConstants,LocalizedForms;
 
 type
 
@@ -30,6 +30,7 @@ type
     procedure jazykAplikaceSelectionChanged(Sender: TObject);
     procedure OkbuttonClick(Sender: TObject);
     procedure nastavStatusBar;
+    procedure spustReinicializaci(Data: PtrInt); // pomocná pro  QueueAsyncCall
   private
     { private declarations }
   public
@@ -59,6 +60,10 @@ begin
   aktualniScraperFilm:=ScraperyFilm[TScraperFilm(FormNastaveni.FilmScrapers.ItemIndex)];
   aktualniScraperSerial:=ScraperySerial[TScraperSerial(FormNastaveni.SerialScrapers.ItemIndex)];
   aktualniJazyk:=jazyky[Tjazyky(FormNastaveni.LanguageScrapers.ItemIndex)];
+  // reinicializace genresMovieDB duritn scraper language change
+  //         - je deklarován v Unit8,line 16-22
+  // QueAsyncCall for keeping responsive ui :-)
+  Application.QueueAsyncCall(@spustReinicializaci,1);
   nastavStatusBar;
 end;
 
@@ -87,6 +92,13 @@ begin
   if (PomS='themoviedb.org') or (pomS='thetvdb.com') then PomS:=PomS+'('+aktualniJazyk+')';
   if PomF='themoviedb.org' then PomF:=PomF+'('+aktualniJazyk+')';
   Form1.StatusBar1.Panels[1].Text:=Format(rsSeriesFilms, [PomS, PomF]);
+end;
+
+procedure TFormNastaveni.spustReinicializaci(Data: PtrInt);
+begin
+  initGenres(genresMovieDB,
+             'https://api.themoviedb.org/3/genre/movie/list?api_key='+theMovidedbAPI+
+             '&language='+aktualniJazyk,'$json("genres")() ! [.("id"), .("name")]');
 end;
 
 procedure TFormNastaveni.UpdateTranslation(ALang: String);

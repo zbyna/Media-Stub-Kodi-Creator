@@ -91,6 +91,9 @@ type
   function SerialThetvdb(PomNazev:string):string;
   function SerialCsfd(PomNazev:string):string;
   procedure nahradDiakritiku(var retezec:String);
+  procedure initGenres(var tabulka:TGenresMovieDB;
+                           pathToFile:String;
+                           parseString:String);
 
 var
   FormScraper: TFormScraper;
@@ -772,27 +775,6 @@ end;
 
 procedure TFormScraper.FormCreate(Sender: TObject);
 
-  procedure initGenres(var tabulka:TGenresMovieDB;
-                           pathToFile:String;
-                           parseString:String);
-    var
-        w,v:IXQValue;
-        i: Integer;
-        cislo: Int64;
-        nazevGenre: String;
-    begin
-      w:=process(pathToFile,parseString);
-      i:=1;
-      for v in w do
-         begin
-           cislo:=(v as TXQValueJSONArray).seq.get(0).toInt64;
-           nazevGenre:=(v as TXQValueJSONArray).seq.get(1).toString;
-           // naplň THashMap
-           tabulka.insert(cislo,nazevGenre);
-           i:=i+1;
-         end;
-    end;
-
 begin
   EventLog1.Active:=True;
   EventLog1.Identification:='Scrapping';
@@ -822,8 +804,9 @@ begin
   vyberHodnoceni:=TStringList.Create;
   // inicializace genresMovieDB
   genresMovieDB:=TGenresMovieDB.create;
-  initGenres(genresMovieDB,'file://movidedb-genres-film.json',
-                           '$json("genres")() ! [.("id"), .("name")]');
+  initGenres(genresMovieDB,
+             'https://api.themoviedb.org/3/genre/movie/list?api_key='+theMovidedbAPI+
+             '&language='+aktualniJazyk,'$json("genres")() ! [.("id"), .("name")]');
 end;
 
 procedure TFormScraper.FormClose(Sender:TObject; var CloseAction:TCloseAction);
@@ -860,6 +843,27 @@ begin
   until (CharLen=0) or (ukChar^ = #0);
   retezec:=pomString;
 end;
+
+procedure initGenres(var tabulka:TGenresMovieDB;
+                           pathToFile:String;
+                           parseString:String); //
+    var
+        w,v:IXQValue;
+        i: Integer;
+        cislo: Int64;
+        nazevGenre: String;
+    begin
+      w:=process(pathToFile,parseString);
+      i:=1;
+      for v in w do
+         begin
+           cislo:=(v as TXQValueJSONArray).seq.get(0).toInt64;
+           nazevGenre:=(v as TXQValueJSONArray).seq.get(1).toString;
+           // naplň THashMap
+           tabulka.insert(cislo,nazevGenre);
+           i:=i+1;
+         end;
+    end;
 
 end.
 
