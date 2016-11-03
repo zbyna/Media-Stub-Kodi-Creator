@@ -600,6 +600,7 @@ begin
     vyberDeju.Clear;
     vyberReferer.Clear;
     vyberZanru.Clear;
+    vyberHodnoceni.Clear;
     nenalezeno:=false;
     if theTvDbTag then      // b/c of theTvDb horizontals banners
        begin
