@@ -121,6 +121,8 @@ implementation
        pomArrayRok:array of String;
        pomArrayObrazek:array of String;
        pomArrayDej:array of String;
+       pomArrayZanry:array of String;
+       pomArrayHodnoceni:array of String;
        pomArrayReferer: array of String;
 
 
@@ -253,7 +255,7 @@ end;
 procedure parallelDownloadJob(const Job:PPasMPJob;const ThreadIndex:longint;
                                  const pointerNaV:pointer;const FromIndex,ToIndex:longint);
 var
-  pomOdkazNaFilm, pomZtazeno: String;
+  pomOdkazNaFilm, pomZtazeno, pomString: String;
   v,w: IXQValue;
 begin
    //DebuglnThreadLog('Thread Index: ' + inttostr(ThreadIndex));
@@ -276,21 +278,28 @@ begin
         //            '***** gzip unpacked in multithread attempt :-) *****');
        end;
    w:= process(pomZtazeno,
-               '<div id="poster" class="image" template:optional="true">' + slineBreak +
-               '    <img> {obrazek:=@src} </img> ' + slineBreak +
-               '</div>' + slineBreak +
-               '<div class="info" template:optional="true">' + slineBreak +
-               '     <div class="header">' + slineBreak +
-               '		<h1>{nazev:=text()}</h1>' + slineBreak +
-               '     </div>' + slineBreak +
-               '     <p></p>' + slineBreak +
-               '     <p> <template:read var="rok" source="text()" regex="(\d\d\d\d)"/> </p>' + slineBreak +
-               '</div>' + slineBreak +
-               '<div data-truncate="570" template:optional="true">' + slineBreak +
-               '	<span class="dot icon icon-bullet"></span>' + slineBreak +
-               '           {dej:=deep-text()}' + slineBreak +
-               '    <span class="source"></span>' + slineBreak +
-               '</div>');
+        '<div id="poster" class="image" template:optional="true">  ' + slineBreak +
+        '    <img> {obrazek:=@src} </img> ' + slineBreak +
+        '</div> ' + slineBreak +
+        '<div class="info" template:optional="true">  ' + slineBreak +
+        '    <div class="header"> ' + slineBreak +
+        '  		 <h1>{nazev:=text()}</h1> ' + slineBreak +
+        '    </div>' + slineBreak +
+        '    <p class="genre"> {zanr:=text()}</p> ' + slineBreak +
+        '    <p> ' + slineBreak +
+        '       <span itemprop="dateCreated"> ' + slineBreak +
+        '           <template:read var="rok" source="text()" regex="(\d\d\d\d)"/>' + slineBreak +
+        '       </span>   ' + slineBreak +
+        '    </p>      ' + slineBreak +
+        '</div> ' + slineBreak +
+        '<div data-truncate="570" template:optional="true"> ' + slineBreak +
+        '  	<span class="dot icon icon-bullet"></span>      ' + slineBreak +
+        '        {dej:=deep-text()}' + slineBreak +
+        '    <span class="source"></span> ' + slineBreak +
+        '</div>' + slineBreak +
+        '<h2 class="average">' + slineBreak +
+        '  <template:read var="hodnoceni" source="text()" regex="(\d*)"/>' + slineBreak +
+        '</h2>');
    pomArrayObrazek[fromIndex]:= (w as TXQValueObject).getProperty('obrazek').get(1).toString;
    //DebuglnThreadLog(pomArrayObrazek[fromIndex]);
    if (Pos('http:',pomArrayObrazek[fromIndex]) = 0) then
@@ -298,7 +307,9 @@ begin
    pomArrayNazev[fromIndex]:=(w as TXQValueObject).getProperty('nazev').get(1).toString;
    pomArrayRok[fromIndex]:=(w as TXQValueObject).getProperty('rok').get(1).toString;
    pomArrayDej[fromIndex]:=(w as TXQValueObject).getProperty('dej').get(1).toString;
-
+   pomString:= (w as TXQValueObject).getProperty('zanr').get(1).toString;
+   pomArrayZanry[fromIndex]:= StringReplace(pomString,' /',',',[rfReplaceAll]);
+   pomArrayHodnoceni[fromIndex]:=(w as TXQValueObject).getProperty('hodnoceni').get(1).toString;
 end;
 
 function FilmCsfd(PomNazev: string): string;
@@ -321,6 +332,8 @@ var
     SetLength(pomArrayRok,pomI);
     SetLength(pomArrayObrazek,pomI);
     SetLength(pomArrayDej,pomI);
+    SetLength(pomArrayZanry,pomI);
+    SetLength(pomArrayHodnoceni,pomI);
     SetLength(pomArrayReferer,pomI);
     TPasMP.CreateGlobalInstance;
     if pomI = 1 then
@@ -333,12 +346,16 @@ var
         formScraper.vyberFilmu.Items.AddText(pomArrayNazev[i]+'~'+pomArrayRok[i]);
         formScraper.vyberObrazku.Add(pomArrayObrazek[i]);
         formScraper.vyberDeju.Add(pomArrayDej[i]);
+        formScraper.vyberZanru.Add(pomArrayZanry[i]);
+        FormScraper.vyberHodnoceni.Add(pomArrayHodnoceni[i]);
         FormScraper.vyberReferer.Add(pomArrayReferer[i]);
       end;
     SetLength(pomArrayNazev,0);
     SetLength(pomArrayRok,0);
     SetLength(pomArrayObrazek,0);
     SetLength(pomArrayDej,0);
+    SetLength(pomArrayZanry,0);
+    SetLength(pomArrayHodnoceni,0);
     SetLength(pomArrayReferer,0);
     FormScraper.EventLog1.Debug('Vynulování pomArrays hotovo');
  end;
