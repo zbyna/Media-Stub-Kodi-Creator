@@ -156,7 +156,7 @@ inherited FormNastaveni: TFormNastaveni
     TabOrder = 0
     object Scrapers: TTabSheet
       Caption = 'Scrapers'
-      ClientHeight = 439
+      ClientHeight = 441
       ClientWidth = 712
       object FilmScrapers: TRadioGroup
         Left = 17
@@ -172,7 +172,7 @@ inherited FormNastaveni: TFormNastaveni
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 253
+        ClientHeight = 255
         ClientWidth = 151
         Items.Strings = (
           'themoviedb.org'
@@ -195,7 +195,7 @@ inherited FormNastaveni: TFormNastaveni
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 253
+        ClientHeight = 255
         ClientWidth = 151
         Items.Strings = (
           'themoviedb.org'
@@ -219,7 +219,7 @@ inherited FormNastaveni: TFormNastaveni
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclTopToBottomThenLeftToRight
         ChildSizing.ControlsPerLine = 12
-        ClientHeight = 350
+        ClientHeight = 352
         ClientWidth = 308
         ColumnLayout = clVerticalThenHorizontal
         Columns = 2
@@ -269,7 +269,7 @@ inherited FormNastaveni: TFormNastaveni
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 161
+        ClientHeight = 163
         ClientWidth = 237
         Items.Strings = (
           'Čeština'
@@ -297,7 +297,7 @@ inherited FormNastaveni: TFormNastaveni
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 98
+        ClientHeight = 100
         ClientWidth = 351
         Items.Strings = (
           'Highlight initial position'

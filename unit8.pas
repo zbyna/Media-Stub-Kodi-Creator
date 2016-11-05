@@ -30,11 +30,13 @@ type
 
   TScraperFilm = (Fthemoviedb,imdb,csfd);
   TfunctionScraperFilm = function(PomNazev:string):string;
+  TprocedureInitGenresLanguageFilm = procedure(lang:string);
 
   { pro scraping roku k seriálu }
 
   TScraperSerial = (Sthemoviedb,tvmaze,thetvdb,Scsfd);
   TfunctionScraperSerial =  function(PomNazev:string):string;
+  TprocedureInitGenresLanguageSerial = procedure(lang:string);
 
   { general action for all scrapers - něco jako closures ve Swiftu :-) }
   TprocedureSraperAction = procedure(v: IXQValue) is nested;
@@ -94,6 +96,9 @@ type
   procedure initGenres(var tabulka:TGenresMovieDB;
                            pathToFile:String;
                            parseString:String);
+  procedure initGenresMovieDBFilm(lang:String);
+  procedure initGenresImdbFilm(lang:String);
+  procedure initGenresCsfdFilm(lang:String);
 
 var
   FormScraper: TFormScraper;
@@ -106,6 +111,8 @@ var
   ScraperySerial :array[TScraperSerial] of TFunctionScraperSerial;
   aktualniScraperSerial:TfunctionScraperSerial;
   genresMovieDB : TgenresMovieDB;
+  InitGenresLanguageFilm :array[TScraperFilm] of TprocedureInitGenresLanguageFilm;
+  InitGenresLanguageSerial:array[TScraperSerial] of TprocedureInitGenresLanguageSerial;
 
 
 
@@ -211,7 +218,8 @@ var
       w: IXQValue;
    begin
       pomImdbId:= (v as TXQValueJSONArray).seq.get(0).toString;
-      FormScraper.vyberReferer.Add('Referer: http://www.imdb.com/title/'+
+      //formScraper.EventLog1.Debug('konec první části imdbID: '+pomImdbId);
+      formScraper.vyberReferer.Add('Referer: http://www.imdb.com/title/'+
                                    pomImdbId+'/');
       w:= process('http://www.omdbapi.com/?i='+pomImdbId,
                    '$json ! [.("Title"),string(.("Year")),'+
@@ -223,6 +231,7 @@ var
       formScraper.vyberDeju.Add((w as TXQValueJSONArray).seq.get(3).toString);
       FormScraper.vyberZanru.Add((w as TXQValueJSONArray).seq.get(4).toString);
       FormScraper.vyberHodnoceni.Add((w as TXQValueJSONArray).seq.get(5).toString);
+      //formScraper.EventLog1.Debug('konec druhé části imdbID: '+pomImdbId);
       if length(pomRok)=4 then   {když api vrací rovnou čtyři znaky roku}
           begin
             formScraper.vyberFilmu.Items.AddText(pomNazev+'~'+pomRok);
@@ -825,6 +834,9 @@ begin
   initGenres(genresMovieDB,
              'https://api.themoviedb.org/3/genre/movie/list?api_key='+theMovidedbAPI+
              '&language='+aktualniJazyk,'$json("genres")() ! [.("id"), .("name")]');
+  InitGenresLanguageFilm[Fthemoviedb]:=@(initGenresMovieDBFilm);
+  InitGenresLanguageFilm[imdb]:=@(initGenresImdbFilm);
+  InitGenresLanguageFilm[csfd]:=@(initGenresCsfdFilm);
 end;
 
 procedure TFormScraper.FormClose(Sender:TObject; var CloseAction:TCloseAction);
@@ -882,6 +894,23 @@ procedure initGenres(var tabulka:TGenresMovieDB;
            i:=i+1;
          end;
     end;
+
+procedure initGenresMovieDBFilm(lang: String);
+begin
+  initGenres(genresMovieDB,
+             'https://api.themoviedb.org/3/genre/movie/list?api_key='+theMovidedbAPI+
+             '&language='+lang,'$json("genres")() ! [.("id"), .("name")]');
+end;
+
+procedure initGenresImdbFilm(lang: String);
+begin
+  // pripare for possible genre translating
+end;
+
+procedure initGenresCsfdFilm(lang: String);
+begin
+  // pripare for possible genre translating
+end;
 
 end.
 

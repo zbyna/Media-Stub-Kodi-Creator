@@ -96,9 +96,10 @@ end;
 
 procedure TFormNastaveni.spustReinicializaci(Data: PtrInt);
 begin
-  initGenres(genresMovieDB,
-             'https://api.themoviedb.org/3/genre/movie/list?api_key='+theMovidedbAPI+
-             '&language='+aktualniJazyk,'$json("genres")() ! [.("id"), .("name")]');
+  //initGenres(genresMovieDB,
+  //           'https://api.themoviedb.org/3/genre/movie/list?api_key='+theMovidedbAPI+
+  //           '&language='+aktualniJazyk,'$json("genres")() ! [.("id"), .("name")]');
+  InitGenresLanguageFilm[TScraperFilm(FormNastaveni.FilmScrapers.ItemIndex)](aktualniJazyk);
 end;
 
 procedure TFormNastaveni.UpdateTranslation(ALang: String);
