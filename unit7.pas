@@ -100,6 +100,7 @@ begin
   //           'https://api.themoviedb.org/3/genre/movie/list?api_key='+theMovidedbAPI+
   //           '&language='+aktualniJazyk,'$json("genres")() ! [.("id"), .("name")]');
   InitGenresLanguageFilm[TScraperFilm(FormNastaveni.FilmScrapers.ItemIndex)](aktualniJazyk);
+  InitGenresLanguageSerial[TScraperSerial(FormNastaveni.SerialScrapers.ItemIndex)](aktualniJazyk);
 end;
 
 procedure TFormNastaveni.UpdateTranslation(ALang: String);

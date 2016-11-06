@@ -93,12 +93,19 @@ type
   function SerialThetvdb(PomNazev:string):string;
   function SerialCsfd(PomNazev:string):string;
   procedure nahradDiakritiku(var retezec:String);
+  { helper for moviedb scrapers genres initialization }
   procedure initGenres(var tabulka:TGenresMovieDB;
                            pathToFile:String;
                            parseString:String);
+  { for init genres of film scrapers }
   procedure initGenresMovieDBFilm(lang:String);
   procedure initGenresImdbFilm(lang:String);
   procedure initGenresCsfdFilm(lang:String);
+  { for init genres of series scrapers }
+  procedure initGenresThemoviedbSerial(lang:string);
+  procedure initGenresTvmazeSerial(lang:string);
+  procedure initGenresThetvdbSerial(lang:string);
+  procedure initGenresCsfdSerial(lang:string);
 
 var
   FormScraper: TFormScraper;
@@ -110,7 +117,8 @@ var
   aktualniScraperFilm:TfunctionScraperFilm;
   ScraperySerial :array[TScraperSerial] of TFunctionScraperSerial;
   aktualniScraperSerial:TfunctionScraperSerial;
-  genresMovieDB : TgenresMovieDB;
+  genresMovieDB : TgenresMovieDB;              // for moviedDB film scraper
+  genresMovieDBSerial:TGenresMovieDB;          // for moviedDB serial scraper
   InitGenresLanguageFilm :array[TScraperFilm] of TprocedureInitGenresLanguageFilm;
   InitGenresLanguageSerial:array[TScraperSerial] of TprocedureInitGenresLanguageSerial;
 
@@ -423,8 +431,10 @@ function SerialThemoviedb(PomNazev: string): string;
 
   procedure scraperAction(v:IXQValue);
    var
-      pomNazev,pomRok,pomObr:String;
+      pomNazev,pomRok,pomObr,pomText:String;
       pomRokTDate:TDateTime;
+      pomArray: TXQValueJSONArray;
+      pom:IXQValue;
 
    begin
      FormScraper.vyberReferer.Add('');
@@ -438,6 +448,14 @@ function SerialThemoviedb(PomNazev: string): string;
                formScraper.vyberObrazku.Add(
                      'http://image.tmdb.org/t/p/w154'+pomObr);
       formScraper.vyberDeju.Add((v as TXQValueJSONArray).seq.get(3).toString);
+      pomArray:=((v as TXQValueJSONArray).seq.get(4)) as TXQValueJSONArray;
+      // pomText:=pomArray.jsonSerialize(tnsText);
+      pomText:='';
+      for pom in pomArray.GetEnumeratorMembers do
+            pomText:= pomText + genresMovieDBSerial.GetData(pom.toInt64)+ ', ';
+      RemoveTrailingChars(pomText,[' ',',']);
+      formScraper.vyberZanru.Add(pomText);
+      formScraper.vyberHodnoceni.Add((v as TXQValueJSONArray).seq.get(5).toString);
       if length(pomRok)=4 then   {když api vrací rovnou čtyři znaky roku}
           begin
             formScraper.vyberFilmu.Items.AddText(pomNazev+'~'+pomRok);
@@ -457,7 +475,8 @@ begin
                             pomNazev+'&language='+aktualniJazyk));
 
  parsujNazev:='$json("results")() ! [.("name"), .("first_air_date"),'+
-               '.("poster_path"),.("overview")]';
+               '.("poster_path"),.("overview"),'+
+                '.("genre_ids"),.("vote_average")]';
  theTvDbTag:=False;
  //ShowMessage('aktuální jazyk: ' + aktualniJazyk + sLineBreak+
  //             scraperVstup );
@@ -829,7 +848,7 @@ begin
   vyberReferer:=TStringList.Create;
   vyberZanru:=TStringList.Create;
   vyberHodnoceni:=TStringList.Create;
-  // inicializace genresMovieDB
+  // inicializace genresMovieDB for film scraper
   genresMovieDB:=TGenresMovieDB.create;
   initGenres(genresMovieDB,
              'https://api.themoviedb.org/3/genre/movie/list?api_key='+theMovidedbAPI+
@@ -837,6 +856,16 @@ begin
   InitGenresLanguageFilm[Fthemoviedb]:=@(initGenresMovieDBFilm);
   InitGenresLanguageFilm[imdb]:=@(initGenresImdbFilm);
   InitGenresLanguageFilm[csfd]:=@(initGenresCsfdFilm);
+  // inicializace genresMovieDBSerial for serie scraper
+  genresMovieDBSerial:=TGenresMovieDB.create;
+  initGenres(genresMovieDBSerial,
+             'https://api.themoviedb.org/3/genre/tv/list?api_key='+theMovidedbAPI+
+             '&language='+aktualniJazyk,'$json("genres")() ! [.("id"), .("name")]');
+  InitGenresLanguageSerial[Sthemoviedb]:=@(initGenresThemoviedbSerial);
+  InitGenresLanguageSerial[tvmaze]:=@(initGenresTvmazeSerial);
+  InitGenresLanguageSerial[thetvdb]:=@(initGenresThetvdbSerial);
+  InitGenresLanguageSerial[Scsfd]:=@(initGenresCsfdSerial);
+
 end;
 
 procedure TFormScraper.FormClose(Sender:TObject; var CloseAction:TCloseAction);
@@ -904,12 +933,34 @@ end;
 
 procedure initGenresImdbFilm(lang: String);
 begin
-  // pripare for possible genre translating
+  // prepared for possible genre translating
 end;
 
 procedure initGenresCsfdFilm(lang: String);
 begin
-  // pripare for possible genre translating
+  // prepared for possible genre translating
+end;
+
+procedure initGenresThemoviedbSerial(lang: string);
+begin
+  initGenres(genresMovieDBSerial,
+             'https://api.themoviedb.org/3/genre/tv/list?api_key='+theMovidedbAPI+
+             '&language='+aktualniJazyk,'$json("genres")() ! [.("id"), .("name")]');
+end;
+
+procedure initGenresTvmazeSerial(lang: string);
+begin
+
+end;
+
+procedure initGenresThetvdbSerial(lang: string);
+begin
+
+end;
+
+procedure initGenresCsfdSerial(lang: string);
+begin
+  // prepared for possible genre translating
 end;
 
 end.
