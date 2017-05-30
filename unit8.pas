@@ -319,7 +319,7 @@ begin
         '</h2>');
    pomArrayObrazek[fromIndex]:= (w as TXQValueObject).getProperty('obrazek').get(1).toString;
    //DebuglnThreadLog(pomArrayObrazek[fromIndex]);
-   if (Pos('http:',pomArrayObrazek[fromIndex]) = 0) then
+   if (Pos('http',pomArrayObrazek[fromIndex]) = 0) then
            pomArrayObrazek[fromIndex]:='http:'+pomArrayObrazek[fromIndex];
    pomArrayNazev[fromIndex]:=(w as TXQValueObject).getProperty('nazev').get(1).toString;
    pomArrayRok[fromIndex]:=(w as TXQValueObject).getProperty('rok').get(1).toString;
