@@ -109,85 +109,88 @@
         <FormatVersion Value="1"/>
       </local>
     </RunParams>
-    <RequiredPackages Count="26">
+    <RequiredPackages Count="27">
       <Item1>
-        <PackageName Value="utf8tools"/>
+        <PackageName Value="pl_generics"/>
       </Item1>
       <Item2>
-        <PackageName Value="internettools"/>
+        <PackageName Value="utf8tools"/>
       </Item2>
       <Item3>
-        <PackageName Value="lz_multithreadprocs"/>
+        <PackageName Value="internettools"/>
       </Item3>
       <Item4>
-        <PackageName Value="pl_KControls"/>
+        <PackageName Value="lz_multithreadprocs"/>
       </Item4>
       <Item5>
-        <PackageName Value="pl_fzcontrols"/>
+        <PackageName Value="pl_KControls"/>
       </Item5>
       <Item6>
-        <PackageName Value="pl_cindy"/>
+        <PackageName Value="pl_fzcontrols"/>
       </Item6>
       <Item7>
-        <PackageName Value="pl_BGRAuecontrols"/>
+        <PackageName Value="pl_cindy"/>
       </Item7>
       <Item8>
-        <PackageName Value="pl_bgracontrols"/>
+        <PackageName Value="pl_BGRAuecontrols"/>
       </Item8>
       <Item9>
-        <PackageName Value="splashabout"/>
+        <PackageName Value="pl_bgracontrols"/>
       </Item9>
       <Item10>
-        <PackageName Value="OXml_Lazarus"/>
+        <PackageName Value="splashabout"/>
       </Item10>
       <Item11>
-        <PackageName Value="bs_IDEIntf"/>
+        <PackageName Value="OXml_Lazarus"/>
       </Item11>
       <Item12>
-        <PackageName Value="pl_jujiboutils"/>
+        <PackageName Value="bs_IDEIntf"/>
       </Item12>
       <Item13>
-        <PackageName Value="pl_zeosdbo"/>
+        <PackageName Value="pl_jujiboutils"/>
       </Item13>
       <Item14>
-        <PackageName Value="pl_synapsevs"/>
+        <PackageName Value="pl_zeosdbo"/>
       </Item14>
       <Item15>
-        <PackageName Value="pl_jvcl"/>
+        <PackageName Value="pl_synapsevs"/>
       </Item15>
       <Item16>
-        <PackageName Value="pl_exsystem"/>
+        <PackageName Value="pl_jvcl"/>
       </Item16>
       <Item17>
-        <PackageName Value="lz_sqldb"/>
+        <PackageName Value="pl_exsystem"/>
       </Item17>
       <Item18>
-        <PackageName Value="pl_exdesign"/>
+        <PackageName Value="lz_sqldb"/>
       </Item18>
       <Item19>
-        <PackageName Value="pl_excontrols"/>
+        <PackageName Value="pl_exdesign"/>
       </Item19>
       <Item20>
-        <PackageName Value="pl_solutions"/>
+        <PackageName Value="pl_excontrols"/>
       </Item20>
       <Item21>
-        <PackageName Value="pl_virtualtreesextra"/>
+        <PackageName Value="pl_solutions"/>
       </Item21>
       <Item22>
-        <PackageName Value="bs_Controls"/>
+        <PackageName Value="pl_virtualtreesextra"/>
       </Item22>
       <Item23>
-        <PackageName Value="adFCL"/>
+        <PackageName Value="bs_Controls"/>
       </Item23>
       <Item24>
-        <PackageName Value="lz_sdf"/>
+        <PackageName Value="adFCL"/>
       </Item24>
       <Item25>
-        <PackageName Value="lz_tpipro"/>
+        <PackageName Value="lz_sdf"/>
       </Item25>
       <Item26>
-        <PackageName Value="adLCL"/>
+        <PackageName Value="lz_tpipro"/>
       </Item26>
+      <Item27>
+        <PackageName Value="adLCL"/>
+      </Item27>
     </RequiredPackages>
     <Units Count="20">
       <Unit0>
