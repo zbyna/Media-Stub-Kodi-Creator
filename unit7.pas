@@ -48,7 +48,7 @@ implementation
 uses unit1,       // resource string
      unit8;       // formScraper
 
-{$R *.lfm}
+{$R *.frm}
 
 { TFormNastaveni }
 

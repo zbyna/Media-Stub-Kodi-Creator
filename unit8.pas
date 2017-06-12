@@ -606,7 +606,7 @@ end;
 
 
 
-{$R *.lfm}
+{$R *.frm}
 
 { TFormScraper }
 

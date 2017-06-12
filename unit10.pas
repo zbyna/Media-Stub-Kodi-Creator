@@ -40,7 +40,7 @@ implementation
   uses Unit1;
   var pomWidth: array[0..10] of integer;
       frmGlobalI:Byte;
-{$R *.lfm}
+{$R *.frm}
 
 { TFormUpravUmisteni }
 

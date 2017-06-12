@@ -71,7 +71,7 @@ var
 
 implementation
 
-{$R *.lfm}
+{$R *.frm}
 
 uses
   unit1, // kvůli rsUndoBufferIt a rsRedoBufferIt  - strings for automatic translation

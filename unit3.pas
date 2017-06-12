@@ -102,7 +102,7 @@ type
     Column0: String;
   end;
 
-{$R *.lfm}
+{$R *.frm}
 
 { TForm3 }
 

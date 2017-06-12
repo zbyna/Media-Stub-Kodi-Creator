@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
   <ProjectOptions>
-    <Version Value="9"/>
+    <Version Value="10"/>
     <PathDelim Value="\"/>
     <General>
       <SessionStorage Value="InProjectDir"/>
@@ -15,9 +15,6 @@
       <EnableI18N Value="True"/>
       <OutDir Value="languages"/>
     </i18n>
-    <VersionInfo>
-      <StringTable ProductVersion=""/>
-    </VersionInfo>
     <BuildModes Count="3">
       <Item1 Name="Default" Default="True"/>
       <Item2 Name="Debug">
@@ -104,7 +101,7 @@
     </BuildModes>
     <PublishOptions>
       <Version Value="2"/>
-      <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
+      <IncludeFileFilter Value="*.(pas|pp|inc|frm|ppr|lrs|ctpr|ctpkg|sh|xml)"/>
       <ExcludeFileFilter Value="*.(bak|ppu|o|so);*~;backup"/>
     </PublishOptions>
     <RunParams>
@@ -180,7 +177,7 @@
         <PackageName Value="bs_Controls"/>
       </Item22>
       <Item23>
-        <PackageName Value="FCL"/>
+        <PackageName Value="adFCL"/>
       </Item23>
       <Item24>
         <PackageName Value="lz_sdf"/>
@@ -189,12 +186,12 @@
         <PackageName Value="lz_tpipro"/>
       </Item25>
       <Item26>
-        <PackageName Value="LCL"/>
+        <PackageName Value="adLCL"/>
       </Item26>
     </RequiredPackages>
     <Units Count="20">
       <Unit0>
-        <Filename Value="project1.lpr"/>
+        <Filename Value="project1.ppr"/>
         <IsPartOfProject Value="True"/>
       </Unit0>
       <Unit1>
@@ -206,7 +203,7 @@
         <UnitName Value="Unit1"/>
       </Unit1>
       <Unit2>
-        <Filename Value="unit1.lfm"/>
+        <Filename Value="unit1.frm"/>
         <IsPartOfProject Value="True"/>
       </Unit2>
       <Unit3>

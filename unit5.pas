@@ -39,7 +39,7 @@ var
 implementation
  uses unit1,  { chci pracovat s objekty Form1 }
       unGlobalScraper; // a s objektem GlobalScraper
-{$R *.lfm}
+{$R *.frm}
 
 { TForm5 }
 

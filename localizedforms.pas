@@ -46,7 +46,7 @@ function GetLCIDFromLangCode(ALang: String): Integer;
 
 implementation
 
-{$R *.lfm}
+{$R *.frm}
 
 uses
 {$IFDEF MSWINDOWS}

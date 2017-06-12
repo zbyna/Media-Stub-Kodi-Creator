@@ -40,7 +40,7 @@ uses unit7,                           // formNastaveni
      unit1,                           // resource strings
      unGlobalScraper;                 // object globalScraper
 
-{$R *.lfm}
+{$R *.frm}
 
 { TFormScrapujVyber }
 

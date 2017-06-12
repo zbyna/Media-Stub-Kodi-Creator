@@ -302,7 +302,7 @@ resourcestring
 
 implementation
 
-{$R *.lfm}
+{$R *.frm}
 uses unit8,unit9,Unit10,       { chci pracovat s objekty v unit8 tzn. scrapovat rok k filmu }
      unHledej;                 { chci pracovat s objekty v unit9 tzn. naplnit tabulkaVysledku}
 

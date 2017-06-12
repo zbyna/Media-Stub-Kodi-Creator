@@ -35,7 +35,7 @@ var
 
 implementation
 
-{$R *.lfm}
+{$R *.frm}
  uses unit1;  // chci pracovat s objekty z unit1 a nepotřebuju je v deklaraci
               // jde o proměnnou kliknuto
 { TfrmHledej }
