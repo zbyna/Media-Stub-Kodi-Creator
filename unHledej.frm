@@ -10,10 +10,9 @@ inherited frmHledej: TfrmHledej
   KeyPreview = True
   OnClose = FormClose
   OnKeyDown = FormKeyDown
-  LCLVersion = '1.5'
-  object LabeledEdit1: TLabeledEdit
+  object LabeledEdit1: TLabeledEdit[0]
     Left = 16
-    Height = 29
+    Height = 28
     Top = 32
     Width = 214
     EditLabel.AnchorSideLeft.Control = LabeledEdit1
@@ -21,14 +20,14 @@ inherited frmHledej: TfrmHledej
     EditLabel.AnchorSideRight.Side = asrBottom
     EditLabel.AnchorSideBottom.Control = LabeledEdit1
     EditLabel.Left = 16
-    EditLabel.Height = 21
-    EditLabel.Top = 8
+    EditLabel.Height = 20
+    EditLabel.Top = 9
     EditLabel.Width = 214
     EditLabel.Caption = 'Text to be searched:'
     EditLabel.ParentColor = False
     TabOrder = 0
   end
-  object SpeedButtonPredchozi: TSpeedButton
+  object SpeedButtonPredchozi: TSpeedButton[1]
     Left = 16
     Height = 64
     Hint = 'Search towards  the head o thef table CTRL + P'
@@ -170,7 +169,7 @@ inherited frmHledej: TfrmHledej
     ShowHint = True
     ParentShowHint = False
   end
-  object SpeedButtonDalsi: TSpeedButton
+  object SpeedButtonDalsi: TSpeedButton[2]
     Left = 166
     Height = 64
     Hint = ' Search towards  the bottom  of the table CTRL+N'

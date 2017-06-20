@@ -4457,6 +4457,7 @@ inherited frmUkazHistorii: TfrmUkazHistorii
     }
     BorderStyle = bsSingle
     Color = clForm
+    Colors.UnfocusedColor = clMedGray
     DefaultText = 'Node'
     Font.Color = clWindowText
     Header.AutoSizeIndex = 0
@@ -4490,6 +4491,7 @@ inherited frmUkazHistorii: TfrmUkazHistorii
     Width = 315
     BorderStyle = bsSingle
     Color = clForm
+    Colors.UnfocusedColor = clMedGray
     DefaultText = 'Node'
     DragOperations = []
     Font.Color = clWindowText
@@ -4515,8 +4517,8 @@ inherited frmUkazHistorii: TfrmUkazHistorii
   end
   object popUpVetItem: TPopupMenu[2]
     OnPopup = popUpVetItemPopup
-    left = 224
-    top = 208
+    Left = 224
+    Top = 208
     object menuItemUndo: TMenuItem
       Caption = 'Undo History Item'
       ShortCut = 16474

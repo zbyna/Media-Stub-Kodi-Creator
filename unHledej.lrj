@@ -1,0 +1,6 @@
+{"version":1,"strings":[
+{"hash":94079128,"name":"tfrmhledej.caption","sourcebytes":[83,101,97,114,99,104],"value":"Search"},
+{"hash":49812090,"name":"tfrmhledej.labelededit1.editlabel.caption","sourcebytes":[84,101,120,116,32,116,111,32,98,101,32,115,101,97,114,99,104,101,100,58],"value":"Text to be searched:"},
+{"hash":232295968,"name":"tfrmhledej.speedbuttonpredchozi.hint","sourcebytes":[83,101,97,114,99,104,32,116,111,119,97,114,100,115,32,32,116,104,101,32,104,101,97,100,32,111,32,116,104,101,102,32,116,97,98,108,101,32,67,84,82,76,32,43,32,80],"value":"Search towards  the head o thef table CTRL + P"},
+{"hash":82752974,"name":"tfrmhledej.speedbuttondalsi.hint","sourcebytes":[32,83,101,97,114,99,104,32,116,111,119,97,114,100,115,32,32,116,104,101,32,98,111,116,116,111,109,32,32,111,102,32,116,104,101,32,116,97,98,108,101,32,67,84,82,76,43,78],"value":" Search towards  the bottom  of the table CTRL+N"}
+]}

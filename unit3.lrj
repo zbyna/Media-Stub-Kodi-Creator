@@ -1,0 +1,18 @@
+{"version":1,"strings":[
+{"hash":29445253,"name":"tform3.button1.caption","sourcebytes":[65,100,100,32,114,111,111,116,32,110,111,100,101],"value":"Add root node"},
+{"hash":134344501,"name":"tform3.button2.caption","sourcebytes":[65,100,100,32,99,104,105,108,100,32,110,111,100,101],"value":"Add child node"},
+{"hash":171808613,"name":"tform3.button3.caption","sourcebytes":[68,101,108,101,116,101,32,110,111,100,101],"value":"Delete node"},
+{"hash":1339,"name":"tform3.button4.caption","sourcebytes":[79,75],"value":"OK"},
+{"hash":77089212,"name":"tform3.button5.caption","sourcebytes":[67,97,110,99,101,108],"value":"Cancel"},
+{"hash":128122389,"name":"tform3.label1.caption","sourcebytes":[65,99,116,117,97,108,32,110,111,100,101],"value":"Actual node"},
+{"hash":41052117,"name":"tform3.label2.caption","sourcebytes":[87,104,111,108,101,32,116,114,101,101],"value":"Whole tree"},
+{"hash":171782965,"name":"tform3.button6.caption","sourcebytes":[67,114,101,97,116,101,32,116,114,101,101],"value":"Create tree"},
+{"hash":259316917,"name":"tform3.labelededit1.editlabel.caption","sourcebytes":[83,101,114,105,101,32,110,97,109,101],"value":"Serie name"},
+{"hash":246168658,"name":"tform3.labelededit2.editlabel.caption","sourcebytes":[76,97,98,101,108,101,100,69,100,105,116,50],"value":"LabeledEdit2"},
+{"hash":116841953,"name":"tform3.jlabeledintegeredit1.editlabel.caption","sourcebytes":[74,76,97,98,101,108,101,100,73,110,116,101,103,101,114,69,100,105,116,49],"value":"JLabeledIntegerEdit1"},
+{"hash":87797949,"name":"tform3.label3.caption","sourcebytes":[77,101,100,105,117,109],"value":"Medium"},
+{"hash":18852,"name":"tform3.combobox1.text","sourcebytes":[68,86,68],"value":"DVD"},
+{"hash":100196792,"name":"tform3.checkbox1.caption","sourcebytes":[76,111,99,97,116,105,111,110,32,105,110,100,101,120],"value":"Location index"},
+{"hash":32,"name":"tform3.jlabeledintegeredit2.editlabel.caption","sourcebytes":[32],"value":" "},
+{"hash":159795458,"name":"tform3.button7.caption","sourcebytes":[83,99,114,97,112,101,32,116,104,101,32,115,101,114,105,101,32,121,101,97,114],"value":"Scrape the serie year"}
+]}

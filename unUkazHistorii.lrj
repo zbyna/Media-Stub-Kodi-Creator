@@ -1,0 +1,5 @@
+{"version":1,"strings":[
+{"hash":74585682,"name":"tfrmukazhistorii.caption","sourcebytes":[85,110,100,111,32,97,110,100,32,82,101,100,111,32,98,117,102,102,101,114],"value":"Undo and Redo buffer"},
+{"hash":226093261,"name":"tfrmukazhistorii.menuitemundo.caption","sourcebytes":[85,110,100,111,32,72,105,115,116,111,114,121,32,73,116,101,109],"value":"Undo History Item"},
+{"hash":6521763,"name":"tfrmukazhistorii.menuitemclear.caption","sourcebytes":[67,108,101,97,114,32,72,105,115,116,111,114,121,32,32,73,116,101,109,115],"value":"Clear History  Items"}
+]}

@@ -5,7 +5,7 @@ inherited Form1: TForm1
   Width = 902
   Action = Action1
   Anchors = []
-  ClientHeight = 576
+  ClientHeight = 572
   ClientWidth = 902
   Constraints.MinHeight = 600
   Icon.Data = {
@@ -554,7 +554,7 @@ inherited Form1: TForm1
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = DBNavigator1
     Left = 0
-    Height = 446
+    Height = 442
     Top = 44
     Width = 902
     Anchors = [akTop, akLeft, akRight, akBottom]
@@ -564,67 +564,67 @@ inherited Form1: TForm1
       item
         MinSize = 15
         Title.Caption = 'Name'
-        Width = 57
+        Width = 55
         FieldName = 'Nazev'
       end    
       item
         MinSize = 20
         Title.Caption = 'Series name'
-        Width = 100
+        Width = 95
         FieldName = 'Nazev_serialu'
       end    
       item
         MinSize = 25
         Title.Caption = 'Year'
-        Width = 46
+        Width = 44
         FieldName = 'Rok'
       end    
       item
         MinSize = 15
         Title.Caption = 'Sort'
-        Width = 44
+        Width = 42
         FieldName = 'Druh'
       end    
       item
         MinSize = 15
         Title.Caption = 'Location'
-        Width = 74
+        Width = 72
         FieldName = 'Umisteni'
       end    
       item
         MinSize = 15
         Title.Caption = 'Medium'
-        Width = 73
+        Width = 70
         FieldName = 'Medium'
       end    
       item
         MinSize = 15
         Title.Caption = 'Total episodes'
-        Width = 114
+        Width = 112
         FieldName = 'Dily_celkem'
       end    
       item
         MinSize = 25
         Title.Caption = 'Episodes on disk'
-        Width = 130
+        Width = 125
         FieldName = 'Dily_na_disku'
       end    
       item
         MinSize = 15
         Title.Caption = 'Season'
-        Width = 65
+        Width = 62
         FieldName = 'Sezona'
       end    
       item
         MinSize = 15
         Title.Caption = 'Stubfile'
-        Width = 68
+        Width = 66
         FieldName = 'Stubfile'
       end    
       item
         MinSize = 15
         Title.Caption = 'Directory'
-        Width = 79
+        Width = 76
         FieldName = 'Directory'
       end>
     DataSource = Datasource1
@@ -643,7 +643,7 @@ inherited Form1: TForm1
     AnchorSideBottom.Control = StatusBar1
     Left = 0
     Height = 58
-    Top = 490
+    Top = 486
     Width = 902
     Align = alBottom
     BeforeAction = DBNavigator1BeforeAction
@@ -668,7 +668,7 @@ inherited Form1: TForm1
     Left = 0
     Height = 28
     Hint = 'For sorting click the column´s header'
-    Top = 548
+    Top = 544
     Width = 902
     Panels = <    
       item
@@ -739,7 +739,7 @@ inherited Form1: TForm1
       ShowHint = True
     end
     object ToolBtnExit: TToolButton
-      Left = 574
+      Left = 570
       Hint = 'Exits program'
       Top = 2
       ImageIndex = 0
@@ -748,7 +748,7 @@ inherited Form1: TForm1
       ShowHint = True
     end
     object ToolBtnImport: TToolButton
-      Left = 292
+      Left = 290
       Hint = 'Imports to the table'
       Top = 2
       ImageIndex = 8
@@ -757,7 +757,7 @@ inherited Form1: TForm1
       ShowHint = True
     end
     object ToolBtnExport: TToolButton
-      Left = 339
+      Left = 337
       Hint = 'Exports selection  from table'
       Top = 2
       ImageIndex = 7
@@ -766,7 +766,7 @@ inherited Form1: TForm1
       ShowHint = True
     end
     object ToolBtnNastaveni: TToolButton
-      Left = 527
+      Left = 523
       Hint = 'Shows application settings'
       Top = 2
       ImageIndex = 12
@@ -778,53 +778,46 @@ inherited Form1: TForm1
       Left = 52
       Height = 42
       Top = 2
-      Width = 5
       Style = tbsDivider
     end
     object ToolButton12: TToolButton
       Left = 141
       Height = 42
       Top = 2
-      Width = 5
       Style = tbsDivider
     end
     object ToolButton13: TToolButton
       Left = 188
       Height = 42
       Top = 2
-      Width = 5
       Style = tbsDivider
     end
     object ToolButton14: TToolButton
       Left = 235
       Height = 42
       Top = 2
-      Width = 5
       Style = tbsDivider
     end
     object ToolButton11: TToolButton
       Left = 282
       Height = 42
       Top = 2
-      Width = 10
       Style = tbsSeparator
     end
     object ToolButton16: TToolButton
-      Left = 334
+      Left = 332
       Height = 42
       Top = 2
-      Width = 5
       Style = tbsDivider
     end
     object ToolButton18: TToolButton
-      Left = 569
+      Left = 565
       Height = 42
       Top = 2
-      Width = 5
       Style = tbsDivider
     end
     object ToolBtnScrapuj: TToolButton
-      Left = 386
+      Left = 384
       Hint = 'Scrapes information for selected items'
       Top = 2
       ImageIndex = 9
@@ -833,21 +826,19 @@ inherited Form1: TForm1
       ShowHint = True
     end
     object ToolButton20: TToolButton
-      Left = 381
+      Left = 379
       Height = 42
       Top = 2
-      Width = 5
       Style = tbsDivider
     end
     object ToolButton17: TToolButton
-      Left = 475
+      Left = 473
       Height = 42
       Top = 2
-      Width = 10
       Style = tbsSeparator
     end
     object ToolBtnStubFile: TToolButton
-      Left = 433
+      Left = 431
       Hint = 'Creates sub files for selection'
       Top = 2
       ImageIndex = 11
@@ -856,10 +847,9 @@ inherited Form1: TForm1
       ShowHint = True
     end
     object ToolButton2: TToolButton
-      Left = 428
+      Left = 426
       Height = 42
       Top = 2
-      Width = 5
       Style = tbsDivider
     end
     object ToolButtonOpenRecent: TToolButton
@@ -873,7 +863,7 @@ inherited Form1: TForm1
       ShowHint = True
     end
     object ToolBtnHledej: TToolButton
-      Left = 485
+      Left = 481
       Hint = 'Search the table'
       Top = 2
       ImageIndex = 13
@@ -884,8 +874,8 @@ inherited Form1: TForm1
   end
   object MainMenu1: TMainMenu[4]
     Images = ImgListFileMenu
-    left = 40
-    top = 312
+    Left = 40
+    Top = 312
     object MenuItem1: TMenuItem
       Caption = 'File'
       SubMenuImages = ImgListFileMenu
@@ -1733,8 +1723,8 @@ inherited Form1: TForm1
     Title = 'Open file'
     DefaultExt = '.fdb'
     Filter = 'firebird|*.fdb|comma-seperated values|*.csv|all files|*.*'
-    left = 48
-    top = 408
+    Left = 48
+    Top = 408
   end
   object SdfDataSet1: TSdfDataSet[6]
     FileMustExist = False
@@ -1823,26 +1813,25 @@ inherited Form1: TForm1
     Delimiter = ';'
     FirstLineAsSchema = True
     StripTrailingDelimiters = False
-    left = 408
-    top = 416
+    Left = 408
+    Top = 416
   end
   object Datasource1: TDataSource[7]
     DataSet = ZQuery1
-    left = 648
-    top = 288
+    Left = 648
+    Top = 288
   end
   object SaveDialog1: TSaveDialog[8]
-    Title = 'Save file as'
     DefaultExt = '.fdb'
     Filter = 'firebird|*.fdb|comma-seperated values|*.csv|all files|*.*'
-    left = 184
-    top = 408
+    Left = 184
+    Top = 408
   end
   object PopupMenu1: TPopupMenu[9]
     Images = ImgListPopupMenu
     OnPopup = PopupMenu1Popup
-    left = 144
-    top = 240
+    Left = 144
+    Top = 240
     object MenuItem11: TMenuItem
       Caption = 'Series'
       object MenuItem14: TMenuItem
@@ -2388,8 +2377,8 @@ inherited Form1: TForm1
     end
   end
   object ActionList1: TActionList[10]
-    left = 88
-    top = 112
+    Left = 88
+    Top = 112
     object Action1: TAction
       DisableIfNoHandler = False
       OnUpdate = Action1Update
@@ -2411,8 +2400,8 @@ inherited Form1: TForm1
     Password = 'masterkey'
     Protocol = 'firebirdd-2.5'
     LibraryLocation = 'E:\Dokumenty_ZbynA\Lazarus project\fbclient.dll'
-    left = 264
-    top = 112
+    Left = 264
+    Top = 112
   end
   object ZQuery1: TZQuery[12]
     Connection = ZConnection1
@@ -2431,8 +2420,8 @@ inherited Form1: TForm1
       'select * from "Offlinemedia"'
     )
     Params = <>
-    left = 392
-    top = 112
+    Left = 392
+    Top = 112
   end
   object ZUpdateSQL1: TZUpdateSQL[13]
     DeleteSQL.Strings = (
@@ -2487,8 +2476,8 @@ inherited Form1: TForm1
       '   DIRECTORY is not distinct from  :OLD_DIRECTORY)    '
     )
     UseSequenceFieldForRefreshSQL = False
-    left = 648
-    top = 112
+    Left = 648
+    Top = 112
     ParamData = <    
       item
         DataType = ftUnknown
@@ -2604,8 +2593,8 @@ inherited Form1: TForm1
   object ImgListToolBar: TImageList[14]
     Height = 32
     Width = 32
-    left = 368
-    top = 200
+    Left = 368
+    Top = 200
     Bitmap = {
       4C690E000000200000002000000000000000000000004C4CE9005F5FE8004C4C
       E6003333DC003333D7003333D7003333D7003333D7003333D6003333D6003333
@@ -4403,8 +4392,8 @@ inherited Form1: TForm1
     }
   end
   object ImgListFileMenu: TImageList[15]
-    left = 504
-    top = 200
+    Left = 504
+    Top = 200
     Bitmap = {
       4C690E0000001000000010000000A8A8F0326C6CE7CF2626D7EC2626D7EC2626
       D6EC2626D5EC2626D4EC2626D4EC2626D2EC2626D2EC2626D1EC2626D0EC2626
@@ -4860,8 +4849,8 @@ inherited Form1: TForm1
   object ImgListDBNavigator: TImageList[16]
     Height = 32
     Width = 32
-    left = 249
-    top = 198
+    Left = 249
+    Top = 198
     Bitmap = {
       4C690A0000002000000020000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -6147,8 +6136,8 @@ inherited Form1: TForm1
     }
   end
   object ImgListPopupMenu: TImageList[17]
-    left = 594
-    top = 186
+    Left = 594
+    Top = 186
     Bitmap = {
       4C6908000000100000001000000000000000000000100000003B0000003B0000
       003B0000003B0000003B0000003B0000003B0000003B0000003B0000003B0233
@@ -6410,8 +6399,8 @@ inherited Form1: TForm1
     }
   end
   object imageListDBColumns: TImageList[18]
-    left = 49
-    top = 214
+    Left = 49
+    Top = 214
     Bitmap = {
       4C69020000001000000010000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
       FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
@@ -16282,8 +16271,8 @@ inherited Form1: TForm1
     FormAboutTextAlign = taLeftJustify
     ShowCreditButton = True
     CreditsTextfileName = 'credits.txt'
-    left = 556
-    top = 408
+    Left = 556
+    Top = 408
   end
   object frmeventLog: TEventLog[20]
     AppendContent = False
@@ -16296,7 +16285,7 @@ inherited Form1: TForm1
     CustomLogType = 0
     EventIDOffset = 0
     Paused = False
-    left = 413
-    top = 294
+    Left = 413
+    Top = 294
   end
 end

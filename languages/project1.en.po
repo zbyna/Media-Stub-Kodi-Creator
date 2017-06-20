@@ -11,6 +11,72 @@ msgstr ""
 "Last-Translator: \n"
 "Language-Team: \n"
 
+#: tform1.dbgrid1.columns[0].title.caption
+#, fuzzy
+msgctxt "tform1.dbgrid1.columns[0].title.caption"
+msgid "Name"
+msgstr "Name"
+
+#: tform1.dbgrid1.columns[10].title.caption
+#, fuzzy
+msgctxt "tform1.dbgrid1.columns[10].title.caption"
+msgid "Directory"
+msgstr "Directory"
+
+#: tform1.dbgrid1.columns[1].title.caption
+#, fuzzy
+msgctxt "tform1.dbgrid1.columns[1].title.caption"
+msgid "Series name"
+msgstr "Series name"
+
+#: tform1.dbgrid1.columns[2].title.caption
+#, fuzzy
+msgctxt "tform1.dbgrid1.columns[2].title.caption"
+msgid "Year"
+msgstr "Year"
+
+#: tform1.dbgrid1.columns[3].title.caption
+#, fuzzy
+msgctxt "tform1.dbgrid1.columns[3].title.caption"
+msgid "Sort"
+msgstr "Sort"
+
+#: tform1.dbgrid1.columns[4].title.caption
+#, fuzzy
+msgctxt "tform1.dbgrid1.columns[4].title.caption"
+msgid "Location"
+msgstr "Location"
+
+#: tform1.dbgrid1.columns[5].title.caption
+#, fuzzy
+msgctxt "tform1.dbgrid1.columns[5].title.caption"
+msgid "Medium"
+msgstr "Medium"
+
+#: tform1.dbgrid1.columns[6].title.caption
+#, fuzzy
+msgctxt "tform1.dbgrid1.columns[6].title.caption"
+msgid "Total episodes"
+msgstr "Total episodes"
+
+#: tform1.dbgrid1.columns[7].title.caption
+#, fuzzy
+msgctxt "tform1.dbgrid1.columns[7].title.caption"
+msgid "Episodes on disk"
+msgstr "Episodes on disk"
+
+#: tform1.dbgrid1.columns[8].title.caption
+#, fuzzy
+msgctxt "tform1.dbgrid1.columns[8].title.caption"
+msgid "Season"
+msgstr "Season"
+
+#: tform1.dbgrid1.columns[9].title.caption
+#, fuzzy
+msgctxt "tform1.dbgrid1.columns[9].title.caption"
+msgid "Stubfile"
+msgstr "Stubfile"
+
 #: tform1.menuitem1.caption
 msgid "File"
 msgstr "File"
@@ -120,11 +186,6 @@ msgctxt "tform1.menuitem29.caption"
 msgid "Scrap selection"
 msgstr "Scrap selection"
 
-#: tform1.menuitem3.caption
-msgctxt "tform1.menuitem3.caption"
-msgid "-"
-msgstr "-"
-
 #: tform1.menuitem30.caption
 msgctxt "TFORM1.MENUITEM30.CAPTION"
 msgid "Create stub files"
@@ -159,11 +220,6 @@ msgstr "Save as"
 msgctxt "tform1.menuitem8.caption"
 msgid "Close"
 msgstr "Close"
-
-#: tform1.menuitem9.caption
-msgctxt "TFORM1.MENUITEM9.CAPTION"
-msgid "-"
-msgstr "-"
 
 #: tform1.menuitemfilmy.caption
 msgctxt "tform1.menuitemfilmy.caption"
@@ -347,10 +403,6 @@ msgstr "Help"
 msgid "Open file"
 msgstr "Open file"
 
-#: tform1.savedialog1.title
-msgid "Save file as"
-msgstr "Save file as"
-
 #: tform1.statusbar1.hint
 msgid "For sorting click the column´s header"
 msgstr "For sorting click the column´s header"
@@ -432,6 +484,16 @@ msgctxt "tform2.checkbox1.caption"
 msgid "Location index"
 msgstr "Location index"
 
+#: tform2.jlabeledintegeredit1.editlabel.caption
+msgctxt "tform2.jlabeledintegeredit1.editlabel.caption"
+msgid "JLabeledIntegerEdit1"
+msgstr ""
+
+#: tform2.labelededit1.editlabel.caption
+msgctxt "tform2.labelededit1.editlabel.caption"
+msgid "LabeledEdit1"
+msgstr ""
+
 #: tform3.button1.caption
 msgid "Add root node"
 msgstr "Add root node"
@@ -472,6 +534,11 @@ msgctxt "tform3.combobox1.text"
 msgid "DVD"
 msgstr "DVD"
 
+#: tform3.jlabeledintegeredit1.editlabel.caption
+msgctxt "tform3.jlabeledintegeredit1.editlabel.caption"
+msgid "JLabeledIntegerEdit1"
+msgstr ""
+
 #: tform3.jlabeledintegeredit2.editlabel.caption
 msgid " "
 msgstr " "
@@ -494,6 +561,11 @@ msgctxt "tform3.labelededit1.editlabel.caption"
 msgid "Serie name"
 msgstr "Serie name"
 
+#: tform3.labelededit2.editlabel.caption
+msgctxt "tform3.labelededit2.editlabel.caption"
+msgid "LabeledEdit2"
+msgstr ""
+
 #: tform4.bitbtn1.caption
 msgctxt "TFORM4.BITBTN1.CAPTION"
 msgid "OK"
@@ -507,6 +579,19 @@ msgstr "Cancel"
 #: tform4.caption
 msgid "Season structure creating"
 msgstr "Season structure creating"
+
+#: tform4.jlabeledintegeredit1.editlabel.caption
+msgctxt "tform4.jlabeledintegeredit1.editlabel.caption"
+msgid "JLabeledIntegerEdit1"
+msgstr ""
+
+#: tform4.jlabeledintegeredit2.editlabel.caption
+msgid "JLabeledIntegerEdit2"
+msgstr ""
+
+#: tform4.jlabeledintegeredit3.editlabel.caption
+msgid "JLabeledIntegerEdit3"
+msgstr ""
 
 #: tform5.button1.caption
 msgctxt "TFORM5.BUTTON1.CAPTION"
@@ -529,6 +614,16 @@ msgstr "Create nfo file"
 #: tform5.label1.caption
 msgid "Directory for stub files creating:"
 msgstr "Directory for stub files creating:"
+
+#: tform5.labelededit1.editlabel.caption
+msgctxt "tform5.labelededit1.editlabel.caption"
+msgid "LabeledEdit1"
+msgstr ""
+
+#: tform5.labelededit2.editlabel.caption
+msgctxt "tform5.labelededit2.editlabel.caption"
+msgid "LabeledEdit2"
+msgstr ""
 
 #: tform6.button1.caption
 msgctxt "TFORM6.BUTTON1.CAPTION"
@@ -560,6 +655,20 @@ msgstr "DVD"
 #: tform6.label1.caption
 msgid "Media"
 msgstr "Media"
+
+#: tform6.labelededit1.editlabel.caption
+msgctxt "tform6.labelededit1.editlabel.caption"
+msgid "LabeledEdit1"
+msgstr ""
+
+#: tform6.labelededit2.editlabel.caption
+msgctxt "tform6.labelededit2.editlabel.caption"
+msgid "LabeledEdit2"
+msgstr ""
+
+#: tform6.labelededit3.editlabel.caption
+msgid "LabeledEdit3"
+msgstr ""
 
 #: tform6.statictext1.caption
 msgid "Stubfile :"
@@ -673,6 +782,10 @@ msgctxt "tformupravumisteni.okbutton.caption"
 msgid "Ok"
 msgstr "Ok"
 
+#: tformupravumisteni.stringgridprovyberpozice.columns[0].title.caption
+msgid "0"
+msgstr ""
+
 #: tfrmhledej.caption
 msgid "Search"
 msgstr "Search"
@@ -724,6 +837,7 @@ msgid "Something went wrong"
 msgstr "Something went wrong"
 
 #: unit1.rsdirectory
+msgctxt "unit1.rsdirectory"
 msgid "Directory"
 msgstr "Directory"
 
@@ -765,6 +879,7 @@ msgid "Do not highlight initial position"
 msgstr "Do not highlight initial position"
 
 #: unit1.rsepisodesondi
+msgctxt "unit1.rsepisodesondi"
 msgid "Episodes on disk"
 msgstr "Episodes on disk"
 
@@ -883,6 +998,7 @@ msgid "Redo Buffer Items"
 msgstr "Redo Buffer Items"
 
 #: unit1.rsseason
+msgctxt "unit1.rsseason"
 msgid "Season"
 msgstr "Season"
 
@@ -926,14 +1042,17 @@ msgid "Total seasons: %s"
 msgstr "Total seasons: %s"
 
 #: unit1.rssort
+msgctxt "unit1.rssort"
 msgid "Sort"
 msgstr "Sort"
 
 #: unit1.rsstubfile
+msgctxt "unit1.rsstubfile"
 msgid "Stubfile"
 msgstr "Stubfile"
 
 #: unit1.rstotalepisode
+msgctxt "unit1.rstotalepisode"
 msgid "Total episodes"
 msgstr "Total episodes"
 

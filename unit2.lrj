@@ -1,0 +1,8 @@
+{"version":1,"strings":[
+{"hash":55373182,"name":"tform2.caption","sourcebytes":[66,117,108,107,32,99,104,97,110,103,101,32,111,102,32,76,111,99,97,116,105,111,110,32,99,111,108,117,109,110],"value":"Bulk change of Location column"},
+{"hash":1339,"name":"tform2.button1.caption","sourcebytes":[79,75],"value":"OK"},
+{"hash":246168657,"name":"tform2.labelededit1.editlabel.caption","sourcebytes":[76,97,98,101,108,101,100,69,100,105,116,49],"value":"LabeledEdit1"},
+{"hash":100196792,"name":"tform2.checkbox1.caption","sourcebytes":[76,111,99,97,116,105,111,110,32,105,110,100,101,120],"value":"Location index"},
+{"hash":116841953,"name":"tform2.jlabeledintegeredit1.editlabel.caption","sourcebytes":[74,76,97,98,101,108,101,100,73,110,116,101,103,101,114,69,100,105,116,49],"value":"JLabeledIntegerEdit1"},
+{"hash":77089212,"name":"tform2.button2.caption","sourcebytes":[67,97,110,99,101,108],"value":"Cancel"}
+]}

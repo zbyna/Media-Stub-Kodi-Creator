@@ -150,7 +150,7 @@ inherited Form5: TForm5
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 16
-    Height = 27
+    Height = 28
     Top = 32
     Width = 261
     Anchors = [akTop, akLeft, akRight]
@@ -160,9 +160,10 @@ inherited Form5: TForm5
     EditLabel.AnchorSideRight.Side = asrBottom
     EditLabel.AnchorSideBottom.Control = LabeledEdit1
     EditLabel.Left = 16
-    EditLabel.Height = 19
-    EditLabel.Top = 10
+    EditLabel.Height = 20
+    EditLabel.Top = 9
     EditLabel.Width = 261
+    EditLabel.Caption = 'LabeledEdit1'
     EditLabel.ParentColor = False
     Enabled = False
     TabOrder = 0
@@ -171,7 +172,7 @@ inherited Form5: TForm5
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 16
-    Height = 27
+    Height = 28
     Top = 104
     Width = 261
     Anchors = [akTop, akLeft, akRight]
@@ -181,9 +182,10 @@ inherited Form5: TForm5
     EditLabel.AnchorSideRight.Side = asrBottom
     EditLabel.AnchorSideBottom.Control = LabeledEdit2
     EditLabel.Left = 16
-    EditLabel.Height = 19
-    EditLabel.Top = 82
+    EditLabel.Height = 20
+    EditLabel.Top = 81
     EditLabel.Width = 261
+    EditLabel.Caption = 'LabeledEdit2'
     EditLabel.ParentColor = False
     Enabled = False
     TabOrder = 1
@@ -192,7 +194,7 @@ inherited Form5: TForm5
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 16
-    Height = 27
+    Height = 28
     Top = 176
     Width = 261
     RootDir = '/'
@@ -207,9 +209,9 @@ inherited Form5: TForm5
   end
   object Label1: TLabel[3]
     Left = 16
-    Height = 19
+    Height = 20
     Top = 152
-    Width = 191
+    Width = 208
     Caption = 'Directory for stub files creating:'
     ParentColor = False
   end
@@ -218,10 +220,10 @@ inherited Form5: TForm5
     AnchorSideLeft.Side = asrBottom
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 142
+    Left = 151
     Height = 42
     Top = 224
-    Width = 135
+    Width = 126
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 17
     BorderSpacing.Right = 17
@@ -235,10 +237,10 @@ inherited Form5: TForm5
     AnchorSideLeft.Side = asrBottom
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 142
+    Left = 151
     Height = 40
     Top = 288
-    Width = 135
+    Width = 126
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 17
     BorderSpacing.Right = 17
@@ -248,9 +250,9 @@ inherited Form5: TForm5
   end
   object CheckBox1: TCheckBox[6]
     Left = 16
-    Height = 23
+    Height = 24
     Top = 240
-    Width = 109
+    Width = 118
     Caption = 'Create nfo file'
     TabOrder = 5
   end
