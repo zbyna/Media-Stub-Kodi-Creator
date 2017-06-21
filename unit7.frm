@@ -156,7 +156,7 @@ inherited FormNastaveni: TFormNastaveni
     TabOrder = 0
     object Scrapers: TTabSheet
       Caption = 'Scrapers'
-      ClientHeight = 441
+      ClientHeight = 440
       ClientWidth = 712
       object FilmScrapers: TRadioGroup
         Left = 17
@@ -172,7 +172,7 @@ inherited FormNastaveni: TFormNastaveni
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 255
+        ClientHeight = 254
         ClientWidth = 151
         Items.Strings = (
           'themoviedb.org'
@@ -195,7 +195,7 @@ inherited FormNastaveni: TFormNastaveni
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 255
+        ClientHeight = 254
         ClientWidth = 151
         Items.Strings = (
           'themoviedb.org'
@@ -219,7 +219,7 @@ inherited FormNastaveni: TFormNastaveni
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclTopToBottomThenLeftToRight
         ChildSizing.ControlsPerLine = 12
-        ClientHeight = 352
+        ClientHeight = 351
         ClientWidth = 308
         ColumnLayout = clVerticalThenHorizontal
         Columns = 2
@@ -269,7 +269,7 @@ inherited FormNastaveni: TFormNastaveni
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 163
+        ClientHeight = 162
         ClientWidth = 237
         Items.Strings = (
           'Čeština'
@@ -297,7 +297,7 @@ inherited FormNastaveni: TFormNastaveni
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 100
+        ClientHeight = 99
         ClientWidth = 351
         Items.Strings = (
           'Highlight initial position'
@@ -329,7 +329,7 @@ inherited FormNastaveni: TFormNastaveni
   object IniPropStorage1: TIniPropStorage[3]
     StoredValues = <>
     IniFileName = 'nastaveni.ini'
-    left = 368
-    top = 24
+    Left = 368
+    Top = 24
   end
 end

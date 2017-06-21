@@ -34,6 +34,7 @@ inherited Form3: TForm3
     Width = 221
     BorderStyle = bsSingle
     Color = clBackground
+    Colors.UnfocusedColor = clMedGray
     DefaultText = 'Node'
     Font.Color = clMenuText
     Header.AutoSizeIndex = 0
@@ -123,17 +124,17 @@ inherited Form3: TForm3
   end
   object Label1: TLabel[10]
     Left = 344
-    Height = 21
+    Height = 20
     Top = 440
-    Width = 82
+    Width = 80
     Caption = 'Actual node'
     ParentColor = False
   end
   object Label2: TLabel[11]
     Left = 600
-    Height = 21
+    Height = 20
     Top = 440
-    Width = 76
+    Width = 73
     Caption = 'Whole tree'
     ParentColor = False
   end
@@ -148,7 +149,7 @@ inherited Form3: TForm3
   end
   object LabeledEdit1: TLabeledEdit[13]
     Left = 26
-    Height = 29
+    Height = 28
     Top = 64
     Width = 249
     EditLabel.AnchorSideLeft.Control = LabeledEdit1
@@ -156,8 +157,8 @@ inherited Form3: TForm3
     EditLabel.AnchorSideRight.Side = asrBottom
     EditLabel.AnchorSideBottom.Control = LabeledEdit1
     EditLabel.Left = 26
-    EditLabel.Height = 21
-    EditLabel.Top = 40
+    EditLabel.Height = 20
+    EditLabel.Top = 41
     EditLabel.Width = 249
     EditLabel.Caption = 'Serie name'
     EditLabel.ParentColor = False
@@ -165,7 +166,7 @@ inherited Form3: TForm3
   end
   object LabeledEdit2: TLabeledEdit[14]
     Left = 26
-    Height = 29
+    Height = 28
     Top = 288
     Width = 249
     EditLabel.AnchorSideLeft.Control = LabeledEdit2
@@ -173,36 +174,39 @@ inherited Form3: TForm3
     EditLabel.AnchorSideRight.Side = asrBottom
     EditLabel.AnchorSideBottom.Control = LabeledEdit2
     EditLabel.Left = 26
-    EditLabel.Height = 1
-    EditLabel.Top = 284
+    EditLabel.Height = 20
+    EditLabel.Top = 265
     EditLabel.Width = 249
+    EditLabel.Caption = 'LabeledEdit2'
     EditLabel.ParentColor = False
     TabOrder = 5
   end
   object JLabeledIntegerEdit1: TJLabeledIntegerEdit[15]
     Left = 26
-    Height = 29
+    Height = 28
     Top = 224
     Width = 248
     DisplayFormat = '0'
     Value = 0
+    NegativeColor = clDefault
     EditLabel.AnchorSideLeft.Control = JLabeledIntegerEdit1
     EditLabel.AnchorSideRight.Control = JLabeledIntegerEdit1
     EditLabel.AnchorSideRight.Side = asrBottom
     EditLabel.AnchorSideBottom.Control = JLabeledIntegerEdit1
     EditLabel.Left = 26
-    EditLabel.Height = 1
-    EditLabel.Top = 220
+    EditLabel.Height = 20
+    EditLabel.Top = 201
     EditLabel.Width = 248
+    EditLabel.Caption = 'JLabeledIntegerEdit1'
     EditLabel.ParentColor = False
     TabOrder = 3
   end
   object Label3: TLabel[16]
     AnchorSideTop.Side = asrBottom
     Left = 28
-    Height = 21
+    Height = 20
     Top = 377
-    Width = 58
+    Width = 55
     Caption = 'Medium'
     ParentColor = False
   end
@@ -210,10 +214,10 @@ inherited Form3: TForm3
     AnchorSideTop.Control = Label3
     AnchorSideTop.Side = asrBottom
     Left = 26
-    Height = 29
-    Top = 398
+    Height = 28
+    Top = 397
     Width = 249
-    ItemHeight = 21
+    ItemHeight = 20
     ItemIndex = 0
     Items.Strings = (
       'DVD'
@@ -224,27 +228,28 @@ inherited Form3: TForm3
   end
   object CheckBox1: TCheckBox[18]
     Left = 28
-    Height = 25
+    Height = 24
     Top = 328
-    Width = 126
+    Width = 121
     Caption = 'Location index'
     OnChange = CheckBox1Change
     TabOrder = 7
   end
   object JLabeledIntegerEdit2: TJLabeledIntegerEdit[19]
     Left = 160
-    Height = 29
+    Height = 28
     Top = 328
     Width = 48
     DisplayFormat = '1'
     Value = 0
+    NegativeColor = clDefault
     EditLabel.AnchorSideLeft.Control = JLabeledIntegerEdit2
     EditLabel.AnchorSideRight.Control = JLabeledIntegerEdit2
     EditLabel.AnchorSideRight.Side = asrBottom
     EditLabel.AnchorSideBottom.Control = JLabeledIntegerEdit2
     EditLabel.Left = 160
-    EditLabel.Height = 21
-    EditLabel.Top = 304
+    EditLabel.Height = 20
+    EditLabel.Top = 305
     EditLabel.Width = 48
     EditLabel.Caption = ' '
     EditLabel.ParentColor = False
@@ -262,9 +267,9 @@ inherited Form3: TForm3
   end
   object CheckBoxNs: TCheckBox[21]
     Left = 288
-    Height = 25
+    Height = 23
     Top = 68
-    Width = 26
+    Width = 24
     Enabled = False
     OnClick = CheckBoxNsClick
     TabOrder = 1
@@ -272,9 +277,9 @@ inherited Form3: TForm3
   end
   object CheckBoxRo: TCheckBox[22]
     Left = 288
-    Height = 25
+    Height = 23
     Top = 228
-    Width = 26
+    Width = 24
     Enabled = False
     OnChange = CheckBoxRoChange
     TabOrder = 4
@@ -282,9 +287,9 @@ inherited Form3: TForm3
   end
   object CheckBoxUm: TCheckBox[23]
     Left = 288
-    Height = 25
+    Height = 23
     Top = 292
-    Width = 26
+    Width = 24
     Enabled = False
     OnChange = CheckBoxUmChange
     TabOrder = 6
@@ -292,9 +297,9 @@ inherited Form3: TForm3
   end
   object CheckBoxMe: TCheckBox[24]
     Left = 288
-    Height = 25
+    Height = 23
     Top = 402
-    Width = 26
+    Width = 24
     Enabled = False
     OnChange = CheckBoxMeChange
     TabOrder = 10
@@ -302,15 +307,15 @@ inherited Form3: TForm3
   end
   object CheckBoxTr: TCheckBox[25]
     Left = 632
-    Height = 25
+    Height = 23
     Top = 68
-    Width = 26
+    Width = 24
     OnClick = CheckBoxTrClick
     TabOrder = 12
   end
   object ActionList1: TActionList[26]
-    left = 808
-    top = 336
+    Left = 808
+    Top = 336
     object Action1: TAction
       DisableIfNoHandler = False
       OnUpdate = Action1Update
@@ -320,8 +325,8 @@ inherited Form3: TForm3
   object ImgListForm3: TImageList[27]
     Height = 64
     Width = 64
-    left = 808
-    top = 448
+    Left = 808
+    Top = 448
     Bitmap = {
       4C69020000004000000040000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

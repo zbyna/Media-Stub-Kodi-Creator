@@ -18,7 +18,7 @@ inherited Form2: TForm2
   end
   object LabeledEdit1: TLabeledEdit[1]
     Left = 16
-    Height = 29
+    Height = 28
     Top = 40
     Width = 245
     EditLabel.AnchorSideLeft.Control = LabeledEdit1
@@ -26,36 +26,39 @@ inherited Form2: TForm2
     EditLabel.AnchorSideRight.Side = asrBottom
     EditLabel.AnchorSideBottom.Control = LabeledEdit1
     EditLabel.Left = 16
-    EditLabel.Height = 1
-    EditLabel.Top = 36
+    EditLabel.Height = 20
+    EditLabel.Top = 17
     EditLabel.Width = 245
+    EditLabel.Caption = 'LabeledEdit1'
     EditLabel.ParentColor = False
     TabOrder = 0
   end
   object CheckBox1: TCheckBox[2]
     Left = 16
-    Height = 25
+    Height = 24
     Top = 72
-    Width = 126
+    Width = 121
     Caption = 'Location index'
     OnChange = CheckBox1Change
     TabOrder = 1
   end
   object JLabeledIntegerEdit1: TJLabeledIntegerEdit[3]
     Left = 16
-    Height = 29
+    Height = 28
     Top = 120
     Width = 184
     DisplayFormat = '0'
     Value = 0
+    NegativeColor = clDefault
     EditLabel.AnchorSideLeft.Control = JLabeledIntegerEdit1
     EditLabel.AnchorSideRight.Control = JLabeledIntegerEdit1
     EditLabel.AnchorSideRight.Side = asrBottom
     EditLabel.AnchorSideBottom.Control = JLabeledIntegerEdit1
     EditLabel.Left = 16
-    EditLabel.Height = 1
-    EditLabel.Top = 116
+    EditLabel.Height = 20
+    EditLabel.Top = 97
     EditLabel.Width = 184
+    EditLabel.Caption = 'JLabeledIntegerEdit1'
     EditLabel.ParentColor = False
     Enabled = False
     TabOrder = 2

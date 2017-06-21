@@ -155,13 +155,14 @@ inherited FormScraper: TFormScraper
     ItemHeight = 0
     OnClick = vyberFilmuClick
     OnEnter = vyberFilmuEnter
+    Options = [lboDrawFocusRect]
     TabOrder = 0
   end
   object Label1: TLabel[1]
     Left = 16
-    Height = 19
+    Height = 20
     Top = 16
-    Width = 80
+    Width = 86
     Caption = 'Choose item:'
     ParentColor = False
   end
@@ -233,22 +234,22 @@ inherited FormScraper: TFormScraper
   end
   object edtZanry: TEdit[8]
     Left = 280
-    Height = 27
+    Height = 28
     Top = 344
     Width = 344
     TabOrder = 6
   end
   object edtHodnoceni: TEdit[9]
     Left = 648
-    Height = 27
+    Height = 28
     Top = 344
     Width = 36
     TabOrder = 7
   end
   object Timer1: TTimer[10]
     OnTimer = Timer1Timer
-    left = 104
-    top = 96
+    Left = 104
+    Top = 96
   end
   object EventLog1: TEventLog[11]
     AppendContent = False
@@ -261,7 +262,7 @@ inherited FormScraper: TFormScraper
     CustomLogType = 0
     EventIDOffset = 0
     Paused = False
-    left = 104
-    top = 192
+    Left = 104
+    Top = 192
   end
 end

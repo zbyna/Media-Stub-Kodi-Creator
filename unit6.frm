@@ -64,7 +64,7 @@ inherited Form6: TForm6
   end
   object LabeledEdit1: TLabeledEdit[6]
     Left = 48
-    Height = 29
+    Height = 28
     Top = 32
     Width = 219
     EditLabel.AnchorSideLeft.Control = LabeledEdit1
@@ -72,15 +72,16 @@ inherited Form6: TForm6
     EditLabel.AnchorSideRight.Side = asrBottom
     EditLabel.AnchorSideBottom.Control = LabeledEdit1
     EditLabel.Left = 48
-    EditLabel.Height = 1
-    EditLabel.Top = 28
+    EditLabel.Height = 20
+    EditLabel.Top = 9
     EditLabel.Width = 219
+    EditLabel.Caption = 'LabeledEdit1'
     EditLabel.ParentColor = False
     TabOrder = 0
   end
   object LabeledEdit2: TLabeledEdit[7]
     Left = 48
-    Height = 29
+    Height = 28
     Top = 152
     Width = 219
     EditLabel.AnchorSideLeft.Control = LabeledEdit2
@@ -88,16 +89,17 @@ inherited Form6: TForm6
     EditLabel.AnchorSideRight.Side = asrBottom
     EditLabel.AnchorSideBottom.Control = LabeledEdit2
     EditLabel.Left = 48
-    EditLabel.Height = 1
-    EditLabel.Top = 148
+    EditLabel.Height = 20
+    EditLabel.Top = 129
     EditLabel.Width = 219
+    EditLabel.Caption = 'LabeledEdit2'
     EditLabel.ParentColor = False
     TabOrder = 4
     OnEditingDone = LabeledEdit2EditingDone
   end
   object LabeledEdit3: TLabeledEdit[8]
     Left = 48
-    Height = 29
+    Height = 28
     Top = 224
     Width = 219
     EditLabel.AnchorSideLeft.Control = LabeledEdit3
@@ -105,9 +107,10 @@ inherited Form6: TForm6
     EditLabel.AnchorSideRight.Side = asrBottom
     EditLabel.AnchorSideBottom.Control = LabeledEdit3
     EditLabel.Left = 48
-    EditLabel.Height = 1
-    EditLabel.Top = 220
+    EditLabel.Height = 20
+    EditLabel.Top = 201
     EditLabel.Width = 219
+    EditLabel.Caption = 'LabeledEdit3'
     EditLabel.ParentColor = False
     TabOrder = 5
     OnEditingDone = LabeledEdit3EditingDone
@@ -115,18 +118,18 @@ inherited Form6: TForm6
   end
   object Label1: TLabel[9]
     Left = 48
-    Height = 21
+    Height = 20
     Top = 272
-    Width = 43
+    Width = 42
     Caption = 'Media'
     ParentColor = False
   end
   object ComboBox1: TComboBox[10]
     Left = 48
-    Height = 29
+    Height = 28
     Top = 296
     Width = 219
-    ItemHeight = 21
+    ItemHeight = 20
     ItemIndex = 0
     Items.Strings = (
       'DVD'
@@ -138,8 +141,8 @@ inherited Form6: TForm6
   object ImgListForm6: TImageList[11]
     Height = 64
     Width = 64
-    left = 280
-    top = 192
+    Left = 280
+    Top = 192
     Bitmap = {
       4C69020000004000000040000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

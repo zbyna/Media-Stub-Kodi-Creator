@@ -56,7 +56,7 @@ implementation
        unit1,   // v unit1 jsou resource stringy
        unGlobalScraper;  // je tam timer + kód na využití frmNotScraped (unNotScraped)
 
-{$R *.lfm}
+{$R *.frm}
 
 { TForm6 }
 

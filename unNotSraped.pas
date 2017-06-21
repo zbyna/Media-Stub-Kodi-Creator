@@ -31,7 +31,7 @@ var
 
 implementation
 
-{$R *.lfm}
+{$R *.frm}
 uses
     Unit8,                      // formScraper
     unit1,                      // resource strings

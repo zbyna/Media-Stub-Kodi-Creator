@@ -1,0 +1,10 @@
+{"version":1,"strings":[
+{"hash":181947678,"name":"tformscrapujvyber.caption","sourcebytes":[83,99,114,97,112,101,32,115,101,108,101,99,116,105,111,110],"value":"Scrape selection"},
+{"hash":4294967295,"name":"tformscrapujvyber.tabulkavysledku.columns[0].title.caption","sourcebytes":[],"value":""},
+{"hash":4294967295,"name":"tformscrapujvyber.tabulkavysledku.columns[1].title.caption","sourcebytes":[],"value":""},
+{"hash":4294967295,"name":"tformscrapujvyber.tabulkavysledku.columns[2].title.caption","sourcebytes":[],"value":""},
+{"hash":252163635,"name":"tformscrapujvyber.okbutton.caption","sourcebytes":[79,107,32,45,32,115,97,118,101,32,114,101,115,117,108,116,115],"value":"Ok - save results"},
+{"hash":77089212,"name":"tformscrapujvyber.cancelbutton.caption","sourcebytes":[67,97,110,99,101,108],"value":"Cancel"},
+{"hash":181947678,"name":"tformscrapujvyber.scrapujvyberbutton.caption","sourcebytes":[83,99,114,97,112,101,32,115,101,108,101,99,116,105,111,110],"value":"Scrape selection"},
+{"hash":252054242,"name":"tformscrapujvyber.jinyscraperbutton.caption","sourcebytes":[65,110,111,116,104,101,114,32,115,99,114,97,112,101,114],"value":"Another scraper"}
+]}

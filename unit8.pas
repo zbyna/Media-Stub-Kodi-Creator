@@ -10,9 +10,29 @@ uses
   Graphics, Dialogs, StdCtrls, ComCtrls, ExtCtrls, simpleinternet,
   simplehtmltreeparser, extendedhtmlparser, xquery, xquery_json, dateutils,
   strutils,LazUTF8,character,eventlog, LocalizedForms,bbutils,unConstants,
-  zuncomprfp,pasMP,LCLProc,ghashmap;
+  zuncomprfp, pasMP, LCLProc, ghashmap, Generics.Hashes;
 
 type
+  { for thetvdb.com genres - languages }
+
+  { proHashInnerDict }
+
+  proHashInnerDict = class
+    public
+      class function hash(a:String;b:SizeUInt):SizeUInt;
+  end;
+
+  InnerDictionary = specialize THashmap<string,string,proHashInnerDict>;
+
+  { ProHashTheTVDB }
+
+  ProHashTheTVDB = class
+    public
+      class function hash(a:String;b:SizeUInt):SizeUInt;
+  end;
+
+  TGenresTheTVDB = specialize THashmap<String,InnerDictionary,ProHashTheTVDB>;
+
   { for moviedb genres - languages }
   ProHash = class
       public
@@ -104,7 +124,8 @@ type
   { for init genres of series scrapers }
   procedure initGenresThemoviedbSerial(lang:string);
   procedure initGenresTvmazeSerial(lang:string);
-  procedure initGenresThetvdbSerial(lang:string);
+  procedure initGenresThetvdbSerial(lang:string);  // not use b/c initialised only once
+  procedure initGenresThetvdbSerialOnce(lang:string);
   procedure initGenresCsfdSerial(lang:string);
 
 var
@@ -121,6 +142,8 @@ var
   genresMovieDBSerial:TGenresMovieDB;          // for moviedDB serial scraper
   InitGenresLanguageFilm :array[TScraperFilm] of TprocedureInitGenresLanguageFilm;
   InitGenresLanguageSerial:array[TScraperSerial] of TprocedureInitGenresLanguageSerial;
+  genresTheTVDB : TGenresTheTVDB;              // for TheTVDB searial scraper
+  pomSlovnik:InnerDictionary;                // inner Dictionary from movidedb-genres-film.json
 
 
 
@@ -139,6 +162,27 @@ implementation
        pomArrayZanry:array of String;
        pomArrayHodnoceni:array of String;
        pomArrayReferer: array of String;
+       pomArrayHeaders: array[0..3] of String;
+
+
+function mojeHashFunkce(s:String):LongInt;
+begin
+ result:= SimpleChecksumHash(pchar(s), s.Length);
+end;
+
+{ ProHashTheTVDB }
+
+class function ProHashTheTVDB.hash(a: String; b: SizeUInt): SizeUInt;
+begin
+  hash := mojeHashFunkce(a) mod b;
+end;
+
+{ proHashInnerDict }
+
+class function proHashInnerDict.hash(a: String; b: SizeUInt): SizeUInt;
+begin
+  hash := mojeHashFunkce(a) mod b;
+end;
 
 
 { for moviedb genres - languages }
@@ -536,6 +580,68 @@ begin
      end;
 end;
 
+procedure theTVDB_parallelDownloadJob(const Job:PPasMPJob;const ThreadIndex:longint;
+                                 const pointerNaV:pointer;const FromIndex,ToIndex:longint);
+var
+  pomOdkazNaFilm, pomZtazeno, pomString,token, pomRok, pomObr, pomText: String;
+  pomRokTDate:TDateTime;
+  v,w,pomZanr, pom: IXQValue;
+  pomArray: TXQValueJSONArray;
+begin
+   //DebuglnThreadLog('Thread Index: ' + inttostr(ThreadIndex));
+   //DebuglnThreadLog('From Index: ' + inttostr(fromIndex));
+   //DebuglnThreadLog('To Index: ' + inttostr(toIndex));
+   v:= IXQValue(pointerNav^);
+   if Job = nil  then
+      pomOdkazNaFilm:= v.toString
+                 else
+      pomOdkazNaFilm:= ( v as TXQValueSequence).get(fromIndex+1).toString;
+   //DebuglnThreadLog('pomOdkazNaFilm:'+ pomOdkazNaFilm);
+   try
+     defaultInternet.additionalHeaders.Add(pomArrayHeaders[0]);
+     defaultInternet.additionalHeaders.Add(pomArrayHeaders[1]);
+     // to add token to request header
+     defaultInternet.additionalHeaders.Add(pomArrayHeaders[2]);
+     // to add language to the request header
+     defaultInternet.additionalHeaders.Add(pomArrayHeaders[3]);
+     pomZtazeno:= retrieve('https://api.thetvdb.com/series/'+pomOdkazNaFilm);
+     pomArrayReferer[fromIndex]:='';
+   except
+     on e:Exception do DebuglnThreadLog(e.ToString);
+   end;
+   w:= process(pomZtazeno,
+              '$json("data")! [.("seriesName") ,string(.("firstAired")),' + slineBreak +
+                              '.("banner"), .("overview"),' + slineBreak +
+                              '.("genre"), .("siteRating")]');
+   //DebuglnThreadLog(defaultInternet.additionalHeaders.DelimitedText);
+
+      pomArrayNazev[fromIndex]:= (w as TXQValueJSONArray).seq.get(0).toString;
+      pomRok:= (w as TXQValueJSONArray).seq.get(1).toString;
+      pomObr:= (w as TXQValueJSONArray).seq.get(2).toString;
+      if pomObr = '' then
+         pomArrayObrazek[fromIndex]:=pomObr
+                      else
+         pomArrayObrazek[fromIndex]:= 'http://www.thetvdb.com/banners/_cache/'+pomObr;
+      pomArrayDej[fromIndex] := (w as TXQValueJSONArray).seq.get(3).toString;
+      if pomRok='' then
+         pomRokTDate:=0000-00-00
+                   else
+         {themoviedb api vrací RRR-MM-DD}
+         pomRokTDate:=(w as TXQValueJSONArray).seq.get(1).toDateTime;
+      pomArrayRok[fromIndex] := floattostr(yearof(pomRokTDate));
+      //{vyberFilmu.Items.Strings[i] záhadně nefunguje}
+      //pomArrayZanry[fromIndex]:= (w as TXQValueJSONArray).seq.get(4).jsonSerialize(tnsText);
+      pomArray:= ((w as TXQValueJSONArray).seq.get(4)) as TXQValueJSONArray;
+      pomText:='';
+      for pom in pomArray.GetEnumeratorMembers do
+            pomText:= pomText + genresTheTVDB[pom.toString][aktualniJazyk]+ ', ';
+      RemoveTrailingChars(pomText,[' ',',']);
+      pomArrayZanry[fromIndex]:= pomText;
+      //DebuglnThreadLog(pomArrayZanry[fromIndex]);
+      pomArrayHodnoceni[fromIndex]:=(w as TXQValueJSONArray).seq.get(5).toString;
+      freeThreadVars;
+end;
+
 function SerialThetvdb(PomNazev: string): string;
 var
     scraperVstup,parsujNazev:string;
@@ -544,58 +650,98 @@ var
 
    procedure scraperAction(v:IXQValue);
    var
-      pomNazev,pomRok,pomObr:String;
-      pomRokTDate:TDateTime;
-
+      i,pomI:byte;
+      pointerNaV : ^IXQValue;
    begin
-      FormScraper.vyberReferer.Add('');
-      pomNazev:= (v as TXQValueJSONArray).seq.get(0).toString;
-      pomRok:= (v as TXQValueJSONArray).seq.get(1).toString;
-      pomObr:= (v as TXQValueJSONArray).seq.get(2).toString;
-      if pomObr = '' then
-                           formScraper.vyberObrazku.Add(pomObr)
-                      else
-                           formScraper.vyberObrazku.Add(
-                           'http://www.thetvdb.com/banners/_cache/'+
-                            pomObr);
-      formScraper.vyberDeju.Add((v as TXQValueJSONArray).seq.get(3).toString);
-      if pomRok='' then pomRokTDate:=0000-00-00
-            else
-              {themoviedb api vrací RRR-MM-DD}
-              pomRokTDate:=(v as TXQValueJSONArray).seq.get(1).toDateTime;
-      formScraper.vyberFilmu.Items.AddText(pomNazev+'~'+floattostr(yearof(pomRokTDate)));
-      {vyberFilmu.Items.Strings[i] záhadně nefunguje}
+      if v.typeName = 'integer' then
+         pomI:=1
+                                else
+         pomI:=(v as TXQValueSequence).getSequenceCount;
+      //formScraper.EventLog1.Debug('Počet odkazů: ' +inttostr(pomI));
+      if pomI > 5 then pomI:=5; // only 5 search results
+      pointerNaV:= @v;
+      SetLength(pomArrayNazev,pomI);
+      SetLength(pomArrayRok,pomI);
+      SetLength(pomArrayObrazek,pomI);
+      SetLength(pomArrayDej,pomI);
+      SetLength(pomArrayZanry,pomI);
+      SetLength(pomArrayHodnoceni,pomI);
+      SetLength(pomArrayReferer,pomI);
+      TPasMP.CreateGlobalInstance;
+      if pomI = 1 then
+            theTVDB_parallelDownloadJob(nil,0,pointerNaV,0,0)
+                   else
+            GlobalPasMP.Invoke(
+            GlobalPasMP.ParallelFor(pointerNaV,0,pomI-1,@theTVDB_parallelDownloadJob,0,0));
+      for i:=0 to pomI-1 do
+        begin
+          formScraper.vyberFilmu.Items.AddText(pomArrayNazev[i]+'~'+pomArrayRok[i]);
+          formScraper.vyberObrazku.Add(pomArrayObrazek[i]);
+          formScraper.vyberDeju.Add(pomArrayDej[i]);
+          //formScraper.vyberZanru.Add(genresTheTVDB['Animation'][aktualniJazyk]);
+          formScraper.vyberZanru.Add(pomArrayZanry[i]);
+          FormScraper.vyberHodnoceni.Add(pomArrayHodnoceni[i]);
+          FormScraper.vyberReferer.Add(pomArrayReferer[i]);
+        end;
+      SetLength(pomArrayNazev,0);
+      SetLength(pomArrayRok,0);
+      SetLength(pomArrayObrazek,0);
+      SetLength(pomArrayDej,0);
+      SetLength(pomArrayZanry,0);
+      SetLength(pomArrayHodnoceni,0);
+      SetLength(pomArrayReferer,0);
+      FormScraper.EventLog1.Debug('Vynulování pomArrays hotovo');
    end;
+
+      //FormScraper.EventLog1.Debug(format('%s', [pomNazev]))
+      //FormScraper.vyberReferer.Add('');
+      //pomNazev:= (v as TXQValueJSONArray).seq.get(0).toString;
+      //pomRok:= (v as TXQValueJSONArray).seq.get(1).toString;
+      //pomObr:= (v as TXQValueJSONArray).seq.get(2).toString;
+      //if pomObr = '' then
+      //                     formScraper.vyberObrazku.Add(pomObr)
+      //                else
+      //                     formScraper.vyberObrazku.Add(
+      //                     'http://www.thetvdb.com/banners/_cache/'+
+      //                      pomObr);
+      //formScraper.vyberDeju.Add((v as TXQValueJSONArray).seq.get(3).toString);
+      //if pomRok='' then pomRokTDate:=0000-00-00
+      //      else
+      //        {themoviedb api vrací RRR-MM-DD}
+      //        pomRokTDate:=(v as TXQValueJSONArray).seq.get(1).toDateTime;
+      //formScraper.vyberFilmu.Items.AddText(pomNazev+'~'+floattostr(yearof(pomRokTDate)));
+      //{vyberFilmu.Items.Strings[i] záhadně nefunguje}
+      //formScraper.vyberZanru.Add('Pomocný žánr');
+      //formScraper.vyberHodnoceni.Add('55,555');
+
 begin
    // to receive the token for API 2.1.0
-   defaultInternet.additionalHeaders.Add('Content-Type: application/json');
-   defaultInternet.additionalHeaders.Add('Accept: application/json');
+   pomArrayHeaders[0]:= 'Content-Type: application/json';
+   pomArrayHeaders[1]:=  'Accept: application/json';
+   defaultInternet.additionalHeaders.Add(pomArrayHeaders[0]);
+   defaultInternet.additionalHeaders.Add(pomArrayHeaders[1]);
    // to add token to request header
    token:= process(defaultInternet.post('https://api.thetvdb.com/login',
-                       '{"apikey": "'+unConstants.theTvdbAPI+'"}'),
-                       '$json("token")').toString;
-   defaultInternet.additionalHeaders.Add('Authorization: Bearer '+token);
+                                        '{"apikey": "'+unConstants.theTvdbAPI+'"}'),
+                   '$json("token")').toString;
+   pomArrayHeaders[2]:= 'Authorization: Bearer ' + token;
+   defaultInternet.additionalHeaders.Add(pomArrayHeaders[2]);
+   //FormScraper.EventLog1.Debug(format('%s', [pomArrayHeaders[2]]));
    // to add language to the request header
-   defaultInternet.additionalHeaders.Add('Accept-Language: '+aktualniJazyk);
+   pomArrayHeaders[3]:= 'Accept-Language: '+aktualniJazyk;
+   defaultInternet.additionalHeaders.Add(pomArrayHeaders[3]);
    scraperVstup:= 'https://api.thetvdb.com/search/series?name='+pomNazev;
-  // {API 1.0} scraperVstup:= 'http://www.thetvdb.com/api/GetSeries.php?seriesname='+pomNazev+
-  // {API 1.0}                '&language='+aktualniJazyk;
-  parsujNazev:='$json("data")()! [.("seriesName") ,string(.("firstAired")),'+
-                '.("banner"), .("overview")]';
- //parsujNazev:= 'for $prom in Data/series' + sLineBreak +
- //          'return [string($prom/seriesname/text()) ,string($prom/firstaired/text())]';
- // {API 1.0} parsujNazev:= 'Data/series ! [string(./seriesname/text()) ,string(./firstaired/text())]';
- theTvDbTag:=True;
- nahradDiakritiku(scraperVstup);
-  //ShowMessage(format('%s', [defaultInternet.additionalHeaders.Text]) );
- FormScraper.Scrapuj(scraperVstup,parsujNazev,theTvDbTag,@scraperAction);{naplní FormScraper výsledkem}
- if  FormScraper.ShowModal = mrOK then
-     SerialThetvdb:=FormScraper.vybranyRok
-                                   else
-     begin
-      FormScraper.vybranyNazev:=PomNazev;
-      SerialThetvdb:='0';
-     end;
+   parsujNazev:='$json("data")()!.("id")';
+   theTvDbTag:=True;
+   nahradDiakritiku(scraperVstup);
+   FormScraper.Scrapuj(scraperVstup,parsujNazev,theTvDbTag,@scraperAction);{naplní FormScraper výsledkem}
+   if  FormScraper.ShowModal = mrOK then
+       SerialThetvdb:=FormScraper.vybranyRok
+                                    else
+       begin
+        FormScraper.vybranyNazev:=PomNazev;
+        SerialThetvdb:='0';
+       end;
 end;
 
 function SerialCsfd(PomNazev: string): string; // nahrazeno filmCsfd
@@ -606,7 +752,7 @@ end;
 
 
 
-{$R *.lfm}
+{$R *.frm}
 
 { TFormScraper }
 
@@ -669,7 +815,12 @@ begin
         try
           ztazeno:= retrieve(scraperVstup);
         except
-          on e:Exception do EventLog1.Debug(e.ToString);
+          on e:Exception do
+             begin
+               EventLog1.Debug(e.ToString);
+               nenalezeno:=true;
+               exit;
+             end;
         end;
         // jde o cachování tj. data s úplnými informacemi o filmu
         // se v případě opakovaného volání posílají z cache serveru
@@ -695,10 +846,13 @@ begin
                               exit;
                             end;
 
-      for v in process (ztazeno,parsujNazev) do scraperAction(v);
+    if aktualniScraperSerial = ScraperySerial[thetvdb] then
+         scraperAction(process(ztazeno,parsujNazev))
+                                                       else
+         for v in process (ztazeno,parsujNazev) do scraperAction(v);
 
-     EventLog1.Debug(format('%s %s', ['Kapacita obrázků: ',inttostr(vyberObrazku.Count)]));
-     EventLog1.Debug(format('%s %s', ['Kapacita dějů: ',inttostr(vyberDeju.Count)]));
+    EventLog1.Debug(format('%s %s', ['Kapacita obrázků: ',inttostr(vyberObrazku.Count)]));
+    EventLog1.Debug(format('%s %s', ['Kapacita dějů: ',inttostr(vyberDeju.Count)]));
     defaultInternet.additionalHeaders.Clear;//vynulování dodatečné hlavičky HTTP
                                             // s hlavičkou pracuje thetvdb api 2.0.1
 
@@ -861,6 +1015,10 @@ begin
   initGenres(genresMovieDBSerial,
              'https://api.themoviedb.org/3/genre/tv/list?api_key='+theMovidedbAPI+
              '&language='+aktualniJazyk,'$json("genres")() ! [.("id"), .("name")]');
+  // inicializace genresTheTVDB
+  genresTheTVDB:= TGenresTheTVDB.create;
+  initGenresThetvdbSerialOnce(aktualniJazyk);
+  {inicializace procedur pro genre language}
   InitGenresLanguageSerial[Sthemoviedb]:=@(initGenresThemoviedbSerial);
   InitGenresLanguageSerial[tvmaze]:=@(initGenresTvmazeSerial);
   InitGenresLanguageSerial[thetvdb]:=@(initGenresThetvdbSerial);
@@ -955,7 +1113,32 @@ end;
 
 procedure initGenresThetvdbSerial(lang: string);
 begin
+  // another approach translation for all available languages are intialised once
+  // during creating this form
+end;
 
+procedure initGenresThetvdbSerialOnce(lang: string);
+
+var
+  w,v,y,x,z:IXQValue;
+begin
+  w:=process('file://thetvdb-genres.json',
+            '$json()');
+  for v in w do
+   begin
+     x:=process('file://thetvdb-genres.json',
+            '$json("'+v.toString+'")()');
+     pomSlovnik:=InnerDictionary.create;
+     for y in x do
+        begin
+          z:= process('file://thetvdb-genres.json',
+              '$json("'+v.toString+'")("'+y.toString+'")');
+          //// fill THashMap pomSlovnik;
+          pomSlovnik.insert(y.toString,z.toString);
+        end;
+     //// naplň THashMap genresTheTVDB;
+     genresTheTVDB.insert(v.toString,pomSlovnik);
+   end;
 end;
 
 procedure initGenresCsfdSerial(lang: string);

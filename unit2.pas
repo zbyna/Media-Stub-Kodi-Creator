@@ -34,7 +34,7 @@ var
 
 implementation
   uses unit1;
-{$R *.lfm}
+{$R *.frm}
 
 { TForm2 }
 

@@ -9,55 +9,61 @@ inherited Form4: TForm4
   Position = poDesktopCenter
   object JLabeledIntegerEdit1: TJLabeledIntegerEdit[0]
     Left = 16
-    Height = 29
+    Height = 28
     Top = 32
     Width = 198
     DisplayFormat = '0'
     Value = 3
+    NegativeColor = clDefault
     EditLabel.AnchorSideLeft.Control = JLabeledIntegerEdit1
     EditLabel.AnchorSideRight.Control = JLabeledIntegerEdit1
     EditLabel.AnchorSideRight.Side = asrBottom
     EditLabel.AnchorSideBottom.Control = JLabeledIntegerEdit1
     EditLabel.Left = 16
-    EditLabel.Height = 1
-    EditLabel.Top = 28
+    EditLabel.Height = 20
+    EditLabel.Top = 9
     EditLabel.Width = 198
+    EditLabel.Caption = 'JLabeledIntegerEdit1'
     EditLabel.ParentColor = False
     TabOrder = 0
   end
   object JLabeledIntegerEdit2: TJLabeledIntegerEdit[1]
     Left = 16
-    Height = 29
+    Height = 28
     Top = 104
     Width = 205
     DisplayFormat = '0'
     Value = 4
+    NegativeColor = clDefault
     EditLabel.AnchorSideLeft.Control = JLabeledIntegerEdit2
     EditLabel.AnchorSideRight.Control = JLabeledIntegerEdit2
     EditLabel.AnchorSideRight.Side = asrBottom
     EditLabel.AnchorSideBottom.Control = JLabeledIntegerEdit2
     EditLabel.Left = 16
-    EditLabel.Height = 1
-    EditLabel.Top = 100
+    EditLabel.Height = 20
+    EditLabel.Top = 81
     EditLabel.Width = 205
+    EditLabel.Caption = 'JLabeledIntegerEdit2'
     EditLabel.ParentColor = False
     TabOrder = 2
   end
   object JLabeledIntegerEdit3: TJLabeledIntegerEdit[2]
     Left = 16
-    Height = 29
+    Height = 28
     Top = 176
     Width = 196
     DisplayFormat = '0'
     Value = 5
+    NegativeColor = clDefault
     EditLabel.AnchorSideLeft.Control = JLabeledIntegerEdit3
     EditLabel.AnchorSideRight.Control = JLabeledIntegerEdit3
     EditLabel.AnchorSideRight.Side = asrBottom
     EditLabel.AnchorSideBottom.Control = JLabeledIntegerEdit3
     EditLabel.Left = 16
-    EditLabel.Height = 1
-    EditLabel.Top = 172
+    EditLabel.Height = 20
+    EditLabel.Top = 153
     EditLabel.Width = 196
+    EditLabel.Caption = 'JLabeledIntegerEdit3'
     EditLabel.ParentColor = False
     TabOrder = 4
   end

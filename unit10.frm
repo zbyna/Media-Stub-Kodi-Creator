@@ -22,7 +22,7 @@ inherited FormUpravUmisteni: TFormUpravUmisteni
         MaxSize = 20
         Title.Alignment = taCenter
         Title.Caption = '0'
-        Width = 484
+        Width = 460
       end>
     FixedCols = 0
     RowCount = 2
@@ -30,7 +30,7 @@ inherited FormUpravUmisteni: TFormUpravUmisteni
     TabOrder = 0
     OnSelectCell = stringGridProVyberPoziceSelectCell
     ColWidths = (
-      484
+      460
     )
   end
   object StringGridProUmisteni: TStringGrid[1]
@@ -43,14 +43,14 @@ inherited FormUpravUmisteni: TFormUpravUmisteni
     Columns = <    
       item
         Title.Caption = ''
-        Width = 266
+        Width = 242
       end>
     FixedCols = 0
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goSmoothScroll]
     ScrollBars = ssAutoVertical
     TabOrder = 1
     ColWidths = (
-      266
+      242
     )
   end
   object okButton: TButton[2]
@@ -74,9 +74,9 @@ inherited FormUpravUmisteni: TFormUpravUmisteni
   end
   object chboxVsechnaCisla: TCheckBox[4]
     Left = 16
-    Height = 25
+    Height = 23
     Top = 96
-    Width = 26
+    Width = 24
     Checked = True
     State = cbChecked
     TabOrder = 4
