@@ -976,7 +976,7 @@ end;
 procedure TFormScraper.FormCreate(Sender: TObject);
 
 begin
-  EventLog1.Active:=True;
+  EventLog1.Active:=True; //  must be EventLog1.LogType := ltFile or set in Object inspector
   EventLog1.Identification:='Scrapping';
   // EventLog1.Pause;
   Timer1.Enabled:=false;

@@ -254,7 +254,7 @@ inherited FormScraper: TFormScraper
   object EventLog1: TEventLog[11]
     AppendContent = False
     Identification = 'typhon'
-    LogType = ltSystem
+    LogType = ltFile
     Active = False
     RaiseExceptionOnError = False
     DefaultEventType = etDebug
