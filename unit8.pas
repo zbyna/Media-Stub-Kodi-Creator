@@ -541,14 +541,24 @@ var
 
    procedure scraperAction(v:IXQValue);
    var
-      pomNazev,pomRok:String;
+      pomNazev,pomRok, pomText:String;
       pomRokTDate:TDateTime;
+      pomArray: TXQValueJSONArray;
+      pom: IXQValue;
    begin
       FormScraper.vyberReferer.Add('');
       pomNazev:= (v as TXQValueJSONArray).seq.get(0).toString;
       pomRok:= (v as TXQValueJSONArray).seq.get(1).toString;
       formScraper.vyberObrazku.Add((v as TXQValueJSONArray).seq.get(2).toString);
       formScraper.vyberDeju.Add((v as TXQValueJSONArray).seq.get(3).toString);
+      pomArray:=((v as TXQValueJSONArray).seq.get(4)) as TXQValueJSONArray;
+      // pomText:=pomArray.jsonSerialize(tnsText);
+      pomText:='';
+      for pom in pomArray.GetEnumeratorMembers do
+            pomText:= pomText + pom.toString + ', ';
+      RemoveTrailingChars(pomText,[' ',',']);
+      formScraper.vyberZanru.Add(pomText);
+      formScraper.vyberHodnoceni.Add((v as TXQValueJSONArray).seq.get(5).toString);
       if length(pomRok)=4 then   {když api vrací rovnou čtyři znaky roku}
           begin
             formScraper.vyberFilmu.Items.AddText(pomNazev+'~'+pomRok);
@@ -567,7 +577,8 @@ begin
  //for $prom in  $json()("show")
  //return [$prom("name"),$prom("premiered")]
  parsujNazev:='$json()("show") ! [.("name") ,string(.("premiered")), '+
-                                 'string(.("image")("medium")),.("summary")]';
+                                 'string(.("image")("medium")),.("summary"),' +
+                                 '.("genres"),.("rating")("average")]';
  theTvDbTag:=False;
  nahradDiakritiku(scraperVstup);
  FormScraper.Scrapuj(scraperVstup,parsujNazev,theTvDbTag,@scraperAction);{naplní FormScraper výsledkem}
@@ -1145,6 +1156,12 @@ procedure initGenresCsfdSerial(lang: string);
 begin
   // prepared for possible genre translating
 end;
+
+finalization
+  genresMovieDB.FreeInstance;
+  genresMovieDBSerial.FreeInstance;
+  genresTheTVDB.FreeInstance;
+  pomSlovnik.FreeInstance;
 
 end.
 
