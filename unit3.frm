@@ -174,10 +174,9 @@ inherited Form3: TForm3
     EditLabel.AnchorSideRight.Side = asrBottom
     EditLabel.AnchorSideBottom.Control = LabeledEdit2
     EditLabel.Left = 26
-    EditLabel.Height = 20
-    EditLabel.Top = 265
+    EditLabel.Height = 1
+    EditLabel.Top = 284
     EditLabel.Width = 249
-    EditLabel.Caption = 'LabeledEdit2'
     EditLabel.ParentColor = False
     TabOrder = 5
   end
@@ -194,10 +193,9 @@ inherited Form3: TForm3
     EditLabel.AnchorSideRight.Side = asrBottom
     EditLabel.AnchorSideBottom.Control = JLabeledIntegerEdit1
     EditLabel.Left = 26
-    EditLabel.Height = 20
-    EditLabel.Top = 201
+    EditLabel.Height = 1
+    EditLabel.Top = 220
     EditLabel.Width = 248
-    EditLabel.Caption = 'JLabeledIntegerEdit1'
     EditLabel.ParentColor = False
     TabOrder = 3
   end
@@ -248,10 +246,9 @@ inherited Form3: TForm3
     EditLabel.AnchorSideRight.Side = asrBottom
     EditLabel.AnchorSideBottom.Control = JLabeledIntegerEdit2
     EditLabel.Left = 160
-    EditLabel.Height = 20
-    EditLabel.Top = 305
+    EditLabel.Height = 1
+    EditLabel.Top = 324
     EditLabel.Width = 48
-    EditLabel.Caption = ' '
     EditLabel.ParentColor = False
     Enabled = False
     TabOrder = 8

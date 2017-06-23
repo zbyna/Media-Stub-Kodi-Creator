@@ -1225,6 +1225,7 @@ inherited Form1: TForm1
       end
       object MenuItemSerialyOznacSerial: TMenuItem
         Caption = 'Select series'
+        ShortCut = 16449
         OnClick = MenuItem24Click
       end
       object MenuItemSerialyHZNazevSerialu: TMenuItem
@@ -1616,6 +1617,7 @@ inherited Form1: TForm1
           00007D1F13000000000000000000000000000000000000000000
         }
         ImageIndex = 10
+        ShortCut = 49235
         OnClick = MenuItem29Click
       end
       object MenuItemNastrojeVytvorStubSoubory: TMenuItem
@@ -1657,6 +1659,7 @@ inherited Form1: TForm1
           00520000005200000052000000520000005200000024FFFFFF00
         }
         ImageIndex = 13
+        ShortCut = 49219
         OnClick = MenuItem30Click
       end
       object MenuItemNastrojeHledej: TMenuItem
@@ -2382,6 +2385,18 @@ inherited Form1: TForm1
     object Action1: TAction
       DisableIfNoHandler = False
       OnUpdate = Action1Update
+    end
+    object DataSetInsert1: TDataSetInsert
+      Category = 'Database'
+      OnExecute = DataSetInsert1Execute
+      ShortCut = 49225
+      DataSource = Datasource1
+    end
+    object DataSetEdit1: TDataSetEdit
+      Category = 'Database'
+      OnExecute = DataSetEdit1Execute
+      ShortCut = 49221
+      DataSource = Datasource1
     end
   end
   object ZConnection1: TZConnection[11]

@@ -10,7 +10,7 @@ uses
   SysUtils, SdfData, db, fileutil, IDEWindowIntf, Forms, Controls, Dialogs,
   Menus, DBGrids, DbCtrls, StdCtrls, ExtCtrls, ComCtrls, ActnList, Unit2,
   unit3,unit5, unit6, unit7, ZConnection, ZDataset, ZSqlUpdate, Graphics,
-  Classes,LCLIntf, LCLType, Grids, types, LCLTranslator, LazUTF8,
+  Classes,LCLIntf, LCLType, Grids, types, LCLTranslator, DBActns, LazUTF8,
   LazFileUtils, LocalizedForms, usplashabout, eventlog,unHistory,unGridMod,
   unGlobalScraper;
 { Unity pro Form2, Form3 }
@@ -22,6 +22,8 @@ type
   TForm1 = class(TLocalizedForm)
     Action1: TAction;
     ActionList1: TActionList;
+    DataSetEdit1: TDataSetEdit;
+    DataSetInsert1: TDataSetInsert;
     Datasource1: TDatasource;
     DBGrid1: TDBGrid;
     DBNavigator1: TDBNavigator;
@@ -134,6 +136,8 @@ type
     ZUpdateSQL1: TZUpdateSQL;
 
     procedure Action1Update(Sender: TObject);   {Akce pravidelně spouštěná když je aplikace idle}
+    procedure DataSetEdit1Execute(Sender: TObject);
+    procedure DataSetInsert1Execute(Sender: TObject);
     procedure DBGrid1CellClick(Column: TColumn);  {pro výběr pomocí clik + SHIFT}
     procedure DBGrid1MouseWheel(Sender: TObject; Shift: TShiftState;
       WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
@@ -780,6 +784,16 @@ begin
     ToolBtnHledej.Enabled:=true;
     // StatusBar1.Panels[0].Text:='Počet záznamů: '+inttostr(ZQuery1.RecordCount);
    end;
+end;
+
+procedure TForm1.DataSetEdit1Execute(Sender: TObject);
+begin
+  DBNavigator1.BtnClick(nbEdit);
+end;
+
+procedure TForm1.DataSetInsert1Execute(Sender: TObject);
+begin
+  DBNavigator1.BtnClick(nbInsert);
 end;
 
 procedure TForm1.DBGrid1CellClick(Column: TColumn);

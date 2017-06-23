@@ -527,15 +527,6 @@ msgctxt "tform3.combobox1.text"
 msgid "DVD"
 msgstr "DVD"
 
-#: tform3.jlabeledintegeredit1.editlabel.caption
-msgctxt "tform3.jlabeledintegeredit1.editlabel.caption"
-msgid "JLabeledIntegerEdit1"
-msgstr ""
-
-#: tform3.jlabeledintegeredit2.editlabel.caption
-msgid " "
-msgstr " "
-
 #: tform3.label1.caption
 msgid "Actual node"
 msgstr "Aktuální node"
@@ -553,11 +544,6 @@ msgstr "Medium"
 msgctxt "tform3.labelededit1.editlabel.caption"
 msgid "Serie name"
 msgstr "Název seriálu"
-
-#: tform3.labelededit2.editlabel.caption
-msgctxt "tform3.labelededit2.editlabel.caption"
-msgid "LabeledEdit2"
-msgstr ""
 
 #: tform4.bitbtn1.caption
 msgctxt "TFORM4.BITBTN1.CAPTION"

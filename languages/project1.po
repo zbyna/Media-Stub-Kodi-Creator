@@ -506,15 +506,6 @@ msgctxt "tform3.combobox1.text"
 msgid "DVD"
 msgstr ""
 
-#: tform3.jlabeledintegeredit1.editlabel.caption
-msgctxt "tform3.jlabeledintegeredit1.editlabel.caption"
-msgid "JLabeledIntegerEdit1"
-msgstr ""
-
-#: tform3.jlabeledintegeredit2.editlabel.caption
-msgid " "
-msgstr ""
-
 #: tform3.label1.caption
 msgid "Actual node"
 msgstr ""
@@ -531,11 +522,6 @@ msgstr ""
 #: tform3.labelededit1.editlabel.caption
 msgctxt "tform3.labelededit1.editlabel.caption"
 msgid "Serie name"
-msgstr ""
-
-#: tform3.labelededit2.editlabel.caption
-msgctxt "tform3.labelededit2.editlabel.caption"
-msgid "LabeledEdit2"
 msgstr ""
 
 #: tform4.bitbtn1.caption
