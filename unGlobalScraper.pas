@@ -5,7 +5,8 @@ unit unGlobalScraper;
 interface
 
 uses
-  Classes, SysUtils,ZDataset,DBGrids,Controls,Grids,ExtCtrls,Forms;
+  Classes, SysUtils,ZDataset,DBGrids,Controls,Grids,ExtCtrls,Forms,
+  strutils;
 
 type
   { TGlobalScraper }
@@ -142,6 +143,8 @@ var
   var
     xmlNode: TXMLNode;
     xmlDoc : IXMLDocument;
+    pomGenre: TCaption;
+    j: Integer;
   begin
     xmlDoc:=CreateXMLDoc(itemType,true);
     xmlNode:=xmlDoc.DocumentElement;
@@ -152,6 +155,10 @@ var
     xmlNode.AddChild('title').AddText(FormScraper.vybranyNazev);
     xmlNode.AddChild('year').AddText(FormScraper.vybranyRok);
     xmlNode.AddChild('plot').AddText(FormScraper.memDej.Lines.Text);
+    xmlNode.AddChild('rating').AddText(FormScraper.edtHodnoceni.Text);
+    pomGenre:= FormScraper.edtZanry.Text;
+    for j:=1 to WordCount(pomGenre,[',']) do
+          xmlNode.AddChild('genre').AddText(ExtractWord(j,pomGenre,[',']));
     pomPath:=directory+path;
     If ForceDirectories(pomPath) then    //utf8tosys
       begin
