@@ -45,8 +45,9 @@ implementation
 
 procedure TForm5.FormCreate(Sender: TObject);
 begin
-DirectoryEdit1.RootDir:= ( getCurrentDir);  //systoutf8
-DirectoryEdit1.Directory:=( getCurrentDir);  // systoutf8
+//DirectoryEdit1.RootDir:= ( getCurrentDir);  //systoutf8
+//DirectoryEdit1.Directory:=( getCurrentDir);  // systoutf8
+DirectoryEdit1.Text:='e:\Dokumenty_ZbynA\Firebird\pokusná cesta\Pokusy\';
 
 end;
 
