@@ -168,6 +168,41 @@ var
       end;
   end;
 
+  procedure createNfoFileEpizode(path:String); // for episodes
+  var
+    xmlNode, xmlNode1: TXMLNode;
+    xmlDoc : IXMLDocument;
+    k: Integer;
+    episodes, sezona: String;
+    episodesCount: SizeInt;
+  begin
+    episodes:=ZQuery.FieldByName('DILY_NA_DISKU').AsString;
+    sezona:=ZQuery.FieldByName('SEZONA').AsString;
+    episodesCount:=  WordCount(episodes,['e']);
+    if episodesCount = 1 then
+       xmlDoc:=CreateXMLDoc('root',true)
+                         else
+       xmlDoc:=CreateXMLDoc('multiepisodeinfo',true);
+    xmlNode:=xmlDoc.DocumentElement;
+    // documentNode contains documentElement(so called root element) :-)
+    // below inserts comment before documentElement(root element)
+    xmlDoc.GetDocumentNode.InsertComment('created on '+ DateTimeToStr(now) +
+                                         ' - MediaStub Kodi Creator',xmlNOde);
+    for k:=1 to episodesCount  do
+        begin
+          xmlNode1:=xmlNode.AddChild('episodedetails');
+          //xmlNode1.AddChild('title').AddText('Díl: '+ExtractWord(k,episodes,['e']));
+          xmlNode1.AddChild('season').AddText(sezona);
+          xmlNode1.AddChild('episode').AddText(ExtractWord(k,episodes,['e']));
+        end;
+    pomPath:=directory+path;
+    If ForceDirectories(pomPath) then    //utf8tosys
+      begin
+       xmlDoc.WriterSettings.IndentType:=itIndent;
+       xmlDoc.SaveToFile(pomPath+sezona+episodes+'.nfo');
+      end;
+  end;
+
 begin
   PomStr:='';
   PomStr1:='';
@@ -181,6 +216,8 @@ begin
          if (i<>0) and (ZQuery.FieldByName('NAZEV_SERIALU').AsString=pomStr) then
            begin
              pomStr:= ZQuery.FieldByName('NAZEV_SERIALU').AsString;
+             pomPath:=ZQuery.FieldByName('DIRECTORY').AsString;
+             createNfoFileEpizode(pomPath);
              continue;
            end
                                                                                else
@@ -196,6 +233,7 @@ begin
                   pomString:= ZQuery.FieldByName('SEZONA').AsString+'\';
                   pomPath:=StringReplace(pomPath,pomString,'',[rfIgnoreCase]);
                   createNfoFile('tvshow',pomPath);
+                  createNfoFileEpizode(ZQuery.FieldByName('DIRECTORY').AsString);
                 end
                                        else
                 scrapovatZnovuToSame:= self.notScrapedAction;
