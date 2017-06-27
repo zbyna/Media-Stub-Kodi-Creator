@@ -112,6 +112,7 @@ type
     vyberReferer:TStringList;
     vyberZanru:TStringList;                  { seznam nascrapovaných řetězců žánrů }
     vyberHodnoceni:TStringList;              { seznam nascrapovaných řetězců hodnocení }
+    vyberIDSerie:TStringList;                { seznam nascrapovaných id serií }
     ProgressBar1: TProgressBar;
     procedure pauseButtonClick(Sender: TObject);
     procedure CancelButtonClick(Sender: TObject);
@@ -131,6 +132,7 @@ type
   public
     { public declarations }
     vybranyNazev,vybranyRok:String;  { výstup ze scrapování dostupný všude}
+    idSerie:String; // nutné pro episode info scraping for nfo creating
   end;
   { pro scraping roku k filmu }
   function FilmThemoviedb(PomNazev:string):string;
@@ -200,6 +202,7 @@ implementation
        pomArrayHodnoceni:array of String;
        pomArrayReferer: array of String;
        pomArrayHeaders: array[0..3] of String;
+       pomArrayIDSerie: array of String;
 
 
 function mojeHashFunkce(s:String):LongInt;
@@ -558,6 +561,7 @@ function SerialThemoviedb(PomNazev: string): string;
       RemoveTrailingChars(pomText,[' ',',']);
       formScraper.vyberZanru.Add(pomText);
       formScraper.vyberHodnoceni.Add((v as TXQValueJSONArray).seq.get(5).toString);
+      formScraper.vyberIDSerie.Add((v as TXQValueJSONArray).seq.get(6).toString);
       if length(pomRok)=4 then   {když api vrací rovnou čtyři znaky roku}
           begin
             formScraper.vyberFilmu.Items.AddText(pomNazev+'~'+pomRok);
@@ -578,7 +582,7 @@ begin
 
  parsujNazev:='$json("results")() ! [.("name"), .("first_air_date"),'+
                '.("poster_path"),.("overview"),'+
-                '.("genre_ids"),.("vote_average")]';
+                '.("genre_ids"),.("vote_average"),.("id")]';
  theTvDbTag:=False;
  //ShowMessage('aktuální jazyk: ' + aktualniJazyk + sLineBreak+
  //             scraperVstup );
@@ -617,6 +621,7 @@ var
       RemoveTrailingChars(pomText,[' ',',']);
       formScraper.vyberZanru.Add(pomText);
       formScraper.vyberHodnoceni.Add((v as TXQValueJSONArray).seq.get(5).toString);
+      formScraper.vyberIDSerie.Add((v as TXQValueJSONArray).seq.get(6).toString);
       if length(pomRok)=4 then   {když api vrací rovnou čtyři znaky roku}
           begin
             formScraper.vyberFilmu.Items.AddText(pomNazev+'~'+pomRok);
@@ -636,7 +641,7 @@ begin
  //return [$prom("name"),$prom("premiered")]
  parsujNazev:='$json()("show") ! [.("name") ,string(.("premiered")), '+
                                  'string(.("image")("medium")),.("summary"),' +
-                                 '.("genres"),.("rating")("average")]';
+                                 '.("genres"),.("rating")("average"),.("id")]';
  theTvDbTag:=False;
  nahradDiakritiku(scraperVstup);
  FormScraper.Scrapuj(scraperVstup,parsujNazev,theTvDbTag,@scraperAction);{naplní FormScraper výsledkem}
@@ -681,7 +686,7 @@ begin
    w:= process(pomZtazeno,
               '$json("data")! [.("seriesName") ,string(.("firstAired")),' + slineBreak +
                               '.("banner"), .("overview"),' + slineBreak +
-                              '.("genre"), .("siteRating")]');
+                              '.("genre"), .("siteRating"),.("id")]');
    //DebuglnThreadLog(defaultInternet.additionalHeaders.DelimitedText);
 
       pomArrayNazev[fromIndex]:= (w as TXQValueJSONArray).seq.get(0).toString;
@@ -708,6 +713,7 @@ begin
       pomArrayZanry[fromIndex]:= pomText;
       //DebuglnThreadLog(pomArrayZanry[fromIndex]);
       pomArrayHodnoceni[fromIndex]:=(w as TXQValueJSONArray).seq.get(5).toString;
+      pomArrayIDSerie[fromIndex]:=(w as TXQValueJSONArray).seq.get(6).toString;
       freeThreadVars;
 end;
 
@@ -736,6 +742,7 @@ var
       SetLength(pomArrayZanry,pomI);
       SetLength(pomArrayHodnoceni,pomI);
       SetLength(pomArrayReferer,pomI);
+      SetLength(pomArrayIDSerie,pomI);
       TPasMP.CreateGlobalInstance;
       if pomI = 1 then
             theTVDB_parallelDownloadJob(nil,0,pointerNaV,0,0)
@@ -751,6 +758,7 @@ var
           formScraper.vyberZanru.Add(pomArrayZanry[i]);
           FormScraper.vyberHodnoceni.Add(pomArrayHodnoceni[i]);
           FormScraper.vyberReferer.Add(pomArrayReferer[i]);
+          FormScraper.vyberIDSerie.Add(pomArrayIDSerie[i]);
         end;
       SetLength(pomArrayNazev,0);
       SetLength(pomArrayRok,0);
@@ -759,6 +767,7 @@ var
       SetLength(pomArrayZanry,0);
       SetLength(pomArrayHodnoceni,0);
       SetLength(pomArrayReferer,0);
+      SetLength(pomArrayIDSerie,0);
       FormScraper.EventLog1.Debug('Vynulování pomArrays hotovo');
    end;
 
@@ -844,6 +853,7 @@ begin
     vyberReferer.Clear;
     vyberZanru.Clear;
     vyberHodnoceni.Clear;
+    vyberIDSerie.Clear;
     nenalezeno:=false;
     if theTvDbTag then      // b/c of theTvDb horizontals banners
        begin
@@ -1021,6 +1031,10 @@ begin
       PomS:=UTF8ToSys(vyberFilmu.Items[vyberFilmu.ItemIndex]);
       vybranyNazev:=SysToUTF8(ExtractDelimited(1,PomS,['~']));
       vybranyRok:=SysToUTF8(ExtractDelimited(2,PomS,['~']));
+      if vyberIDSerie.Count > 0 then
+         idSerie:=vyberIDSerie[vyberFilmu.ItemIndex]
+                                 else
+         idSerie:='';
      end
                     else
      begin
@@ -1071,6 +1085,7 @@ begin
   vyberReferer:=TStringList.Create;
   vyberZanru:=TStringList.Create;
   vyberHodnoceni:=TStringList.Create;
+  vyberIDSerie:=TStringList.Create;
   // inicializace genresMovieDB for film scraper
   genresMovieDB:=TGenresMovieDB.create;
   initGenres(genresMovieDB,
