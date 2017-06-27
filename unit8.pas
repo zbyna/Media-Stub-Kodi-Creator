@@ -63,6 +63,35 @@ type
 
   {genders for moviedb - films}
 
+  { pro scraping episodes detail for TVseries }
+  { proHashTEpisodeInfo }
+
+  proHashTEpisodeInfo = class
+    public
+      class function hash(a:String;b:SizeUInt):SizeUInt;
+  end;
+
+  TEpisodeInfo = specialize THashmap<String,String,proHashTEpisodeInfo>;
+
+  { proHashTEpisodeInSeason }
+
+  proHashTEpisodeInSeason = class
+    public
+      class function hash(a:String;b:SizeUInt):SizeUInt;
+  end;
+
+  TEpisodeInSeason = specialize THashmap<String,TEpisodeInfo,proHashTEpisodeInSeason>;
+
+  { proHashTEpisodeInfoAll }
+
+  proHashTEpisodeInfoAll = class
+    public
+      class function hash(a:String;b:SizeUInt):SizeUInt;
+  end;
+
+  TEpisodeInfoAll = specialize THashmap<String,TEpisodeInSeason,proHashTEpisodeInfoAll>;
+
+  TfunctionSraperEpisodeDetail = function(id:String):TEpisodeInfoAll;
 
   { TFormScraper }
 
@@ -127,6 +156,11 @@ type
   procedure initGenresThetvdbSerial(lang:string);  // not use b/c initialised only once
   procedure initGenresThetvdbSerialOnce(lang:string);
   procedure initGenresCsfdSerial(lang:string);
+  { pro scraping episode details for TV Series }
+  function SerialThemoviedbEpisodes(id:string):TEpisodeInfoAll;
+  function SerialTvmazeEpisodes(id:string):TEpisodeInfoAll;
+  function SerialThetvdbEpisode(id:string):TEpisodeInfoAll;
+  function SerialCsfdEpisode(id:string):TEpisodeInfoAll;
 
 var
   FormScraper: TFormScraper;
@@ -144,6 +178,9 @@ var
   InitGenresLanguageSerial:array[TScraperSerial] of TprocedureInitGenresLanguageSerial;
   genresTheTVDB : TGenresTheTVDB;              // for TheTVDB searial scraper
   pomSlovnik:InnerDictionary;                // inner Dictionary from movidedb-genres-film.json
+  scraperyEpizody : array[TScraperSerial] of TfunctionSraperEpisodeDetail;
+  aktualniScraperEpisody:TfunctionSraperEpisodeDetail;
+
 
 
 
@@ -168,6 +205,27 @@ implementation
 function mojeHashFunkce(s:String):LongInt;
 begin
  result:= SimpleChecksumHash(pchar(s), s.Length);
+end;
+
+{ proHashTEpisodeInfoAll }
+
+class function proHashTEpisodeInfoAll.hash(a: String; b: SizeUInt): SizeUInt;
+begin
+  hash := mojeHashFunkce(a) mod b;
+end;
+
+{ proHashTEpisodeInSeason }
+
+class function proHashTEpisodeInSeason.hash(a: String; b: SizeUInt): SizeUInt;
+begin
+  hash := mojeHashFunkce(a) mod b;
+end;
+
+{ proHashTEpisodeInfo }
+
+class function proHashTEpisodeInfo.hash(a: String; b: SizeUInt): SizeUInt;
+begin
+  hash := mojeHashFunkce(a) mod b;
 end;
 
 { ProHashTheTVDB }
@@ -1155,6 +1213,28 @@ end;
 procedure initGenresCsfdSerial(lang: string);
 begin
   // prepared for possible genre translating
+end;
+
+{ pro scraping episode details for TV Series }
+
+function SerialThemoviedbEpisodes(id: string): TEpisodeInfoAll;
+begin
+
+end;
+
+function SerialTvmazeEpisodes(id: string): TEpisodeInfoAll;
+begin
+
+end;
+
+function SerialThetvdbEpisode(id: string): TEpisodeInfoAll;
+begin
+
+end;
+
+function SerialCsfdEpisode(id: string): TEpisodeInfoAll;
+begin
+
 end;
 
 finalization
