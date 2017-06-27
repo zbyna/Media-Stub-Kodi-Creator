@@ -191,7 +191,7 @@ var
     for k:=1 to episodesCount  do
         begin
           xmlNode1:=xmlNode.AddChild('episodedetails');
-          //xmlNode1.AddChild('title').AddText('Díl: '+ExtractWord(k,episodes,['e']));
+          xmlNode1.AddChild('title').AddText('id serie: '+FormScraper.idSerie);
           xmlNode1.AddChild('season').AddText(sezona);
           xmlNode1.AddChild('episode').AddText(ExtractWord(k,episodes,['e']));
         end;
