@@ -1064,21 +1064,34 @@ begin
   // EventLog1.Pause;
   Timer1.Enabled:=false;
   prvniFokus:=true;
-  {inicializace jazyka pro scrapování}
-  aktualniJazyk:=jazyky[Tjazyky(FormNastaveni.LanguageScrapers.ItemIndex)];
-  {inicializace procedur pro scrapování}
-   ScraperyFilm[Fthemoviedb]:=@(FilmThemoviedb);
-   ScraperyFilm[imdb]:=@(FilmImdb);
-   ScraperyFilm[csfd]:=@(FilmCsfd);
-   ScraperySerial[Sthemoviedb]:=@(SerialThemoviedb);
-   ScraperySerial[tvmaze]:=@(SerialTvmaze);
-   ScraperySerial[thetvdb]:=@(SerialThetvdb);
-   ScraperySerial[Scsfd]:=@(FilmCsfd); //@(SerialCsfd);
+
   { vytvoření aktuálních scraperu z ini, možno až po vytvoření FormNastaveni (unit7)
-    jinak segmentation error za runtimu}
+    jinak segmentation error za runtimu, nemůže být v initialisation unitu}
   aktualniScraperFilm:=ScraperyFilm[TScraperFilm(FormNastaveni.FilmScrapers.ItemIndex)];
   aktualniScraperSerial:=ScraperySerial[TScraperSerial(FormNastaveni.SerialScrapers.ItemIndex)];
+  aktualniScraperEpisody:=scraperyEpizody[TScraperSerial(FormNastaveni.SerialScrapers.ItemIndex)];
   FormNastaveni.nastavStatusBar;
+
+  {inicializace jazyka pro scrapování,nemůže být v initialization unitu}
+  aktualniJazyk:=jazyky[Tjazyky(FormNastaveni.LanguageScrapers.ItemIndex)];
+
+  // inicializace genresMovieDBSerial for serial scraper
+  genresMovieDBSerial:=TGenresMovieDB.create;
+  initGenres(genresMovieDBSerial,
+             'https://api.themoviedb.org/3/genre/tv/list?api_key='+theMovidedbAPI+
+             '&language='+aktualniJazyk,'$json("genres")() ! [.("id"), .("name")]');
+
+  // inicializace genresMovieDB for film scraper
+  genresMovieDB:=TGenresMovieDB.create;
+  initGenres(genresMovieDB,
+             'https://api.themoviedb.org/3/genre/movie/list?api_key='+theMovidedbAPI+
+             '&language='+aktualniJazyk,'$json("genres")() ! [.("id"), .("name")]');
+
+  // inicializace genresTVDB for serial scraper, different approach - only once !!!!!
+  genresTheTVDB:= TGenresTheTVDB.create;
+  initGenresThetvdbSerialOnce(aktualniJazyk);
+
+
   // vytvoření TStringList pro scrapování obrázků a dějů a pomocných referrers
   vyberObrazku:=TStringList.Create;
   vyberDeju:=TStringList.Create;
@@ -1086,28 +1099,6 @@ begin
   vyberZanru:=TStringList.Create;
   vyberHodnoceni:=TStringList.Create;
   vyberIDSerie:=TStringList.Create;
-  // inicializace genresMovieDB for film scraper
-  genresMovieDB:=TGenresMovieDB.create;
-  initGenres(genresMovieDB,
-             'https://api.themoviedb.org/3/genre/movie/list?api_key='+theMovidedbAPI+
-             '&language='+aktualniJazyk,'$json("genres")() ! [.("id"), .("name")]');
-  InitGenresLanguageFilm[Fthemoviedb]:=@(initGenresMovieDBFilm);
-  InitGenresLanguageFilm[imdb]:=@(initGenresImdbFilm);
-  InitGenresLanguageFilm[csfd]:=@(initGenresCsfdFilm);
-  // inicializace genresMovieDBSerial for serie scraper
-  genresMovieDBSerial:=TGenresMovieDB.create;
-  initGenres(genresMovieDBSerial,
-             'https://api.themoviedb.org/3/genre/tv/list?api_key='+theMovidedbAPI+
-             '&language='+aktualniJazyk,'$json("genres")() ! [.("id"), .("name")]');
-  // inicializace genresTheTVDB
-  genresTheTVDB:= TGenresTheTVDB.create;
-  initGenresThetvdbSerialOnce(aktualniJazyk);
-  {inicializace procedur pro genre language}
-  InitGenresLanguageSerial[Sthemoviedb]:=@(initGenresThemoviedbSerial);
-  InitGenresLanguageSerial[tvmaze]:=@(initGenresTvmazeSerial);
-  InitGenresLanguageSerial[thetvdb]:=@(initGenresThetvdbSerial);
-  InitGenresLanguageSerial[Scsfd]:=@(initGenresCsfdSerial);
-
 end;
 
 procedure TFormScraper.FormClose(Sender:TObject; var CloseAction:TCloseAction);
@@ -1287,6 +1278,29 @@ function SerialCsfdEpisode(id: string): TEpisodeInfoAll;
 begin
 
 end;
+
+initialization
+  {inicializace procedur pro scrapování}
+   ScraperyFilm[Fthemoviedb]:=@(FilmThemoviedb);
+   ScraperyFilm[imdb]:=@(FilmImdb);
+   ScraperyFilm[csfd]:=@(FilmCsfd);
+   ScraperySerial[Sthemoviedb]:=@(SerialThemoviedb);
+   ScraperySerial[tvmaze]:=@(SerialTvmaze);
+   ScraperySerial[thetvdb]:=@(SerialThetvdb);
+   ScraperySerial[Scsfd]:=@(FilmCsfd); //@(SerialCsfd);
+   scraperyEpizody[Sthemoviedb]:=@(SerialThemoviedbEpisodes);
+   scraperyEpizody[tvmaze]:=@(SerialTvmazeEpisodes);
+   scraperyEpizody[thetvdb]:=@(SerialThetvdbEpisode);
+   scraperyEpizody[Scsfd]:=@(SerialCsfdEpisode);
+
+  {inicializace procedur pro genre language }
+  InitGenresLanguageFilm[Fthemoviedb]:=@(initGenresMovieDBFilm);
+  InitGenresLanguageFilm[imdb]:=@(initGenresImdbFilm);
+  InitGenresLanguageFilm[csfd]:=@(initGenresCsfdFilm);
+  InitGenresLanguageSerial[Sthemoviedb]:=@(initGenresThemoviedbSerial);
+  InitGenresLanguageSerial[tvmaze]:=@(initGenresTvmazeSerial);
+  InitGenresLanguageSerial[thetvdb]:=@(initGenresThetvdbSerial);
+  InitGenresLanguageSerial[Scsfd]:=@(initGenresCsfdSerial);
 
 finalization
   genresMovieDB.FreeInstance;
