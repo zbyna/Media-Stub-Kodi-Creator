@@ -138,6 +138,7 @@ var
   pomStr,PomStr1,pomPath, pomString: String;
   Pom: Integer;
   scrapovatZnovuToSame : Boolean;
+  pomEpisodesInfo:TEpisodeInfoAll;
 
   procedure createNfoFile(itemType,path:String); // itemType = tvshow or movie
   var
@@ -168,16 +169,19 @@ var
       end;
   end;
 
-  procedure createNfoFileEpizode(path:String); // for episodes
+  procedure createNfoFileEpizode(path:String;episodesInfo:TEpisodeInfoAll);
   var
     xmlNode, xmlNode1: TXMLNode;
     xmlDoc : IXMLDocument;
     k: Integer;
-    episodes, sezona: String;
+    episodes, sezona, pomSezona, pomEpisode: String;
     episodesCount: SizeInt;
+
   begin
     episodes:=ZQuery.FieldByName('DILY_NA_DISKU').AsString;
-    sezona:=ZQuery.FieldByName('SEZONA').AsString;
+    sezona:= ZQuery.FieldByName('SEZONA').AsString;
+    pomSezona:=ExtractWord(1,sezona,['s']);
+    RemoveLeadingChars(pomSezona, ['0']);
     episodesCount:=  WordCount(episodes,['e']);
     if episodesCount = 1 then
        xmlDoc:=CreateXMLDoc('root',true)
@@ -190,10 +194,13 @@ var
                                          ' - MediaStub Kodi Creator',xmlNOde);
     for k:=1 to episodesCount  do
         begin
+          pomEpisode:= ExtractWord(k,episodes,['e']);
+          Removeleadingchars(pomEpisode,['0']);
           xmlNode1:=xmlNode.AddChild('episodedetails');
-          xmlNode1.AddChild('title').AddText('id serie: '+FormScraper.idSerie);
-          xmlNode1.AddChild('season').AddText(sezona);
-          xmlNode1.AddChild('episode').AddText(ExtractWord(k,episodes,['e']));
+          xmlNode1.AddChild('title').AddText(episodesInfo[pomSezona][pomEpisode]['jmeno']);
+          xmlNode1.AddChild('season').AddText(pomSezona);
+          xmlNode1.AddChild('episode').AddText(pomEpisode);
+          xmlNode1.AddChild('plot').AddText(episodesInfo[pomSezona][pomEpisode]['obsah']);
         end;
     pomPath:=directory+path;
     If ForceDirectories(pomPath) then    //utf8tosys
@@ -206,6 +213,7 @@ var
 begin
   PomStr:='';
   PomStr1:='';
+  pomEpisodesInfo:=TEpisodeInfoAll.create;
   {projdi výběr a vytvoř nfo soubor v cestě path}
       //nultý řádek v tabulkaVysledku jsou názvy sloupců proto +1
   for i:=0 to dbgrid.SelectedRows.Count-1 do
@@ -217,7 +225,7 @@ begin
            begin
              pomStr:= ZQuery.FieldByName('NAZEV_SERIALU').AsString;
              pomPath:=ZQuery.FieldByName('DIRECTORY').AsString;
-             createNfoFileEpizode(pomPath);
+             createNfoFileEpizode(pomPath,pomEpisodesInfo);
              continue;
            end
                                                                                else
@@ -233,7 +241,12 @@ begin
                   pomString:= ZQuery.FieldByName('SEZONA').AsString+'\';
                   pomPath:=StringReplace(pomPath,pomString,'',[rfIgnoreCase]);
                   createNfoFile('tvshow',pomPath);
-                  createNfoFileEpizode(ZQuery.FieldByName('DIRECTORY').AsString);
+                  // there may be several TV series in selection
+                  FreeAndNil(pomEpisodesInfo);
+                  pomEpisodesInfo:=TEpisodeInfoAll.create;
+                  pomEpisodesInfo:=aktualniScraperEpisody(FormScraper.idSerie);
+                  createNfoFileEpizode(ZQuery.FieldByName('DIRECTORY').AsString,
+                                       pomEpisodesInfo);
                 end
                                        else
                 scrapovatZnovuToSame:= self.notScrapedAction;
@@ -259,6 +272,7 @@ begin
          continue;
        end;    // --- řádek je film
    end;
+  freeandnil(pomEpisodesInfo);
 end;
 
 constructor TGlobalScraper.create(zq: TZquery;dbg:TDBGrid);

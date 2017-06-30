@@ -1233,8 +1233,44 @@ end;
 { pro scraping episode details for TV Series }
 
 function SerialThemoviedbEpisodes(id: string): TEpisodeInfoAll;
+var
+  v,w:IXQValue;
+  scraperVstup,parsujNazev,pomSeason,ztazeno: String;
+  episodeInfo:TEpisodeInfo;             // dictionary 3rd level
+  episodeInSeason:TEpisodeInSeason;     // dictionary 2nd level
+  episodeInfoAll:TEpisodeInfoAll;       // dictionary 1st level
+  pomEpisodeNumber,pomEpisodeName,pomEpisodeOverview: String;
 begin
-
+  episodeInfoAll:=TEpisodeInfoAll.create;
+  scraperVstup:=UTF8ToSys(('https://api.themoviedb.org/3/tv/'+
+                            FormScraper.idSerie +
+                            '?api_key='+unConstants.theMovidedbAPI+
+                            '&language='+aktualniJazyk));
+  parsujNazev:='$json("seasons")()![.("season_number")]';
+  ztazeno:= retrieve(scraperVstup);
+  for v in process (ztazeno,parsujNazev) do
+     begin
+       pomSeason:= (v as TXQValueJSONArray).seq.get(0).toString;
+       scraperVstup:=UTF8ToSys(('https://api.themoviedb.org/3/tv/'+FormScraper.idSerie+
+                                '/season/'   +  pomSeason+
+                                '?api_key='  +  unConstants.theMovidedbAPI+
+                                '&language=' +  aktualniJazyk));
+       parsujNazev:='$json("episodes")()![.("episode_number"),.("name"),.("overview")]';
+       ztazeno:=retrieve(scraperVstup);
+       episodeInSeason:=TEpisodeInSeason.create;
+       for w in process(ztazeno,parsujNazev) do
+          begin
+            episodeInfo:=TEpisodeInfo.create;
+            pomEpisodeNumber:= (w as TXQValueJSONArray).seq.get(0).toString;
+            pomEpisodeName:= (w as TXQValueJSONArray).seq.get(1).toString;
+            pomEpisodeOverview:= (w as TXQValueJSONArray).seq.get(2).toString;
+            episodeInfo.insert('jmeno',pomEpisodeName);
+            episodeInfo.insert('obsah',pomEpisodeOverview);
+            episodeInSeason.insert(pomEpisodeNumber,episodeInfo);
+          end;
+       episodeInfoAll.insert(pomSeason,episodeInSeason);
+     end;
+  Result:=episodeInfoAll;
 end;
 
 function SerialTvmazeEpisodes(id: string): TEpisodeInfoAll;
