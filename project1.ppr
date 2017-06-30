@@ -10,11 +10,23 @@ uses
   {pl_kcontrols, pl_win_midi,}  pl_exsystem, pl_synapsevs, pl_zeosdbo,
   pl_bgracontrols, pl_bgrauecontrols, pl_kcontrols, Unit5, Unit6, Unit7, Unit8,
   Unit9, Unit10, unHledej, unHistory, unUkazHistorii, unGridMod,
-  unNotSraped, unGlobalScraper, unConstants, utf8tools;
+  unNotSraped, unGlobalScraper, unConstants, utf8tools
+  {$IFDEF debug}
+  , SysUtils
+  {$ENDIF};
 
 {$R *.res}
 
 begin
+   {$IFDEF DEBUG}
+  // Assuming your build mode sets -dDEBUG in Project Options/Other when defining -gh
+  // This avoids interference when running a production/default build without -gh
+
+  // Set up -gh output for the Leakview package:
+  if FileExists('heap.trc') then
+    DeleteFile('heap.trc');
+  SetHeapTraceOutput('heap.trc');
+  {$ENDIF DEBUG}
   Application.Title:='Media Stub Kodi Creator';
   RequireDerivedFormResource := True;
   Application.Initialize;

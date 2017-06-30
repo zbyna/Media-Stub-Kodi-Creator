@@ -40,13 +40,14 @@
               <OverflowChecks Value="True"/>
               <StackChecks Value="True"/>
             </Checks>
+            <VerifyObjMethodCallValidity Value="True"/>
             <Optimizations>
               <OptimizationLevel Value="0"/>
             </Optimizations>
           </CodeGeneration>
           <Linking>
             <Debugging>
-              <DebugInfoType Value="dsDwarf2"/>
+              <DebugInfoType Value="dsStabs"/>
               <UseHeaptrc Value="True"/>
               <UseExternalDbgSyms Value="True"/>
             </Debugging>
@@ -57,7 +58,8 @@
             </Options>
           </Linking>
           <Other>
-            <CustomOptions Value="-FcUTF8"/>
+            <CustomOptions Value="-FcUTF8
+-dDEBUG"/>
           </Other>
         </CompilerOptions>
       </Item2>
@@ -342,7 +344,7 @@
     </CodeGeneration>
     <Linking>
       <Debugging>
-        <DebugInfoType Value="dsDwarf2"/>
+        <DebugInfoType Value="dsStabs"/>
       </Debugging>
       <Options>
         <Win32>

@@ -1,0 +1,15 @@
+*.pak
+*.dat
+*.bin
+Log*.txt
+Log*.*
+lib/
+*.bak
+*.dbg
+*.res
+*.lps
+*.dll
+*.exe
+*.log
+*.rar
+*.trc
