@@ -1033,6 +1033,7 @@ end;
 procedure TForm1.FormDestroy(Sender: TObject);   {Při ukončení Form1 vykonej}
 begin
   HistoryFiles.SaveToFile('history.txt');
+  HistoryFiles.Free;
 end;
 
 procedure TForm1.MenuItem12Click(Sender: TObject);  {popup menu Seriály }

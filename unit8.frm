@@ -145,6 +145,7 @@ inherited FormScraper: TFormScraper
   }
   OnClose = FormClose
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnShow = FormShow
   Position = poDesktopCenter
   object vyberFilmu: TListBox[0]

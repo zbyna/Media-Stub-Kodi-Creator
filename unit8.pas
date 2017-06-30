@@ -10,7 +10,7 @@ uses
   Graphics, Dialogs, StdCtrls, ComCtrls, ExtCtrls, simpleinternet,
   simplehtmltreeparser, extendedhtmlparser, xquery, xquery_json, dateutils,
   strutils,LazUTF8,character,eventlog, LocalizedForms,bbutils,unConstants,
-  zuncomprfp, pasMP, LCLProc, ghashmap, Generics.Hashes;
+  zuncomprfp, pasMP, LCLProc, ghashmap, Generics.Hashes,contnrs;
 
 type
   { for thetvdb.com genres - languages }
@@ -114,6 +114,7 @@ type
     vyberHodnoceni:TStringList;              { seznam nascrapovaných řetězců hodnocení }
     vyberIDSerie:TStringList;                { seznam nascrapovaných id serií }
     ProgressBar1: TProgressBar;
+    procedure FormDestroy(Sender: TObject);
     procedure pauseButtonClick(Sender: TObject);
     procedure CancelButtonClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -180,6 +181,7 @@ var
   InitGenresLanguageSerial:array[TScraperSerial] of TprocedureInitGenresLanguageSerial;
   genresTheTVDB : TGenresTheTVDB;              // for TheTVDB searial scraper
   pomSlovnik:InnerDictionary;                // inner Dictionary from movidedb-genres-film.json
+  pomSlovnikReferences:TFPObjectList;        // list refereces for dealocation
   scraperyEpizody : array[TScraperSerial] of TfunctionSraperEpisodeDetail;
   aktualniScraperEpisody:TfunctionSraperEpisodeDetail;
 
@@ -1056,6 +1058,16 @@ begin
   Timer1.Enabled:=not(Timer1.Enabled);
 end;
 
+procedure TFormScraper.FormDestroy(Sender: TObject);
+begin
+  vyberObrazku.Free;
+  vyberDeju.Free;
+  vyberReferer.Free;
+  vyberZanru.Free;
+  vyberHodnoceni.Free;
+  vyberIDSerie.Free;
+end;
+
 procedure TFormScraper.FormCreate(Sender: TObject);
 
 begin
@@ -1197,6 +1209,7 @@ procedure initGenresThetvdbSerialOnce(lang: string);
 var
   w,v,y,x,z:IXQValue;
 begin
+  pomSlovnikReferences:=TFPObjectList.Create;
   w:=process('file://thetvdb-genres.json',
             '$json()');
   for v in w do
@@ -1204,6 +1217,7 @@ begin
      x:=process('file://thetvdb-genres.json',
             '$json("'+v.toString+'")()');
      pomSlovnik:=InnerDictionary.create;
+     pomSlovnikReferences.Add(pomSlovnik);
      for y in x do
         begin
           z:= process('file://thetvdb-genres.json',
@@ -1303,10 +1317,12 @@ initialization
   InitGenresLanguageSerial[Scsfd]:=@(initGenresCsfdSerial);
 
 finalization
-  genresMovieDB.FreeInstance;
-  genresMovieDBSerial.FreeInstance;
-  genresTheTVDB.FreeInstance;
-  pomSlovnik.FreeInstance;
+  genresMovieDB.Free;
+  genresMovieDBSerial.Free;
+  genresTheTVDB.Free;
+  //pomSlovnik.Free;
+  pomSlovnikReferences.Free;
+
 
 end.
 
