@@ -1092,8 +1092,7 @@ begin
   initGenres(genresMovieDBSerial,
              'https://api.themoviedb.org/3/genre/tv/list?api_key='+theMovidedbAPI+
              '&language='+aktualniJazyk,'$json("genres")() ! [.("id"), .("name")]');
-
-  // inicializace genresMovieDB for film scraper
+  //inicializace genresMovieDB for film scraper
   genresMovieDB:=TGenresMovieDB.create;
   initGenres(genresMovieDB,
              'https://api.themoviedb.org/3/genre/movie/list?api_key='+theMovidedbAPI+
@@ -1157,6 +1156,8 @@ procedure initGenres(var tabulka:TGenresMovieDB;
         cislo: Int64;
         nazevGenre: String;
     begin
+      // způsobuje memory leak v w32internetaccess.pas řádek:381
+      // FLastHTTPHeaders jsou vytvořeny dvakrát ještě v internetaccess.pas řádek:917
       w:=process(pathToFile,parseString);
       i:=1;
       for v in w do
@@ -1294,6 +1295,7 @@ begin
 end;
 
 initialization
+
   {inicializace procedur pro scrapování}
    ScraperyFilm[Fthemoviedb]:=@(FilmThemoviedb);
    ScraperyFilm[imdb]:=@(FilmImdb);

@@ -22,6 +22,7 @@ type
     procedure onTimer(sender:TObject);
     function notScrapedAction:Boolean;
     constructor create(zq:TZquery;dbg:TDBGrid);
+    destructor destroy;override;
   end;
 
 var
@@ -286,6 +287,12 @@ begin
   self.timer1.OnTimer:=@self.onTimer; // více na: http://forum.lazarus.freepascal.org/index.php?topic=7046.0
 end;
 
+destructor TGlobalScraper.destroy;
+begin
+  self.timer1.Destroy;
+  inherited;
+end;
+
 procedure TGlobalScraper.onTimer(sender: TObject);
 begin
   dobaTimer1:=dobaTimer1-1;
@@ -327,9 +334,9 @@ initialization
     // !!!!! need to asign  real dbgrid and zquery used in form1 in TForm1.create
     // !!!!!  globalScraper.dbGrid:=DBGrid1;
     // !!!!!  globalScraper.zQuery:=ZQuery1;
-
-
-
   end;
+
+finalization
+  globalScraper.destroy;
 end.
 

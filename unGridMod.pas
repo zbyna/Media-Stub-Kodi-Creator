@@ -125,8 +125,6 @@ begin
   // self.kolecko se nastaví v TForm1.DBGrid1MouseWheel
 end;
 
-
-
 { TShiftSelectForGrid }
 
 procedure TShiftSelectForGrid.dbGridShiftSelect;
@@ -195,5 +193,13 @@ initialization
     // !!!!!  columnClickSorting.zquery:=ZQuery1;
   end;
 
+finalization
+  begin
+    // not needeed own destructor(means override TObject destructor)
+    // b/c classes does not allocate any custom memory resources
+    shiftSelectForGrid.destroy;
+    wheelGridModification.destroy;
+    columnClickSorting.destroy;
+  end;
 end.
 

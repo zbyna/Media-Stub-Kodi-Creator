@@ -407,7 +407,7 @@ begin
  {vytvoř položky menu  soubor - Otevřít nedávné ------ začátek}
  MenuItem5.Clear;
  PomMenu := TmenuItem.create(Self);
- HistoryFiles := Tstringlist.create;
+ //HistoryFiles := Tstringlist.create;
  HistoryFiles.LoadFromfile('history.txt');
  for i:=0 to HistoryFiles.Count-1 do
   begin
@@ -1033,7 +1033,6 @@ end;
 procedure TForm1.FormDestroy(Sender: TObject);   {Při ukončení Form1 vykonej}
 begin
   HistoryFiles.SaveToFile('history.txt');
-  HistoryFiles.Free;
 end;
 
 procedure TForm1.MenuItem12Click(Sender: TObject);  {popup menu Seriály }
@@ -1411,7 +1410,8 @@ begin
  end;
 end;
 
-
+finalization
+ HistoryFiles.Destroy;
 
 end.
 

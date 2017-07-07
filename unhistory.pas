@@ -48,6 +48,7 @@ type
      historyVector:THistoryVector;
      procedure printHistoryVector;
      constructor create(pomString:String);
+     destructor destroy; override;
   end;
 
   // mohl by ještě obsahovat třídu TGlobalHistory, která by zapouzdřovala veškeré
@@ -71,6 +72,7 @@ type
      procedure beforePost;
      procedure clearAndPrintUndoAndRedo;   // zatím prázdná
      constructor create(ds:TDataset);
+     destructor destroy; override;
   end;
 
  var
@@ -101,6 +103,11 @@ constructor THistory.create(pomString:String);
 begin
   self.name:=pomString;
   self.historyVector:=THistoryVector.Create;
+end;
+
+destructor THistory.destroy;
+begin
+  self.historyVector.Free;
 end;
 
 procedure THistory.printHistoryVector; // upravit podle potřeby
@@ -330,6 +337,13 @@ begin
   dataSet:=ds;
 end;
 
+destructor TGlobalHistory.destroy;
+begin
+ self.undoPolozky.destroy;
+ self.redoPolozky.destroy;
+ inherited;
+end;
+
 
  initialization
   begin
@@ -338,6 +352,9 @@ end;
     // !!!!! in TForm1.create
     // !!!!! globalHistory.dataSet:=ZQuery1;
   end;
+
+ finalization
+ globalHistory.destroy;
 
 end.
 
