@@ -91,7 +91,19 @@ type
 
   TEpisodeInfoAll = specialize THashmap<String,TEpisodeInSeason,proHashTEpisodeInfoAll>;
 
-  TfunctionSraperEpisodeDetail = function(id:String):TEpisodeInfoAll;
+  { TEpisodeInfoComplete - encapsulate data and inner levels references b/c THashmap
+                           does not take into account nested objects deallocation}
+  TEpisodeInfoComplete = class
+    episodeInfoAll : TEpisodeInfoAll;
+    references: TFPObjectList;
+    constructor create;
+    destructor destroy; override;
+  end;
+
+  TfunctionSraperEpisodeDetail = function(id:String):TEpisodeInfoComplete;
+
+  { pro scraping episodes detail for TVseries - end }
+
 
   { TFormScraper }
 
@@ -135,6 +147,7 @@ type
     vybranyNazev,vybranyRok:String;  { výstup ze scrapování dostupný všude}
     idSerie:String; // nutné pro episode info scraping for nfo creating
   end;
+
   { pro scraping roku k filmu }
   function FilmThemoviedb(PomNazev:string):string;
   function FilmImdb(PomNazev:string):string;
@@ -160,10 +173,10 @@ type
   procedure initGenresThetvdbSerialOnce(lang:string);
   procedure initGenresCsfdSerial(lang:string);
   { pro scraping episode details for TV Series }
-  function SerialThemoviedbEpisodes(id:string):TEpisodeInfoAll;
-  function SerialTvmazeEpisodes(id:string):TEpisodeInfoAll;
-  function SerialThetvdbEpisode(id:string):TEpisodeInfoAll;
-  function SerialCsfdEpisode(id:string):TEpisodeInfoAll;
+  function SerialThemoviedbEpisodes(id:string):TEpisodeInfoComplete;
+  function SerialTvmazeEpisodes(id:string):TEpisodeInfoComplete;
+  function SerialThetvdbEpisode(id:string):TEpisodeInfoComplete;
+  function SerialCsfdEpisode(id:string):TEpisodeInfoComplete;
 
 var
   FormScraper: TFormScraper;
@@ -184,7 +197,6 @@ var
   pomSlovnikReferences:TFPObjectList;        // list refereces for dealocation
   scraperyEpizody : array[TScraperSerial] of TfunctionSraperEpisodeDetail;
   aktualniScraperEpisody:TfunctionSraperEpisodeDetail;
-
 
 
 
@@ -212,6 +224,21 @@ begin
  result:= SimpleChecksumHash(pchar(s), s.Length);
 end;
 
+{ TEpisodeInfoComplete }
+
+constructor TEpisodeInfoComplete.create;
+begin
+  self.episodeInfoAll:=TEpisodeInfoAll.create;
+  self.references:=TFPObjectList.create;
+end;
+
+destructor TEpisodeInfoComplete.destroy;
+begin
+  self.episodeInfoAll.Free;
+  self.references.Free;
+  inherited destroy;
+end;
+
 { proHashTEpisodeInfoAll }
 
 class function proHashTEpisodeInfoAll.hash(a: String; b: SizeUInt): SizeUInt;
@@ -223,7 +250,10 @@ end;
 
 class function proHashTEpisodeInSeason.hash(a: String; b: SizeUInt): SizeUInt;
 begin
-  hash := mojeHashFunkce(a) mod b;
+  if b=0 then
+     hash := 0
+  else
+    hash := mojeHashFunkce(a) mod b;
 end;
 
 { proHashTEpisodeInfo }
@@ -1238,16 +1268,17 @@ end;
 
 { pro scraping episode details for TV Series }
 
-function SerialThemoviedbEpisodes(id: string): TEpisodeInfoAll;
+function SerialThemoviedbEpisodes(id: string): TEpisodeInfoComplete;
 var
   v,w:IXQValue;
   scraperVstup,parsujNazev,pomSeason,ztazeno: String;
   episodeInfo:TEpisodeInfo;             // dictionary 3rd level
   episodeInSeason:TEpisodeInSeason;     // dictionary 2nd level
   episodeInfoAll:TEpisodeInfoAll;       // dictionary 1st level
+  episodeInfoComplete:TEpisodeInfoComplete; //whole dictionary + references in one class
   pomEpisodeNumber,pomEpisodeName,pomEpisodeOverview: String;
 begin
-  episodeInfoAll:=TEpisodeInfoAll.create;
+  episodeInfoComplete:=TEpisodeInfoComplete.create;
   scraperVstup:=UTF8ToSys(('https://api.themoviedb.org/3/tv/'+
                             FormScraper.idSerie +
                             '?api_key='+unConstants.theMovidedbAPI+
@@ -1264,9 +1295,11 @@ begin
        parsujNazev:='$json("episodes")()![.("episode_number"),.("name"),.("overview")]';
        ztazeno:=retrieve(scraperVstup);
        episodeInSeason:=TEpisodeInSeason.create;
+       episodeInfoComplete.references.Add(episodeInSeason);
        for w in process(ztazeno,parsujNazev) do
           begin
             episodeInfo:=TEpisodeInfo.create;
+            episodeInfoComplete.references.add(episodeInfo);
             pomEpisodeNumber:= (w as TXQValueJSONArray).seq.get(0).toString;
             pomEpisodeName:= (w as TXQValueJSONArray).seq.get(1).toString;
             pomEpisodeOverview:= (w as TXQValueJSONArray).seq.get(2).toString;
@@ -1274,24 +1307,37 @@ begin
             episodeInfo.insert('obsah',pomEpisodeOverview);
             episodeInSeason.insert(pomEpisodeNumber,episodeInfo);
           end;
-       episodeInfoAll.insert(pomSeason,episodeInSeason);
+       episodeInfoComplete.episodeInfoAll.insert(pomSeason,episodeInSeason);
      end;
-  Result:=episodeInfoAll;
+  Result:=episodeInfoComplete;
 end;
 
-function SerialTvmazeEpisodes(id: string): TEpisodeInfoAll;
+function SerialTvmazeEpisodes(id: string): TEpisodeInfoComplete;
 begin
 
 end;
 
-function SerialThetvdbEpisode(id: string): TEpisodeInfoAll;
+function SerialThetvdbEpisode(id: string): TEpisodeInfoComplete;
 begin
 
 end;
 
-function SerialCsfdEpisode(id: string): TEpisodeInfoAll;
+function SerialCsfdEpisode(id: string): TEpisodeInfoComplete;
+var
+  episodeInfo:TEpisodeInfo;             // dictionary 3rd level
+  episodeInSeason:TEpisodeInSeason;     // dictionary 2nd level
+  episodeInfoAll:TEpisodeInfoAll;       // dictionary 1st level
+  episodeInfoComplete:TEpisodeInfoComplete;
 begin
-
+  episodeInfoComplete:=TEpisodeInfoComplete.create;
+  episodeInfo:=TEpisodeInfo.create;
+  episodeInfo.insert('jmeno','xxxxx');
+  episodeInfoComplete.references.Add(episodeinfo);
+  episodeInSeason:=TEpisodeInSeason.create;
+  episodeInSeason.insert('1',episodeInfo);
+  episodeInfoComplete.references.Add(episodeInSeason);
+  episodeInfoComplete.episodeInfoAll.insert('1',episodeInSeason);
+  Result:=episodeInfoComplete;
 end;
 
 initialization

@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils,ZDataset,DBGrids,Controls,Grids,ExtCtrls,Forms,
-  strutils;
+  strutils,contnrs, ghashmap,dialogs, OWideSupp;
 
 type
   { TGlobalScraper }
@@ -139,7 +139,7 @@ var
   pomStr,PomStr1,pomPath, pomString: String;
   Pom: Integer;
   scrapovatZnovuToSame : Boolean;
-  pomEpisodesInfo:TEpisodeInfoAll;
+  pomEpisodesInfo:TEpisodeInfoComplete;
 
   procedure createNfoFile(itemType,path:String); // itemType = tvshow or movie
   var
@@ -170,13 +170,14 @@ var
       end;
   end;
 
-  procedure createNfoFileEpizode(path:String;episodesInfo:TEpisodeInfoAll);
+  procedure createNfoFileEpizode(path:String;episodesInfo:TEpisodeInfoComplete);
   var
     xmlNode, xmlNode1: TXMLNode;
     xmlDoc : IXMLDocument;
     k: Integer;
     episodes, sezona, pomSezona, pomEpisode: String;
     episodesCount: SizeInt;
+    pomText:string;
 
   begin
     episodes:=ZQuery.FieldByName('DILY_NA_DISKU').AsString;
@@ -198,10 +199,15 @@ var
           pomEpisode:= ExtractWord(k,episodes,['e']);
           Removeleadingchars(pomEpisode,['0']);
           xmlNode1:=xmlNode.AddChild('episodedetails');
-          xmlNode1.AddChild('title').AddText(episodesInfo[pomSezona][pomEpisode]['jmeno']);
+          //ShowMessage(episodesInfo.episodeInfoAll['1']['1']['jmeno']);
+          if episodesInfo.episodeInfoAll['1']['1']['jmeno'] = 'xxxxx' then
+            pomText:= 'info neni'
+          else
+            pomText:= episodesInfo.episodeInfoAll[pomSezona][pomEpisode]['jmeno'];
+          xmlNode1.AddChild('title').AddText(pomText);
           xmlNode1.AddChild('season').AddText(pomSezona);
           xmlNode1.AddChild('episode').AddText(pomEpisode);
-          xmlNode1.AddChild('plot').AddText(episodesInfo[pomSezona][pomEpisode]['obsah']);
+          xmlNode1.AddChild('plot').AddText(pomText);
         end;
     pomPath:=directory+path;
     If ForceDirectories(pomPath) then    //utf8tosys
@@ -214,7 +220,9 @@ var
 begin
   PomStr:='';
   PomStr1:='';
-  pomEpisodesInfo:=TEpisodeInfoAll.create;
+  // možná zbytečné, ještě někdy prověřit :-)
+  // vytváří se totiž ve funkci unit8.SerialThemoviedbEpisodes()
+  pomEpisodesInfo:=TEpisodeInfoComplete.create;
   {projdi výběr a vytvoř nfo soubor v cestě path}
       //nultý řádek v tabulkaVysledku jsou názvy sloupců proto +1
   for i:=0 to dbgrid.SelectedRows.Count-1 do
@@ -244,7 +252,6 @@ begin
                   createNfoFile('tvshow',pomPath);
                   // there may be several TV series in selection
                   FreeAndNil(pomEpisodesInfo);
-                  pomEpisodesInfo:=TEpisodeInfoAll.create;
                   pomEpisodesInfo:=aktualniScraperEpisody(FormScraper.idSerie);
                   createNfoFileEpizode(ZQuery.FieldByName('DIRECTORY').AsString,
                                        pomEpisodesInfo);
