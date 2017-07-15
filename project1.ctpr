@@ -113,13 +113,13 @@
     </RunParams>
     <RequiredPackages Count="27">
       <Item1>
-        <PackageName Value="pl_generics"/>
+        <PackageName Value="internettools"/>
       </Item1>
       <Item2>
-        <PackageName Value="utf8tools"/>
+        <PackageName Value="pl_generics"/>
       </Item2>
       <Item3>
-        <PackageName Value="internettools"/>
+        <PackageName Value="utf8tools"/>
       </Item3>
       <Item4>
         <PackageName Value="lz_multithreadprocs"/>
