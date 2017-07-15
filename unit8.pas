@@ -396,63 +396,80 @@ begin
 end;
 
 procedure parallelDownloadJob(const Job:PPasMPJob;const ThreadIndex:longint;
-                                 const pointerNaV:pointer;const FromIndex,ToIndex:longint);
-var
-  pomOdkazNaFilm, pomZtazeno, pomString: String;
-  v,w: IXQValue;
-begin
-   //DebuglnThreadLog('Thread Index: ' + inttostr(ThreadIndex));
-   //DebuglnThreadLog('From Index: ' + inttostr(fromIndex));
-   //DebuglnThreadLog('To Index: ' + inttostr(toIndex));
-   v:= IXQValue(pointerNav^);
-   pomOdkazNaFilm:= ( v as TXQValueObject).getProperty('odkaz').get(fromIndex+1).toString;
-   //DebuglnThreadLog('pomOdkazNaFilm:'+ pomOdkazNaFilm);
-   try
-     pomZtazeno:= retrieve('http://www.csfd.cz'+pomOdkazNaFilm);
-     pomArrayReferer[fromIndex]:='Referer: http://www.csfd.cz'+pomOdkazNaFilm;
-   except
-     on e:Exception do DebuglnThreadLog(e.ToString);
-   end;
-   if defaultInternet.lastHTTPHeaders.IndexOf(
-           'Content-Encoding: gzip') <> -1 then
-       begin
-        pomZtazeno:=decompress(pomZtazeno);
-        //DebuglnThreadLog(
-        //            '***** gzip unpacked in multithread attempt :-) *****');
-       end;
-   w:= process(pomZtazeno,
-        '<div id="poster" class="image" template:optional="true">  ' + slineBreak +
-        '    <img> {obrazek:=@src} </img> ' + slineBreak +
-        '</div> ' + slineBreak +
-        '<div class="info" template:optional="true">  ' + slineBreak +
-        '    <div class="header"> ' + slineBreak +
-        '  		 <h1>{nazev:=text()}</h1> ' + slineBreak +
-        '    </div>' + slineBreak +
-        '    <p class="genre"> {zanr:=text()}</p> ' + slineBreak +
-        '    <p> ' + slineBreak +
-        '       <span itemprop="dateCreated"> ' + slineBreak +
-        '           <template:read var="rok" source="text()" regex="(\d\d\d\d)"/>' + slineBreak +
-        '       </span>   ' + slineBreak +
-        '    </p>      ' + slineBreak +
-        '</div> ' + slineBreak +
-        '<div data-truncate="570" template:optional="true"> ' + slineBreak +
-        '  	<span class="dot icon icon-bullet"></span>      ' + slineBreak +
-        '        {dej:=deep-text()}' + slineBreak +
-        '    <span class="source"></span> ' + slineBreak +
-        '</div>' + slineBreak +
-        '<h2 class="average">' + slineBreak +
-        '  <template:read var="hodnoceni" source="text()" regex="(\d*)"/>' + slineBreak +
-        '</h2>');
-   pomArrayObrazek[fromIndex]:= (w as TXQValueObject).getProperty('obrazek').get(1).toString;
-   //DebuglnThreadLog(pomArrayObrazek[fromIndex]);
-   if (Pos('http',pomArrayObrazek[fromIndex]) = 0) then
-           pomArrayObrazek[fromIndex]:='http:'+pomArrayObrazek[fromIndex];
-   pomArrayNazev[fromIndex]:=(w as TXQValueObject).getProperty('nazev').get(1).toString;
-   pomArrayRok[fromIndex]:=(w as TXQValueObject).getProperty('rok').get(1).toString;
-   pomArrayDej[fromIndex]:=(w as TXQValueObject).getProperty('dej').get(1).toString;
-   pomString:= (w as TXQValueObject).getProperty('zanr').get(1).toString;
-   pomArrayZanry[fromIndex]:= StringReplace(pomString,' /',',',[rfReplaceAll]);
-   pomArrayHodnoceni[fromIndex]:=(w as TXQValueObject).getProperty('hodnoceni').get(1).toString;
+                              const pointerNaV:pointer;const FromIndex,ToIndex:longint);
+
+  procedure Calculate;
+  // due to the necessity to separate calculate and run part to avoid memory leaks
+  // see: https://github.com/benibela/internettools/issues/12
+  var
+    pomOdkazNaFilm, pomZtazeno, pomString: String;
+    v: IXQValue;
+    t: THtmlTemplateParser;
+  begin
+     //DebuglnThreadLog('Thread Index: ' + inttostr(ThreadIndex));
+     //DebuglnThreadLog('From Index: ' + inttostr(fromIndex));
+     //DebuglnThreadLog('To Index: ' + inttostr(toIndex));
+     v:= IXQValue(pointerNav^);
+     pomOdkazNaFilm:= ( v as TXQValueObject).getProperty('odkaz').get(fromIndex+1).toString;
+     //DebuglnThreadLog('pomOdkazNaFilm:'+ pomOdkazNaFilm);
+     try
+       pomZtazeno:= retrieve('http://www.csfd.cz'+pomOdkazNaFilm);
+       pomArrayReferer[fromIndex]:='Referer: http://www.csfd.cz'+pomOdkazNaFilm;
+     except
+       on e:Exception do DebuglnThreadLog(e.ToString);
+     end;
+     if defaultInternet.lastHTTPHeaders.IndexOf(
+             'Content-Encoding: gzip') <> -1 then
+         begin
+          pomZtazeno:=decompress(pomZtazeno);
+          //DebuglnThreadLog(
+          //            '***** gzip unpacked in multithread attempt :-) *****');
+         end;
+
+     t:=THtmlTemplateParser.create;
+     // nahrazení w:= process((pomZtazeno, template ...)
+     // template loading
+     t.parseTemplate('<div id="poster" class="image" template:optional="true">  ' + slineBreak +
+          '    <img> {obrazek:=@src} </img> ' + slineBreak +
+          '</div> ' + slineBreak +
+          '<div class="info" template:optional="true">  ' + slineBreak +
+          '    <div class="header"> ' + slineBreak +
+          '  		 <h1>{nazev:=text()}</h1> ' + slineBreak +
+          '    </div>' + slineBreak +
+          '    <p class="genre"> {zanr:=text()}</p> ' + slineBreak +
+          '    <p> ' + slineBreak +
+          '       <span itemprop="dateCreated"> ' + slineBreak +
+          '           <template:read var="rok" source="text()" regex="(\d\d\d\d)"/>' + slineBreak +
+          '       </span>   ' + slineBreak +
+          '    </p>      ' + slineBreak +
+          '</div> ' + slineBreak +
+          '<div data-truncate="570" template:optional="true"> ' + slineBreak +
+          '  	<span class="dot icon icon-bullet"></span>      ' + slineBreak +
+          '        {dej:=deep-text()}' + slineBreak +
+          '    <span class="source"></span> ' + slineBreak +
+          '</div>' + slineBreak +
+          '<h2 class="average">' + slineBreak +
+          '  <template:read var="hodnoceni" source="text()" regex="(\d*)"/>' + slineBreak +
+          '</h2>');
+     // parsing with loaded template
+     t.parseHTML(pomZtazeno);
+     // using parsing result
+     pomArrayObrazek[fromIndex]:= t.variables.Values['obrazek'].toString;
+     //DebuglnThreadLog(pomArrayObrazek[fromIndex]);
+     if (Pos('http',pomArrayObrazek[fromIndex]) = 0) then
+             pomArrayObrazek[fromIndex]:='http:'+pomArrayObrazek[fromIndex];
+     pomArrayNazev[fromIndex]:=t.variables.Values['nazev'].toString;
+     pomArrayRok[fromIndex]:=t.variables.Values['rok'].toString;
+     pomArrayDej[fromIndex]:=t.variables.Values['dej'].toString;
+     pomString:= t.variables.Values['zanr'].toString;
+     pomArrayZanry[fromIndex]:= StringReplace(pomString,' /',',',[rfReplaceAll]);
+     pomArrayHodnoceni[fromIndex]:=t.variables.Values['hodnoceni'].toString;
+     t.free;
+  end;
+
+begin  // run parallelDownloadJob
+   Calculate;
+   freeThreadVars;
 end;
 
 function FilmCsfd(PomNazev: string): string;
