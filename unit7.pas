@@ -59,8 +59,9 @@ begin
   { nastavení aktuálního scraperu při změně konfigurace v ini souboru}
   aktualniScraperFilm:=ScraperyFilm[TScraperFilm(FormNastaveni.FilmScrapers.ItemIndex)];
   aktualniScraperSerial:=ScraperySerial[TScraperSerial(FormNastaveni.SerialScrapers.ItemIndex)];
+  aktualniScraperEpisody:=scraperyEpizody[TScraperSerial(FormNastaveni.SerialScrapers.ItemIndex)];
   aktualniJazyk:=jazyky[Tjazyky(FormNastaveni.LanguageScrapers.ItemIndex)];
-  // reinicializace genresMovieDB duritn scraper language change
+  // reinicializace genresMovieDB during scraper language change
   //         - je deklarován v Unit8,line 16-22
   // QueAsyncCall for keeping responsive ui :-)
   Application.QueueAsyncCall(@spustReinicializaci,1);

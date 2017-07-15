@@ -13,33 +13,31 @@ uses
   zuncomprfp, pasMP, LCLProc, ghashmap, Generics.Hashes,contnrs;
 
 type
+
   { for thetvdb.com genres - languages }
-
-  { proHashInnerDict }
-
+  { InnerDictionary }
   proHashInnerDict = class
     public
       class function hash(a:String;b:SizeUInt):SizeUInt;
   end;
-
   InnerDictionary = specialize THashmap<string,string,proHashInnerDict>;
 
-  { ProHashTheTVDB }
 
+  { TGenresTheTVDB }
   ProHashTheTVDB = class
     public
       class function hash(a:String;b:SizeUInt):SizeUInt;
   end;
-
   TGenresTheTVDB = specialize THashmap<String,InnerDictionary,ProHashTheTVDB>;
+
 
   { for moviedb genres - languages }
   ProHash = class
       public
           class function hash(a:LongInt;b:LongInt):LongInt;
   end;
-
   TGenresMovieDB = specialize THashmap<LongInt,String,proHash>;
+
 
   { pro scraping roku k filmu - languages }
   Tjazyky = (English, Svenska, Norsk, Dansk, Suomeksi, Nederlands, Deutsch, Italiano,
@@ -47,13 +45,11 @@ type
              Japanese, Portuguese, Chinese, Czech, Slovenian, Croatian, Korean);
 
   { pro scraping roku k filmu }
-
   TScraperFilm = (Fthemoviedb,imdb,csfd);
   TfunctionScraperFilm = function(PomNazev:string):string;
   TprocedureInitGenresLanguageFilm = procedure(lang:string);
 
   { pro scraping roku k seriálu }
-
   TScraperSerial = (Sthemoviedb,tvmaze,thetvdb,Scsfd);
   TfunctionScraperSerial =  function(PomNazev:string):string;
   TprocedureInitGenresLanguageSerial = procedure(lang:string);
@@ -61,34 +57,27 @@ type
   { general action for all scrapers - něco jako closures ve Swiftu :-) }
   TprocedureSraperAction = procedure(v: IXQValue) is nested;
 
-  {genders for moviedb - films}
 
-  { pro scraping episodes detail for TVseries }
-  { proHashTEpisodeInfo }
-
+  { pro scraping episodes detail for TVseries - begin }
+  { TEpisodeInfo - 3rd level of dictionary }
   proHashTEpisodeInfo = class
     public
       class function hash(a:String;b:SizeUInt):SizeUInt;
   end;
-
   TEpisodeInfo = specialize THashmap<String,String,proHashTEpisodeInfo>;
 
-  { proHashTEpisodeInSeason }
-
+  { TEpisodeInSeason - 2nd level of dictionary }
   proHashTEpisodeInSeason = class
     public
       class function hash(a:String;b:SizeUInt):SizeUInt;
   end;
-
   TEpisodeInSeason = specialize THashmap<String,TEpisodeInfo,proHashTEpisodeInSeason>;
 
-  { proHashTEpisodeInfoAll }
-
+  { TEpisodeInfoAll - 1st level of dictionary }
   proHashTEpisodeInfoAll = class
     public
       class function hash(a:String;b:SizeUInt):SizeUInt;
   end;
-
   TEpisodeInfoAll = specialize THashmap<String,TEpisodeInSeason,proHashTEpisodeInfoAll>;
 
   { TEpisodeInfoComplete - encapsulate data and inner levels references b/c THashmap
@@ -470,8 +459,6 @@ function FilmCsfd(PomNazev: string): string;
 var
     scraperVstup,parsujNazev:string;
     theTvDbTag:Boolean;
-
-
 
    procedure scraperAction(v:IXQValue);
    var
