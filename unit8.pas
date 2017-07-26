@@ -1278,7 +1278,6 @@ var
   scraperVstup,parsujNazev,pomSeason,ztazeno: String;
   episodeInfo:TEpisodeInfo;             // dictionary 3rd level
   episodeInSeason:TEpisodeInSeason;     // dictionary 2nd level
-  episodeInfoAll:TEpisodeInfoAll;       // dictionary 1st level
   episodeInfoComplete:TEpisodeInfoComplete; //whole dictionary + references in one class
   pomEpisodeNumber,pomEpisodeName,pomEpisodeOverview: String;
 begin
@@ -1322,15 +1321,64 @@ begin
 end;
 
 function SerialThetvdbEpisode(id: string): TEpisodeInfoComplete;
+var
+  pomArrayHeaders: array[0..3] of String;
+  token, ztazeno, parsujSezony, parsujEpizody : String;
+  pomEpisodeNumber,pomEpisodeName,pomEpisodeOverview, pomSeason: String;
+  episodeInfo:TEpisodeInfo;             // dictionary 3rd level
+  episodeInSeason:TEpisodeInSeason;     // dictionary 2nd level
+  episodeInfoComplete:TEpisodeInfoComplete; //whole dictionary + references in one class
+  v,w:IXQValue;
 begin
-
+  // to receive the token for API 2.1.0
+   pomArrayHeaders[0]:= 'Content-Type: application/json';
+   pomArrayHeaders[1]:=  'Accept: application/json';
+   defaultInternet.additionalHeaders.Add(pomArrayHeaders[0]);
+   defaultInternet.additionalHeaders.Add(pomArrayHeaders[1]);
+   // to add token to request header
+   token:= process(defaultInternet.post('https://api.thetvdb.com/login',
+                                        '{"apikey": "'+unConstants.theTvdbAPI+'"}'),
+                                        '$json("token")').toString;
+   pomArrayHeaders[2]:= 'Authorization: Bearer ' + token;
+   defaultInternet.additionalHeaders.Add(pomArrayHeaders[2]);
+   // to add language to the request header
+   pomArrayHeaders[3]:= 'Accept-Language: '+aktualniJazyk;
+   defaultInternet.additionalHeaders.Add(pomArrayHeaders[3]);
+   ztazeno:=retrieve('https://api.thetvdb.com/series/'+id+'/episodes/summary');
+   parsujSezony:='jn:members($json("data")("airedSeasons"))';
+   //nahradDiakritiku(scraperVstup);  asi nebude vůbec potřeba
+   episodeInfoComplete:=TEpisodeInfoComplete.create;
+   for v in process(ztazeno,parsujSezony) do
+      begin
+        pomSeason:=v.toString;
+        if pomSeason = '0' then Continue; // no specials scrapping
+        defaultInternet.additionalHeaders.Add(pomArrayHeaders[3]);
+        ztazeno:=retrieve('https://api.thetvdb.com/series/'+id+
+                          '/episodes/query?airedSeason='+pomSeason);
+        parsujEpizody:='$json("data")()![.("airedEpisodeNumber"),'+
+                                        '.("episodeName"),.("overview")]';
+        episodeInSeason:=TEpisodeInSeason.create;
+        episodeInfoComplete.references.Add(episodeInSeason);
+        for w in process(ztazeno,parsujEpizody) do
+           begin
+             episodeInfo:=TEpisodeInfo.create;
+             episodeInfoComplete.references.add(episodeInfo);
+             pomEpisodeNumber:= (w as TXQValueJSONArray).seq.get(0).toString;
+             pomEpisodeName:= (w as TXQValueJSONArray).seq.get(1).toString;
+             pomEpisodeOverview:= (w as TXQValueJSONArray).seq.get(2).toString;
+             episodeInfo.insert('jmeno',pomEpisodeName);
+             episodeInfo.insert('obsah',pomEpisodeOverview);
+             episodeInSeason.insert(pomEpisodeNumber,episodeInfo);
+           end;
+        episodeInfoComplete.episodeInfoAll.insert(pomSeason,episodeInSeason);
+      end;
+   result:=episodeInfoComplete;
 end;
 
 function SerialCsfdEpisode(id: string): TEpisodeInfoComplete;
 var
   episodeInfo:TEpisodeInfo;             // dictionary 3rd level
   episodeInSeason:TEpisodeInSeason;     // dictionary 2nd level
-  episodeInfoAll:TEpisodeInfoAll;       // dictionary 1st level
   episodeInfoComplete:TEpisodeInfoComplete;
 begin
   episodeInfoComplete:=TEpisodeInfoComplete.create;
