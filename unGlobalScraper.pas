@@ -177,7 +177,7 @@ var
     k: Integer;
     episodes, sezona, pomSezona, pomEpisode: String;
     episodesCount: SizeInt;
-    pomText:string;
+    pomTitle, pomPlot:string;
 
   begin
     episodes:=ZQuery.FieldByName('DILY_NA_DISKU').AsString;
@@ -201,13 +201,19 @@ var
           xmlNode1:=xmlNode.AddChild('episodedetails');
           //ShowMessage(episodesInfo.episodeInfoAll['1']['1']['jmeno']);
           if episodesInfo.episodeInfoAll['1']['1']['jmeno'] = 'xxxxx' then
-            pomText:= 'info neni'
+            begin
+              pomTitle:= 'info neni';
+              pomPlot:='plot není';
+            end
           else
-            pomText:= episodesInfo.episodeInfoAll[pomSezona][pomEpisode]['jmeno'];
-          xmlNode1.AddChild('title').AddText(pomText);
+            begin
+              pomTitle:= episodesInfo.episodeInfoAll[pomSezona][pomEpisode]['jmeno'];
+              pomPlot:= episodesInfo.episodeInfoAll[pomSezona][pomEpisode]['obsah'];
+            end;
+          xmlNode1.AddChild('title').AddText(pomTitle);
           xmlNode1.AddChild('season').AddText(pomSezona);
           xmlNode1.AddChild('episode').AddText(pomEpisode);
-          xmlNode1.AddChild('plot').AddText(pomText);
+          xmlNode1.AddChild('plot').AddText(pomPlot);
         end;
     pomPath:=directory+path;
     If ForceDirectories(pomPath) then    //utf8tosys
