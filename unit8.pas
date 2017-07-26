@@ -1316,8 +1316,48 @@ begin
 end;
 
 function SerialTvmazeEpisodes(id: string): TEpisodeInfoComplete;
+var
+  v,w:IXQValue;
+  scraperVstup,parsujNazev,pomSeason,ztazeno: String;
+  episodeInfo:TEpisodeInfo;             // dictionary 3rd level
+  episodeInSeason:TEpisodeInSeason;     // dictionary 2nd level
+  episodeInfoComplete:TEpisodeInfoComplete; //whole dictionary + references in one class
+  pomEpisodeNumber,pomEpisodeName,pomEpisodeOverview: String;
+  pomSeasonReal: Byte;
 begin
-
+  episodeInfoComplete:=TEpisodeInfoComplete.create;
+  scraperVstup:=UTF8ToSys(('http://api.tvmaze.com/shows/'+
+                            FormScraper.idSerie + '/seasons' ));
+  parsujNazev:='$json()("id")';
+  ztazeno:= retrieve(scraperVstup);
+  pomSeasonReal:=0; // id is unique for record on site, we need sequence number
+  for v in process (ztazeno,parsujNazev) do
+     begin
+       pomSeason:= v.toString;
+       pomSeasonReal:=pomSeasonReal+1;
+       scraperVstup:=UTF8ToSys(('http://api.tvmaze.com/seasons/'+pomSeason+
+                                '?embed=episodes'));
+       parsujNazev:=('$json("_embedded")("episodes")()'+
+                     '![.("number"),.("name"),.("summary")]');
+       ztazeno:=retrieve(scraperVstup);
+       episodeInSeason:=TEpisodeInSeason.create;
+       episodeInfoComplete.references.Add(episodeInSeason);
+       for w in process(ztazeno,parsujNazev) do
+          begin
+            pomEpisodeNumber:= (w as TXQValueJSONArray).seq.get(0).toString;
+            if pomEpisodeNumber = 'null' then continue;
+            episodeInfo:=TEpisodeInfo.create;
+            episodeInfoComplete.references.add(episodeInfo);
+            pomEpisodeName:= (w as TXQValueJSONArray).seq.get(1).toString;
+            pomEpisodeOverview:= (w as TXQValueJSONArray).seq.get(2).toString;
+            episodeInfo.insert('jmeno',pomEpisodeName);
+            episodeInfo.insert('obsah',pomEpisodeOverview);
+            episodeInSeason.insert(pomEpisodeNumber,episodeInfo);
+          end;
+       episodeInfoComplete.episodeInfoAll.insert(inttostr(pomSeasonReal),
+                                                 episodeInSeason);
+     end;
+  Result:=episodeInfoComplete;
 end;
 
 function SerialThetvdbEpisode(id: string): TEpisodeInfoComplete;

@@ -202,8 +202,8 @@ var
           //ShowMessage(episodesInfo.episodeInfoAll['1']['1']['jmeno']);
           if episodesInfo.episodeInfoAll['1']['1']['jmeno'] = 'xxxxx' then
             begin
-              pomTitle:= 'info neni';
-              pomPlot:='plot není';
+              pomTitle:= '';  // info neni
+              pomPlot:='';    // plot není
             end
           else
             begin
