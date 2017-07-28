@@ -81,6 +81,8 @@ procedure TFormNastaveni.FormCreate(Sender: TObject);
 begin
  mysKoleckoOznaceni.Items.Strings[0]:= rsHighlightIni;
  mysKoleckoOznaceni.Items.Strings[1]:= rsDoNotHighlig;
+ // disabling imdb.com sraper due to omdbapi.com became paid
+ FilmScrapers.Controls[1].Enabled:=False;
 end;
 
 procedure TFormNastaveni.nastavStatusBar;
