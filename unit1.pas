@@ -285,6 +285,8 @@ resourcestring
   rsHighlightIni = 'Highlight initial position';
   rsDoNotHighlig = 'Do not highlight initial position';
   rsSeriesFilms = 'Series: %s Films: %s       ';
+  rsMainApplicat = 'Main application log';
+  rsScrappingLog = 'Scrapping log';
   //--------------unit 2-------------------------------------------------
   rsInintialInde = 'Initial index value';
   rsFixedPartOfL = 'Fixed part of Location (text)';
@@ -301,6 +303,7 @@ resourcestring
   rsIfHistoryExc = 'If  history exceeds number of 100 items%sit may slow down '
     +'program reaction time during%slarge database operations.%sHIDE HISTORY FORM';
   rsUndoHistoryI = 'Undo History Item name: ';
+
 
 
 

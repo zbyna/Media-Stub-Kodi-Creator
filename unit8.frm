@@ -259,7 +259,6 @@ inherited FormScraper: TFormScraper
     Active = False
     RaiseExceptionOnError = False
     DefaultEventType = etDebug
-    FileName = 'srapping.log'
     CustomLogType = 0
     EventIDOffset = 0
     Paused = False

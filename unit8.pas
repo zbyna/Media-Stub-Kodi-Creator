@@ -921,10 +921,11 @@ begin
     DefaultFormatSettings.DateSeparator:='-';  // defaultní se inicalizuje ze systému z kultury :-)
     DefaultFormatSettings.ShortDateFormat:= 'yyyy-mm-dd'; {themoviedb api vrací RRR-MM-DD}
     {uprav vstup a scrapuj }
-     EventLog1.Info('--------------Začátek scrapování--------------------');
+     EventLog1.debug('------------------------------Začátek_scrapování------------------------------');
      EventLog1.Debug('HTTP header - begin (defaultInternet.additionalHeaders): ');
      EventLog1.Debug(format('%s', [defaultInternet.additionalHeaders.Text]));
-     EventLog1.Debug('scraperVstup: '+scraperVstup);
+     EventLog1.Debug('scraperVstup: '+ReplaceText(scraperVstup,
+                                                  unConstants.theMovidedbAPI,'*****'));
      EventLog1.Debug('csfd tag: '+booltostr(theTvDbTag,true));
      EventLog1.Debug('query: ' + LeftStr(parsujNazev,800) + ' ...');
         try
@@ -987,7 +988,7 @@ begin
     { vrať zpět defaultní formát data }
     DefaultFormatSettings.DateSeparator:=pamatuj1;
     DefaultFormatSettings.ShortDateFormat:= pamatuj2;
-    EventLog1.Info('-----------------------------------------------------');
+    EventLog1.Info('--------------------------------------------------------------------------------');
 end;
 
 procedure TFormScraper.Timer1Timer(Sender: TObject);
@@ -1105,9 +1106,21 @@ end;
 procedure TFormScraper.FormCreate(Sender: TObject);
 
 begin
-  EventLog1.Active:=True; //  must be EventLog1.LogType := ltFile or set in Object inspector
-  EventLog1.Identification:='Scrapping';
-  // EventLog1.Pause;
+  // Rozhoduje EventLog1.FileName -
+  //  - když je vyplněno nepomůže ani EventLog1.Active := False;
+  //EventLog1.Active:=False; //  must be EventLog1.LogType := ltFile or set in Object inspector
+  //EventLog1.Identification:='Scrapping';
+  //EventLog1.Pause;
+  if FormNastaveni.logyAplikaceNastaveni.Checked[1] then
+     begin
+      EventLog1.FileName:='scrapping.log';
+      EventLog1.Active:=True;
+     end
+  else
+    begin
+      EventLog1.FileName:='';
+      EventLog1.Active:=False;
+    end;
   Timer1.Enabled:=false;
   prvniFokus:=true;
 

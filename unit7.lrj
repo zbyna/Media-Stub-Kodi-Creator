@@ -8,6 +8,7 @@
 {"hash":82521923,"name":"tformnastaveni.jazykaplikace.caption","sourcebytes":[76,97,110,103,117,97,103,101,115],"value":"Languages"},
 {"hash":5507422,"name":"tformnastaveni.ostatni.caption","sourcebytes":[77,105,115,99,46],"value":"Misc."},
 {"hash":124247079,"name":"tformnastaveni.myskoleckooznaceni.caption","sourcebytes":[80,111,105,110,116,101,114,32,98,101,104,97,118,105,110,103,32,32,100,117,114,105,110,103,32,109,111,117,115,101,32,119,104,101,101,108,32,115,99,114,111,108,108,105,110,103],"value":"Pointer behaving  during mouse wheel scrolling"},
+{"hash":56483863,"name":"tformnastaveni.logyaplikacenastaveni.caption","sourcebytes":[76,111,103,103,105,110,103],"value":"Logging"},
 {"hash":1371,"name":"tformnastaveni.okbutton.caption","sourcebytes":[79,107],"value":"Ok"},
 {"hash":77089212,"name":"tformnastaveni.cancelbutton.caption","sourcebytes":[67,97,110,99,101,108],"value":"Cancel"}
 ]}

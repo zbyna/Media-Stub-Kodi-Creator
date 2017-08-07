@@ -14,6 +14,7 @@ type
   { TFormNastaveni }
 
   TFormNastaveni = class(TLocalizedForm)         // Options form
+    logyAplikaceNastaveni: TCheckGroup;
     IniPropStorage1: TIniPropStorage;
     Okbutton: TButton;
     CancelButton: TButton;
@@ -27,6 +28,8 @@ type
     narodniNastaveni: TTabSheet;
     ostatni: TTabSheet;
     procedure FormCreate(Sender: TObject);
+    procedure IniPropStorage1RestoreProperties(Sender: TObject);
+    procedure IniPropStorage1SavingProperties(Sender: TObject);
     procedure jazykAplikaceSelectionChanged(Sender: TObject);
     procedure OkbuttonClick(Sender: TObject);
     procedure nastavStatusBar;
@@ -83,6 +86,32 @@ begin
  mysKoleckoOznaceni.Items.Strings[1]:= rsDoNotHighlig;
  // disabling imdb.com sraper due to omdbapi.com became paid
  FilmScrapers.Controls[1].Enabled:=False;
+  if FormNastaveni.logyAplikaceNastaveni.Checked[0] then
+       begin
+         form1.frmeventLog.FileName:='eventLogMain.log';
+         Form1.frmeventLog.Active:=True;
+       end
+    else
+       begin
+         Form1.frmeventLog.FileName:='';
+         Form1.frmeventLog.Active:=False;
+       end;
+end;
+
+procedure TFormNastaveni.IniPropStorage1RestoreProperties(Sender: TObject);
+begin
+  logyAplikaceNastaveni.Checked[0]:=StrToBool(
+                                    IniPropStorage1.StoredValue['mainApplicationLog']);
+  logyAplikaceNastaveni.Checked[1]:=StrToBool(
+                                    IniPropStorage1.StoredValue['scrappingLog']);
+end;
+
+procedure TFormNastaveni.IniPropStorage1SavingProperties(Sender: TObject);
+begin
+  IniPropStorage1.StoredValue['mainApplicationLog']:=BoolToStr(
+                                                     logyAplikaceNastaveni.Checked[0]);
+  IniPropStorage1.StoredValue['scrappingLog']:=BoolToStr(
+                                               logyAplikaceNastaveni.Checked[1]);
 end;
 
 procedure TFormNastaveni.nastavStatusBar;
@@ -111,7 +140,10 @@ begin
   inherited UpdateTranslation(ALang);
   mysKoleckoOznaceni.Items.Strings[0]:= rsHighlightIni;
   mysKoleckoOznaceni.Items.Strings[1]:= rsDoNotHighlig;
-  nastavStatusBar;
+  //nastavStatusBar;  // způsobovalo podivnou chybu, po přidání lines 146,147,
+  // asi chyba fpc nebo lazarusu v TIniPropStorage;
+  logyAplikaceNastaveni.Items.Strings[0]:= rsMainApplicat;
+  logyAplikaceNastaveni.Items.Strings[1]:= rsScrappingLog;
 end;
 
 end.

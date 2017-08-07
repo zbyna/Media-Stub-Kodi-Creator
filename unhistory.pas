@@ -62,7 +62,7 @@ type
      multiPolozkaHistorie:Boolean;   // více prvků v historyItem.polePolozek
      probihaUndo:Boolean;            // vybráno menu Historie/Undo
      probihaRedo:Boolean;            // vybráno menu Historie/Redo
-     dataSet:TDataset;               // daset for history
+     dataSet:TDataset;               // dataset for history
      isfrmUkazHistoriiShown:Boolean; // because of speed improving
      procedure doUndo;
      procedure doRedo;

@@ -3,7 +3,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.8\n"
+"X-Generator: Poedit 1.8.11\n"
 "Project-Id-Version: Media Stub Kodi Creator\n"
 "Language: cs\n"
 "POT-Creation-Date: \n"
@@ -674,6 +674,10 @@ msgstr "Jazyky"
 msgid "For themoviedb.org a thetvdb.com"
 msgstr "Pro themoviedb.org a thetvdb.com "
 
+#: tformnastaveni.logyaplikacenastaveni.caption
+msgid "Logging"
+msgstr "Logování"
+
 #: tformnastaveni.myskoleckooznaceni.caption
 msgid "Pointer behaving  during mouse wheel scrolling"
 msgstr "Chování ukazatele během scrolování kolečkem"
@@ -904,6 +908,10 @@ msgctxt "unit1.rslocation"
 msgid "Location"
 msgstr "Umístění"
 
+#: unit1.rsmainapplicat
+msgid "Main application log"
+msgstr "Log hlavní aplikace"
+
 #: unit1.rsmedium
 msgctxt "unit1.rsmedium"
 msgid "Medium"
@@ -971,6 +979,10 @@ msgstr "Pro scrapování roku %sje potřeba také zaškrtnout pole \"Název seri
 #: unit1.rsredobufferit
 msgid "Redo Buffer Items"
 msgstr "Redo položky"
+
+#: unit1.rsscrappinglog
+msgid "Scrapping log"
+msgstr "Log scrapování"
 
 #: unit1.rsseason
 msgctxt "unit1.rsseason"
@@ -1074,4 +1086,3 @@ msgstr "Změň film(y)"
 #: unit1.rszmnitscraper
 msgid "Change scraper"
 msgstr "Změň scraper"
-

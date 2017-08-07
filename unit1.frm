@@ -16296,7 +16296,6 @@ inherited Form1: TForm1
     Active = False
     RaiseExceptionOnError = False
     DefaultEventType = etDebug
-    FileName = 'eventLogMain.log'
     CustomLogType = 0
     EventIDOffset = 0
     Paused = False

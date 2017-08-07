@@ -145,7 +145,7 @@ inherited FormNastaveni: TFormNastaveni
   }
   OnCreate = FormCreate
   Position = poDesktopCenter
-  SessionProperties = 'FilmScrapers.ItemIndex;LanguageScrapers.ItemIndex;SerialScrapers.ItemIndex;mysKoleckoOznaceni.ItemIndex;jazykAplikace.ItemIndex'
+  SessionProperties = 'FilmScrapers.ItemIndex;jazykAplikace.ItemIndex;LanguageScrapers.ItemIndex;mysKoleckoOznaceni.ItemIndex;SerialScrapers.ItemIndex'
   object PageControl1: TPageControl[0]
     Left = 8
     Height = 473
@@ -253,7 +253,7 @@ inherited FormNastaveni: TFormNastaveni
     end
     object narodniNastaveni: TTabSheet
       Caption = 'National setting'
-      ClientHeight = 439
+      ClientHeight = 440
       ClientWidth = 712
       object jazykAplikace: TRadioGroup
         Left = 32
@@ -281,7 +281,7 @@ inherited FormNastaveni: TFormNastaveni
     end
     object ostatni: TTabSheet
       Caption = 'Misc.'
-      ClientHeight = 439
+      ClientHeight = 440
       ClientWidth = 712
       object mysKoleckoOznaceni: TRadioGroup
         Left = 21
@@ -305,6 +305,32 @@ inherited FormNastaveni: TFormNastaveni
         )
         TabOrder = 0
       end
+      object logyAplikaceNastaveni: TCheckGroup
+        Left = 21
+        Height = 124
+        Top = 184
+        Width = 355
+        AutoFill = True
+        Caption = 'Logging'
+        ChildSizing.LeftRightSpacing = 6
+        ChildSizing.TopBottomSpacing = 6
+        ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+        ChildSizing.EnlargeVertical = crsHomogenousChildResize
+        ChildSizing.ShrinkHorizontal = crsScaleChilds
+        ChildSizing.ShrinkVertical = crsScaleChilds
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 1
+        ClientHeight = 99
+        ClientWidth = 351
+        Items.Strings = (
+          'Main application log'
+          'Scrapping log'
+        )
+        TabOrder = 1
+        Data = {
+          020000000202
+        }
+      end
     end
   end
   object Okbutton: TButton[1]
@@ -327,8 +353,18 @@ inherited FormNastaveni: TFormNastaveni
     TabOrder = 2
   end
   object IniPropStorage1: TIniPropStorage[3]
-    StoredValues = <>
+    StoredValues = <    
+      item
+        Name = 'mainApplicationLog'
+        Value = '-1'
+      end    
+      item
+        Name = 'scrappingLog'
+        Value = '-1'
+      end>
     IniFileName = 'nastaveni.ini'
+    OnSavingProperties = IniPropStorage1SavingProperties
+    OnRestoreProperties = IniPropStorage1RestoreProperties
     Left = 368
     Top = 24
   end

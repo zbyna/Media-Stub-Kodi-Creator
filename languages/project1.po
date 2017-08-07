@@ -653,6 +653,10 @@ msgstr ""
 msgid "For themoviedb.org a thetvdb.com"
 msgstr ""
 
+#: tformnastaveni.logyaplikacenastaveni.caption
+msgid "Logging"
+msgstr ""
+
 #: tformnastaveni.myskoleckooznaceni.caption
 msgid "Pointer behaving  during mouse wheel scrolling"
 msgstr ""
@@ -883,6 +887,10 @@ msgctxt "unit1.rslocation"
 msgid "Location"
 msgstr ""
 
+#: unit1.rsmainapplicat
+msgid "Main application log"
+msgstr ""
+
 #: unit1.rsmedium
 msgctxt "unit1.rsmedium"
 msgid "Medium"
@@ -949,6 +957,10 @@ msgstr ""
 
 #: unit1.rsredobufferit
 msgid "Redo Buffer Items"
+msgstr ""
+
+#: unit1.rsscrappinglog
+msgid "Scrapping log"
 msgstr ""
 
 #: unit1.rsseason

@@ -3,7 +3,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.8\n"
+"X-Generator: Poedit 1.8.11\n"
 "Project-Id-Version: Media Stub Kodi Creator\n"
 "Language: en\n"
 "POT-Creation-Date: \n"
@@ -681,6 +681,10 @@ msgstr "Languages"
 msgid "For themoviedb.org a thetvdb.com"
 msgstr "For themoviedb.org a thetvdb.com"
 
+#: tformnastaveni.logyaplikacenastaveni.caption
+msgid "Logging"
+msgstr "Logging"
+
 #: tformnastaveni.myskoleckooznaceni.caption
 msgid "Pointer behaving  during mouse wheel scrolling"
 msgstr "Pointer behaving  during mouse wheel scrolling"
@@ -915,6 +919,10 @@ msgctxt "unit1.rslocation"
 msgid "Location"
 msgstr "Location"
 
+#: unit1.rsmainapplicat
+msgid "Main application log"
+msgstr "Main application log"
+
 #: unit1.rsmedium
 msgctxt "unit1.rsmedium"
 msgid "Medium"
@@ -982,6 +990,10 @@ msgstr "For year scraping %sis neede to check also field \"Series name\""
 #: unit1.rsredobufferit
 msgid "Redo Buffer Items"
 msgstr "Redo Buffer Items"
+
+#: unit1.rsscrappinglog
+msgid "Scrapping log"
+msgstr "Scrapping log"
 
 #: unit1.rsseason
 msgctxt "unit1.rsseason"
@@ -1089,4 +1101,3 @@ msgstr "Change film(s)"
 #: unit1.rszmnitscraper
 msgid "Change scraper"
 msgstr "Change scraper"
-
