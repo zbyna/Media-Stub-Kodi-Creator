@@ -486,7 +486,9 @@ begin
   ZmenaVDatabazi := false;    {vynulování změn základní tabulky }
   StatusBar1.Panels[0].Text:=rsSeAzenoDle;
   JmenoAktSoubor:='';
-  globalHistory.clearAndPrintUndoAndRedo;
+  // před vymazáním nutno  free all object references,
+  // better to let this job to desctructors in unHistory.pas :-)
+//  globalHistory.clearAndPrintUndoAndRedo;
 end;
 
 procedure TForm1.MenuItemFilmyClick(Sender: TObject);

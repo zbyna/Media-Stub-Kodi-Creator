@@ -25,6 +25,7 @@ type
      operaceRedo:TsqlTypProUndo;
      hodnoty: Thodnoty;
      constructor create(op:TsqlTypProUndo; pomHodnoty:THodnoty);
+     destructor Destroy; override;
    end;
 
   { TPolePolozek }
@@ -37,6 +38,7 @@ type
      constructor create(pomString:string;pomHodnoty:THodnoty;sqlTyp:TsqlTypProUndo);
      procedure operaceDoPolePolozek(pomHodnoty:Thodnoty;sqlTyp:TsqlTypProUndo);
      procedure operaceZPolePolozek( pomDs:TDataset;pomUnRe:TUndoNeboRedo;pomPol:Integer);
+     destructor destroy; override;
   end;
 
   { THistoryVector }
@@ -98,6 +100,11 @@ begin
   self.hodnoty:=pomHodnoty;
 end;
 
+destructor TPolozka.Destroy;
+begin
+  inherited Destroy;
+end;
+
 { THistory }
 constructor THistory.create(pomString:String);
 begin
@@ -106,8 +113,13 @@ begin
 end;
 
 destructor THistory.destroy;
+var
+     i:Integer;
 begin
+  for i:=0 to self.historyVector.Size-1 do
+      self.historyVector.Items[i].destroy;
   self.historyVector.Free;
+  //Inherited;
 end;
 
 procedure THistory.printHistoryVector; // upravit podle potřeby
@@ -134,6 +146,7 @@ end;
 
 { THistoryItem }
 constructor THistoryItem.create(pomString: string;pomHodnoty:THodnoty;sqlTyp:TsqlTypProUndo);
+
 begin
   self.jmenoPolozky:=pomString;
   self.polePolozek:=TPolePolozek.Create;
@@ -147,7 +160,8 @@ begin
   self.polePolozek.PushBack(TPolozka.create(sqlTyp,pomHodnoty));
 end;
 
-procedure THistoryItem.operaceZPolePolozek( pomDs: TDataset;pomUnRe:TUndoNeboRedo;pomPol:integer);
+procedure THistoryItem.operaceZPolePolozek(pomDs: TDataset; pomUnRe: TUndoNeboRedo; pomPol: Integer
+  );
 var
   i: Integer;
   v:variant;
@@ -179,6 +193,16 @@ begin
         end
   end;
   //self.polePolozek.PopBack;
+end;
+
+destructor THistoryItem.destroy;
+var
+  i: Integer;
+begin
+  for i:=0 to self.polePolozek.Size-1 do
+      self.polePolozek.Items[i].Free;
+  self.polePolozek.Free;
+  //Inherited;
 end;
 
 { TGlobalHistory }
@@ -320,8 +344,14 @@ begin
 end;
 
 procedure TGlobalHistory.clearAndPrintUndoAndRedo;
+var
+     i:Integer;
 begin
+  for i:=0 to self.undoPolozky.historyVector.Size-1 do
+         self.undoPolozky.historyVector.Items[i].Destroy;
   undoPolozky.historyVector.Clear;
+  for i:=0 to self.redoPolozky.historyVector.Size-1 do
+         self.redoPolozky.historyVector.Items[i].Destroy;
   redoPolozky.historyVector.Clear;
   undoPolozky.printHistoryVector;
   redoPolozky.printHistoryVector;
