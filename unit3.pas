@@ -314,7 +314,7 @@ If  Form1.ZjistiPromNovySerial()
                       Form1.ZQuery1.FieldByName('DRUH').AsString:= 'series';
                       if CheckBox1.Checked then
                          begin
-                           PomUm:=inttostr(JLabeledIntegerEdit2.Value+PocetDisku);
+                           PomUm:=inttostr(JLabeledIntegerEdit2.Value+PocetDisku-1);
                            if length(PomUm) =1 then PomUm:='00'+PomUm;
                            if length(PomUm) =2 then PomUm:='0'+PomUm;
                            Form1.ZQuery1.FieldByName('UMISTENI').AsString:= LabeledEdit2.Text+
@@ -401,7 +401,7 @@ If  Form1.ZjistiPromNovySerial()
                   begin
                     if CheckBox1.Checked then
                        begin
-                         PomUm:=inttostr(JLabeledIntegerEdit2.Value+PocetDisku);
+                         PomUm:=inttostr(JLabeledIntegerEdit2.Value+PocetDisku-1);
                          if length(PomUm) =1 then PomUm:='00'+PomUm;
                          if length(PomUm) =2 then PomUm:='0'+PomUm;
                          Form1.ZQuery1.FieldByName('UMISTENI').AsString:= LabeledEdit2.Text+

@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs,
-  Grids, ExtCtrls, StdCtrls,LocalizedForms,LazUTF8;
+  Grids, ExtCtrls, StdCtrls,LocalizedForms,LazUTF8,strutils;
 
 type
 
@@ -132,7 +132,9 @@ procedure TFormUpravUmisteni.stringGridProVyberPoziceSelectCell(
   Sender: TObject; aCol, aRow: Integer; var CanSelect: Boolean);
 {doplní nuly zleva pro vybrané číslo v Umístění}
 type
-   TCislice = set of '0'..'9';
+   TCislice = set of char; // nesmí být set of '0'..'9' jinak nefunguje proměnná
+   //typu TCislice v podmínkách na řádcích 171,172,178 i když před update codetyphonu
+   // vše fungovalo :-) komedie
 var
    cislice : TCislice;
    i,k: Integer;

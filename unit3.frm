@@ -238,7 +238,7 @@ inherited Form3: TForm3
     Height = 28
     Top = 328
     Width = 48
-    DisplayFormat = '1'
+    DisplayFormat = '0'
     Value = 0
     NegativeColor = clDefault
     EditLabel.AnchorSideLeft.Control = JLabeledIntegerEdit2
