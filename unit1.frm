@@ -1221,6 +1221,7 @@ inherited Form1: TForm1
           D3FFD2D2D2FFD1D1D1FFCFCFCFFFCECECEFFCCCCCCFFCBCBCB00
         }
         ImageIndex = 12
+        ShortCut = 24659
         OnClick = MenuItem14Click
       end
       object MenuItemSerialyOznacSerial: TMenuItem
@@ -1230,14 +1231,17 @@ inherited Form1: TForm1
       end
       object MenuItemSerialyHZNazevSerialu: TMenuItem
         Caption = 'Bulk change "Series name"'
+        ShortCut = 24654
         OnClick = MenuItem12Click
       end
       object MenuItemSerialyHZUmisteni: TMenuItem
         Caption = 'Bulk change  "Location"'
+        ShortCut = 24652
         OnClick = MenuItem13Click
       end
       object MenuItemSerialyHZRok: TMenuItem
         Caption = 'Bulk change "Year"'
+        ShortCut = 24665
         OnClick = MenuItem15Click
       end
       object MenuItemSerialyHZKomplexni: TMenuItem
@@ -1279,6 +1283,7 @@ inherited Form1: TForm1
           003B0000003B0000003B02334643484FD4DC3838D0BA4444D018
         }
         ImageIndex = 7
+        ShortCut = 24645
         OnClick = MenuItem17Click
       end
       object MenuItemSerialyVytvorStubSoubory: TMenuItem
@@ -1365,6 +1370,7 @@ inherited Form1: TForm1
           D3FFD2D2D2FFD1D1D1FFCFCFCFFFCECECEFFCCCCCCFFCBCBCB00
         }
         ImageIndex = 12
+        ShortCut = 41030
         OnClick = MenuItem19Click
       end
       object MenuItemFilmyZmenFilmy: TMenuItem
@@ -1406,10 +1412,12 @@ inherited Form1: TForm1
           003B0000003B0000003B02334643484FD4DC3838D0BA4444D018
         }
         ImageIndex = 7
+        ShortCut = 41029
         OnClick = MenuItem22Click
       end
       object MenuItemFilmyHZUmisteni: TMenuItem
         Caption = 'Bulk change "Location"'
+        ShortCut = 41036
         OnClick = MenuItem20Click
       end
       object MenuItemFilmyHTStubfileDirectory: TMenuItem
