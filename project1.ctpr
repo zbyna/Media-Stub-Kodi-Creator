@@ -26,6 +26,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
+            <Libraries Value="$(FPCUnitsDir)\$(TargetCPU)-$(TargetOS);$(FPCSrcDir)\packages;$(CTDir)\binLibraries"/>
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <Parsing>
@@ -49,7 +50,6 @@
             <Debugging>
               <DebugInfoType Value="dsStabs"/>
               <UseHeaptrc Value="True"/>
-              <UseExternalDbgSyms Value="True"/>
             </Debugging>
             <Options>
               <Win32>
@@ -113,13 +113,13 @@
     </RunParams>
     <RequiredPackages Count="27">
       <Item1>
-        <PackageName Value="internettools"/>
+        <PackageName Value="utf8tools"/>
       </Item1>
       <Item2>
-        <PackageName Value="pl_generics"/>
+        <PackageName Value="internettools"/>
       </Item2>
       <Item3>
-        <PackageName Value="utf8tools"/>
+        <PackageName Value="pl_generics"/>
       </Item3>
       <Item4>
         <PackageName Value="lz_multithreadprocs"/>
@@ -179,19 +179,19 @@
         <PackageName Value="pl_virtualtreesextra"/>
       </Item22>
       <Item23>
-        <PackageName Value="bs_Controls"/>
+        <PackageName Value="adLCL"/>
       </Item23>
       <Item24>
-        <PackageName Value="adFCL"/>
+        <PackageName Value="bs_Controls"/>
       </Item24>
       <Item25>
-        <PackageName Value="lz_sdf"/>
+        <PackageName Value="adFCL"/>
       </Item25>
       <Item26>
-        <PackageName Value="lz_tpipro"/>
+        <PackageName Value="lz_sdf"/>
       </Item26>
       <Item27>
-        <PackageName Value="adLCL"/>
+        <PackageName Value="lz_tpipro"/>
       </Item27>
     </RequiredPackages>
     <Units Count="20">

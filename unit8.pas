@@ -9,7 +9,7 @@ uses
   Classes, SysUtils, FileUtil, TplTimerUnit, Forms, Controls,
   Graphics, Dialogs, StdCtrls, ComCtrls, ExtCtrls, simpleinternet,
   simplehtmltreeparser, extendedhtmlparser, xquery, xquery_json, dateutils,
-  strutils,LazUTF8,character,eventlog, LocalizedForms,bbutils,unConstants,
+  strutils,LazUTF8,character_utf8tools,eventlog, LocalizedForms,bbutils,unConstants,
   zuncomprfp, pasMP, LCLProc, ghashmap, Generics.Hashes,contnrs;
 
 type

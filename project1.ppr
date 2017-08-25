@@ -10,7 +10,7 @@ uses
   {pl_kcontrols, pl_win_midi,}  pl_exsystem, pl_synapsevs, pl_zeosdbo,
   pl_bgracontrols, pl_bgrauecontrols, pl_kcontrols, Unit5, Unit6, Unit7, Unit8,
   Unit9, Unit10, unHledej, unHistory, unUkazHistorii, unGridMod,
-  unNotSraped, unGlobalScraper, unConstants, utf8tools
+  unNotSraped, unGlobalScraper, unConstants, utf8tools,LazFileUtils
   {$IFDEF debug}
   , SysUtils
   {$ENDIF};
@@ -23,8 +23,8 @@ begin
   // This avoids interference when running a production/default build without -gh
 
   // Set up -gh output for the Leakview package:
-  if FileExists('heap.trc') then
-    DeleteFile('heap.trc');
+  if FileExistsUTF8('heap.trc') then
+    DeleteFileUTF8('heap.trc');
   SetHeapTraceOutput('heap.trc');
   {$ENDIF DEBUG}
   Application.Title:='Media Stub Kodi Creator';
