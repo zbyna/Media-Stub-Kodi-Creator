@@ -19,4 +19,5 @@ The program allows you to:
  - communicate with programs 3 parties using csv format
 
  ![](http://i.imgur.com/OAw4y2j.png)
-
+### How to add TV Series
++ [![](https://img.youtube.com/vi/gVMAXWbmoxo/1.jpg)](https://youtu.be/gVMAXWbmoxo "Click to play on Youtube.com")
