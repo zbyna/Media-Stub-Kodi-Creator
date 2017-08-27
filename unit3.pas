@@ -336,9 +336,9 @@ If  Form1.ZjistiPromNovySerial()
                begin
                   XNodeDisk:=XNodeSezona^.FirstChild;
 
-                   {
-                    PocetDisku:=0;
-                   }
+                     PocetDilu:=0;
+                    //PocetDisku:=0;
+
 
                end;
             if (XNodeDisk  <> nil) then XnodeDil :=XNodeDisk^.FirstChild;
@@ -430,9 +430,9 @@ If  Form1.ZjistiPromNovySerial()
                begin
                   XNodeDisk:=XNodeSezona^.FirstChild;
 
-                   {
-                    PocetDisku:=0;
-                   }
+                     PocetDilu:=0;
+                    //PocetDisku:=0;
+
 
                end;
             if (XNodeDisk  <> nil) then XnodeDil :=XNodeDisk^.FirstChild;
