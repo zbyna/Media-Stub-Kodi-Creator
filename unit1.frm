@@ -16286,7 +16286,8 @@ inherited Form1: TForm1
     LicenseFile = saLGPL
     SupportContact = 'zbynek.fiala()gmail.com'
     Author = 'Zbyněk Fiala (zbyna)'
-    UserTitle = 'Media Stub Kodi Creator '
+    TitleStyle = saUserTitle
+    UserTitle = 'Media Stub Kodi Creator'
     ShowDescription = False
     FormSplashHeight = 320
     FormAboutWidth = 640

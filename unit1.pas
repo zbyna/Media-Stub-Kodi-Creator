@@ -984,6 +984,7 @@ var
  i: Integer;
 
 begin
+ SplashAbout1.UserTitle:=SplashAbout1.UserTitle + ' (v.0.9-beta3)';
  //SetDefaultLang('cs');
  //SplashAbout1.ShowSplash;
  DBGrid1.Columns.Items[0].Title.Caption:=rsName;
