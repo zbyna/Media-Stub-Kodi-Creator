@@ -769,7 +769,7 @@ var
                                 else
          pomI:=(v as TXQValueSequence).getSequenceCount;
       //formScraper.EventLog1.Debug('Počet odkazů: ' +inttostr(pomI));
-      if pomI > 5 then pomI:=5; // only 5 search results
+      if pomI > 4 then pomI:=4; // only 5 search results
       pointerNaV:= @v;
       SetLength(pomArrayNazev,pomI);
       SetLength(pomArrayRok,pomI);
