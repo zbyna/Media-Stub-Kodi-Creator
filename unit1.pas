@@ -546,8 +546,17 @@ end;
 procedure TForm1.MenuItemHledejClick(Sender: TObject);  {popUp Hledej}
 begin
   //  vytvořit frmHledej;
-  Application.CreateForm(TfrmHledej,frmHledej);
-  frmHledej.Show;
+  if frmHledej = nil then
+     begin
+       Application.CreateForm(TfrmHledej,frmHledej);
+       frmHledej.Show;
+     end
+  else
+     begin
+       Application.ReleaseComponent(frmHledej);
+       frmHledej:=nil;
+     end;
+
   // ZQuery1.Locate();
   // uvolnit frmHledej;
   // Application.ReleaseComponent(frmHledej);
