@@ -18,6 +18,16 @@ The program allows you to:
 
  - communicate with programs 3 parties using csv format
 
+
  ![](http://i.imgur.com/OAw4y2j.png)
-### How to add TV Series
-+ [![](https://img.youtube.com/vi/gVMAXWbmoxo/1.jpg)](https://youtu.be/gVMAXWbmoxo "Click to play on Youtube.com")
+
+##### How to videos
+<span>
+
+[![](https://img.youtube.com/vi/gVMAXWbmoxo/1.jpg)](https://youtu.be/gVMAXWbmoxo "How to add TV Series")
+[![](https://img.youtube.com/vi/BQm922h87aI/1.jpg)](https://youtu.be/BQm922h87aI "How to import TV Serie data from csv")
+[![](https://img.youtube.com/vi/nKoxmrb_tk4/1.jpg)](https://youtu.be/nKoxmrb_tk4 "How to use number format adjustment tool")
+[![](https://img.youtube.com/vi/Y3WII0TuPHg/1.jpg)](https://youtu.be/Y3WII0TuPHg "How to adjust imported  tv-series")
+[![](https://img.youtube.com/vi/XeaSmTt0nus/1.jpg)](https://youtu.be/XeaSmTt0nus "How to create nfo files for tv series")
+
+</span>
