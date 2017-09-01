@@ -818,6 +818,7 @@ begin
   ////previousGridBookmark := DBGrid1.DataSource.DataSet.GetBookmark; je to depreciated
   //previousGridBookmark := ZQuery1.Bookmark; // save last selected bookmark
   shiftSelectForGrid.previousBookmark:=ZQuery1.Bookmark;  // save last selected bookmark
+  shiftSelectForGrid.previousRecNo:=ZQuery1.RecNo;
   ////if minulyColumnKliknuty <> nil then minulyColumnKliknuty.Title.Color:=clWindow;
   ////Column.Title.Color:=cl3DLight;
   ////minulyColumnKliknuty:=Column;

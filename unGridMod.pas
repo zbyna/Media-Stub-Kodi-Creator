@@ -16,6 +16,7 @@ type
 
   TShiftSelectForGrid = class
      previousBookmark:TBookmark;
+     previousRecNo:LongInt;
      //dataSet:TDataSet;   // dataset is referenced from dbgrid.DataSource.DataSet;
      dbgrid:TDBGrid;
      procedure dbGridShiftSelect;
@@ -132,7 +133,7 @@ var
 	soucPos: TBookmark;
 	grid: TDBGrid;
 	dSet: TDataSet;
-	prvni, posledni, pom: integer;
+	prvni, posledni, pom: LongInt;
         existingBookmarks:TBookmark;
 begin
   grid := self.dbgrid;   //(Sender as TDBGrid);
@@ -146,26 +147,28 @@ begin
     repeat
 	if not (ssShift in GetKeyShiftState) then exit;
 	if (existingBookmarks = nil) then exit;
-	// go to the last bookmark before we shift-clicked
-	dSet.GotoBookmark(existingBookmarks);
-	prvni := dSet.RecNo;
+	// RecNo of record we clicked before we shift-clicked
+        prvni:=self.previousRecNo;
 	if posledni = prvni then exit;
-	// we want to only mark moving forward, so if need be, swap the bookmarks
-	if posledni < prvni then
-           begin
-		pom := posledni;
-		posledni := prvni;
-		prvni := pom;
+        // from last (shift click) selected to the first to avoid annoing
+        //                               scrolling when gotobookmart used
+	// Is the position of activated item (shift clicked one)
+        //                 under position of item clicked previously ?
+	if posledni < prvni then    // yes we need go down the table
+             repeat
 		grid.SelectedRows.CurrentRowSelected := True;
-		dSet.GotoBookmark(soucPos);
-	   end;
-	repeat
-	  // highlight current row
-	  grid.SelectedRows.CurrentRowSelected := True;
-	  dset.Next;
-	  prvni := dSet.recNo;
-	  // keep going until we reach the shift-clicked row
-	until prvni = posledni ;
+                dset.Next;
+                posledni:=dSet.RecNo;
+                // keep going until we reach the last row
+             until posledni = prvni
+        else     // no we need go up the table
+	      repeat
+	        // highlight current row it means the shift-clicked one
+	        grid.SelectedRows.CurrentRowSelected := True;
+	        dset.Prior;
+	        posledni := dSet.recNo;
+	        // keep going until we reach the first row
+	      until posledni = prvni ;
     until true;
   finally
     dSet.FreeBookmark(soucPos);
@@ -177,6 +180,7 @@ constructor TShiftSelectForGrid.create({ds: TDataset;} dg: TDBGrid);
 begin
   //self.dataSet:=ds;   // dataset is referenced from dbgrid.DataSource.DataSet;
   self.dbgrid:=dg;
+  self.previousRecNo:=0;
   self.previousBookmark:=nil; // nastaví se později v metodě dbGridShiftSelect
 end;                // a taky potřeba obnovit v TForm1.DBGrid1CellClick(Column:TColumn)
 
