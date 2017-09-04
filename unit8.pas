@@ -166,6 +166,8 @@ type
   function SerialTvmazeEpisodes(id:string):TEpisodeInfoComplete;
   function SerialThetvdbEpisode(id:string):TEpisodeInfoComplete;
   function SerialCsfdEpisode(id:string):TEpisodeInfoComplete;
+  { pro scraping fanart and poster for thetvdb.com nfo creating }
+  procedure getPosterFanart(cesta:String;id:String);
 
 var
   FormScraper: TFormScraper;
@@ -1443,6 +1445,79 @@ begin
   episodeInfoComplete.references.Add(episodeInSeason);
   episodeInfoComplete.episodeInfoAll.insert('1',episodeInSeason);
   Result:=episodeInfoComplete;
+end;
+
+procedure getPosterFanart(cesta: String;id:String);
+const
+      baseURL   = 'http://www.thetvdb.com/banners/';
+      baseQuery = '$json("data")()("fileName")';
+var
+  pomArrayHeaders :array[0..2] of String;
+  urlImages       :array[0..1] of String;
+  nameImages      :array[0..1] of String = ('fanart.jpg','poster.jpg');
+  imgLanguages    :array[0..1] of String = ('','en');
+  token, ztazeno, pomAdresa, pomString: String;
+  pomStream: TMemoryStream;
+  imgObrazek:TPicture;
+  i, j: Integer;
+begin
+   // to receive the token for API 2.1.0
+   pomArrayHeaders[0]:= 'Content-Type: application/json';
+   pomArrayHeaders[1]:=  'Accept: application/json';
+   defaultInternet.additionalHeaders.Add(pomArrayHeaders[0]);
+   defaultInternet.additionalHeaders.Add(pomArrayHeaders[1]);
+   // to add token to request header
+   token:= process(defaultInternet.post('https://api.thetvdb.com/login',
+                                        '{"apikey": "'+unConstants.theTvdbAPI+'"}'),
+                                        '$json("token")').toString;
+   pomArrayHeaders[2]:= 'Authorization: Bearer ' + token;
+   defaultInternet.additionalHeaders.Add(pomArrayHeaders[2]);
+   urlImages[0]:= ('https://api.thetvdb.com/series/'+id+
+                  '/images/query?keyType=fanart');
+   urlImages[1]:=('https://api.thetvdb.com/series/'+id+
+                  '/images/query?keyType=poster&resolution=680x1000');
+   imgLanguages[0]:=aktualniJazyk;
+   imgObrazek:=TPicture.Create;
+   pomStream:=TMemoryStream.Create;
+   for i:=0 to 1 do
+      begin
+         for j:=0 to 1 do
+            begin
+               defaultInternet.additionalHeaders.Add('Accept-Language: '+imgLanguages[j]);
+               try
+                 ztazeno:=retrieve(urlImages[i]);
+                 break; // images for desired language found
+               except
+                 on E:Exception do
+                    FormScraper.EventLog1.Debug(imgLanguages[j] +' ----- '+ e.ToString);
+               end;
+            end;
+         // if images not found for any language continue with next
+         if defaultInternet.lastHTTPResultCode = 404 then continue;
+         pomString:= process(ztazeno,baseQuery).toXQVList.get(0).toString;
+         //FormScraper.EventLog1.Debug(pomString);
+         pomAdresa:=baseURL + pomString;
+         //FormScraper.EventLog1.Debug(pomAdresa);
+          try
+            try
+             defaultInternet.get(pomAdresa,pomStream);
+             pomStream.Seek(0,soFromBeginning);
+             imgObrazek.LoadFromStream(pomStream);
+            Except
+              on E: Exception do
+              begin
+                FormScraper.EventLog1.Debug(e.ToString);
+                imgObrazek.LoadFromFile('no_poster-v2.png');
+              end;
+            end;
+          finally
+            pomStream.Clear;
+          end;
+         imgObrazek.SaveToFile(cesta + nameImages[i]);
+         imgObrazek.Clear;
+      end;
+   imgObrazek.Free;
+   pomStream.free;
 end;
 
 initialization

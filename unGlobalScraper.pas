@@ -147,6 +147,7 @@ var
     xmlDoc : IXMLDocument;
     pomGenre: TCaption;
     j: Integer;
+
   begin
     xmlDoc:=CreateXMLDoc(itemType,true);
     xmlNode:=xmlDoc.DocumentElement;
@@ -166,7 +167,13 @@ var
       begin
        xmlDoc.WriterSettings.IndentType:=itIndent;
        xmlDoc.SaveToFile(pomPath+itemType+'.nfo');
-       FormScraper.imgObrazek.Picture.SaveToFile(pomPath+'poster.jpg');
+       if aktualniScraperSerial = @(SerialThetvdb) then
+          begin
+            FormScraper.imgObrazek.Picture.SaveToFile(pomPath + 'banner.jpg');
+            getPosterFanart(pomPath,FormScraper.idSerie);
+          end
+       else
+          FormScraper.imgObrazek.Picture.SaveToFile(pomPath+'poster.jpg');
       end;
   end;
 
