@@ -746,7 +746,16 @@ begin
       pomArray:= ((w as TXQValueJSONArray).seq.get(4)) as TXQValueJSONArray;
       pomText:='';
       for pom in pomArray.GetEnumeratorMembers do
+        begin
+          try
             pomText:= pomText + genresTheTVDB[pom.toString][aktualniJazyk]+ ', ';
+          except
+             on E:Exception do
+              FormScraper.EventLog1.Debug(
+                e.ToString +', Genre '+pom.toString +
+                ' has no translation in thetvdb-genres.json');
+          end;
+        end;
       RemoveTrailingChars(pomText,[' ',',']);
       pomArrayZanry[fromIndex]:= pomText;
       //DebuglnThreadLog(pomArrayZanry[fromIndex]);
