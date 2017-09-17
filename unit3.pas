@@ -438,9 +438,12 @@ If  Form1.ZjistiPromNovySerial()
             if (XNodeDisk  <> nil) then XnodeDil :=XNodeDisk^.FirstChild;
          end;
     // Form1.UlozZmenySQL;  // zmněna se hlída přez zmenaVDatabazi viz zquery1.afterPost;
-     VET.DeleteChildren(VET.RootNode,true)     { smaž strom, radši :-) }
+    //VET.DeleteChildren(VET.RootNode,true)     { smaž strom, radši :-) }
    end; {--------------------------------konec změň seriál volba Hromadná změna - komplexní}
-
+   LabeledEdit1.Text:='';
+   LabeledEdit2.Text:='';
+   JLabeledIntegerEdit1.Value:=0;
+   VET.DeleteChildren(VET.RootNode,true)     { smaž strom, radši :-) }
 end;
 
 
@@ -542,6 +545,7 @@ begin
       Button3.Enabled:=True;
       Button6.Enabled:=True;
       odhadniStromZVyberu;
+      CheckBoxNs.Checked:=True; // naplň LabeledEdit1.Text z databáze je potřeba pro uložení stromu;
     end
                         else
     begin
