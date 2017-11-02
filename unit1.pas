@@ -997,6 +997,7 @@ begin
  SplashAbout1.UserTitle:=SplashAbout1.UserTitle + ' (v.0.9-beta4)';
  //SetDefaultLang('cs');
  //SplashAbout1.ShowSplash;
+ ZConnection1.LibraryLocation:='fbclient.dll';
  DBGrid1.Columns.Items[0].Title.Caption:=rsName;
  DBGrid1.Columns.Items[1].Title.Caption:=rsSerieName;
  DBGrid1.Columns.Items[2].Title.Caption:=rsYear;
