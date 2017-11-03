@@ -9,7 +9,10 @@ The program creates the so-called Media stub files for all your DVD and Blu-ray 
 The program allows you to:
 
  - create and maintain a table of information about the collection of disks
-    (including scraping year title using a few Internet resources) 
+    including scraping information using a few Internet resources
+    - www.themoviedb.org and www.thetvdb.com in 23 languages
+    - www.tvmaze.com in English
+    - www.csfd.cz in Czech
 
  - "infinite" history of operations - undo and redo functionality for all table operations
 
