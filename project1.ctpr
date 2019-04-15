@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
   <ProjectOptions>
-    <Version Value="10"/>
+    <Version Value="11"/>
     <PathDelim Value="\"/>
     <General>
       <SessionStorage Value="InProjectDir"/>
@@ -48,7 +48,7 @@
           </CodeGeneration>
           <Linking>
             <Debugging>
-              <DebugInfoType Value="dsStabs"/>
+              <DebugInfoType Value="dsDwarf2Set"/>
               <UseHeaptrc Value="True"/>
             </Debugging>
             <Options>
@@ -103,15 +103,14 @@
     </BuildModes>
     <PublishOptions>
       <Version Value="2"/>
-      <IncludeFileFilter Value="*.(pas|pp|inc|frm|ppr|lrs|ctpr|ctpkg|sh|xml)"/>
-      <ExcludeFileFilter Value="*.(bak|ppu|o|so);*~;backup"/>
     </PublishOptions>
     <RunParams>
-      <local>
-        <FormatVersion Value="1"/>
-      </local>
+      <FormatVersion Value="2"/>
+      <Modes Count="1">
+        <Mode0 Name="default"/>
+      </Modes>
     </RunParams>
-    <RequiredPackages Count="27">
+    <RequiredPackages Count="26">
       <Item1>
         <PackageName Value="utf8tools"/>
       </Item1>
@@ -119,80 +118,77 @@
         <PackageName Value="internettools"/>
       </Item2>
       <Item3>
-        <PackageName Value="pl_generics"/>
+        <PackageName Value="lz_multithreadprocs"/>
       </Item3>
       <Item4>
-        <PackageName Value="lz_multithreadprocs"/>
+        <PackageName Value="pl_KControls"/>
       </Item4>
       <Item5>
-        <PackageName Value="pl_KControls"/>
+        <PackageName Value="pl_fzcontrols"/>
       </Item5>
       <Item6>
-        <PackageName Value="pl_fzcontrols"/>
+        <PackageName Value="pl_cindy"/>
       </Item6>
       <Item7>
-        <PackageName Value="pl_cindy"/>
+        <PackageName Value="pl_BGRAuecontrols"/>
       </Item7>
       <Item8>
-        <PackageName Value="pl_BGRAuecontrols"/>
+        <PackageName Value="pl_bgracontrols"/>
       </Item8>
       <Item9>
-        <PackageName Value="pl_bgracontrols"/>
+        <PackageName Value="splashabout"/>
       </Item9>
       <Item10>
-        <PackageName Value="splashabout"/>
+        <PackageName Value="OXml_Lazarus"/>
       </Item10>
       <Item11>
-        <PackageName Value="OXml_Lazarus"/>
+        <PackageName Value="bs_IDEIntf"/>
       </Item11>
       <Item12>
-        <PackageName Value="bs_IDEIntf"/>
+        <PackageName Value="pl_jujiboutils"/>
       </Item12>
       <Item13>
-        <PackageName Value="pl_jujiboutils"/>
+        <PackageName Value="pl_zeosdbo"/>
       </Item13>
       <Item14>
-        <PackageName Value="pl_zeosdbo"/>
+        <PackageName Value="pl_synapsevs"/>
       </Item14>
       <Item15>
-        <PackageName Value="pl_synapsevs"/>
+        <PackageName Value="pl_jvcl"/>
       </Item15>
       <Item16>
-        <PackageName Value="pl_jvcl"/>
+        <PackageName Value="pl_exsystem"/>
       </Item16>
       <Item17>
-        <PackageName Value="pl_exsystem"/>
+        <PackageName Value="lz_sqldb"/>
       </Item17>
       <Item18>
-        <PackageName Value="lz_sqldb"/>
+        <PackageName Value="pl_exdesign"/>
       </Item18>
       <Item19>
-        <PackageName Value="pl_exdesign"/>
+        <PackageName Value="pl_excontrols"/>
       </Item19>
       <Item20>
-        <PackageName Value="pl_excontrols"/>
+        <PackageName Value="pl_solutions"/>
       </Item20>
       <Item21>
-        <PackageName Value="pl_solutions"/>
+        <PackageName Value="pl_virtualtreesextra"/>
       </Item21>
       <Item22>
-        <PackageName Value="pl_virtualtreesextra"/>
+        <PackageName Value="adLCL"/>
       </Item22>
       <Item23>
-        <PackageName Value="adLCL"/>
+        <PackageName Value="bs_Controls"/>
       </Item23>
       <Item24>
-        <PackageName Value="bs_Controls"/>
+        <PackageName Value="adFCL"/>
       </Item24>
       <Item25>
-        <PackageName Value="adFCL"/>
+        <PackageName Value="lz_sdf"/>
       </Item25>
       <Item26>
-        <PackageName Value="lz_sdf"/>
-      </Item26>
-      <Item27>
         <PackageName Value="lz_tpipro"/>
-      </Item27>
+      </Item26>
     </RequiredPackages>
     <Units Count="20">
       <Unit0>
@@ -201,6 +197,7 @@
       </Unit0>
       <Unit1>
         <Filename Value="unit1.pas"/>
+        <FRMtype Value="200"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="Form1"/>
         <HasResources Value="True"/>
@@ -217,6 +214,7 @@
       </Unit3>
       <Unit4>
         <Filename Value="unit2.pas"/>
+        <FRMtype Value="200"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="Form2"/>
         <HasResources Value="True"/>
@@ -225,6 +223,7 @@
       </Unit4>
       <Unit5>
         <Filename Value="unit3.pas"/>
+        <FRMtype Value="200"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="Form3"/>
         <HasResources Value="True"/>
@@ -233,6 +232,7 @@
       </Unit5>
       <Unit6>
         <Filename Value="unit4.pas"/>
+        <FRMtype Value="200"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="Form4"/>
         <HasResources Value="True"/>
@@ -241,6 +241,7 @@
       </Unit6>
       <Unit7>
         <Filename Value="unit5.pas"/>
+        <FRMtype Value="200"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="Form5"/>
         <HasResources Value="True"/>
@@ -249,6 +250,7 @@
       </Unit7>
       <Unit8>
         <Filename Value="unit6.pas"/>
+        <FRMtype Value="200"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="Form6"/>
         <HasResources Value="True"/>
@@ -257,6 +259,7 @@
       </Unit8>
       <Unit9>
         <Filename Value="unit7.pas"/>
+        <FRMtype Value="200"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="FormNastaveni"/>
         <HasResources Value="True"/>
@@ -265,6 +268,7 @@
       </Unit9>
       <Unit10>
         <Filename Value="unit8.pas"/>
+        <FRMtype Value="200"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="FormScraper"/>
         <HasResources Value="True"/>
@@ -273,6 +277,7 @@
       </Unit10>
       <Unit11>
         <Filename Value="unit9.pas"/>
+        <FRMtype Value="200"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="FormScrapujVyber"/>
         <HasResources Value="True"/>
@@ -281,6 +286,7 @@
       </Unit11>
       <Unit12>
         <Filename Value="unit10.pas"/>
+        <FRMtype Value="200"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="FormUpravUmisteni"/>
         <HasResources Value="True"/>
@@ -289,6 +295,7 @@
       </Unit12>
       <Unit13>
         <Filename Value="unHledej.pas"/>
+        <FRMtype Value="200"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmHledej"/>
         <HasResources Value="True"/>
@@ -301,6 +308,7 @@
       </Unit14>
       <Unit15>
         <Filename Value="unUkazHistorii.pas"/>
+        <FRMtype Value="200"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmUkazHistorii"/>
         <HasResources Value="True"/>
@@ -312,6 +320,7 @@
       </Unit16>
       <Unit17>
         <Filename Value="unNotSraped.pas"/>
+        <FRMtype Value="200"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmNotScraped"/>
         <HasResources Value="True"/>

@@ -920,7 +920,7 @@ begin
   ZmenaVDatabazi:=true;    {ano proběhla změna základní tabulky je třeba ji uložit, to  }
   DBGrid1.SelectedRows.CurrentRowSelected:=true;{po otevření vybrat celý řádek, ne jen buňka}
   StatusBar1.Panels[0].Text:=Format(rsPoEtZZnam, [inttostr(ZQuery1.RecordCount)]);
-  Dbgrid1.AutoSizeColumns; // aby se po zadání hodnoty přizpůsobil sloupec
+  Dbgrid1.AutoAdjustColumns; // aby se po zadání hodnoty přizpůsobil sloupec
 end;
 
 procedure TForm1.ZQuery1AfterScroll(DataSet: TDataSet);
@@ -1114,7 +1114,7 @@ begin
  NovySerial:=true;
  if  Form3.Showmodal = mrOK then
  begin
-  DbGrid1.AutoSizeColumns;
+  DbGrid1.AutoAdjustColumns;
  end;
 end;
 
@@ -1191,7 +1191,7 @@ begin
   Form6.indexBaze:=0;
   Form6.indexDefinovan:=false; {index není definován}
   Form6.umisteniStare:='';
-  DbGrid1.AutoSizeColumns;
+  DbGrid1.AutoAdjustColumns;
 end;
 
 procedure TForm1.MenuItem20Click(Sender: TObject);  {popup Filmy Hromadná změna "Umístění"}
@@ -1308,7 +1308,7 @@ begin
   OpenDialog1.FilterIndex:=1;
   dbgrid1.SelectedRows.Clear;
   dbgrid1.SelectedRows.CurrentRowSelected:=true;
-  DbGrid1.AutoSizeColumns;
+  DbGrid1.AutoAdjustColumns;
 end;
 
 procedure TForm1.MenuItem27Click(Sender: TObject);  {popup Nástroje Export CSV}

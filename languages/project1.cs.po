@@ -994,6 +994,7 @@ msgid "Season : Disk : Episode"
 msgstr "Sezóna : Disk : Díl"
 
 #: unit1.rsseazenodle
+#, fuzzy,badformat
 msgid "Sorted by:  "
 msgstr "Pro scrapování roku %sje potřeba zaškrtnout také pole \"Název seriálu\" "
 
